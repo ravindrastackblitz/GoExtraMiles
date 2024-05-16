@@ -1,0 +1,257 @@
+.avatar-container {
+  position: relative;
+  display: inline-block;
+}
+.box {
+  background-color: black;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.box a {
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 3px;
+  text-decoration: none;
+}
+
+.avatar-container img {
+  display: block;
+  width: 150px; /* Adjust as needed */
+  height: 150px; /* Adjust as needed */
+  border-radius: 50%;
+}
+
+.avatar-placeholder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 150px; /* Adjust as needed */
+  height: 150px; /* Adjust as needed */
+  border: 2px dashed #ccc; /* Placeholder border */
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.avatar-placeholder i {
+  font-size: 48px; /* Adjust icon size */
+  color: #ccc; /* Placeholder icon color */
+}
+
+.avatar-placeholder span {
+  margin-top: 5px;
+  color: #aaa; /* Placeholder text color */
+}
+
+
+#avatarInput {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+}
+
+
+.register
+{ 
+     background-color: darkgreen;
+     color: white;
+}
+  
+
+
+  /* .form-control{
+    width:100%;
+  
+  } */
+  .col-12{
+    width:90%;
+    margin-left:5%;
+  }
+  
+  iframe{
+    margin: 2% 5%;
+  } 
+  .text-muted {
+    color: red !important;
+}
+
+.popup { 
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.popup-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #888;
+ width:30%
+}
+.modal-header {
+  border-bottom: 1px solid #ccc;
+  padding: 0;
+  position: relative;
+}
+h3{
+  font-size: 20px;
+}
+
+.text-base {
+  line-height: 1;
+  margin: 0;
+  height: 30px;
+  padding: 5px 8px;
+  border: 2px solid #aaa;
+  border-radius: 6px;
+  transition: all .3s;
+}
+
+.text-base:focus {
+  border: 2px solid #d90007;
+  outline: 0;
+}
+
+.text-field {
+  position: relative;
+}
+
+.text-field input,
+.text-field textarea {
+  display: inline-block;
+  padding: 25px;
+}
+
+.text-field span {
+  color: #aaa;
+  position: absolute;
+  pointer-events: none;
+  left: 10px;
+  top: 13px;
+  transition: 0.3s;
+}
+
+.text-field input:focus+span,
+.text-field input:not(:placeholder-shown)+span,
+.text-field textarea:focus+span,
+.text-field textarea:not(:placeholder-shown)+span {
+  top: 2px;
+  left: 10px;
+  font-size: small;
+  background-color: #fff;
+  padding: 0 5px 0 5px;
+}
+
+.text-field input:focus:invalid+span,
+.text-field input:not(:placeholder-shown):invalid+span,
+.text-field textarea:focus:invalid+span,
+.text-field textarea:not(:placeholder-shown):invalid+span {
+  color: red;
+}
+
+.w100p {
+  width: 95%;
+  margin: 10px 0;
+}
+
+.w100p textarea {
+  height: 120px;
+}
+.text-base w100p{
+  height: 60px;
+}
+
+.second{
+margin-left: 3%;
+}
+.text{
+width:30%
+}
+#search{
+  border: 0;
+}
+.location{
+  width:20%;
+}
+.map{
+  width:90%;
+   height:300px;
+   margin-top: 0%; 
+}
+
+
+.file-container {
+  position: relative;
+  display: inline-block;
+  width: 300px; 
+  height: 150px; 
+  border: 1px dashed black;
+  overflow: hidden; 
+  text-align: center;
+  background-color:white;
+  margin-left: 10%
+}
+
+/* .file-container .fa-download {
+  font-size: 5rem;
+  margin-top: 20px;
+  color: grey;
+} */
+#uploadicon{
+  font-size: 20px;
+  padding-top: 10%;
+}
+
+
+.file-container .upload-text {
+  font-size: 20px; 
+  margin-top: 10px; 
+  color:black;
+  font-weight: bold;
+}
+#browse{
+  font-size: 20px; 
+  margin-top: 10px; 
+  color:skyblue;
+  font-weight: bold;
+}
+.file {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer; 
+}
+
+.file-info {
+  margin-top: 10px;
+}
+
+.file-info button {
+  margin-top: 10px;
+}
+.fa-times-circle{
+  font-size: 40px;
+}
+.term{
+  color:deepskyblue;
+}
+.term:hover{
+  text-decoration: underline;
+  cursor: pointer;
+}

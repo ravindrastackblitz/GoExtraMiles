@@ -1,0 +1,87 @@
+
+.card{
+    border: none;
+    padding: 20px;
+    background-color: blue;
+    color: white;
+}
+.contain{
+    margin-top: 10%;
+    margin-left: 400px;
+    margin-right: 400px;
+   
+}
+
+
+#countryCode{
+margin-left: 67%;
+margin-top: 3%;
+}
+.select2-selection select2-selection--single{
+    width:100px;
+    height: 34px;
+}
+.selection{
+    width: 20px;
+}
+
+.input-select-div
+{
+    cursor: not-allowed !important;
+    pointer-events: none !important;
+}
+
+input[name="InputPhone"]{
+  
+    text-indent: 85px !important;
+    height: 28px !important;
+    width: 34% !important;
+    min-width: 100px !important;
+    max-width: 210px !important;
+    
+}
+.phone-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 9999;
+}
+
+.phone-popup h3 {
+    margin-bottom: 10px;
+    margin-top: 60px;
+}
+
+.phone-popup .button-container {
+    display: flex;
+   margin-left: 200px;
+    margin-top: 60px;
+}
+
+.phone-popup button {
+    margin-right: 10px;
+}
+
+.edit
+{
+background-color: black;
+border-radius: 25px;
+color: white;
+width:30%;
+padding: 7px;
+}
+
+.select2-selection__arrow
+{
+    display:none;
+}
+
+.select2-container--default
+{
+    width: 90px !important;
+}

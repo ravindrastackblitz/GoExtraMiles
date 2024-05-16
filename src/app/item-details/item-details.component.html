@@ -1,0 +1,124 @@
+
+<div class="menu-nav">
+  <div class="menu-item" ><h3>Item Details</h3></div>
+  <div class="dropdown-container" tabindex="-1">
+    <div class="three-dots"></div>
+  
+      <button type="button" (click)="update()"  class="btn btn-primary">Edit</button>
+     <br>
+     <button type="button" (click)="togglePopup1()"  class="btn btn-primary" style="margin-top: 3%;">Delete</button>
+     <!-- <button class="delete">Delete</button>  -->
+
+
+  </div>
+  
+</div>
+<br>
+<img [src]="imagedata1" style="width: 150px;height: 150px;  border: 2px dashed #ccc; border-radius: 50%; cursor: pointer;margin-left: 35%;">
+<img [src]="imagedata2" style=" width: 150px;height: 150px; border: 2px dashed #ccc; border-radius: 50%; cursor: pointer;margin:0% 4%;">
+<img [src]="imagedata3" style=" width: 150px;height: 150px; border: 2px dashed #ccc; border-radius: 50%; cursor: pointer;">
+
+<!-- <img [src]="imagedata1" style="width: 100px;height: 100px;margin-left: 40%;">
+<img [src]="imagedata2" style="width: 100px;height: 100px;margin:0% 4%;">
+<img [src]="imagedata3" style="width: 100px;height: 100px;"> -->
+<br>
+ 
+<div class="row">
+  <div class="col-sm-6">
+    <label class="label1"><b>Item Name  :</b></label>
+  </div>
+  <div class="col-sm-6">
+ <input type="text" [value]="details?.Itemname"  readonly class="form-control">
+  </div>
+<div class="col-sm-6">
+    <label class="label1"><b>Description   :</b></label>
+  </div>
+  <div class="col-sm-6">
+ <input type="text" [value]="details?.Description"  readonly class="form-control">
+  </div>
+  <div class="col-sm-6">
+    <label class="label1"><b>Country of Orgin :</b></label>
+  </div>
+  <div class="col-sm-6">
+ <input type="text" [value]="details?.Country"  readonly class="form-control">
+  </div>
+  <div class="col-sm-6">
+    <label class="label1"><b>Link :</b></label>
+  </div>
+  <div class="col-sm-6">
+ <input type="text-area" [value]="details?.Link"  readonly class="form-control">
+  </div>
+  <div class="col-sm-6">
+    <label class="label1"><b>MRP/Retail Price :</b></label>
+  </div>
+  <div class="col-sm-6">
+ <input type="text" [value]="details?.Retailprice"  readonly class="form-control">
+  </div>
+  <div class="col-sm-6">
+    <label class="label1"><b>Selling price :</b></label>
+  </div>
+  <div class="col-sm-6">
+ <input type="text" [value]="details?.SellingPrice"  readonly class="form-control">
+  </div> 
+ </div>
+<div style="display: flex;margin-left: 36%;margin-top:3%">
+  <p>Hide from Catalouge </p>
+  <label class="switch" style="margin-left: 40%;">
+      <input type="checkbox" (click)="clicktoggle()">
+      <span class="slider round"></span>
+    </label>
+ </div><br>
+<div>
+    <pre style="margin-left: 37%;"><img src="https://cdn1.iconfinder.com/data/icons/material-device/20/access-time-64.png" style="width: 25px;height: px;"> This item is being reviewed.If it's been approved App users will
+      Start seeing this item under your Catalouge. <b style="margin-left: 2px;" (click)="popup()" class="term">Learn More</b>.</pre>
+    <br>
+    <div style="display: flex;">
+      <button type="button" style="margin-left: 40%;" (click)="togglePopup()"  class="btn btn-primary">Create Scratch Card</button>
+      <!-- <button type="button" style="margin-left: 40%;" (click)="update()"  class="btn btn-primary">Edit</button> -->
+     <!-- <input type="button" [routerLink]="['/MyCatalouge']" style="margin-left:15%; width:10%;height: 40px;; background-color:black; color:white" class="btn btn-primary" value="Store"> -->
+    </div>
+    <div [hidden]="!Terms">
+      <app-terms (terms)="Conditions($event)"></app-terms>
+     </div>
+</div>
+<!-- <div class="popup" id="popup-1">
+  <div class="overlay"></div>
+  <div class="content">
+    <i class="fas fa-times-circle" (click)="togglePopup()"> </i>
+  
+  <h3>Create Scratch Card</h3>
+  <div class="text-field w100p">
+    <input class="form-control" type="text" placeholder=" Discount Code " id="code" formControlName="itemname" >
+    <span> </span>
+  </div>
+  <button class="btn btn-primary" style="width: 40%;" [routerLink]="['/MyCatalouge']" >Create</button>
+</div>
+</div> -->
+<div class="popup1" *ngIf="discount">
+  <div class="popup-content1">
+    <h2>Create Scratch Card</h2>
+    <div class="modal-header1">
+      <input type="text" id="categoryNameInput" class="form-control" [(ngModel)]="textBoxData"  placeholder="Write Discount Code" name="scratchcardNumber" required>
+    </div>
+    <div>
+      <button (click)="Scratchcard()" class="btn btn-primary m-3" id="add">Create</button>
+      
+    </div> 
+  </div>  
+</div>
+<!-- delete-modal.component.html -->
+
+<div class="popup1" *ngIf="discount1">
+  <div class="popup-content1">
+    <div class="modal-header1">
+      <h2>Delete Product</h2>
+      <p>This will be Delete Product Permanently</p>
+    </div>
+    <div >
+      <button (click)="Scratchcard1()" class="btn btn-primary m-3" class="add" >Cancle</button><button style="margin-left:3%;" (click)="Scratchcard1()" class="btn btn-primary m-3" class="add">Delete</button>
+
+      
+    </div> 
+  </div>  
+</div>
+

@@ -1,0 +1,53 @@
+.navbar {
+  background: rgb(16, 16, 15);
+  font-family: Calibri;
+  padding-right: 15px;
+  padding-left: 15px;
+margin-left: -32%;
+}
+
+
+.term{
+  color:deepskyblue;
+}
+.term:hover{
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+
+
+
+.container {
+    display: flex;
+    align-items: center;
+  }
+.cont{
+    align-items: center;
+    margin-left: 100px;
+    margin-top: 50px;
+}
+  .matter1
+  {
+    margin-left: 500px;
+  }
+
+  .image {
+    
+    margin-left: 500px;
+    width: 75px; /* Adjust the width as needed */
+    height: auto;
+    margin-right: 20px; /* Adjust the spacing between image and text */
+  }
+  
+  .matter {
+    font-size: 16px;
+    
+    /* Add any other styles for the text container */
+  }
+  
+  .div1{
+    margin-top: 2%;
+    margin-left: 650px;
+  }
+ 

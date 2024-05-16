@@ -1,0 +1,44 @@
+.avatar-container {
+  position: relative;
+  display: inline-block;
+}
+
+.avatar-container img {
+  display: block;
+  width: 150px; /* Adjust as needed */
+  height: 150px; /* Adjust as needed */
+  border-radius: 50%;
+}
+
+.avatar-placeholder {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 150px; /* Adjust as needed */
+  height: 150px; /* Adjust as needed */
+  border: 2px dashed #ccc; /* Placeholder border */
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.avatar-placeholder i {
+  font-size: 48px; /* Adjust icon size */
+  color: #ccc; /* Placeholder icon color */
+}
+
+.avatar-placeholder span {
+  margin-top: 5px;
+  color: #aaa; /* Placeholder text color */
+}
+
+/* Hide the input[type="file"] element */
+input[type="file"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  overflow: hidden;
+}

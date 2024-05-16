@@ -1,0 +1,48 @@
+<div class="navbar" id="landingpageHeader" *ngIf="!MainHeaderVisible">
+    <div class="navdiv">
+ 
+      <ul>
+        <ng-container >
+          <li style="margin-left: 4%;"><img src="https://png.pngtree.com/png-clipart/20190517/original/pngtree-vector-location-icon-png-image_4280104.jpg" alt="Image" class="image" style="width:40px;height: 40px;"></li>
+        </ng-container>
+      </ul>
+
+
+    </div>
+   
+ 
+  </div>
+
+  <div class="navbar" id="MainHeader" *ngIf="MainHeaderVisible">
+    <div class="navdiv">
+ 
+      <ul>
+        <ng-container >
+          <li style="margin-left: 4%;"><img src="https://png.pngtree.com/png-clipart/20190517/original/pngtree-vector-location-icon-png-image_4280104.jpg" alt="Image" class="image" style="width:40px;height: 40px;"></li>
+          <li style="margin-left: 10%;width: 100%;"><a [routerLink]="['/']" style="color: white;" ><b>Home</b></a></li>
+          <li style="margin-left: 10%;text-wrap: nowrap;"><a [routerLink]="['/BusinessRegistration']" style="color: white;"><b>Business Registration</b></a></li>
+          <li style="margin-left: 10%;"><a [routerLink]="['/UrbanRiderStoreCatalouge']" style="color: white;">Catalouges</a></li>
+        </ng-container>
+      </ul>
+
+    </div>
+    <!-- <button class="red" mat-icon-button (click)="clearCount()">
+      <mat-icon class="icon">notifications</mat-icon>
+      <span class="badge" *ngIf="badgeCount > 0">{{badgeCount}}</span>
+    </button> -->
+    <!-- <button mat-raised-button (click)="incrementCount()">+</button> -->
+    <div class="user-info">
+      <h5 style="margin-top: 6%;" style="color: white;margin-top: 10px;"><b> {{ username }}</b></h5>
+      <button class="red" mat-icon-button (click)="clearCount()">
+        <mat-icon class="icon">notifications</mat-icon>
+        
+        <!-- <span class="badge" *ngIf="badgeCount > 0">{{badgeCount}}</span> -->
+      </button>
+      <div>
+        <!-- <span class="username">{{ username }}</span> -->
+        <button><a href="#" >Logout</a></button>
+        <!-- <img class="bell"src="https://png.pngtree.com/png-vector/20191004/ourmid/pngtree-bell-icon-png-image_1791341.jpg" alt="bell" style="height: 40px;"> -->
+      </div>
+    </div>
+ 
+  </div>

@@ -1,0 +1,21 @@
+.data
+{
+    text-align: center;
+}
+.page
+{
+    margin-left: 650px;
+    
+    height: 200px;
+    width: 200px;
+    
+}
+.register
+{
+    height: 30px;
+     width: 250px;
+     text-align: center;
+     margin-left: 650px;
+     background-color: darkgreen;
+     color: white;
+}

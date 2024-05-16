@@ -1,0 +1,70 @@
+
+ <h1 style="text-align: center;">Promotion Insights</h1>
+<!--<div class="image-container" style="margin-left: 45%;">
+  <div class="avatar-container">
+    <label for="avatarInput">
+      <img *ngIf="selectedImage" [src]="selectedImage" class="avatar-preview" alt="Avatar Preview">
+      <div *ngIf="!selectedImage" class="avatar-placeholder">
+        <i class="fas fa-user"></i>  Placeholder icon -->
+        <!-- <span>Upload Avatar</span>
+      </div>
+    </label>
+    <input type="file" id="avatarInput" accept="image/*" (change)="onFileSelected($event)">
+  </div>
+</div> -->
+<div *ngFor="let image of images">
+  <img *ngIf="image" [src]="image" style="width: 150px; height: 150px; border: 2px dashed #ccc; border-radius: 50%; cursor: pointer; margin-left: 45%;">
+</div>
+<br>
+<br>
+<div style="margin-left: 35%;">
+  <h4>Overview<img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-information-outline-64.png" style="width: 30px;height:30px;margin: 1%;"></h4>
+</div>
+<div style="text-align: center;">
+    <pre>People Received this Scratch Card                 0</pre>
+    <pre>People seen the offer                             0</pre>
+    <pre>People Clicked on the button                      0</pre>
+    <pre>People Copied your discount code                  0</pre>
+</div><br>
+<div style="margin-left: 35%;">
+  <h4>Rider<img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-information-outline-64.png" style="width: 30px;height:30px;margin: 1%;"></h4>
+</div>
+<div style="text-align: center;" >
+  <textarea rows="7" cols="50">Bar Charts</textarea>
+  <!-- <h5><b style="text-align: center;">Vehicle Type</b></h5>
+  <img src="https://thepercentagecalculator.net/images/pie-charts/pie-chart-showing-31.3-percent.png" style="width: 300px;height: 300px;">
+    <br>
+    <div style="display:flex;">
+      <h3 style="margin-left: 2%;"><b>31.3%</b></h3><h3 style="margin-left: 50%;"><b>68.7%</b></h3>
+      </div>
+        <input type="box" style="color: rgb(42, 156, 243);background-color: rgb(67, 141, 225);width: 20px;height: 20px;border: none;margin: 2%;" checked>2 Wheeler
+        <input type="box" style="color: #fc232d;background-color: hsl(351, 82%, 52%);width: 20px;height: 20px;border: none;margin-left:45%;" checked>4 Wheeler
+   -->
+</div>
+<br>
+<div style="text-align: center;">
+    <p>Are you satisfied with the results on this promotion</p>
+    <div>
+        <input type="button" class="btn btn-primary" value="Yes">
+        <input type="button" class="btn btn-primary" value="Not Sure" style="margin-left: 3%;">
+        <input type="button" class="btn btn-primary" value="NO" style="margin-left: 3%;">
+    </div>
+</div>
+<br>
+<div style="text-align: center;">
+    <p [routerLink]="['/MyCatalouge']" style="color:rgb(55, 157, 212);"><b>Promote Again ?</b></p><br>
+    <p (click)="togglePopup1()" style="color:rgb(55, 157, 212);"><b>Delete Promotion</b></p>
+</div>
+<div class="popup1" *ngIf="discount1">
+  <div class="popup-content1">
+    <div class="modal-header1">
+      <h2>Delete Product</h2>
+      <p>This will be Delete Product Permanently</p>
+    </div>
+    <div >
+      <button (click)="Scratchcard1()" class="btn btn-primary m-3" class="add" >Cancle</button><button style="margin-left:3%;" (click)="Scratchcard1()" class="btn btn-primary m-3" class="add">Delete</button>
+
+      
+    </div> 
+  </div>  
+</div>

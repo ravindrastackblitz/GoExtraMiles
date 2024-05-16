@@ -1,0 +1,63 @@
+
+
+ 
+<h1 style="text-align: center;">Scratch Card Insights</h1>
+<!-- <div class="image-container">
+  <div class="avatar-container" style="margin-left: 45%;">
+    <label for="avatarInput">
+      <img *ngIf="selectedImage" [src]="selectedImage" class="avatar-preview" alt="Avatar Preview">
+      <div *ngIf="!selectedImage" class="avatar-placeholder">
+        <i class="fas fa-user"></i>  Placeholder icon -->
+        <!-- <span>Upload Avatar</span>
+      </div>
+    </label>
+    <input type="file" id="avatarInput" accept="image/*" (change)="onFileSelected($event)">
+  </div>
+  
+</div> --> 
+<div *ngFor="let image of images">
+  <img *ngIf="image" [src]="image" style="width: 150px; height: 150px; border: 2px dashed #ccc; border-radius: 50%; cursor: pointer; margin-left: 45%;">
+</div>
+<div style="text-align: center;">
+  <p>Created On {{toDate | date:'medium'}}</p>
+  <p >Discount Code :{{ label }}</p>
+</div>
+<div style="margin-left: 35%;">
+  <h4>Overview<img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-information-outline-64.png" style="width: 30px;height:30px;margin: 1%;"></h4>
+</div>
+<div style="text-align: center;">
+    <pre>People Received this Scratch Card                 0</pre>
+    <pre>People seen the offer                             0</pre>
+    <pre>People Clicked on the button                      0</pre>
+    <pre>People Copied your discount code                  0</pre>
+</div><br>
+<div style="margin-left: 35%;">
+  <h4>Rider<img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-ios7-information-outline-64.png" style="width: 30px;height:30px;margin: 1%;"></h4>
+</div>
+<div style="text-align: center;" >
+  <textarea rows="7" cols="50">Pie Chart</textarea>
+  <!-- <h5><b style="text-align: center;">Vehicle Type</b></h5>
+  <img src="https://thepercentagecalculator.net/images/pie-charts/pie-chart-showing-31.3-percent.png" style="width: 300px;height: 300px;">
+    <br>
+    <div style="display:flex;">
+      <h3 style="margin-left: 2%;"><b>31.3%</b></h3><h3 style="margin-left: 50%;"><b>68.7%</b></h3>
+      </div>
+        <input type="box" style="color: rgb(42, 156, 243);background-color: rgb(67, 141, 225);width: 20px;height: 20px;border: none;margin: 2%;" checked>2 Wheeler
+        <input type="box" style="color: #fc232d;background-color: hsl(351, 82%, 52%);width: 20px;height: 20px;border: none;margin-left:45%;" checked>4 Wheeler
+   -->
+</div>
+<br>
+<br>
+<div style="text-align: center;">
+    <pre><img src="https://cdn1.iconfinder.com/data/icons/material-device/20/access-time-64.png" style="width: 25px;height: px;"> This promotion is being reviewed.If it's been approved.
+App users will start receiving your Scratch card.<b><a style="color:rgb(80, 182, 222);"  class="term" (click)="popup()">
+  Learn more</a></b></pre>
+</div>
+<div>
+  <input type="button" style="margin-left: 45%;" [routerLink]="['/MyCatalouge']"  class="btn btn-primary" value="ReCreate ScratchCard"> 
+</div>
+<div style="text-align: center;">
+  <div [hidden]="!Terms">
+    <app-terms (terms)="Conditions($event)"></app-terms>
+   </div>
+ </div>

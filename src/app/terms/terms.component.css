@@ -1,0 +1,34 @@
+
+.popup { 
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  
+  .popup-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #888;
+   width:60%;
+text-align: center;
+  }
+  .modal-header {
+    border-bottom: 1px solid #ccc;
+    position: relative;
+    padding: 0;
+  }
+  .fa-times-circle{
+    font-size: 40px;
+    margin-left: 300px;
+  }
+  h3{
+    font-size: 25px;
+    margin-left: 40%;
+  }

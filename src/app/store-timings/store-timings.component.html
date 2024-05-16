@@ -1,0 +1,110 @@
+
+
+<div class="popup" >
+  <div class="popup-content">
+    <div class="modal-header">
+      <div class="flex">
+        <h3>Store Timings</h3>
+        <i class="fas fa-times-circle" (click)="close1()"> </i>
+      </div>
+      
+    </div>
+    <div>
+      <form [formGroup]="Timedetails" (ngSubmit)="data()">
+
+        <div style="text-align: center;" >
+           <div>
+            <input type="radio"  id="rad" checked  value="Available 24/7" formControlName="radiotime" (click)="select1()"><b>Available 24/7</b> <br><br>
+            <input type="radio" class="radiobutton" id="rad" value="Pick Days" (click)="select()"  formControlName="radiotime"><b style="margin-right:2.5%;">Pick Days</b>
+           </div>
+        
+            <div [hidden]="time" >
+            <button type="button" class="btn btn-primary"  style="margin-top: 20%;width: 300px;" (click)="data()"> CONTINUE</button>
+            </div>
+        
+            <form [formGroup]="storetimes" (ngSubmit)="onsubmit()" [hidden]="!time">
+            <label class="la" style="margin-left:-17%;"><b>ALL DAYS</b></label><div style="display: inline-block;"><input type="button" style="width: 80px;" *ngIf="!Allclick" (click)="Click()" class="btn1 " value="CHOOSE">
+            <p *ngIf="Allclick" style="display: inline;">
+                <input formControlName="Alldaysopen" name="Alldaysopen" type="time" style="width: 80px;">
+                <input formControlName="Alldaysclose" name="Alldaysclose" type="time" style="width: 80px;">
+              </p>
+            </div>
+            <br>
+            <label class="la"><b>MON</b></label><div style="display: inline-block;"><input type="button" style="width: 80px;" *ngIf="!buttonClicked" (click)="onClick()" class="btn1  choice" value="CHOOSE">  
+             <p *ngIf="buttonClicked" style="display: inline;">
+                <input formControlName="Monopen" name="Monopen" type="time" style="width: 80px;">
+                <input formControlName="Monclose" name="Monclose" type="time" style="width: 80px;">
+                
+              </p>
+            </div>
+            <span class="switch"><input type="checkbox" id="switcher"><label for=switcher></label></span>
+            <br>
+        
+            <label class="la"><b>TUE</b></label><div style="display: inline-block;"><input type="button" style="width: 80px;" *ngIf="!buttonClicked1" (click)="onClick1()" class="btn1 choice" value="CHOOSE">
+            <p *ngIf="buttonClicked1" style="display: inline;">
+                <input formControlName="Tueopen" name="Tueopen" type="time" style="width: 80px;">
+                <input formControlName="Tueclose" name="Tueclose" type="time" style="width: 80px;">
+            </p>
+        </div>
+            <span class="switch"><input type="checkbox" id="switcher"><label for=switcher></label></span>
+            <br>
+           
+            <label class="la"><b>WED</b></label><div style="display: inline-block;"><input type="button" style="width: 80px;" *ngIf="!buttonClicked2" (click)="onClick2()" class="btn1 choice" value="CHOOSE">
+            <p *ngIf="buttonClicked2" style="display: inline;">
+                <input formControlName="Wedopen" name="Wedopen" type="time" style="width: 80px;">
+                <input formControlName="Wedclose" name="Wedclose" type="time" style="width: 80px;">
+            </p>
+            </div>
+            <span class="switch"><input type="checkbox" id="switcher"><label for=switcher></label></span><br>
+           
+            <label class="la"><b>THU</b></label><div style="display: inline-block;"><input type="button" style="width: 80px;" *ngIf="!buttonClicked3" (click)="onClick3()" class="btn1 choice" value="CHOOSE">
+            <p *ngIf="buttonClicked3" style="display: inline;">
+                <input formControlName="Thuopen" name="Thuopen" type="time" style="width: 80px;">
+                <input formControlName="Thuclose" name="Thuclose" type="time" style="width: 80px;">
+              </p>
+            </div>
+            <span class="switch"><input type="checkbox" id="switcher"><label for=switcher></label></span><br>
+        
+            <label class="la"><b>FRI</b></label>
+             <div style="display: inline-block;">
+                <input type="button" *ngIf="!buttonClicked4" style="width: 80px;" (click)="onClick4()" class="btn1 choice" value="CHOOSE">
+            <p *ngIf="buttonClicked4" style="display: inline;">
+                <input formControlName="Friopen" name="Friopen" type="time" style="width: 80px;">
+                <input formControlName="Friclose" name="Friclose" type="time" style="width: 80px;">
+            </p>
+            </div>
+            <span class="switch"><input type="checkbox" id="switcher"><label for=switcher></label></span><br>
+        
+            <label class="la"><b>SAT</b></label>
+            <div style="display: inline-block;">
+              <input type="button" *ngIf="!buttonClicked5" (click)="onClick5()" style="width: 80px;" class="btn1 choice" value="CHOOSE">
+              <p *ngIf="buttonClicked5" style="display: inline;">
+                <input formControlName="Satopen" name="Satopen" type="time" style="width: 80px;">
+                <input formControlName="Satclose" name="Satclose" type="time" style="width: 80px;">
+              </p>
+            </div>
+            <span class="switch"><input type="checkbox" id="switcher"><label for=switcher></label></span><br>
+            
+            <!-- <label class="la"><b>SAT</b></label><input type="button" *ngIf="!buttonClicked5" (click)="onClick5()" class="btn1 choice" value="CHOOSE">
+            <p *ngIf="buttonClicked5">
+                <input formControlName="Satopen" name="Satopen" type="time" style="width: 80px;">
+                <input formControlName="Satclose" name="Satclose" type="time" style="width: 80px;">
+                <input type="button" (click)="close5()" value="enter">
+            </p>
+            <span class="switch"><input type="checkbox" id="switcher"><label for=switcher></label></span><br> -->
+        
+            <label class="la"><b>SUN</b></label><div style="display: inline-block;"><input type="button" style="width: 80px;" *ngIf="!buttonClicked6" (click)="onClick6()" class="btn1 choice" value="CHOOSE">
+            <p *ngIf="buttonClicked6" style="display: inline;">
+                <input formControlName="Sunopen" name="Sunopen" type="time" style="width: 80px;">
+                <input formControlName="Sunclose" name="Sunclose" type="time" style="width: 80px;">
+              </p>
+            </div>
+            <span class="switch"><input type="checkbox" checked id="switcher"><label for=switcher></label></span> <br>
+            <button type="submit" class="btn btn-primary" style="margin-top: 3%;width: 300px;" (click)="close()"> SAVE</button>
+        </form>
+        </div>
+        </form> 
+    </div><br>
+ 
+  </div>
+</div> 

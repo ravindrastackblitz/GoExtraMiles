@@ -1,0 +1,125 @@
+<form [formGroup]="Additemdetails">
+<div>
+  <h1 style="text-align: center;">Add Items</h1>
+ 
+  <!-- <input class="button" [routerLink]="['/ItemDetails']"  class="btn btn-primary" style="margin-left:80%;" value="SAVE"> -->
+</div>
+<div class="image-container" style="margin-left: 35%;">
+
+  <div class="avatar-container1">
+    <label for="avatarInput1">
+ 
+<img *ngIf="selectedImages[0]" [src]="selectedImages[0]" class="avatar-preview1" alt="Avatar Preview">
+<div *ngIf="!selectedImages[0]" class="avatar-placeholder">
+        <i class="fas fa-user1"></i> <!-- Placeholder icon -->
+        <span>Add images</span>
+      </div>
+    </label>
+    <input type="file" id="avatarInput1" accept="image1/*" (change)="onFileSelected($event,0)">
+  </div>
+  <div class="avatar-container2" style="margin-left: 3%;">
+    <label for="avatarInput2">
+      <img *ngIf="selectedImages[1]" [src]="selectedImages[1]" class="avatar-preview2" alt="Avatar Preview">
+<div *ngIf="!selectedImages[1]" class="avatar-placeholder">
+        <i class="fas fa-user2"></i> <!-- Placeholder icon -->
+        <span>Add images</span>
+      </div>
+    </label>
+    <input type="file" id="avatarInput2" accept="image2/*" (change)="onFileSelected($event,1)">
+  </div>
+  <div class="avatar-container3" style="margin-left: 3%;">
+    <label for="avatarInput3">
+      <img *ngIf="selectedImages[2]" [src]="selectedImages[2]" class="avatar-preview3" alt="Avatar Preview">
+<div *ngIf="!selectedImages[2]" class="avatar-placeholder">
+        <i class="fas fa-user3"></i> <!-- Placeholder icon -->
+        <span>Add Images</span>
+      </div>
+    </label>
+    <input type="file" id="avatarInput3" accept="image3/*" (change)="onFileSelected($event,2)">
+  </div>
+</div>
+<br>
+<br>
+<div style="margin-left: 35%;">
+  <h2>Product Info</h2>
+  <div class="text-field w100p">
+    <input class="text-base w100p" type="text" required placeholder=" " formControlName="itemname" >
+    <span> Item Name  *</span>
+  </div>
+   <div class="form-text text-muted"
+   *ngIf="Additemdetails.controls['itemname'].touched && Additemdetails.controls['itemname'].errors?.['required']">
+   Please Enter  ItemName.
+  </div>
+  <div class="text-field w100p">
+    <input class="text-base w100p" type="text" required placeholder=" " formControlName="description" >
+    <span> Description  *</span>
+  </div>
+  
+   <div class="form-text text-muted"
+   *ngIf="Additemdetails.controls['description'].touched && Additemdetails.controls['description'].errors?.['required']">
+   Please Enter  Description.
+  </div>
+  <div class="text-field w100p">
+    <select class="text-base w100p" type="text"  placeholder=" " formControlName="country" >
+      <option value="" selected disabled >Country of Orgin </option>
+    <option value="India">India</option>
+    <option value="America">America</option>
+    <option value="China">China</option>
+    <option value="Maldives">Maldives</option>
+    <option value="Nepal">Nepal</option>
+    <option value="Pakistan">Pakistan</option>
+    <option value="Sri Lanka ">Sri Lanka </option>
+      </select>
+  </div>
+   <!-- <select type="text" placeholder=" Country of Orgin *" class="form-select"  formControlName="country">
+     <option value="" selected disabled >Country of Orgin </option>
+    <option value="India">India</option>
+    <option value="America">America</option>
+    <option value="China">China</option>
+    <option value="Maldives">Maldives</option>
+    <option value="Nepal">Nepal</option>
+    <option value="Pakistan">Pakistan</option>
+    <option value="Sri Lanka ">Sri Lanka </option>
+    </select> -->
+    <div class="text-field w100p">
+      <input class="text-base w100p" type="text" required placeholder=" " formControlName="link" >
+      <span> Link  *</span>
+    </div>
+    <div class="form-text text-muted"
+    *ngIf="Additemdetails.controls['link'].touched && Additemdetails.controls['link'].errors">
+    <div *ngIf="Additemdetails.controls['link'].errors?.['required']">Please Enter  Link.</div>
+    <div *ngIf="Additemdetails.controls['link'].errors?.['pattern']">Please Enter a Valid link.</div>
+  </div>
+
+  <h2>Pricing Info</h2>
+
+  <div class="text-field w100p">
+    <input class="text-base w100p" type="text" required placeholder=" " (input)="enforceNumberValidation($event)" formControlName="retailprice"   (keypress)="OnlyNubersAllowed($event)">
+    <span>MRP/Retail Price *</span>
+  </div>
+  <div class="form-text text-muted"
+  *ngIf="Additemdetails.controls['retailprice'].touched && Additemdetails.controls['retailprice'].errors">
+  <div *ngIf="Additemdetails.controls['retailprice'].errors?.['required']">Please Enter  Retailprice.</div>
+  <!-- <div *ngIf="Additemdetails.controls['retailprice'].errors?.['pattern']"> Price must have a maximum of two decimal places.</div> -->
+</div>
+  <div class="text-field w100p">
+    <input class="text-base w100p" type="text" required placeholder=" " (input)="enforceNumberValidation($event)" formControlName="sellingprice"  (keypress)="OnlyNubersAllowed($event)">
+    <span>Selling price to GEM *</span>
+  </div>
+  <div class="form-text text-muted"
+ *ngIf="Additemdetails.controls['sellingprice'].touched && Additemdetails.controls['sellingprice'].errors">
+ <div *ngIf="Additemdetails.controls['sellingprice'].errors?.['required']">Please Enter  Selling Price.</div>
+ <!-- <div *ngIf="Additemdetails.controls['sellingprice'].errors?.['pattern']"> Price must have a maximum of two decimal places.</div> -->
+</div>
+
+</div>
+
+ <div style="display: flex;">
+  <p style="margin-left: 35%;" >Hide from Catalouge </p>
+  <label class="switch" style="margin-left: 20%;" >
+      <input type="checkbox">
+      <span class="slider round"></span>
+    </label>
+ </div>
+</form><br><br>
+<button type="submit" [disabled]="!Additemdetails.valid" class="btn btn-primary" style="margin-left:40%;width: 15%;" (click)="Sumit()" >SAVE</button>
