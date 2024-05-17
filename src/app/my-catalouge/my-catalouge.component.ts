@@ -147,7 +147,11 @@ visible:boolean = false
     );
   }
   
-  
+  isUnblurred: boolean = false;
+
+  toggleBlur(): void {
+    this.isUnblurred = !this.isUnblurred;
+  }
   
 
 }
