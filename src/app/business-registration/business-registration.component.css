@@ -5,14 +5,13 @@
 .page
 {
     margin-left: 650px;
-    
-    height: 200px;
-    width: 200px;
+    height: 300px;
+    width: 300px;
     
 }
 .register
 {
-    height: 30px;
+    height: 40px;
      width: 250px;
      text-align: center;
      margin-left: 650px;

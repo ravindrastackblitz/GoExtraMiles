@@ -111,21 +111,43 @@ visible:boolean = false
     this.catalogService.getImagesByPhoneNumber().subscribe(images1 => {
       console.log("catelog data",images1)
       this.images = images1;
-      // if( this.Images != "" ){
-      //   this.showImage = true;
-      //   this.showcatelog = false;
-      // }
-      // else{
-      //   this.showImage = true;
-      //   this.showcatelog = false;
-      // }
+      
       var dta = JSON.parse(JSON.stringify(images1));
       for(var i=0;i<dta.length;i++){
         this.Images.push(dta[i][0])
       }
-
+      if( this.Images != "" ){
+        this.showImage = false;
+        this.showcatelog = true;
+      }
+      else{
+        this.showImage = true;
+        this.showcatelog = false;
+      }
       console.log("catelog data",this.images)
 
     });
+  }
 
-  }}
+  ImageData(event: any) {
+    const imageName = event.target.dataset.imagename;
+    console.log("Image Name:", imageName); // Log imageName
+    this.catalogService.getFilesByPhoneNumber(this.phoneNumber, imageName).subscribe(
+      uyuy => {
+        console.log("Retrieved Data:", uyuy); // Log data retrieved
+        if (uyuy) {
+          console.log("Found Data:", uyuy);
+        } else {
+          console.log("No data found for the provided phone number and image name.");
+        }
+      },
+      error => {
+        console.error("Error retrieving data:", error);
+      }
+    );
+  }
+  
+  
+  
+
+}

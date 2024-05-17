@@ -42,3 +42,16 @@ input[type="file"] {
   opacity: 0;
   overflow: hidden;
 }
+.image{
+  width: 150px;
+   height: 150px;
+   color: black;
+    border: 4px solid #1d1c1c; 
+    border-radius: 20%;
+      margin-left: 45%;
+}
+.RiderOverview{
+  width: 30px;
+  height:30px;
+  margin: 1%;
+}

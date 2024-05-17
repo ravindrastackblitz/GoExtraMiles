@@ -82,6 +82,7 @@ export class PhoneComponent {
   }
   onEdit(){
     this.verify =false;
+    this.route.navigate(['/phone']);
   }
 
 

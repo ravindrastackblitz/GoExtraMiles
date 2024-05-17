@@ -1,8 +1,10 @@
 import { Component,HostListener,OnInit, Output,EventEmitter } from '@angular/core';
 import { ImagesarviceService } from '../services/imagesarvice.service';
+import { DiscountcodeService } from '../services/discountcode.service';
 
 import { Router } from '@angular/router';
-import { DiscountcodeService } from '../services/discountcode.service';
+import { CatalogCURDService } from '../services/catalog-curd.service';
+import { CatalogModel } from '../Model/catalog-model';
 
 @Component({
   selector: 'app-item-details',
@@ -10,33 +12,33 @@ import { DiscountcodeService } from '../services/discountcode.service';
   styleUrls: ['./item-details.component.css']
 })
 export class ItemDetailsComponent {
-  textBoxData: string = '';
-  labelData: string = '';
- 
   selectedImage:any| string | ArrayBuffer | null = null;
   discount!:boolean;
   discount1!:boolean;
   discountcode!:string;
   scratchnumber!:string;
-  data = JSON.parse(JSON.stringify(localStorage.getItem('AddItems')));
+  formdata:any=[]
+data = JSON.parse(JSON.stringify(localStorage.getItem('AddItems')));
   details = JSON.parse(this.data);
   imagedata1 :string | null = null;
   imagedata2 :string | null = null;
   imagedata3 :string | null = null;
   HostListener:any;
+  catalogModel!:CatalogModel;
   language: string = ''; // Variable to store the selected language
   dropdownVisible: boolean = false; // Variable to control the visibility of the dropdown menu
+  textBoxData: string = '';
 
   // clicktoggle()
   // {
   //   this.details =(this.details === 'empty') ? "JSON.parse(localStorage.getItem('AddItems') || '{}')" : 'empty';
   // }
   clicktoggle(){
-  if (this.details === "none") {
-    this.details  = "block";
-  } else {
-    this.details  = "none";
-  }
+  // if (this.details === "none") {
+  //   this.details  = "block";
+  // } else {
+  //   this.details  = "none";
+  // }
 }
 togglePopup(): void {
   this.discount =true;
@@ -51,6 +53,13 @@ Scratchcard(){
 }
 Scratchcard1(){
   this.discount1 =false;
+ 
+}
+datadelete()
+{
+  this.discount1 =false;
+  this.details = '';
+  this._router.navigate(['/MyCatalouge']);
 }
 
   // Function to change the language
@@ -84,7 +93,7 @@ Scratchcard1(){
       this.dropdownVisible = false;
     }
   }
-constructor(private imageService: ImagesarviceService, private _router: Router,private dataService: DiscountcodeService){
+constructor(private imageService: ImagesarviceService, private _router: Router, private catalogCrud:CatalogCURDService,private dataService:DiscountcodeService){
 }
 Terms!:boolean
 popup(){
@@ -96,22 +105,53 @@ this.Terms = false;
 }
 
 
+Delete()
+{
+  // if(this.catalogModel.key)
+  //   {
+  //       this.catalogCrud.delete(this.catalogModel.key)
+       
+  //   }
+}
+
+
 ngOnInit(){
   console.log(this.details)
 
  this.imagedata1 = this.imageService.getImageData1();
  this.imagedata2 = this.imageService.getImageData2();
  this.imagedata3 = this.imageService.getImageData3();
+
+
+ this.catalogCrud.getBusinessByPhoneNumber().subscribe(
+  catalog=>{
+    console.log("Catalog is ",catalog)
+    this.formdata = catalog;
+    console.log("hjhj",this.formdata[0].key)
+    
+
+
+  }
+ )
 }
+
+
+
+
+
+
+
+
   // onFileSelected(event: any) {
   //   const file: File = event.target.files[0];
   //   if (file) {
   //     const reader = new FileReader();
   //     reader.onload = (e) => {
   //       this.selectedImage = e.target?.result;
-  //     };
+  //     }; 
   //     reader.readAsDataURL(file);
   //   }
   // }
-
+  
+ 
 }

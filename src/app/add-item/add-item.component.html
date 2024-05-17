@@ -116,10 +116,10 @@
 
  <div style="display: flex;">
   <p style="margin-left: 35%;" >Hide from Catalouge </p>
-  <label class="switch" style="margin-left: 20%;" >
+  <label class="switch" >
       <input type="checkbox">
       <span class="slider round"></span>
     </label>
  </div>
 </form><br><br>
-<button type="submit" [disabled]="!Additemdetails.valid" class="btn btn-primary" style="margin-left:40%;width: 15%;" (click)="Sumit()" >SAVE</button>
+<button type="submit" [disabled]="!Additemdetails.valid" class="btn btn-primary" id="save" (click)="Sumit()" >SAVE</button>

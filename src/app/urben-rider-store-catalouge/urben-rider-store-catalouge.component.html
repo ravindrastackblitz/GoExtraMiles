@@ -8,7 +8,7 @@
             align-items: center;
             width: 80px; 
             height: 80px; 
-            border: 2px dashed #ccc; 
+            border: 2px solid #ccc; 
             border-radius: 50%;
            
             cursor: pointer;">  <div class="col-sm-6">
@@ -17,17 +17,17 @@
     </div>
 
 </div>
-<div style="text-align: center;">
-    <input type="button" id="button1" value="CATALOUGE" [routerLink]="['/AddItem']" class="btn btn-primary"> <b><input type="button" id="button" [routerLink]="['/MyCatalouge']" value="SCRATCH CARDS" class="btn btn-primary"></b>
-</div>
+<!-- <div style="text-align: center;">
+     <input type="button" id="button1" value="CATALOUGE" [routerLink]="['/AddItem']" class="btn btn-primary"> <b><input type="button" id="button" [routerLink]="['/MyCatalouge']" value="SCRATCH CARDS" class="btn btn-primary"></b>
+</div> -->
 
-<img class="ima" src="https://en.pimg.jp/106/876/444/1/106876444.jpg" alt="image" style="width: 250px;height: 250px;text-align: center;margin-right: 100px;">
+<img class="ima" src="https://en.pimg.jp/106/876/444/1/106876444.jpg" alt="image">
 
 <div style="text-align: center;">
     <h2>CREATE CATELOGUE</h2>
     <p>Create your Cateloge and Sell Directly to your Customers</p>
 
-    <input type="button"id="button1" style="margin-bottom: 10%;" (click)="togglePopup()"  value="CREATE NOW" class="btn btn-primary">
+    <input type="button" id="button1" (click)="togglePopup()"  value="CREATE NOW" class="btn btn-primary">
 </div>
 <div class="popup1" *ngIf="discount">
     <div class="popup-content1">

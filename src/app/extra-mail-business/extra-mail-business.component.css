@@ -5,8 +5,11 @@
   padding-left: 15px;
 margin-left: -32%;
 }
-
-
+#FirstImage
+{
+  width: 150px;
+  height: 150;
+}
 .term{
   color:deepskyblue;
 }

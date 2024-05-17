@@ -180,10 +180,10 @@
   <input type="checkbox" style="margin: 5px;" formControlName="termsAndConditions"> I accept the  <b (click)="condition()" class="term">Terms and Conditions</b> as well as <b (click)="condition()" class="term">Privacy Policy.</b> 
 </div>
 <div  *ngIf="!buttons">
-<button type="submit" [disabled]="!Createbusiness.valid" class="btn btn-primary m-3" style="margin-left: 5%;width: 10%;">Submit</button>
+<button type="submit" [disabled]="!Createbusiness.valid" class="btn btn-primary m-3" id="SubmitUpdate">Submit</button>
 </div>
 <div *ngIf="buttons">
-<button type="submit" [disabled]="!Createbusiness.valid" class="btn btn-primary m-3" style="margin-left: 5%;width: 10%;">Update</button>
+<button type="submit" [disabled]="!Createbusiness.valid" class="btn btn-primary m-3" id="SubmitUpdate">Update</button>
 </div>
 </div>
 <!-- <input type="button" [routerLink]="['/BusinessRegistrationDetails']" class="btn btn-primary" style="margin-left: 5%;"  value="CREATE ACCOUNT"> -->

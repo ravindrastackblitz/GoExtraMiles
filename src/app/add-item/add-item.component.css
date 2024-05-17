@@ -1,3 +1,8 @@
+#save
+{
+  margin-left:40%;
+  width: 15%;
+}
 .text-base {
   line-height: 1;
   margin: 0;
@@ -132,6 +137,7 @@ input[type="file"] {
     display: inline-block;
     width: 60px;
     height: 34px;
+    margin-left: 20%;
   }
   
   /* Hide default HTML checkbox */

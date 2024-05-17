@@ -3,19 +3,24 @@
     margin-right: 3%;
     padding-top: 2%;
 }
- .la{
+ .alldays{
     margin-right: 2%;
     margin-top: 2%;
+    margin-left:-17%;
 }
 .btn1{
     background-color: black;
     color: white;
     border-radius: 25px;
-    width:7%
+    width:7%;
+    width: 80px;
 }
 .choice{
     margin-left: 2.5%;
 } 
+.daytime{
+    width: 80px;
+}
 
 .switch{
     margin-left: 3%;

@@ -74,7 +74,7 @@ pushFilesToStorage(catalogImages: CatalogModel[]): Observable<any[]> {
 
   
 
-  getFilesByPhoneNumber(phoneNumber: string): Observable<any> {
+  getFilesByPhoneNumber(phoneNumber: string, imageName: any): Observable<any> {
     this.catalogService = this.db.list(this.dbPath);
     
     // Querying the list based on the phone number
