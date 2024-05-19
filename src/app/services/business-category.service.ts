@@ -9,7 +9,7 @@ import {map} from 'rxjs'
 })
 export class BusinessCategoryService {
   // private dbPath = 'Categories';
-  private dbPath ='/SelectCategory';
+  private dbPath ='/Categories';
   BusinessCategories: AngularFireList<SelectCategory>;
 
   constructor(private db: AngularFireDatabase, private storage: AngularFireStorage) {

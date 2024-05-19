@@ -7,6 +7,7 @@ import { CatalogServiceService } from '../services/catalog-service.service';
 import { ImagesarviceService } from '../services/imagesarvice.service';
 import { CatalogCURDService } from '../services/catalog-curd.service';
 import { CatalogModel } from '../Model/catalog-model';
+import { UserloginService } from '../services/userlogin.service';
 
 @Component({
   selector: 'app-add-item',
@@ -24,15 +25,20 @@ catalogUploads:any
   formdata:any;
   buttons!:boolean
   phone :any = localStorage.getItem('phoneNumber');
+  Email = localStorage.getItem('Email');
+
 
   constructor(private fb: FormBuilder, private _router: Router,
     private imageService: ImagesarviceService,
     private httpClient: HttpClient, private catalogService: CatalogServiceService,
-    private catalogCrudService: CatalogCURDService,
+    private catalogCrudService: CatalogCURDService, private userloginService:UserloginService
 
     ) { }
 
-  ngOnInit() {
+    ngOnInit(){
+      if(this.Email != '' && this.Email != undefined){
+        this.userloginService.setIsMainHeaderVisible(true); 
+      }
     this.Additemdetails = this.fb.group({
       itemname: ['', Validators.required],
       description: ['', Validators.required],
@@ -194,15 +200,20 @@ updateSelectedImages(): void {
 //     // Upload files to storage
 //   }
 // }
+CatalogImage: any
+images:CatalogImage[]  =[];
+
+URLS:any =[];
+Names:any =[];
 Sumit() {
   if (this.Additemdetails.valid && this.selectedFiles.length > 0) {
     // Initialize array to hold CatalogModel objects
     const catalogModels: CatalogModel[] = [];
 
     // Iterate over selectedFiles to create CatalogModel objects
-    for (const files of this.selectedFiles) {
-      for (let i = 0; i < files.length; i++) {
-        const file: File = files.item(i)!;
+    for (const file of this.selectedFiles) {
+      // Check if file is defined
+      if (file) {
         const catalogModel: CatalogModel = {
           Itemname: this.Additemdetails.value.itemname,
           Description: this.Additemdetails.value.description,
@@ -212,21 +223,34 @@ Sumit() {
           Retailprice: this.Additemdetails.value.sellingprice,
           registrationnumber: this.phone,
           isApproved: false,
-          url: '', // If you're updating the URL after the files are uploaded, leave it empty for now
-          name: file.name,
-          
-          file: file
+          urls: [], // Initialize URLs array
+          names: [], // Initialize names array
+          file: file,
         };
-
+  
         catalogModels.push(catalogModel);
+      } else {
+        console.error('File is undefined');
       }
     }
 
     // Upload files to storage
     this.catalogCrudService.pushFilesToStorage(catalogModels).subscribe(
       catalogImagesUpload => {
-        this.catalogUploads = catalogImagesUpload;
-        console.log('fileUpload details:', this.catalogUploads);
+        this.catalogUploads = catalogImagesUpload; 
+         for(var i=0; i<this.catalogUploads.length; i++ ){
+          this.images.push({name: this.catalogUploads[i].names, url: this.catalogUploads[i].urls});
+          // this.URLS.push(this.catalogUploads[i].urls);
+          // this.Names.push(this.catalogUploads[i].names)
+        //  const  data =  this.catalogUploads[i].urls;
+        // this.catalogUploads = catalogImagesUpload; 
+        const na =  this.catalogUploads[i].names;
+        //  console.log('fileUpload urs:', data);
+        //  console.log('fileUpload na:', na);
+        }
+        console.log('fileUpload URLS :', this.URLS);
+        console.log('fileUpload Na :', this.Names);
+     
         // Save form data once all files are uploaded
         this.saveFormData();
       },
@@ -238,10 +262,8 @@ Sumit() {
 }
 
 
-
-
-
 saveFormData() {
+ 
   const formData = {
     Itemname: this.Additemdetails.value.itemname,
     Description: this.Additemdetails.value.description,
@@ -251,16 +273,14 @@ saveFormData() {
     Retailprice: this.Additemdetails.value.sellingprice,
     registrationnumber: this.phone,
     isApproved: false,
-    url: '', // If you're updating the URL after the files are uploaded, leave it empty for now
-    key: '', // If you're using keys for database entries, leave it empty for now
-    name: '', // If you're using names for database entries, leave it empty for now
     file: '',
-    name2:'',
-    name1:'',
+    urls: this.images,//[{url:"",Name:""},{}] // If you're updating the URL after the files are uploaded, leave it empty for now
+ // If you're using keys for database entries, leave it empty for now
+    names: this.Names, // If you're using names for database entries, leave it empty for now
   };
 
   // Save form data to database
-  this.catalogCrudService.create(this.catalogUploads).then(() => {
+  this.catalogCrudService.create(formData).then(() => {
     console.log('Data added successfully');
   }).catch((error: any) => {
     console.error('Error adding data:', error);

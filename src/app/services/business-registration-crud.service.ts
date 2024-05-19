@@ -10,7 +10,7 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
   providedIn: 'root'
 })
 export class BusinessRegistrationCRUDService {
-  private dbPath = '/BusinessRegistrationDetails';
+  private dbPath = '/BusinessRegistrations';
   number= localStorage.getItem('phoneNumber')
 
   businessRegistration: AngularFireList<CreateBusinessAccount>;
@@ -71,12 +71,12 @@ export class BusinessRegistrationCRUDService {
   }
 
   getBusinessRecordByKey1(phonenumber:string): Observable<any> {
-    return this.db.list('BusinessRegistrationDetails/').snapshotChanges().pipe(
+    return this.db.list('BusinessRegistrations/').snapshotChanges().pipe(
       map(changes =>
         changes.map(c => ({ key: c.payload.key, ...c.payload.val() as any }))
       ),
       map(businesses =>
-        businesses.find(business => business.registrationnumber == this.number)
+        businesses.find(business => business.registrationnumber == phonenumber)
       ),
       catchError(error => {
         console.error('Error retrieving business records:', error);
