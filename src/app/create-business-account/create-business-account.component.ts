@@ -150,7 +150,7 @@ if(this.Email != '' && this.Email != undefined){
               this.AddvaluesToform()
             } 
       });
-    // this.businessService.getBusinessRecordByKey1(this.phone).subscribe(
+    
     //   business => {
     //     if (business != undefined) {
     //       this.formdata = business;
