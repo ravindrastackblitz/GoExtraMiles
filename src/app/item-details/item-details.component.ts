@@ -62,10 +62,12 @@ Scratchcard1(){
   this.discount1 =false;
  
 }
+
 datadelete()
 {
   this.discount1 =false;
   this.details = '';
+  this.catalogCrud.deletecatalouge(this.keyName)
   this._router.navigate(['/MyCatalouge']);
 }
 

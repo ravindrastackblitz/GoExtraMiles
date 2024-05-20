@@ -94,6 +94,10 @@ delete(key: string): Observable<any> {
       changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
     ))
 }
+deletecatalouge(key:string)
+{
+  return this.catalogService.remove(key);
+}
 
 
 }
