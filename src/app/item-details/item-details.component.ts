@@ -18,17 +18,23 @@ export class ItemDetailsComponent {
   discount1!:boolean;
   discountcode!:string;
   scratchnumber!:string;
-  formdata:any=[]
-data = JSON.parse(JSON.stringify(localStorage.getItem('AddItems')));
-  details = JSON.parse(this.data);
+  formdata:any=[];
+  Names:any =[];
+data1 = JSON.parse(JSON.stringify(localStorage.getItem('AddItems')));
+  details = JSON.parse(this.data1);
   imagedata1 :string | null = null;
   imagedata2 :string | null = null;
   imagedata3 :string | null = null;
   HostListener:any;
   catalogModel!:CatalogModel;
+  phoneNumber: any =  localStorage.getItem('phoneNumber');
+  keyName:any = localStorage.getItem('KEY');
+
   language: string = ''; // Variable to store the selected language
   dropdownVisible: boolean = false; // Variable to control the visibility of the dropdown menu
   textBoxData: string = '';
+
+  images: any;
 
   // clicktoggle()
   // {
@@ -120,42 +126,47 @@ ngOnInit(){
   if(this.Email != '' && this.Email != undefined){
     this.userloginService.setIsMainHeaderVisible(true); 
   }
-  console.log(this.details)
-
- this.imagedata1 = this.imageService.getImageData1();
- this.imagedata2 = this.imageService.getImageData2();
- this.imagedata3 = this.imageService.getImageData3();
 
 
- this.catalogCrud.getBusinessByPhoneNumber().subscribe(
-  catalog=>{
-    console.log("Catalog is ",catalog)
-    this.formdata = catalog;
-    console.log("hjhj",this.formdata[0].key)
-    
-
-
+if (this.phoneNumber && this.keyName) {
+  this.catalogCrud.getFilesByPhoneNumber(this.phoneNumber, this.keyName).subscribe({
+    next: data => {
+      if(data !== undefined)
+      {
+      console.log("Retrieved Data:", data);
+      this.data1 = data;
+      this.details = data;
+      this.ItemDetails()
+       
+        localStorage.removeItem('KEY')
+      } else {
+        this.ItemDetails()
+        console.log("No data found for the provided phone number and image name.");
+      }
+    }
   }
- )
+   
+  
+   
+  );
+}
 }
 
-
-
-///item details
-
-
-
-
-  // onFileSelected(event: any) {
-  //   const file: File = event.target.files[0];
-  //   if (file) {
-  //     const reader = new FileReader();
-  //     reader.onload = (e) => {
-  //       this.selectedImage = e.target?.result;
-  //     }; 
-  //     reader.readAsDataURL(file);
-  //   }
-  // }
-  
+ItemDetails()
+{
+  this.details.patchValue({
+    Itemname: this.details.Itemname ,
+          Description: this.details.Description  ,
+          Country: this.details.Country,
+          Link: this.details.Link  ,
+          SellingPrice:this.details.SellingPrice  ,
+          Retailprice: this.details.Retailprice  ,
+          registrationnumber: this.phoneNumber,
+          isApproved: false,
+          file: '',
+          urls: this.details.urls || [],
+          names: this.Names || []
+  })
+}
  
 }

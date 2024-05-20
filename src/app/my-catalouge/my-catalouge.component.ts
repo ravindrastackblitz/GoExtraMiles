@@ -42,7 +42,7 @@ visible:boolean = false
   imagedata3 :string | null = null;
   HostListener:any
   online!: boolean;
-
+catalogKeyt!:any;
   togglePopup(): void {
     this.online =true;
   }
@@ -73,21 +73,25 @@ visible:boolean = false
     this.imagedata1 = this.imageService.getImageData1();
     this.imagedata2 = this.imageService.getImageData2();
     this.imagedata3 = this.imageService.getImageData3();
-    this.catalogService.getBusinessByPhoneNumber().subscribe(
-      data => console.log("This is the catelog data :",data)
-    );
+   
     
       this.imagedata = this.imageService.getImageData();
-    this.catalogService.getImagesByPhoneNumber().subscribe(images1 => {
+
+    this.catalogService.getBusinessByPhoneNumber().subscribe(images1 => {
       console.log("catelog data",images1)
       this.images = images1;
+      //this.catalogKeyt
       
       var dta = JSON.parse(JSON.stringify(images1));
       for(var i=0;i<dta.length;i++){
+        const key = dta[i].key;
+      //  console.log("hffhffhfgfg ",key);
         const img = dta[i].urls[0];
-        this.Images.push(dta[i].urls[0]);
-        console.log("image 0 ",img);
+        this.Images.push({images:dta[i].urls[0],key:dta[i].key});
+        console.log("yqwyqwuyw ",this.Images);
+     //   console.log("image 0 ",img);
       }
+      console.log("yqwyqwuyw 4334",this.Images);
       if( this.Images != "" ){
         this.showImage = false;
         this.showcatelog = true;
@@ -102,18 +106,12 @@ visible:boolean = false
 
 
   ImageData(event: any) {
-    const imageName = event.target.dataset.imagename;
-    console.log("Image Name:", imageName); // Log imageName
-    this.catalogService.getFilesByPhoneNumber(this.phoneNumber, imageName).subscribe({
-      next: data => {
-        console.log("Retrieved Data:", data); // Log data retrieved
-        if (data) {
-          console.log("Found Data:", data.registrationnumber);
-        } else {
-          console.log("No data found for the provided phone number and image name.");
-        }
-      }
-    });
+    const key = event.target.dataset.imagename;
+
+    console.log("Image Name:", key); // Log imageName
+    this.router.navigate(['/ItemDetails'])
+    localStorage.setItem("KEY",key)
+    
   }
   
   

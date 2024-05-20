@@ -2,6 +2,7 @@ import { CatalogImage } from "./catalog-image";
 
 export interface CatalogModel {
 
+
     // Itemname: this.Additemdetails.value.itemname,
     // Description: this.Additemdetails.value.description,
     // Country: this.Additemdetails.value.country,
