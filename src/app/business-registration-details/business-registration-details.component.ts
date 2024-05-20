@@ -5,6 +5,7 @@ import { BusinessRegistrationCRUDService } from '../services/business-registrati
 import { ImageUploadService } from '../services/image-upload.service';
 import { FileUpload } from '../Model/file-upload';
 import { CreateBusinessAccount } from '../Model/create-business-account';
+import { UserloginService } from '../services/userlogin.service';
 
 @Component({
   selector: 'app-business-registration-details',
@@ -26,10 +27,14 @@ times1 =JSON.parse(this.times);
 
 constructor(private imageService: ImagesarviceService, private router: Router,private reg:BusinessRegistrationCRUDService,
   private businessService:BusinessRegistrationCRUDService,
-  private uploadService:ImageUploadService){
+  private userloginService:UserloginService){
 }
+Email = localStorage.getItem('Email')
 phone = localStorage.getItem('phoneNumber')
 ngOnInit(){
+  if(this.Email != '' && this.Email != undefined){
+    this.userloginService.setIsMainHeaderVisible(true); 
+  }
  this.imagedata = this.imageService.getImageData();
  this.selectedFiles =this.imageService.getfile()
  if(this.details?.storetiming == "Pick Days"){

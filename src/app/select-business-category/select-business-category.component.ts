@@ -1,4 +1,4 @@
-import { Component,OnInit,Output,EventEmitter,Pipe,PipeTransform  } from '@angular/core';
+import { Component,OnInit,Output,EventEmitter } from '@angular/core';
 import { PopupComponent } from '../popup/popup.component';
 import { PopupService } from '../services/popup.service';
 import { observable, Observable, Subscription } from 'rxjs';
@@ -15,10 +15,8 @@ import { SelectCategory } from '../Model/select-category';
   templateUrl: './select-business-category.component.html',
   styleUrls: ['./select-business-category.component.css']
 })
-export class SelectBusinessCategoryComponent implements PipeTransform {
-  transform(businesscategory: any[], limit: number): any[] {
-    return businesscategory.slice(0, 5);
-  }
+export class SelectBusinessCategoryComponent {
+
   businesscategory:any=[];
 
 selectcategory!:FormGroup;
@@ -46,34 +44,19 @@ this.selectcategory = this.formbuilder.group({
 })
 
 this.category.GetAllCategorys().subscribe(res => {
-console.log("category",res);
+//console.log("category",res);
 this.businesscategory =res
 })
- 
 }
+
 Filterdata(event: any) {
-console.log("entervalue :",event.target.value)
-console.log(" charcode :",event.keyCode)
-  const charCode = (event.which)?event.which:event.keyCode;
-//   if(charCode === "BS"){
-//     this.category.GetAllCategorys().subscribe(res => {
-//       this.businesscategory =res
-//   })
-// }
-  const char = event.target.value.trim().toLowerCase(); 
-  if(char.keyCode === "08"){
-   // console.log(" charcode :",char.keyCode)
-    this.category.GetAllCategorys().subscribe(res => {
-            this.businesscategory =res
-        })
-  }else{
+    const char = event.target.value.trim().toLowerCase(); 
     this.category.GetAllCategorys().subscribe(res => {
       const filteredResults = res.filter(item => item.label?.toLowerCase().includes(char) || item.value?.toLowerCase() === char);
-      console.log("Filtered results:", filteredResults);
+    //  console.log("Filtered results:", filteredResults);
       this.businesscategory =filteredResults;
-      });
-  }
-
+    })
+ 
 }
 
 addcategory!:boolean;
@@ -97,6 +80,9 @@ categorys(){
     this.selectedCategory = res.category
     this.eventemit.emit( this.selectedCategory);   
   }
+  this.category.GetAllCategorys().subscribe(res => {
+    this.businesscategory =res
+    })
 }
 close1(){
   this.eventemit.emit( this.selectedCategory);

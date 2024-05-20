@@ -50,8 +50,8 @@ export class PhoneComponent {
  
    ngOnInit() {
     firebase.initializeApp( config)
-
    }
+   
    GetOtp() {
     this.verify =true;
     this.reCaptchaverifer = new firebase.auth.RecaptchaVerifier('sign-in-button', {
@@ -63,28 +63,31 @@ export class PhoneComponent {
    localStorage.setItem('phoneNumber', this.phoneNumber); // Log phoneNumber to check its value
 
   }
-  onConfirm()
-  {
 
-    firebase.auth().signInWithPhoneNumber(this.phoneNumber, this.reCaptchaverifer)
-    .then((confirmationResult) => {
+  onConfirm() {
+    firebase
+      .auth()
+      .signInWithPhoneNumber(this.phoneNumber, this.reCaptchaverifer)
+      .then((confirmationResult) => {
         localStorage.setItem('verificationId', confirmationResult.verificationId);
         this.route.navigate(['/OTP']);
         console.log('Verification ID:', confirmationResult.verificationId);
-    })
-    .catch((error) => {
+  
+        // Close the reCAPTCHA widget
+        this.reCaptchaverifer.clear();
+      })
+      .catch((error) => {
         console.error('Error sending OTP:', error);
         alert('Error sending OTP: ' + error.message);
-
+  
         // Log the entire error object for detailed inspection
         console.log('Full error object:', error);
-    });
+      });
   }
+  
   onEdit(){
     this.verify =false;
-    this.route.navigate(['/phone']);
   }
-
 
 }
 

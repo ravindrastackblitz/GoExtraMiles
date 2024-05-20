@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserloginService } from '../services/userlogin.service';
 
 @Component({
   selector: 'app-business-registration',
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class BusinessRegistrationComponent {
 
+  constructor ( private userloginService:UserloginService){ }
+    Email = localStorage.getItem('Email')
+ngOnInit(){
+  if(this.Email != '' && this.Email != undefined){
+    this.userloginService.setIsMainHeaderVisible(true); 
+  }
+}
 }
