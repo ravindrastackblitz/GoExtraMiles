@@ -22,7 +22,8 @@ export class AddItemComponent implements OnInit {
   selectedImages: any[] = [];
   Additemdetails!: FormGroup| any;
   percentage = 0;
-catalogUploads:any
+catalogUploads:any;
+keyName:any;
   formdata:any;
   buttons!:boolean
   phone :any = localStorage.getItem('phoneNumber');
@@ -32,7 +33,8 @@ catalogUploads:any
   constructor(private fb: FormBuilder, private _router: Router,
     private imageService: ImagesarviceService,
     private httpClient: HttpClient, private catalogService: CatalogServiceService,
-    private catalogCrudService: CatalogCURDService, private userloginService:UserloginService
+    private catalogCrudService: CatalogCURDService, private userloginService:UserloginService,
+   
 
     ) { }
 
@@ -49,21 +51,46 @@ catalogUploads:any
       sellingprice: ['', Validators.required]
     });
 
+    this.catalogCrudService.data$.subscribe(data => {
+      this.keyName = data;
+     });
+  
+  if (this.phone && this.keyName) {
+    this.catalogCrudService.getFilesByPhoneNumber(this.phone, this.keyName).subscribe({
+      next: data => {
+        if(data !== undefined)
+        {
+          this.AddvaluesToform();
+        console.log("Retrieved Data:", data);
+       
+       
+        
+         
+        }
+      }
+    });
+  }
+
   }
 
 
 
 
 AddvaluesToform(){
-  if( this.formdata!= undefined){
+  if( this.catalogDetails!= undefined){
     this.Additemdetails.patchValue({
-      itemname:this.formdata.Itemname,
-      description:this.formdata.Description,
-      country:this.formdata.Country,
-      link:this.formdata.Link,
-      retailprice:this.formdata.Retailprice,
-      sellingprice:this.formdata.SellingPrice
-
+   
+      Itemname: this.catalogDetails.Itemname ,
+      Description: this.catalogDetails.Description  ,
+      Country: this.catalogDetails.Country,
+      Link: this.catalogDetails.Link  ,
+      SellingPrice:this.catalogDetails.SellingPrice  ,
+      Retailprice: this.catalogDetails.Retailprice  ,
+      registrationnumber: this.phone,
+      isApproved: false,
+      file: '',
+      urls: this.catalogDetails.urls || [],
+      names: this.Names || [],
      
     })
   }

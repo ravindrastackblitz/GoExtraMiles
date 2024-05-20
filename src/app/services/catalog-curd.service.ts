@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
 import { CatalogModel } from '../Model/catalog-model';
-import { Observable, finalize, map ,forkJoin, switchMap, of,tap, catchError} from 'rxjs';
+import { Observable, finalize, map ,forkJoin, switchMap, of,tap, catchError, BehaviorSubject} from 'rxjs';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/compat/storage';
 
 @Injectable({
@@ -15,6 +15,8 @@ export class CatalogCURDService {
 
   
 
+  private Key = new BehaviorSubject<string>('');
+  public data$: Observable<string> = this.Key.asObservable();
 
   constructor(private db: AngularFireDatabase, private storage: AngularFireStorage) {
     this.catalogService = db.list(this.dbPath);
@@ -80,7 +82,10 @@ pushFilesToStorage(fileLists: FileList[]): Observable<any> {
     );
     }
   
- 
+    setKey(key: string) {
+      this.Key.next(key);
+    }
+
 getImagesByPhoneNumber(): Observable<CatalogModel[]> {
   return this.db.list<CatalogModel>(this.dbPath).valueChanges();
 }

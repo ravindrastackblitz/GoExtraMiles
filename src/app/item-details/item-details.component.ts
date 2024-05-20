@@ -28,7 +28,7 @@ data1 = JSON.parse(JSON.stringify(localStorage.getItem('AddItems')));
   HostListener:any;
   catalogModel!:CatalogModel;
   phoneNumber: any =  localStorage.getItem('phoneNumber');
-  keyName:any = localStorage.getItem('KEY');
+  keyName:any;
 
   language: string = ''; // Variable to store the selected language
   dropdownVisible: boolean = false; // Variable to control the visibility of the dropdown menu
@@ -128,6 +128,10 @@ ngOnInit(){
   }
 
 
+  this.catalogCrud.data$.subscribe(data => {
+    this.keyName = data;
+   });
+
 if (this.phoneNumber && this.keyName) {
   this.catalogCrud.getFilesByPhoneNumber(this.phoneNumber, this.keyName).subscribe({
     next: data => {
@@ -137,8 +141,8 @@ if (this.phoneNumber && this.keyName) {
       this.data1 = data;
       this.details = data;
       this.ItemDetails()
+      
        
-        localStorage.removeItem('KEY')
       } else {
         this.ItemDetails()
         console.log("No data found for the provided phone number and image name.");
@@ -165,8 +169,10 @@ ItemDetails()
           isApproved: false,
           file: '',
           urls: this.details.urls || [],
-          names: this.Names || []
+          names: this.Names || [],
+          
   })
+
 }
  
 }
