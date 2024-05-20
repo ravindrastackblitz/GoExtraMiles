@@ -60,7 +60,6 @@ Scratchcard(){
 }
 Scratchcard1(){
   this.discount1 =false;
- 
 }
 
 datadelete()
@@ -114,15 +113,6 @@ Conditions(data:any){
 this.Terms = false;
 }
 
-
-Delete()
-{
-  // if(this.catalogModel.key)
-  //   {
-  //       this.catalogCrud.delete(this.catalogModel.key)
-       
-  //   }
-}
 Email = localStorage.getItem('Email');
 
 ngOnInit(){
@@ -140,8 +130,13 @@ if (this.phoneNumber && this.keyName) {
     next: data => {
       if(data !== undefined){
       console.log("Retrieved Data:", data);
-      this.data1 = data;
-      this.details = this.data1;
+     for(var i = 0; i<data.urls.length; i++){
+      this.imagedata1 = data.urls[0].url;
+      this.imagedata2 =data.urls[1].url;
+      this.imagedata3 = data.urls[2].url;
+     }
+      
+      this.details = data;
       this.ItemDetails()
       
       }
@@ -159,7 +154,7 @@ if (this.phoneNumber && this.keyName) {
 }
 
 ItemDetails(){
-  this.data1.patchValue({
+  this.details.patchValue({
     Itemname: this.details.Itemname ,
           Description: this.details.Description  ,
           Country: this.details.Country,
