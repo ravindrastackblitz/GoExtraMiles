@@ -5,6 +5,7 @@ import { DiscountcodeService } from '../services/discountcode.service';
 import { Router } from '@angular/router';
 import { CatalogCURDService } from '../services/catalog-curd.service';
 import { CatalogModel } from '../Model/catalog-model';
+import { UserloginService } from '../services/userlogin.service';
 
 @Component({
   selector: 'app-item-details',
@@ -59,7 +60,6 @@ datadelete()
 {
   this.discount1 =false;
   this.details = '';
-  this._router.navigate(['/MyCatalouge']);
 }
 
   // Function to change the language
@@ -93,7 +93,8 @@ datadelete()
       this.dropdownVisible = false;
     }
   }
-constructor(private imageService: ImagesarviceService, private _router: Router, private catalogCrud:CatalogCURDService,private dataService:DiscountcodeService){
+constructor(private imageService: ImagesarviceService, private _router: Router, 
+  private catalogCrud:CatalogCURDService,private dataService:DiscountcodeService,private userloginService:UserloginService){
 }
 Terms!:boolean
 popup(){
@@ -113,9 +114,12 @@ Delete()
        
   //   }
 }
-
+Email = localStorage.getItem('Email');
 
 ngOnInit(){
+  if(this.Email != '' && this.Email != undefined){
+    this.userloginService.setIsMainHeaderVisible(true); 
+  }
   console.log(this.details)
 
  this.imagedata1 = this.imageService.getImageData1();

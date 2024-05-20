@@ -1,3 +1,5 @@
+import { CatalogImage } from "./catalog-image";
+
 export interface CatalogModel {
 
     // Itemname: this.Additemdetails.value.itemname,
@@ -16,9 +18,9 @@ export interface CatalogModel {
     Retailprice:number;
     isApproved:boolean;
     registrationnumber:any;
-     name: string;
+     names: string[];
      
-    url: string;
+    urls: CatalogImage[];
     
     
     

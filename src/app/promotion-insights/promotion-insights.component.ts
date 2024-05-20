@@ -1,5 +1,6 @@
 import { Component,VERSION } from '@angular/core';
 import { ImagesarviceService } from '../services/imagesarvice.service';
+import { UserloginService } from '../services/userlogin.service';
 
 @Component({
   selector: 'app-promotion-insights',
@@ -23,9 +24,13 @@ export class PromotionInsightsComponent {
   Conditions(data:any){
   this.Terms = false;
   }
-  constructor(private imageService: ImagesarviceService) {}
+  constructor(private imageService: ImagesarviceService, private userloginService:UserloginService) {}
 
+  Email = localStorage.getItem('Email');
   ngOnInit() {
+    if(this.Email != '' && this.Email != undefined){
+      this.userloginService.setIsMainHeaderVisible(true); 
+    }
     this.images.push(this.imageService.getImageData1());
 
   }

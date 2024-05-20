@@ -47,14 +47,13 @@ constructor(private _router:Router,private userloginService: UserloginService) {
     console.log(JSON.parse(jsonPayload));
    
     var username = JSON.parse(jsonPayload).email;
+    localStorage.setItem("Email",username);
     this.userloginService.setusername(username)
-    localStorage.setItem("Email",username)
+    
     console.log(username);
     this._router.navigate(['/phone']);
-
-
   }
-  //show main header 
+
  
 
 }

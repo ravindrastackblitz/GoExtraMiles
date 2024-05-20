@@ -49,8 +49,9 @@ export class CreateBusinessAccountComponent implements OnInit {
   datatime :string ="";
   username:string ='';
   subscription: Subscription;
-formdata:any
+formdata:any;
 
+Email = localStorage.getItem('Email')
   constructor(
     private popupservice: PopupService,
     private gstservice: GstService,
@@ -106,6 +107,10 @@ searchLocation()
 
 }
   ngOnInit() {
+if(this.Email != '' && this.Email != undefined){
+  this.userloginService.setIsMainHeaderVisible(true); 
+}
+  
     this.Createbusiness = this.formBuilder.group({
       searchQuery: [''],
       categoryname:new FormControl('',[Validators.required]),
