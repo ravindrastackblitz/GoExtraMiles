@@ -28,6 +28,7 @@ keyName:any;
   buttons!:boolean
   phone :any = localStorage.getItem('phoneNumber');
   Email = localStorage.getItem('Email');
+  ImagesUrl!:any[]
 
 
   constructor(private fb: FormBuilder, private _router: Router,
@@ -63,7 +64,13 @@ keyName:any;
           this.formdata=data;
           this.AddvaluesToform();
         console.log("Retrieved Data:", data);
-       
+        for( var i=0;i<=data.urls.length; i++)
+          {
+            this.selectedImages=data.urls[0].url;
+            this.selectedImages=data.urls[1].url;
+            this.selectedImages=data.urls[2].url;
+  
+          }
        
         
          
@@ -121,6 +128,8 @@ AddvaluesToform(){
   }
   onFileSelected(event: any,index: number) {
     const files = event.target.files;
+
+    
     if (files) {
       this.selectedFile[index] = files;
       const fileCount = files.length;

@@ -151,7 +151,7 @@ if(this.Email != '' && this.Email != undefined){
             } 
       });
     
-    //   business => {
+
     //     if (business != undefined) {
     //       this.formdata = business;
     //       console.log("data form database", this.formdata);

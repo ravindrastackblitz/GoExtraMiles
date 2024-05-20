@@ -2,7 +2,7 @@ import { Component,HostListener,OnInit, Output,EventEmitter } from '@angular/cor
 import { ImagesarviceService } from '../services/imagesarvice.service';
 import { DiscountcodeService } from '../services/discountcode.service';
 
-import { Router } from '@angular/router';
+import { Router, UrlSegment } from '@angular/router';
 import { CatalogCURDService } from '../services/catalog-curd.service';
 import { CatalogModel } from '../Model/catalog-model';
 import { UserloginService } from '../services/userlogin.service';
@@ -115,14 +115,7 @@ this.Terms = false;
 }
 
 
-Delete()
-{
-  // if(this.catalogModel.key)
-  //   {
-  //       this.catalogCrud.delete(this.catalogModel.key)
-       
-  //   }
-}
+
 Email = localStorage.getItem('Email');
 
 ngOnInit(){
@@ -141,6 +134,13 @@ if (this.phoneNumber && this.keyName) {
       if(data !== undefined)
       {
       console.log("Retrieved Data:", data);
+      for( var i=0;i<=data.urls.length; i++)
+        {
+          this.imagedata1=data.urls[0].url;
+          this.imagedata2=data.urls[1].url;
+          this.imagedata3=data.urls[2].url;
+
+        }
       this.data1 = data;
       this.details = data;
       this.ItemDetails()

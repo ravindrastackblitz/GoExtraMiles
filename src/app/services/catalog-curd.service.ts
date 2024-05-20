@@ -92,14 +92,14 @@ getImagesByPhoneNumber(): Observable<CatalogModel[]> {
 }
 
 
-delete(key: string): Observable<any> {
+// delete(key: string): Observable<any> {
      
-  this.catalogService = this.db.list(this.dbPath);
-  return this.catalogService.snapshotChanges().pipe(
-    map(changes =>
-      changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
-    ))
-}
+//   this.catalogService = this.db.list(this.dbPath);
+//   return this.catalogService.snapshotChanges().pipe(
+//     map(changes =>
+//       changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+//     ))
+// }
 deletecatalouge(key:string)
 {
   return this.catalogService.remove(key);
