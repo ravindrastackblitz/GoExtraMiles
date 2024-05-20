@@ -106,7 +106,7 @@ catalogKeyt!:any;
   ImageData(event: any) {
     const key = event.target.dataset.imagename;
     this.catalogService.setKey(key)
-    console.log("Image Name:", key); // Log imageName
+   // console.log("Image Name:", key); // Log imageName
     this.router.navigate(['/ItemDetails'])
     
     

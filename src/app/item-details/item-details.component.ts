@@ -60,7 +60,6 @@ Scratchcard(){
 }
 Scratchcard1(){
   this.discount1 =false;
- 
 }
 
 datadelete()
@@ -131,22 +130,19 @@ ngOnInit(){
 if (this.phoneNumber && this.keyName) {
   this.catalogCrud.getFilesByPhoneNumber(this.phoneNumber, this.keyName).subscribe({
     next: data => {
-      if(data !== undefined)
-      {
+      if(data !== undefined){
       console.log("Retrieved Data:", data);
-      for( var i=0;i<=data.urls.length; i++)
-        {
-          this.imagedata1=data.urls[0].url;
-          this.imagedata2=data.urls[1].url;
-          this.imagedata3=data.urls[2].url;
-
-        }
-      this.data1 = data;
+     for(var i = 0; i<data.urls.length; i++){
+      this.imagedata1 = data.urls[0].url;
+      this.imagedata2 =data.urls[1].url;
+      this.imagedata3 = data.urls[2].url;
+     }
+      
       this.details = data;
       this.ItemDetails()
       
-       
-      } else {
+      }
+       else {
         this.ItemDetails()
         console.log("No data found for the provided phone number and image name.");
       }
@@ -159,22 +155,19 @@ if (this.phoneNumber && this.keyName) {
 }
 }
 
-ItemDetails()
-{
+ItemDetails(){
   this.details.patchValue({
- 
-    itemname: this.details.Itemname ,
-    description: this.details.Description  ,
-    country: this.details.Country,
-    link: this.details.Link  ,
-    sellingprice:this.details.SellingPrice  ,
-    retailprice: this.details.Retailprice  ,
-    registrationnumber: this.phoneNumber,
-    isApproved: false,
-    file: '',
-    urls: this.details.urls || [],
-    names: this.Names || [],
-   
+    Itemname: this.details.Itemname ,
+          Description: this.details.Description  ,
+          Country: this.details.Country,
+          Link: this.details.Link  ,
+          SellingPrice:this.details.SellingPrice  ,
+          Retailprice: this.details.Retailprice  ,
+          registrationnumber: this.phoneNumber,
+          isApproved: false,
+          file: '',
+          urls: this.details.urls || [],
+          names: this.Names || []
           
   })
 

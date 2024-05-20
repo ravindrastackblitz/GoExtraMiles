@@ -133,9 +133,10 @@ if(this.Email != '' && this.Email != undefined){
           this.formdata = business;
               console.log( "data form database",this.formdata);
               this.buttons = true;
+              this.imagedata= this.formdata.url;
               localStorage.setItem('key',this.formdata.key);
-           //  console.log("this is the key"+this.formdata.url);
-
+           //  console.log("this is the key"+this.formdata.url);imagename
+         //  this.Createbusiness?.controls['Image'].setValue(this.formdata.imagename);
            this.Createbusiness?.controls['categoryname'].setValue(this.formdata.categoryname);
              this.datatime  = this.formdata.storetiming;
               this.AddvaluesToform()

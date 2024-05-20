@@ -1,4 +1,4 @@
-<form [formGroup]="Additemdetails">
+<form [formGroup]="Additemdetails" (ngSubmit)="Submit()">
 <div>
   <h1 style="text-align: center;">Add Items</h1>
  
@@ -71,16 +71,6 @@
     <option value="Sri Lanka ">Sri Lanka </option>
       </select>
   </div>
-   <!-- <select type="text" placeholder=" Country of Orgin *" class="form-select"  formControlName="country">
-     <option value="" selected disabled >Country of Orgin </option>
-    <option value="India">India</option>
-    <option value="America">America</option>
-    <option value="China">China</option>
-    <option value="Maldives">Maldives</option>
-    <option value="Nepal">Nepal</option>
-    <option value="Pakistan">Pakistan</option>
-    <option value="Sri Lanka ">Sri Lanka </option>
-    </select> -->
     <div class="text-field w100p">
       <input class="text-base w100p" type="text" required placeholder=" " formControlName="link" >
       <span> Link  *</span>
@@ -121,6 +111,12 @@
       <span class="slider round"></span>
     </label>
  </div>
-</form><br><br>
-<button type="submit" [disabled]="!Additemdetails.valid" class="btn btn-primary" id="save" (click)="Submit()" >SAVE</button>
+<div *ngIf="!buttons">
+  <button type="submit" [disabled]="!Additemdetails.valid" class="btn btn-primary" id="save"  >SAVE</button>
+</div>
+<div *ngIf="buttons">
+  <button type="submit" [disabled]="!Additemdetails.valid" class="btn btn-primary" id="save" >Update</button>
+</div>
+</form>
+
  

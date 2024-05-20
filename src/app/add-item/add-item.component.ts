@@ -61,19 +61,18 @@ keyName:any;
       next: data => {
         if(data !== undefined)
         {
+          for(var i = 0; i<data.urls.length; i++){
+            this.selectedImages[0] = data.urls[0].url;
+            this.selectedImages[1] =data.urls[1].url;
+            this.selectedImages[2] = data.urls[2].url;
+           }
           this.formdata=data;
+          this.buttons = true;
           this.AddvaluesToform();
         console.log("Retrieved Data:", data);
-        for( var i=0;i<=data.urls.length; i++)
-          {
-            this.selectedImages=data.urls[0].url;
-            this.selectedImages=data.urls[1].url;
-            this.selectedImages=data.urls[2].url;
-  
-          }
-       
-        
-         
+        }
+        else{
+          this.buttons = false;
         }
       }
     });
