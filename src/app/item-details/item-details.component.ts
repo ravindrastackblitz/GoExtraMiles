@@ -60,6 +60,7 @@ datadelete()
 {
   this.discount1 =false;
   this.details = '';
+  this._router.navigate(['/MyCatalouge']);
 }
 
   // Function to change the language
