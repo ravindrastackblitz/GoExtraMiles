@@ -93,7 +93,7 @@
    <a>
     <div class="row" style="margin-left: 15%;margin-top: 5%;">
     <div class="col-4" *ngFor="let image of Images" >
-      <img [src]="image.images.url" alt="Catalog Image" [routerLink]="['/ScratchCardInsights']" class="img">
+      <img [src]="image.images.url" alt="Catalog Image" [attr.data-imagekey]="image.key" (click)="ScractchcardImage($event)" class="img">
       <span class="icon" ><img src="assets/Images/time.png"  id="info"></span>
      
     </div>

@@ -39,6 +39,7 @@ import { ImagesarviceService } from '../services/imagesarvice.service';
 import { UserloginService } from '../services/userlogin.service';
 import { Subscription } from 'rxjs';
  import { DiscountcodeService } from '../services/discountcode.service';
+import { CatalogCURDService } from '../services/catalog-curd.service';
 
 @Component({
   selector: 'app-scratch-card-insights',
@@ -54,6 +55,8 @@ export class ScratchCardInsightsComponent {
   Terms!:boolean
   snumber:any;
   subscription!:Subscription;
+  key!:string;
+  phoneNumber: any =  localStorage.getItem('phoneNumber');
   popup(){
     this.Terms = true
   }
@@ -61,7 +64,8 @@ export class ScratchCardInsightsComponent {
   Conditions(data:any){
   this.Terms = false;
   }
-  constructor(private imageService: ImagesarviceService,private userloginService:UserloginService,private dataService: DiscountcodeService) {
+  constructor(private imageService: ImagesarviceService,private userloginService:UserloginService,
+    private dataService: DiscountcodeService,private catalog:CatalogCURDService) {
   
   }
   Email = localStorage.getItem('Email');
@@ -71,11 +75,26 @@ export class ScratchCardInsightsComponent {
     }
 
     this.images.push(this.imageService.getImageData1());
+
      this.dataService.data$.subscribe(data => {
       this.label = data;
-  
-     });
+    });
 
+    this.catalog.getScrachcard$.subscribe(image =>{
+        this.key = image
+      }
+    );
+    
+    this.catalog.getFilesByPhoneNumber(this.phoneNumber, this.key).subscribe({
+      next: data => {
+        if(data !== undefined){
+          console.log("files data",data);
+          for(var i=0; i<data.urls.length; i++){
+            this.images = data.urls[0].url;
+          }
+        }
+      }
+    })
 
 }
 }

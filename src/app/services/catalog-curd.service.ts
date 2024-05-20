@@ -18,6 +18,17 @@ export class CatalogCURDService {
   private Key = new BehaviorSubject<string>('');
   public data$: Observable<string> = this.Key.asObservable();
 
+  private ScratchcardKey = new BehaviorSubject<string>('');
+  public getScrachcard$: Observable<string> = this.ScratchcardKey.asObservable();
+
+  setKey(key: string) {
+    this.Key.next(key);
+  }
+
+  SetScrachcard(key: string) {
+    this.ScratchcardKey.next(key);
+  }
+
   constructor(private db: AngularFireDatabase, private storage: AngularFireStorage) {
     this.catalogService = db.list(this.dbPath);
    }
@@ -82,10 +93,7 @@ pushFilesToStorage(fileLists: FileList[]): Observable<any> {
       })
     );
     }
-  
-    setKey(key: string) {
-      this.Key.next(key);
-    }
+
 
 getImagesByPhoneNumber(): Observable<CatalogModel[]> {
   return this.db.list<CatalogModel>(this.dbPath).valueChanges();

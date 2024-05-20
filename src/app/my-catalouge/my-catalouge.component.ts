@@ -108,10 +108,16 @@ catalogKeyt!:any;
     this.catalogService.setKey(key)
    // console.log("Image Name:", key); // Log imageName
     this.router.navigate(['/ItemDetails'])
-    
-    
+     
   }
   
+  ScractchcardImage(event: any) {
+    const Scrachkey = event.target.dataset.imagekey;
+    this.catalogService.SetScrachcard(Scrachkey)
+   // console.log("Image Name:", key); // Log imageName
+    this.router.navigate(['/ScratchCardInsights']);
+     
+  }
   
   
 
