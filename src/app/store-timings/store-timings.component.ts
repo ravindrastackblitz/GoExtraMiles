@@ -214,7 +214,7 @@ close1(){
       if(wed1 == "" && wed2 ==""){
         this.storetime.Wednesday  = " " + "00:00"+ ' AM  - ' +"00:00"+' PM '
       }else{
-        this.storetime.Wednesday = " : "+wed1+ ' AM  - '+wed2+' PM'
+        this.storetime.Wednesday = " "+wed1+ ' AM  - '+wed2+' PM'
       }
  
       this.buttonClicked2 = false;
@@ -225,7 +225,7 @@ close1(){
       if(thu1 == "" && thu2 ==""){
         this.storetime.Thusday = " " + "00:00"+ ' AM  - ' +"00:00"+' PM '
       }else{
-        this.storetime.Thusday = " : "+thu1+ ' AM  - '+thu2+' PM'
+        this.storetime.Thusday = " "+thu1+ ' AM  - '+thu2+' PM'
       }
 
       this.buttonClicked3 = false;
@@ -236,7 +236,7 @@ close1(){
      if(fri1 == "" && fri2 ==""){
       this.storetime.Friday = " " + "00:00"+ ' AM  - ' +"00:00"+' PM '
     }else{
-      this.storetime.Friday  = " : "+fri1+ ' AM  - '+fri2+' PM' 
+      this.storetime.Friday  = " "+fri1+ ' AM  - '+fri2+' PM' 
     }
    
       this.buttonClicked4 = false;
@@ -247,7 +247,7 @@ close1(){
       if(sat1 == "" && sat2 ==""){
         this.storetime.Saturday = " " + "00:00"+ ' AM  - ' +"00:00"+' PM '
       }else{
-        this.storetime.Saturday  = " : "+sat1+ ' AM  - '+sat2+' PM'
+        this.storetime.Saturday  = " "+sat1+ ' AM  - '+sat2+' PM'
       }
       
       this.buttonClicked5 = false;
@@ -258,7 +258,7 @@ close1(){
      if(sun1 == "" && sun2 ==""){
       this.storetime.Sunday = " Closed "; 
     }else{
-      this.storetime.Sunday  = " : "+sun1+ ' AM  - '+sun2+' PM'
+      this.storetime.Sunday  = " "+sun1+ ' AM  - '+sun2+' PM'
     }
      
       this.buttonClicked6 = false;

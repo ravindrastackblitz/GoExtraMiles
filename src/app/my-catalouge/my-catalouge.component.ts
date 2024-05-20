@@ -74,6 +74,7 @@ catalogKeyt!:any;
     this.imagedata2 = this.imageService.getImageData2();
     this.imagedata3 = this.imageService.getImageData3();
    
+
     
       this.imagedata = this.imageService.getImageData();
 
