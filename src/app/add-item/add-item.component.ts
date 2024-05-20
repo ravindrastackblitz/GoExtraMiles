@@ -81,12 +81,12 @@ AddvaluesToform(){
   if( this.formdata!= undefined){
     this.Additemdetails.patchValue({
    
-      Itemname: this.formdata.Itemname ,
-      Description: this.formdata.Description  ,
-      Country: this.formdata.Country,
-      Link: this.formdata.Link  ,
-      SellingPrice:this.formdata.SellingPrice  ,
-      Retailprice: this.formdata.Retailprice  ,
+      itemname: this.formdata.Itemname ,
+      description: this.formdata.Description  ,
+      country: this.formdata.Country,
+      link: this.formdata.Link  ,
+      sellingprice:this.formdata.SellingPrice  ,
+      retailprice: this.formdata.Retailprice  ,
       registrationnumber: this.phone,
       isApproved: false,
       file: '',

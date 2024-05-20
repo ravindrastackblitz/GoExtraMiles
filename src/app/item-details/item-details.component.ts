@@ -162,17 +162,19 @@ if (this.phoneNumber && this.keyName) {
 ItemDetails()
 {
   this.details.patchValue({
-    Itemname: this.details.Itemname ,
-          Description: this.details.Description  ,
-          Country: this.details.Country,
-          Link: this.details.Link  ,
-          SellingPrice:this.details.SellingPrice  ,
-          Retailprice: this.details.Retailprice  ,
-          registrationnumber: this.phoneNumber,
-          isApproved: false,
-          file: '',
-          urls: this.details.urls || [],
-          names: this.Names || [],
+ 
+    itemname: this.details.Itemname ,
+    description: this.details.Description  ,
+    country: this.details.Country,
+    link: this.details.Link  ,
+    sellingprice:this.details.SellingPrice  ,
+    retailprice: this.details.Retailprice  ,
+    registrationnumber: this.phoneNumber,
+    isApproved: false,
+    file: '',
+    urls: this.details.urls || [],
+    names: this.Names || [],
+   
           
   })
 
