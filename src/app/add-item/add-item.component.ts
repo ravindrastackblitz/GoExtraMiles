@@ -233,6 +233,14 @@ saveFormData() {
   };
 
   // Save form data to database
+  if(this.keyName !="" && this.keyName != null){
+
+    this.catalogCrudService.updateCatalogKey(this.keyName,formData).then(()=>{
+      this._router.navigate(['/ItemDetails']);
+      console.log("Updated Sucessfully")
+    })
+  }
+  else{
   this.catalogCrudService.create(formData).then(() => {
     console.log('Data added successfully');
   }).catch((error: any) => {
@@ -241,6 +249,7 @@ saveFormData() {
 
   localStorage.setItem('AddItems', JSON.stringify(formData));
   this._router.navigate(['/ItemDetails']);
+  }
 }
 
 
