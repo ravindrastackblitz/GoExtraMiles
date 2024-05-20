@@ -138,15 +138,14 @@ ngOnInit(){
 if (this.phoneNumber && this.keyName) {
   this.catalogCrud.getFilesByPhoneNumber(this.phoneNumber, this.keyName).subscribe({
     next: data => {
-      if(data !== undefined)
-      {
+      if(data !== undefined){
       console.log("Retrieved Data:", data);
       this.data1 = data;
-      this.details = data;
+      this.details = this.data1;
       this.ItemDetails()
       
-       
-      } else {
+      }
+       else {
         this.ItemDetails()
         console.log("No data found for the provided phone number and image name.");
       }
@@ -159,9 +158,8 @@ if (this.phoneNumber && this.keyName) {
 }
 }
 
-ItemDetails()
-{
-  this.details.patchValue({
+ItemDetails(){
+  this.data1.patchValue({
     Itemname: this.details.Itemname ,
           Description: this.details.Description  ,
           Country: this.details.Country,
@@ -172,7 +170,7 @@ ItemDetails()
           isApproved: false,
           file: '',
           urls: this.details.urls || [],
-          names: this.Names || [],
+          names: this.Names || []
           
   })
 
