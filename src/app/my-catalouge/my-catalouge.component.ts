@@ -78,7 +78,7 @@ catalogKeyt!:any;
     
       this.imagedata = this.imageService.getImageData();
 
-    this.catalogService.getBusinessByPhoneNumber().subscribe(images1 => {
+    this.catalogService.getBusinessByPhoneNumber(this.phoneNumber).subscribe(images1 => {
       console.log("catelog data",images1)
       this.images = images1;
       //this.catalogKeyt
@@ -86,11 +86,8 @@ catalogKeyt!:any;
       var dta = JSON.parse(JSON.stringify(images1));
       for(var i=0;i<dta.length;i++){
         const key = dta[i].key;
-      //  console.log("hffhffhfgfg ",key);
         const img = dta[i].urls[0];
         this.Images.push({images:dta[i].urls[0],key:dta[i].key});
-        console.log("yqwyqwuyw ",this.Images);
-     //   console.log("image 0 ",img);
       }
       console.log("yqwyqwuyw 4334",this.Images);
       if( this.Images != "" ){

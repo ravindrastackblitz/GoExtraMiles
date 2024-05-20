@@ -46,19 +46,20 @@ pushFilesToStorage(fileLists: FileList[]): Observable<any> {
 }
 
 
-
-  
   create(catalogDetails: CatalogModel): any {
     return this.catalogService.push(catalogDetails);
   }
 
 
-  getBusinessByPhoneNumber(): Observable<any> {
+  getBusinessByPhoneNumber(phonenumber:string): Observable<any> {
     this.catalogService = this.db.list(this.dbPath);
     
     return this.catalogService.snapshotChanges().pipe(
       map(changes =>
         changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
+      ),
+      map(business =>
+        business.filter(b => b.registrationnumber == phonenumber)
       )
      );
   }
@@ -98,6 +99,10 @@ delete(key: string): Observable<any> {
     map(changes =>
       changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
     ))
+}
+deletecatalouge(key:string)
+{
+  return this.catalogService.remove(key);
 }
 
 

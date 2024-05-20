@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList, AngularFireObject } from '@angular/fire/compat/database';
 import { CreateBusinessAccount } from '../Model/create-business-account';
-import { Observable,catchError,throwError,take,of } from 'rxjs';
+import { Observable,catchError,throwError,take,of, forkJoin } from 'rxjs';
 import { finalize, map,switchMap } from 'rxjs/operators';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 
@@ -18,6 +18,29 @@ export class BusinessRegistrationCRUDService {
   constructor(private db: AngularFireDatabase, private storage: AngularFireStorage) {
     this.businessRegistration = db.list(this.dbPath);
   }
+  
+pushFilesToStorage(fileLists: FileList[]): Observable<any> {
+  const uploadTasks: Observable<any>[] = [];
+
+  fileLists.forEach(fileList => {
+    for (let i = 0; i < fileList.length; i++) {
+      const file = fileList[i];
+      const filePath = `${this.dbPath}/${file.name}`;
+      const storageRef = this.storage.ref(filePath);
+      const uploadTask = this.storage.upload(filePath, file);
+
+      uploadTasks.push(uploadTask.snapshotChanges().pipe(
+        switchMap(() => {
+          return storageRef.getDownloadURL().pipe(
+            map(downloadURL => ({ url: downloadURL, imageName: file.name }))
+          );
+        })
+      ));
+    }
+  });
+
+  return forkJoin(uploadTasks);
+}
 
  
 
