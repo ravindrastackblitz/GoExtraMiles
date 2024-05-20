@@ -60,6 +60,7 @@ keyName:any;
       next: data => {
         if(data !== undefined)
         {
+          this.formdata=data;
           this.AddvaluesToform();
         console.log("Retrieved Data:", data);
        
@@ -77,19 +78,19 @@ keyName:any;
 
 
 AddvaluesToform(){
-  if( this.catalogDetails!= undefined){
+  if( this.formdata!= undefined){
     this.Additemdetails.patchValue({
    
-      Itemname: this.catalogDetails.Itemname ,
-      Description: this.catalogDetails.Description  ,
-      Country: this.catalogDetails.Country,
-      Link: this.catalogDetails.Link  ,
-      SellingPrice:this.catalogDetails.SellingPrice  ,
-      Retailprice: this.catalogDetails.Retailprice  ,
+      Itemname: this.formdata.Itemname ,
+      Description: this.formdata.Description  ,
+      Country: this.formdata.Country,
+      Link: this.formdata.Link  ,
+      SellingPrice:this.formdata.SellingPrice  ,
+      Retailprice: this.formdata.Retailprice  ,
       registrationnumber: this.phone,
       isApproved: false,
       file: '',
-      urls: this.catalogDetails.urls || [],
+      urls: this.formdata.urls || [],
       names: this.Names || [],
      
     })
