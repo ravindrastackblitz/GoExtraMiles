@@ -17,34 +17,27 @@ export class CatalogCURDService {
 
 
   constructor(private db: AngularFireDatabase, private storage: AngularFireStorage) {
-   
     this.catalogService = db.list(this.dbPath);
-
-
    }
 
-pushFilesToStorage(catalogImages: CatalogModel[]): Observable<any[]> {
+pushFilesToStorage(fileLists: FileList[]): Observable<any> {
   const uploadTasks: Observable<any>[] = [];
 
-  catalogImages.forEach((catalogImage: CatalogModel) => {
-    const filePath = `${this.dbPath}/${catalogImage.file[0].name}`;
-    const storageRef = this.storage.ref(filePath);
-    const uploadTask = this.storage.upload(filePath, catalogImage.file);
+  fileLists.forEach(fileList => {
+    for (let i = 0; i < fileList.length; i++) {
+      const file = fileList[i];
+      const filePath = `${this.dbPath}/${file.name}`;
+      const storageRef = this.storage.ref(filePath);
+      const uploadTask = this.storage.upload(filePath, file);
 
-    const task = uploadTask.snapshotChanges().pipe(
-      switchMap(() => {
-        return storageRef.getDownloadURL().pipe(
-          switchMap(downloadURL => {
-            catalogImage.urls = downloadURL;
-            catalogImage.names = catalogImage.file[0].name;
-            console.log("Download URL for", catalogImage.file[0].name, ":", downloadURL); // Log the download URL here
-                  return of (catalogImage)// Save catalogModel to database after upload
-          })
-        );
-      })
-    );
-
-    uploadTasks.push(task);
+      uploadTasks.push(uploadTask.snapshotChanges().pipe(
+        switchMap(() => {
+          return storageRef.getDownloadURL().pipe(
+            map(downloadURL => ({ url: downloadURL, imageName: file.name }))
+          );
+        })
+      ));
+    }
   });
 
   return forkJoin(uploadTasks);
@@ -65,8 +58,6 @@ pushFilesToStorage(catalogImages: CatalogModel[]): Observable<any[]> {
       map(changes =>
         changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
       )
-      
-   
      );
   }
 
