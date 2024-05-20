@@ -10,5 +10,6 @@ export class DiscountcodeService {
   sendData(data: string) {
     this.dataSubject.next(data);
   }
+  
 
 }
