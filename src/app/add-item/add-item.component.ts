@@ -28,6 +28,7 @@ keyName:any;
   buttons!:boolean
   phone :any = localStorage.getItem('phoneNumber');
   Email = localStorage.getItem('Email');
+  ImagesUrl!:any[]
 
 
   constructor(private fb: FormBuilder, private _router: Router,
@@ -126,6 +127,8 @@ AddvaluesToform(){
   }
   onFileSelected(event: any,index: number) {
     const files = event.target.files;
+
+    
     if (files) {
       this.selectedFile[index] = files;
       const fileCount = files.length;
@@ -230,6 +233,14 @@ saveFormData() {
   };
 
   // Save form data to database
+  if(this.keyName !="" && this.keyName != null){
+
+    this.catalogCrudService.updateCatalogKey(this.keyName,formData).then(()=>{
+      this._router.navigate(['/ItemDetails']);
+      console.log("Updated Sucessfully")
+    })
+  }
+  else{
   this.catalogCrudService.create(formData).then(() => {
     console.log('Data added successfully');
   }).catch((error: any) => {
@@ -238,6 +249,7 @@ saveFormData() {
 
   localStorage.setItem('AddItems', JSON.stringify(formData));
   this._router.navigate(['/ItemDetails']);
+  }
 }
 
 
