@@ -73,9 +73,7 @@ visible:boolean = false
     this.imagedata1 = this.imageService.getImageData1();
     this.imagedata2 = this.imageService.getImageData2();
     this.imagedata3 = this.imageService.getImageData3();
-    this.catalogService.getBusinessByPhoneNumber().subscribe(
-      data => console.log("This is the catelog data :",data)
-    );
+
     
       this.imagedata = this.imageService.getImageData();
     this.catalogService.getImagesByPhoneNumber().subscribe(images1 => {
