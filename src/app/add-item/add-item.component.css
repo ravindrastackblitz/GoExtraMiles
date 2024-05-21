@@ -105,7 +105,7 @@
   align-items: center;
   width: 150px; /* Adjust as needed */
   height: 150px; /* Adjust as needed */
-  border: 2px dashed #ccc; /* Placeholder border */
+  border: 2px solid #ccc; /* Placeholder border */
   border-radius: 50%;
   cursor: pointer;
 }
