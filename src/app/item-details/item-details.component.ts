@@ -2,7 +2,7 @@ import { Component,HostListener,OnInit, Output,EventEmitter } from '@angular/cor
 import { ImagesarviceService } from '../services/imagesarvice.service';
 import { DiscountcodeService } from '../services/discountcode.service';
 
-import { Router } from '@angular/router';
+import { Router, UrlSegment } from '@angular/router';
 import { CatalogCURDService } from '../services/catalog-curd.service';
 import { CatalogModel } from '../Model/catalog-model';
 import { UserloginService } from '../services/userlogin.service';
@@ -112,6 +112,8 @@ popup(){
 Conditions(data:any){
 this.Terms = false;
 }
+
+
 
 Email = localStorage.getItem('Email');
 

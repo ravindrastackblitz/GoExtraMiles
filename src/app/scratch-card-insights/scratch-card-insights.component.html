@@ -1,8 +1,8 @@
 
 <h1 style="text-align: center;">Scratch Card Insights</h1>
 
-<div *ngFor="let image of images">
-  <img *ngIf="image" [src]="image" class="image" >
+<div >
+  <img  [src]="images" class="image" >
 </div>
 <div style="text-align: center;">
   <p>Created On {{toDate | date:'medium'}}</p>
