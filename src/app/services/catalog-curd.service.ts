@@ -18,8 +18,12 @@ export class CatalogCURDService {
   private Key = new BehaviorSubject<string>('');
   public data$: Observable<string> = this.Key.asObservable();
 
+  private Ischecked: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   private ScratchcardKey = new BehaviorSubject<string>('');
   public getScrachcard$: Observable<string> = this.ScratchcardKey.asObservable();
+
+  public get getchecked$(): Observable<boolean> { return this.Ischecked.asObservable(); };
 
   setKey(key: string) {
     this.Key.next(key);
@@ -27,6 +31,10 @@ export class CatalogCURDService {
 
   SetScrachcard(key: string) {
     this.ScratchcardKey.next(key);
+  }
+
+  setchecked(Ischecked: boolean) {
+    this.Ischecked.next(Ischecked)
   }
 
   constructor(private db: AngularFireDatabase, private storage: AngularFireStorage) {

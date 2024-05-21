@@ -3,7 +3,7 @@ import { ImagesarviceService } from '../services/imagesarvice.service';
 import { CatalogCURDService } from '../services/catalog-curd.service';
 import { Router } from '@angular/router';
 import { CatalogModel } from '../Model/catalog-model';
-import { EMPTY } from 'rxjs';
+import { EMPTY, Subscription } from 'rxjs';
 import { UserloginService } from '../services/userlogin.service';
 
 @Component({
@@ -30,10 +30,13 @@ visible:boolean = false
   details = JSON.parse(localStorage.getItem('AddItems') || '{}');
   imagedata!: string | null;
   time!: boolean;
+  subscription!:Subscription;
+  Ischecked!:boolean;
 
   constructor(
     private imageService: ImagesarviceService,private catalogService:CatalogCURDService,
     private router: Router, private userloginService:UserloginService){
+      this.subscription = this.catalogService.getchecked$.subscribe(val => this.Ischecked = val);
   }
   showImage!: boolean;
   showcatelog:boolean = true
