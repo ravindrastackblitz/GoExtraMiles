@@ -15,7 +15,7 @@ mobilenumber: string;
 storetiming: string;
 isApproved:boolean;
 registrationnumber:any;
-registrationEmail:string;
+registrationEmail:any;
 
  
 }

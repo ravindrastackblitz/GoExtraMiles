@@ -114,7 +114,7 @@ if(this.Email != '' && this.Email != undefined){
     this.Createbusiness = this.formBuilder.group({
       searchQuery: [''],
       categoryname:new FormControl('',[Validators.required]),
-      Image: new FormControl('', [Validators.required]),
+      Image: new FormControl('', []),
       businessName: new FormControl('', [Validators.required]),
       storetiming:new FormControl('',[Validators.required]),
       description: new FormControl('', [Validators.required]),
@@ -136,7 +136,8 @@ if(this.Email != '' && this.Email != undefined){
               this.imagedata= this.formdata.url;
               localStorage.setItem('key',this.formdata.key);
            //  console.log("this is the key"+this.formdata.url);imagename
-         //  this.Createbusiness?.controls['Image'].setValue(this.formdata.imagename);
+           this.selectedFiles = this.formdata.url;
+           this.image1 = this.formdata.imagename;
            this.Createbusiness?.controls['categoryname'].setValue(this.formdata.categoryname);
              this.datatime  = this.formdata.storetiming;
               this.AddvaluesToform()
@@ -153,29 +154,7 @@ if(this.Email != '' && this.Email != undefined){
       });
     
 
-    //     if (business != undefined) {
-    //       this.formdata = business;
-    //       console.log("data form database", this.formdata);
-    //       this.buttons = true;
-    //       localStorage.setItem('key', this.formdata.key);
-    //       this.Createbusiness?.controls['categoryname'].setValue(this.formdata.categoryname);
-    //       this.datatime = this.formdata.storetiming;
-    //       this.AddvaluesToform();
-    //     } else {
-    //       const some = JSON.parse(JSON.stringify(localStorage.getItem('form-data')) || '{}');
-    //       this.formdata = JSON.parse(some);
-    //       this.Createbusiness?.controls['categoryname'].setValue(this.formdata.categoryname);
-    //       this.datatime = this.formdata?.storetiming;
-    //       this.buttons = false;
-    //       this.AddvaluesToform();
-    //     }
-    //   },
-    //   error => {
-    //     console.error('Error fetching business record:', error);
-    //     // Handle the error here (e.g., show an error message)
-    //   }
-    // );
-  }
+   }
 
      
 
@@ -263,22 +242,22 @@ this.Terms= true;
   }
 
   onFormSubmit(): void {
-    if (this.Createbusiness.valid && this.selectedFiles) {
+    if (this.Createbusiness.valid ) {
 
-      const file: File | null = this.selectedFiles.item(0);
+      const file: File  = this.selectedFiles![0];
 
       const formData: CreateBusinessAccount = {
         categoryname: this.category,
-        url:'',
+        url:this.imagedata,
 
-        file: this.selectedFiles[0],
+        file: file,
         businessName: this.Createbusiness.value.businessName,
         description: this.Createbusiness.value.description,
         email: this.Createbusiness.value.email,
         website: this.Createbusiness.value.website,
         gstNumber: this.Createbusiness.value.gstNumber,
         isOwner: this.Createbusiness.value.isOwner,
-        imagename: '',
+        imagename: this.image1,
         username:this.Createbusiness.value.username,
         mobilenumber: this.Createbusiness.value.mobileNumber,
         storetiming: this.storetiming,
