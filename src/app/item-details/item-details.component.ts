@@ -122,6 +122,9 @@ ngOnInit(){
     this.userloginService.setIsMainHeaderVisible(true); 
   }
 
+  this.imagedata1 = this.imageService.getImageData1();
+  this.imagedata2 = this.imageService.getImageData2();
+  this.imagedata3 = this.imageService.getImageData3();
 
   this.catalogCrud.data$.subscribe(data => {
     this.keyName = data;
