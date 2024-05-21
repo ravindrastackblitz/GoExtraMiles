@@ -3,7 +3,7 @@
 {
   width: 150px;
   height: 150px;
-    border: 2px dashed #ccc;
+    border: 2px solid #ccc;
      border-radius: 50%;
       cursor: pointer;
 }
@@ -77,7 +77,7 @@ a div {
   align-items: center;
   width: 150px; /* Adjust as needed */
   height: 150px; /* Adjust as needed */
-  border: 2px dashed #ccc; /* Placeholder border */
+  border: 2px solid #ccc; /* Placeholder border */
   border-radius: 50%;
   cursor: pointer;
 }
