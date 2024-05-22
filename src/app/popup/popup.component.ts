@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { PopupService } from '../services/popup.service';
+import { NotificationService } from '../notifications.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-popup',
@@ -8,11 +10,32 @@ import { PopupService } from '../services/popup.service';
   styleUrls: ['./popup.component.css']
 })
 export class PopupComponent {
- constructor( private popup:PopupService,private dialogRef: MatDialogRef<PopupComponent>){}
- isdisabled!:boolean;
-  closeDialog(){
-  this.popup.setdisable(true);
-  this.dialogRef.close();
+  notificationCount = 0;
+  notifications: string[] = [];
+  popupVisible = false;
+  subscription!:Subscription
+  notificationspopup!:boolean
+
+  constructor(private notificationService: NotificationService) {
+    this.subscription = this.notificationService.getnotificationspopup1$.subscribe(val =>this.notificationspopup = val )
   }
-  
+
+  ngOnInit() {
+    this.notificationService.notifications$.subscribe(notifications => {
+      this.notifications = notifications;
+      this.notificationCount = notifications.length;
+    });
+  }
+
+  notificationclose(){
+    this.notificationspopup = false;
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    if (!target.closest('.notification-container')) {
+      this.popupVisible = false;
+    }
+  }
 }

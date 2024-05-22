@@ -1,17 +1,9 @@
-
-
-<div class="categorypopup" >
-  <div class="categorypopup-content">
-    <div class="categorymodal-header">
-      <h3>Category</h3>   
-    </div>
-    <h4>If you Could not find the Category Name Please 
-      click on "<b>Add Category</b>" and 
-      write the category name</h4>
-      <button (click)="closeDialog()" class="btn btn-primary m-3">Ok</button>
-    <div>
-  </div>
-</div> 
+<div class="notification-container" *ngIf="notificationspopup">
+<div class="notification-popup">
+  <h4 > Notification  <i class="fas fa-times-circle" (click)="notificationclose()"> </i></h4>  
+ 
+  <ul>
+    <li *ngFor="let notification of notifications"><b>{{ notification }}</b> Successfully login your mail this application</li>
+  </ul>
 </div>
-
-
+</div>

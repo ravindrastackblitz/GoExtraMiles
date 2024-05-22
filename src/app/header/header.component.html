@@ -32,10 +32,11 @@
     </button> -->
     <!-- <button mat-raised-button (click)="incrementCount()">+</button> -->
     <div class="user-info">
+      
       <h5 style="margin-top: 6%;" style="color: white;margin-top: 10px;"><b> {{ user }}</b></h5>
       <button class="red" mat-icon-button (click)="clearCount()">
-        <mat-icon class="icon">notifications</mat-icon>
-        
+        <mat-icon class="icon" (click)="toggleNotificationPopup()">notifications</mat-icon>
+        <span class="badge" *ngIf="notificationCount > 0" >{{ notificationCount }}</span>
         <!-- <span class="badge" *ngIf="badgeCount > 0">{{badgeCount}}</span> -->
       </button>
       <div>
@@ -46,3 +47,17 @@
     </div>
  
   </div>
+
+  <div>
+    <div class="notification-container" *ngIf="notificationspopup">
+      <div class="notification-popup">
+        <h4 > Notifications  <i class="fas fa-times-circle" (click)="notificationclose()"> </i></h4>  
+       
+        <ul>
+          <li *ngFor="let notification of notifications"><b>{{ notification }}</b> You Have Logged in Successfully !.</li><br>
+        </ul>
+        
+      </div>
+      </div>
+  </div>
+
