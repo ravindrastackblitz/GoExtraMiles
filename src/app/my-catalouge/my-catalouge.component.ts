@@ -46,6 +46,8 @@ visible:boolean = false
   HostListener:any
   online!: boolean;
 catalogKeyt!:any;
+
+spinner!:boolean;
   togglePopup(): void {
     this.online =true;
   }
@@ -82,25 +84,33 @@ catalogKeyt!:any;
       this.imagedata = this.imageService.getImageData();
 
     this.catalogService.getBusinessByPhoneNumber(this.phoneNumber).subscribe(images1 => {
-      console.log("catelog data",images1)
-      this.images = images1;
-      //this.catalogKeyt
-      
-      var dta = JSON.parse(JSON.stringify(images1));
-      for(var i=0;i<dta.length;i++){
-        const key = dta[i].key;
-        const img = dta[i].urls[0];
-        this.Images.push({images:dta[i].urls[0],key:dta[i].key});
-      }
-      console.log("yqwyqwuyw 4334",this.Images);
-      if( this.Images != "" ){
-        this.showImage = false;
-        this.showcatelog = true;
-      }
-      else{
-        this.showImage = true;
-        this.showcatelog = false;
-      }
+      setTimeout(()=>{
+     //   console.log("catelog data",images1)
+        this.images = images1;
+        //this.catalogKeyt
+        
+        var dta = JSON.parse(JSON.stringify(images1));
+        for(var i=0;i<dta.length;i++){
+          const key = dta[i].key;
+          const img = dta[i].urls[0];
+          this.Images.push({images:dta[i].urls[0],key:dta[i].key});
+        }
+        if( this.Images != "" ){
+          this.showImage = false;
+          this.showcatelog = true;
+        }
+        else{
+          this.showImage = true;
+          this.showcatelog = false;
+        }
+      },2000)
+
+      setTimeout(()=>{
+        this.spinner= true;
+      },2000)
+ 
+     // console.log("yqwyqwuyw 4334",this.Images);
+     
 
     });
   }

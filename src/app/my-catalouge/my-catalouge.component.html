@@ -25,6 +25,10 @@
 
 </div>
 
+<div *ngIf="!spinner">
+  <h1 class="text-center text-primary">Please Wait Loading </h1>
+  <app-spinner></app-spinner>
+</div>
 
 <div class="hide" *ngIf="showImage"  >
 <img class="ima" src="https://en.pimg.jp/106/876/444/1/106876444.jpg" alt="image" style="width: 250px;height: 250px;text-align: center;margin-right: 100px;">
@@ -105,3 +109,5 @@
 <div class="tabbed-interface" style="display: flex;margin-left: 30%;" class="col-sm-8">
 
 </div>
+
+

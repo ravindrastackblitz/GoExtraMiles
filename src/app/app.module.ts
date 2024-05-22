@@ -41,6 +41,8 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { SpinnerComponent } from './spinner/spinner.component';
 
 
 const approu :Routes=[
@@ -90,6 +92,7 @@ const approu :Routes=[
     PhonenumberDirective,
     TermsComponent,
     HeaderComponent,
+    SpinnerComponent,
     
     
   ],
@@ -106,6 +109,7 @@ const approu :Routes=[
     MatTabsModule,
     HttpClientModule,
     NgxOtpInputModule,
+    MatProgressSpinnerModule,
     Ng2SearchPipeModule,
     ReactiveFormsModule,
     RouterModule.forRoot(approu),
