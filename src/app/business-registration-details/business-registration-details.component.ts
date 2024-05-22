@@ -14,6 +14,14 @@ import { toastersrc } from '../services/toastr.service';
   styleUrls: ['./business-registration-details.component.css']
 })
 export class BusinessRegistrationDetailsComponent {
+
+  // public latitude!: number;
+  // public longitude!: number;
+  // public zoom!: number;
+ zoom = 4;
+ latitude = 39.8282;
+ longitude = -98.5795;
+  
   // category = localStorage.getItem('category');
   // gstnumber = localStorage.getItem('gstnumber');
   data = JSON.parse(JSON.stringify(localStorage.getItem('form-data')));
@@ -33,6 +41,7 @@ constructor(private imageService: ImagesarviceService, private router: Router,pr
 Email = localStorage.getItem('Email')
 phone = localStorage.getItem('phoneNumber')
 ngOnInit(){
+ 
   if(this.Email != '' && this.Email != undefined){
     this.userloginService.setIsMainHeaderVisible(true); 
   }
@@ -40,7 +49,9 @@ ngOnInit(){
  if(this.imagedata == "" || this.imagedata == null){
   this.imagedata = this.details?.url;
  }
-
+ this.latitude = this.details.businesslocation.latitude;
+ this.longitude = this.details.businesslocation.longitude;
+ 
  this.selectedFiles =this.imageService.getfile()
  if(this.details?.storetiming == "Pick Days"){
   this.data1 = false;
@@ -50,6 +61,11 @@ ngOnInit(){
 else{
   this.data1 = true;
 }
+}
+
+setbusinesslocation(){
+  this.latitude = this.details.businesslocation.latitude;
+  this.longitude = this.details.businesslocation.longitude;
 }
 
 Edit(){

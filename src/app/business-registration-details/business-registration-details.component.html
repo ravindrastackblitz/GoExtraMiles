@@ -17,6 +17,7 @@
 
 </form>
 <input type="button"  (click)="Edit()"class="btn btn-primary" value="Edit"><br>
+
  <div class="row">
   <div class="col-sm-6">
     <label><b>Business Category  </b></label>
@@ -73,14 +74,24 @@
   <div class="col-sm-6">
  <input type="text" [value]="details?.gstNumber"  readonly class="form-control">
   </div>
-  <div class="col-sm-6">
+  <!-- <div class="col-sm-6">
     <label><b>Business Location </b></label>
   </div>
   <div class="col-sm-6">
  <input type="text" [value]=""  readonly class="form-control">
-  </div>
+  </div> -->
  
  </div>
+
+ <div class="map">
+  <b class="location">Business Location </b>
+  <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
+    <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+  </agm-map>
+ </div>
+ 
+
+
  <!-- <input type="button"  style="width: 250px;height: 40px; text-align: center;margin-left: 45%;margin-top: 3%;" [routerLink]="['/UrbanRiderStoreCatalouge']" class="btn btn-primary" value="SAVE"><br><br> -->
 <div style="display: flex;">
   <p style="margin-left: 35%; margin-top: 3%;" >Hide from Catalouge </p>
