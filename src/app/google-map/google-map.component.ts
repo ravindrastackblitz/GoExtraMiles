@@ -1,6 +1,8 @@
-import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, NgZone, OnInit, ViewChild,Output,EventEmitter,Input } from '@angular/core';
 import { FormControl } from "@angular/forms";
 import { MapsAPILoader } from '@agm/core';
+
+import {Location} from '../Model/location'
 
 declare var google:any;
 @Component({
@@ -10,11 +12,6 @@ declare var google:any;
 })
 export class GoogleMapComponent {
 
- 
-
-
-
-
   public latitude!: number;
   public longitude!: number;
   public searchControl!: FormControl;
@@ -22,7 +19,12 @@ export class GoogleMapComponent {
   
   @ViewChild("search")
   public searchElementRef!: ElementRef;
-  
+
+  location!:Location
+  @Output() Searchdata:EventEmitter<any> =new EventEmitter()
+
+  @Input('locationdetails') locationdata!:Location;
+
   constructor(
     private mapsAPILoader: MapsAPILoader,
     private ngZone: NgZone
@@ -33,7 +35,7 @@ export class GoogleMapComponent {
     this.zoom = 4;
     this.latitude = 39.8282;
     this.longitude = -98.5795;
-    
+    console.log("@Input values  0",this.locationdata)
     //create search FormControl
     this.searchControl = new FormControl();
     
@@ -42,9 +44,7 @@ export class GoogleMapComponent {
     
     //load Places Autocomplete
     this.mapsAPILoader.load().then(() => {
-      let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
-        types: ["address"]
-      });
+      let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement);
       autocomplete.addListener("place_changed", () => {
         this.ngZone.run(() => {
           //get the place result
@@ -54,11 +54,17 @@ export class GoogleMapComponent {
           if (place.geometry === undefined || place.geometry === null) {
             return;
           }
-          
-          //set latitude, longitude and zoom
+                
           this.latitude = place.geometry.location.lat();
           this.longitude = place.geometry.location.lng();
+          //set latitude, longitude and zoom
           this.zoom = 12;
+        
+          this.location ={
+            latitude:this.latitude,
+            longitude :this.longitude
+          }
+          this.Searchdata.emit(this.location);
         });
       });
     });
@@ -72,5 +78,12 @@ export class GoogleMapComponent {
         this.zoom = 12;
       });
     }
+  }
+
+  ngOnChanges():void
+  {
+   // console.log("@Input values  01",this.locationdata?.latitude);
+    this.latitude = this.locationdata?.latitude;
+    this.longitude = this.locationdata?.longitude;
   }
 }

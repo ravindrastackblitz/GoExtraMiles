@@ -85,7 +85,8 @@ save() {
         storetiming: this.details.storetiming,
         isApproved: false,
         registrationnumber: this.phone,
-        registrationEmail:this.Email
+        registrationEmail:this.Email,
+        businesslocation:this.details.businesslocation
       };
 
       this.businessService.pushFileToStorage(createBusinessAccount).subscribe({

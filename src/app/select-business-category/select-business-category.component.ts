@@ -1,4 +1,4 @@
-import { Component,OnInit,Output,EventEmitter } from '@angular/core';
+import { Component,OnInit,Output,EventEmitter,Input } from '@angular/core';
 import { PopupComponent } from '../popup/popup.component';
 import { PopupService } from '../services/popup.service';
 import { observable, Observable, Subscription } from 'rxjs';
@@ -24,7 +24,7 @@ selectedCategory:string="";
 
 @Output() eventemit:EventEmitter<string> = new EventEmitter();
 
-
+@Input('businesscategory') businessname!:string;
 filterTerm!: string;
 categoriesdata !:SelectCategory
 
@@ -112,4 +112,10 @@ close1(){
 
   }
  
+  ngOnChanges():void
+  {
+    console.log("@Input values  ",this.businessname);
+    this.selectcategory?.controls['category'].setValue(this.businessname);
+  
+  }
 }

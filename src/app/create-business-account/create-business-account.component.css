@@ -259,3 +259,8 @@ width:30%
   text-decoration: underline;
   cursor: pointer;
 }
+.googlemap{
+  width:95%;
+  margin-left: 2.5%;
+  margin-bottom: 3%;
+}
