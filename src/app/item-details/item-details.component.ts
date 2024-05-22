@@ -36,6 +36,8 @@ data1 = JSON.parse(JSON.stringify(localStorage.getItem('AddItems')));
 
   images: any;
 
+  Ischecked!:boolean;
+
   // clicktoggle()
   // {
   //   this.details =(this.details === 'empty') ? "JSON.parse(localStorage.getItem('AddItems') || '{}')" : 'empty';
@@ -56,6 +58,7 @@ togglePopup1(): void {
 Scratchcard(){
   this.discount =false;
   this.dataService.sendData(this.textBoxData);
+  this.catalogCrud.setchecked(true);
   this._router.navigate(['/MyCatalouge']);
 }
 Scratchcard1(){

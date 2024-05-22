@@ -36,6 +36,10 @@ ngOnInit(){
     this.userloginService.setIsMainHeaderVisible(true); 
   }
  this.imagedata = this.imageService.getImageData();
+ if(this.imagedata == "" || this.imagedata == null){
+  this.imagedata = this.details?.url;
+ }
+
  this.selectedFiles =this.imageService.getfile()
  if(this.details?.storetiming == "Pick Days"){
   this.data1 = false;
@@ -81,7 +85,7 @@ save() {
         storetiming: this.details.storetiming,
         isApproved: false,
         registrationnumber: this.phone,
-        registrationEmail:this.details.registrationEmail
+        registrationEmail:this.Email
       };
 
       this.businessService.pushFileToStorage(createBusinessAccount).subscribe({
