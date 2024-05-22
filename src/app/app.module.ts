@@ -42,15 +42,10 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatFormFieldModule} from '@angular/material/form-field';
-<<<<<<< HEAD
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { SpinnerComponent } from './spinner/spinner.component';
-=======
 import { GoogleMapComponent } from './google-map/google-map.component';
 import { AgmCoreModule } from '@agm/core';
-
-
->>>>>>> e33fdce0bde825fb793f1cceda80bd789d1aaf06
 
 
 const approu :Routes=[
@@ -101,13 +96,8 @@ const approu :Routes=[
     PhonenumberDirective,
     TermsComponent,
     HeaderComponent,
-<<<<<<< HEAD
     SpinnerComponent,
-=======
-    GoogleMapComponent,
->>>>>>> e33fdce0bde825fb793f1cceda80bd789d1aaf06
-    
-    
+    GoogleMapComponent, 
   ],
   imports: [
     BrowserModule,

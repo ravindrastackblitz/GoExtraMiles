@@ -37,7 +37,7 @@
      </div>
     </div>
     <div [hidden]="!selectbusiness">
-      <app-select-business-category (eventemit)="getchilddata($event)" ></app-select-business-category>
+      <app-select-business-category [businesscategory]="categoryname" (eventemit)="getchilddata($event)" ></app-select-business-category>
     </div>
   </div>
   <div class="row">
@@ -117,21 +117,16 @@
 </div>
 
 
-<label style="margin-left: 5%;margin-top: 2%;"><b>Search Location:</b></label>
+<!-- <label style="margin-left: 5%;margin-top: 2%;"><b>Search Location:</b></label>
 <input type="text" formControlName="searchQuery" class="location"  placeholder="Search for a location">
-<button id="search" (click)="searchLocation()">Search</button>
-
-<!-- <div style="width: 100%; height: 400px;">
-  <agm-map [latitude]="mapLat" [longitude]="mapLng" [zoom]="mapZoom" (mapClick)="onMapClick($event)">
-    <agm-marker [latitude]="selectedLat" [longitude]="selectedLng" *ngIf="selectedLat && selectedLng"></agm-marker>
-  </agm-map>
-</div> -->
+<button id="search" (click)="searchLocation()">Search</button> -->
+<div class="googlemap">
+  <app-google-map   [locationdetails]="businesslocation"  (Searchdata)="Location($event)"></app-google-map>
+</div>
+ 
 
 
-<p *ngIf="selectedLat && selectedLng">Selected Location: Latitude - {{ selectedLat }}, Longitude - {{ selectedLng }}</p>
-
-
-<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d121735.52507417274!2d78.45314559999998!3d17.543987199999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1714654002113!5m2!1sen!2sin"  class="map" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+<!-- <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d121735.52507417274!2d78.45314559999998!3d17.543987199999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1714654002113!5m2!1sen!2sin"  class="map" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> -->
 <div class="second">
 <div class="who">
   <label class="form-label"><b>Are You the owner/manager of this Business*</b></label>

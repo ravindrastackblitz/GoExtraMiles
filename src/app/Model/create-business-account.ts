@@ -16,6 +16,6 @@ storetiming: string;
 isApproved:boolean;
 registrationnumber:any;
 registrationEmail:any;
-
+businesslocation:any;
  
 }

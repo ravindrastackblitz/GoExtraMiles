@@ -10,6 +10,7 @@ import { PopupService } from '../services/popup.service';
 import { GstService } from '../services/gst.service';
 import { BusinessRegistrationCRUDService } from '../services/business-registration-crud.service';
 import { CreateBusinessAccount } from '../Model/create-business-account';
+import { Location } from '../Model/location';
 import { MouseEvent } from '@agm/core';
 import { map,switchMap,take } from 'rxjs/operators';
 import { listChanges } from '@angular/fire/compat/database';
@@ -21,6 +22,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./create-business-account.component.css']
 })
 export class CreateBusinessAccountComponent implements OnInit {
+
   selectedFiles?: FileList;
   image1:any;
   currentFileUpload?: FileUpload;
@@ -50,6 +52,9 @@ export class CreateBusinessAccountComponent implements OnInit {
   username:string ='';
   subscription: Subscription;
 formdata:any;
+locationdata!:Location
+businesslocation!:Location;
+categoryname!:string;
 
 Email = localStorage.getItem('Email')
   constructor(
@@ -78,6 +83,10 @@ Email = localStorage.getItem('Email')
   return true;
 }
 
+Location(event:any){
+console.log("location details :",event)
+this.locationdata=event;
+}
 
   getchilddata(data:string){
     if(data == "undefined"){
@@ -102,17 +111,13 @@ GetChilddata(data:string){
   }
 }
 
-searchLocation()
-{
 
-}
   ngOnInit() {
 if(this.Email != '' && this.Email != undefined){
   this.userloginService.setIsMainHeaderVisible(true); 
 }
   
     this.Createbusiness = this.formBuilder.group({
-      searchQuery: [''],
       categoryname:new FormControl('',[Validators.required]),
       Image: new FormControl('', []),
       businessName: new FormControl('', [Validators.required]),
@@ -124,7 +129,7 @@ if(this.Email != '' && this.Email != undefined){
       isOwner: new FormControl('', [Validators.required]),
       username: new FormControl('', [Validators.required]),
       mobileNumber: new FormControl('', [Validators.required]),
-      termsAndConditions: [false, Validators.requiredTrue]
+      termsAndConditions: [false, Validators.requiredTrue],
     });
 
     this.businessService.getBusinessRecordByKey1(this.phone).subscribe(
@@ -138,7 +143,9 @@ if(this.Email != '' && this.Email != undefined){
            //  console.log("this is the key"+this.formdata.url);imagename
            this.selectedFiles = this.formdata.url;
            this.image1 = this.formdata.imagename;
+           this.businesslocation = this.formdata.businesslocation;
            this.Createbusiness?.controls['categoryname'].setValue(this.formdata.categoryname);
+           this.categoryname = this.formdata.categoryname;
              this.datatime  = this.formdata.storetiming;
               this.AddvaluesToform()
         }
@@ -147,7 +154,9 @@ if(this.Email != '' && this.Email != undefined){
               this.formdata = JSON.parse(some)
              // console.log(this.formdata);
              this.Createbusiness?.controls['categoryname'].setValue(this.formdata.categoryname);
-             this.datatime  = this.formdata?.storetiming
+             this.categoryname = this.formdata.categoryname;
+             this.datatime  = this.formdata?.storetiming;
+             this.businesslocation = this.formdata.businesslocation;
               this.buttons = false;
               this.AddvaluesToform()
             } 
@@ -173,8 +182,8 @@ AddvaluesToform(){
       storetiming  :this.formdata.storetiming,
       mobileNumber :this.formdata.mobilenumber,
      // imagedata : this.imageService.getImageData(),
-      imagedata : this.formdata.url,
-     image :this.formdata.imagename
+    //   imagedata : this.formdata.url,
+    //  image :this.formdata.imagename
     })
     console.log("this is the data",this.imagedata)
   }  
@@ -264,6 +273,7 @@ this.Terms= true;
         isApproved: false,
         registrationnumber:this.phone,
         registrationEmail:this.username,
+        businesslocation:this.locationdata
       };
 
       localStorage.setItem('form-data', JSON.stringify(formData));
