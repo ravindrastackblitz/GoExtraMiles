@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ExtraMailBusinessComponent } from './extra-mail-business/extra-mail-business.component';
@@ -25,7 +26,7 @@ import { PopupComponent } from './popup/popup.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgOtpInputModule } from  'ng-otp-input';
 import { PhonenumberDirective } from './phonenumber.directive';
-import {AgmCoreModule } from '@agm/core';
+
 import { MatIconModule } from '@angular/material/icon';
 import { IntlInputPhoneModule } from 'intl-input-phone';
 import { MapsAPILoader } from '@agm/core';
@@ -41,8 +42,15 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatFormFieldModule} from '@angular/material/form-field';
+<<<<<<< HEAD
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { SpinnerComponent } from './spinner/spinner.component';
+=======
+import { GoogleMapComponent } from './google-map/google-map.component';
+import { AgmCoreModule } from '@agm/core';
+
+
+>>>>>>> e33fdce0bde825fb793f1cceda80bd789d1aaf06
 
 
 const approu :Routes=[
@@ -55,6 +63,7 @@ const approu :Routes=[
   {path:'CreateBusinessAccount',component:CreateBusinessAccountComponent},
   {path:'selectBusinessCategory',component:SelectBusinessCategoryComponent},
   {path:'GSTDetails',component:GSTDetailsComponent},
+  {path:'GoogleMap',component:GoogleMapComponent},
   {path:'StoreTimings',component:StoreTimingsComponent},
   {path:'BusinessRegistrationDetails',component:BusinessRegistrationDetailsComponent},
   {path:'UrbanRiderStoreCatalouge',component:UrbenRiderStoreCatalougeComponent},
@@ -92,7 +101,11 @@ const approu :Routes=[
     PhonenumberDirective,
     TermsComponent,
     HeaderComponent,
+<<<<<<< HEAD
     SpinnerComponent,
+=======
+    GoogleMapComponent,
+>>>>>>> e33fdce0bde825fb793f1cceda80bd789d1aaf06
     
     
   ],
@@ -118,6 +131,10 @@ const approu :Routes=[
     AngularFireStorageModule,
     AngularFireDatabaseModule,
     MatIconModule,
+    AgmCoreModule.forRoot({
+      apiKey:'AIzaSyCw1WGnlRsc19GSCRBdgxKqgrjvVPSUwzk',
+      libraries: ['places'],
+    })
     // AgmCoreModule.forRoot({
     //   // please get your own API key here:
     //   // https://developers.google.com/maps/documentation/javascript/get-api-key?hl=en
@@ -126,7 +143,16 @@ const approu :Routes=[
     // }),
    
   ],
-  providers: [],
+  providers: [Geolocation,
+    { provide: 'AIzaSyCw1WGnlRsc19GSCRBdgxKqgrjvVPSUwzk', useValue: 'AIzaSyCw1WGnlRsc19GSCRBdgxKqgrjvVPSUwzk' }
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+
+}
+declare global {
+  interface Window {
+    google: typeof google;
+  }
+}
