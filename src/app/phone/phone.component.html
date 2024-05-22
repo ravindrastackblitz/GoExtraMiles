@@ -1,7 +1,12 @@
 
+<div *ngIf="spinner">
+    <h3 class="text-center text-primary">Please Wait Loading </h3>
+    <app-spinner></app-spinner>
+</div>
+<div *ngIf="!spinner">
     <div class="contain">
         <img src="data:image/png;base64,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" style="width: 8%;height: 8%;margin-left: 45%;margin-bottom: 3%;">
-        <h2 style="margin-left: 35%;">Varify Mobile Number</h2>
+        <h2 style="margin-left: 35%;">Verify Mobile Number</h2>
                         <h6 style="margin-left: 35%;">OTP will be sent to your mobile number</h6>
         <div class="row d-flex align-item-center justify-content-center">
             <form [formGroup]="phoneForm" id="countryCode">
@@ -22,6 +27,8 @@
             <button  class="edit" (click)="onConfirm()">Confirm</button>
         </div>
     </div>
+</div>
+
 
     
       

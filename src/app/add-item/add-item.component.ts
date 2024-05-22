@@ -8,6 +8,7 @@ import { ImagesarviceService } from '../services/imagesarvice.service';
 import { CatalogCURDService } from '../services/catalog-curd.service';
 import { CatalogModel } from '../Model/catalog-model';
 import { UserloginService } from '../services/userlogin.service';
+import { toastersrc } from '../services/toastr.service';
 
 @Component({
   selector: 'app-add-item',
@@ -28,15 +29,13 @@ keyName:any;
   buttons!:boolean
   phone :any = localStorage.getItem('phoneNumber');
   Email = localStorage.getItem('Email');
-  ImagesUrl!:any[]
-
+  ImagesUrl!:any[];
+  spinner!:boolean;
 
   constructor(private fb: FormBuilder, private _router: Router,
-    private imageService: ImagesarviceService,
+    private imageService: ImagesarviceService,private toastar:toastersrc,
     private httpClient: HttpClient, private catalogService: CatalogServiceService,
     private catalogCrudService: CatalogCURDService, private userloginService:UserloginService,
-   
-
     ) { }
 
     ngOnInit(){
@@ -180,6 +179,9 @@ catalogModel:any;
 URLS:any =[];
 Names:any =[];
 Submit() {
+  setTimeout(()=>{
+    this.spinner= true;
+  },2000)
   if (this.Additemdetails.valid && this.selectedFile.length > 0) {
     
         this.catalogModel = {
@@ -236,19 +238,24 @@ saveFormData() {
   if(this.keyName !="" && this.keyName != null){
 
     this.catalogCrudService.updateCatalogKey(this.keyName,formData).then(()=>{
+      this.spinner =false
       this._router.navigate(['/ItemDetails']);
-      console.log("Updated Sucessfully")
+      console.log("Updated Sucessfully");
+      this.toastar.success("ItemDetails Updated Suessfully", "Success")
     })
   }
   else{
   this.catalogCrudService.create(formData).then(() => {
     console.log('Data added successfully');
+    this.toastar.success("ItemDetails Added Suessfully", "Success")
+    this._router.navigate(['/ItemDetails']);
+    this.spinner =false
   }).catch((error: any) => {
     console.error('Error adding data:', error);
   });
 
   localStorage.setItem('AddItems', JSON.stringify(formData));
-  this._router.navigate(['/ItemDetails']);
+  //this._router.navigate(['/ItemDetails']);
   }
 }
 

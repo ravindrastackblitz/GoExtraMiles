@@ -6,6 +6,7 @@ import { ImageUploadService } from '../services/image-upload.service';
 import { FileUpload } from '../Model/file-upload';
 import { CreateBusinessAccount } from '../Model/create-business-account';
 import { UserloginService } from '../services/userlogin.service';
+import { toastersrc } from '../services/toastr.service';
 
 @Component({
   selector: 'app-business-registration-details',
@@ -26,7 +27,7 @@ times1 =JSON.parse(this.times);
   IsEdit!:boolean
 
 constructor(private imageService: ImagesarviceService, private router: Router,private reg:BusinessRegistrationCRUDService,
-  private businessService:BusinessRegistrationCRUDService,
+  private businessService:BusinessRegistrationCRUDService,private  toastar:toastersrc,
   private userloginService:UserloginService){
 }
 Email = localStorage.getItem('Email')
@@ -99,7 +100,7 @@ save() {
               this.businessService.updateBusinessBykey(this.key,this.currentFileUpload)
               .then(()=>{
                 console.log('Successfully updated');
-
+                this.toastar.success("Business Registration Details Updated Suessfully", "Success")
                 localStorage.removeItem('key');
               })
             }
@@ -107,6 +108,7 @@ save() {
               this.businessService.create(this.currentFileUpload)
                 .then(() => {
                   console.log('Data added successfully');
+                  this.toastar.success("Business Registration Details Added Suessfully", "Success")
                 })
                 .catch((error: any) => {
                   console.error('Error adding data:', error);

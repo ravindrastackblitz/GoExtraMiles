@@ -46,6 +46,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { GoogleMapComponent } from './google-map/google-map.component';
 import { AgmCoreModule } from '@agm/core';
+import { ToastrModule } from 'ngx-toastr';
 
 
 const approu :Routes=[
@@ -117,6 +118,9 @@ const approu :Routes=[
     ReactiveFormsModule,
     RouterModule.forRoot(approu),
     NgxOtpInputModule,  
+    ToastrModule.forRoot({
+      progressBar: true
+    }),
     IntlInputPhoneModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,

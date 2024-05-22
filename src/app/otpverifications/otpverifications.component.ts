@@ -11,6 +11,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { take } from 'rxjs/operators'
 import { UserloginService } from '../services/userlogin.service';
 import { NotificationService } from '../notifications.service';
+import { toastersrc } from '../services/toastr.service';
 
 @Component({
   selector: 'app-otpverifications',
@@ -20,8 +21,10 @@ import { NotificationService } from '../notifications.service';
 export class OTPVerificationsComponent {
   otp!:string;
 verify:any;
+spinner!:boolean;
 
-constructor(private route : Router,private userloginService: UserloginService,private notificationService: NotificationService){}
+constructor(private route : Router,private userloginService: UserloginService,
+  private notificationService: NotificationService,private toastar:toastersrc){}
 
   config ={
     allowNumberOnly:true,
@@ -79,7 +82,7 @@ handleClick(){
     localStorage.setItem('user_data',JSON.stringify(response));
     this.notificationService.addNotification();
     this.route.navigate(['/BusinessRegistration']);
-
+this.toastar.success("Your Mobile Number Verifycation Completed Suessfully", "Success")
     //show main header 
     this.userloginService.setIsMainHeaderVisible(true); 
 

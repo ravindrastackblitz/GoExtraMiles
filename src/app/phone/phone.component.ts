@@ -32,7 +32,7 @@ export class PhoneComponent {
   phoneNumber:any;
   reCaptchaverifer: any;
   dialog: any;
- 
+spinner!:boolean; 
 
 
  
@@ -65,11 +65,15 @@ export class PhoneComponent {
   }
 
   onConfirm() {
+    setTimeout(()=>{
+      this.spinner= true;
+    },2000)
     firebase
       .auth()
       .signInWithPhoneNumber(this.phoneNumber, this.reCaptchaverifer)
       .then((confirmationResult) => {
-        localStorage.setItem('verificationId', confirmationResult.verificationId);
+       // localStorage.setItem('verificationId', confirmationResult.verificationId);
+       this.spinner= false;
         this.route.navigate(['/OTP']);
         console.log('Verification ID:', confirmationResult.verificationId);
   
