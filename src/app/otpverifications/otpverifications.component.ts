@@ -78,7 +78,7 @@ handleClick(){
   .auth()
   .signInWithCredential(credentials)
   .then((response)=>{
-    console.log("THirhfh",response);
+   // console.log("THirhfh",response);
     localStorage.setItem('user_data',JSON.stringify(response));
     this.notificationService.addNotification();
     this.route.navigate(['/BusinessRegistration']);
