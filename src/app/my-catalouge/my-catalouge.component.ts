@@ -23,12 +23,14 @@ export class MyCatalougeComponent implements OnInit {
 ReadMore:boolean = true
 
 //hiding info box
-visible:boolean = false
+visible:boolean = false;
+data = JSON.parse(JSON.stringify(localStorage.getItem('form-data')));
+details2 = JSON.parse(this.data);
   details1 = JSON.parse(localStorage.getItem('form-data') || '{}');
   selectedImage:any| string | ArrayBuffer | null = null;
   selectedTab: number = 1;
   details = JSON.parse(localStorage.getItem('AddItems') || '{}');
-  imagedata!: string | null;
+  imagedata :string | null = null;
   time!: boolean;
   subscription!:Subscription;
   Ischecked!:boolean;
@@ -79,7 +81,11 @@ catalogKeyt!:any;
    
 
     
-      this.imagedata = this.imageService.getImageData();
+    this.imagedata = this.imageService.getImageData();
+    if(this.imagedata == "" || this.imagedata == null){
+      this.imagedata = this.details2?.url;
+     }
+    
 
     this.catalogService.getBusinessByPhoneNumber(this.phoneNumber).subscribe(images1 => {
       console.log("catelog data",images1)
