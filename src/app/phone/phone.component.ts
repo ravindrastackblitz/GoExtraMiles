@@ -32,7 +32,7 @@ export class PhoneComponent {
   phoneNumber:any;
   reCaptchaverifer: any;
   dialog: any;
-spinner!:boolean; 
+ spinner!:boolean;
 
 
  
@@ -65,15 +65,14 @@ spinner!:boolean;
   }
 
   onConfirm() {
-    setTimeout(()=>{
-      this.spinner= true;
-    },2000)
+    setTimeout(() => {
+      this.spinner=true;
+    }, 2000);
     firebase
       .auth()
       .signInWithPhoneNumber(this.phoneNumber, this.reCaptchaverifer)
       .then((confirmationResult) => {
-       // localStorage.setItem('verificationId', confirmationResult.verificationId);
-       this.spinner= false;
+        localStorage.setItem('verificationId', confirmationResult.verificationId);
         this.route.navigate(['/OTP']);
         console.log('Verification ID:', confirmationResult.verificationId);
   
@@ -90,9 +89,7 @@ spinner!:boolean;
   }
   
   onEdit(){
-    this.verify =false;
-  }
+    this.verify =false;
+  }
 
 }
-
-   
