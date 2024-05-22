@@ -68,7 +68,11 @@ catalogKeyt!:any;
     this.selectedTab = tabNumber;
   }
   buttonTitle:string = "CREATE NOW"; 
- 
+  isUnblurred: boolean = false;
+
+  toggleBlur(): void {
+    this.isUnblurred = !this.isUnblurred;
+  }
   Email = localStorage.getItem('Email')
   ngOnInit(): void {
 
@@ -78,15 +82,11 @@ catalogKeyt!:any;
     this.imagedata1 = this.imageService.getImageData1();
     this.imagedata2 = this.imageService.getImageData2();
     this.imagedata3 = this.imageService.getImageData3();
-   
-
     
     this.imagedata = this.imageService.getImageData();
     if(this.imagedata == "" || this.imagedata == null){
       this.imagedata = this.details2?.url;
      }
-    
-
     this.catalogService.getBusinessByPhoneNumber(this.phoneNumber).subscribe(images1 => {
       console.log("catelog data",images1)
       this.images = images1;
