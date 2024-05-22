@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { PopupComponent } from '../popup/popup.component';
-import { BehaviorSubject, Observable, Subject, throwError } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PopupService {
+export class NotificationService {
   private notificationsSubject = new BehaviorSubject<string[]>([]);
   notifications$ = this.notificationsSubject.asObservable();
 

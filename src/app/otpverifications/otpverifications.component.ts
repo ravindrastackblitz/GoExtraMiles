@@ -10,6 +10,7 @@ import { timer, Subscription } from 'rxjs';
 import { Pipe, PipeTransform } from '@angular/core';
 import { take } from 'rxjs/operators'
 import { UserloginService } from '../services/userlogin.service';
+import { NotificationService } from '../notifications.service';
 
 @Component({
   selector: 'app-otpverifications',
@@ -20,7 +21,7 @@ export class OTPVerificationsComponent {
   otp!:string;
 verify:any;
 
-constructor(private route : Router,private userloginService: UserloginService){}
+constructor(private route : Router,private userloginService: UserloginService,private notificationService: NotificationService){}
 
   config ={
     allowNumberOnly:true,
@@ -76,6 +77,7 @@ handleClick(){
   .then((response)=>{
     console.log("THirhfh",response);
     localStorage.setItem('user_data',JSON.stringify(response));
+    this.notificationService.addNotification();
     this.route.navigate(['/BusinessRegistration']);
 
     //show main header 
@@ -85,6 +87,8 @@ handleClick(){
     alert(error.message)
   })
 }
+
+
 
   // ngOnInit() {
   //   const inputElement = document.querySelector('#phone') as HTMLInputElement; // Explicitly cast to HTMLInputElement
