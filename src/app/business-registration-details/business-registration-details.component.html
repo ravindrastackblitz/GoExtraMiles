@@ -7,7 +7,7 @@
   align-items: center;
   width: 150px; /* Adjust as needed */
   height: 150px; /* Adjust as needed */
-  border: 2px dashed #ccc; /* Placeholder border */
+  border: 2px solid #ccc; /* Placeholder border */
   border-radius: 50%;
   margin-top: 3%;
   cursor: pointer;margin-left: 45%;">
@@ -19,25 +19,25 @@
 <input type="button"  (click)="Edit()"class="btn btn-primary" value="Edit"><br>
  <div class="row">
   <div class="col-sm-6">
-    <label><b>Business Category  :</b></label>
+    <label><b>Business Category  </b></label>
   </div>
   <div class="col-sm-6">
  <input type="text" [value]="details?.categoryname"  readonly class="form-control">
   </div>
 <div class="col-sm-6">
-    <label><b>Business Name  :</b></label>
+    <label><b>Business Name  </b></label>
   </div>
   <div class="col-sm-6">
  <input type="text" [value]="details?.businessName"  readonly class="form-control">
   </div>
   <div class="col-sm-6">
-    <label><b>Desription :</b></label>
+    <label><b>Description </b></label>
   </div>
   <div class="col-sm-6">
  <input type="text" [value]="details?.description"  readonly class="form-control">
   </div>
   <div class="col-sm-6">
-    <label><b>Store Timings  :</b></label>
+    <label><b>Store Timings  </b></label>
   </div>
 <div class="col-sm-6"  *ngIf="data1">
  <input type="text" [value]="details?.storetiming"  readonly  class="form-control" >   
@@ -56,23 +56,30 @@
     <textarea type="text-area" [value]="storetimings" rows="7" cols="45" readonly class="form-control"></textarea>
      </div> -->
   <div class="col-sm-6">
-    <label><b>Email Address  :</b></label>
+    <label><b>Email Address  </b></label>
   </div>
   <div class="col-sm-6">
  <input type="text" [value]="details?.email"  readonly class="form-control">
   </div>
   <div class="col-sm-6">
-    <label><b>Website :</b></label>
+    <label><b>Website </b></label>
   </div>
   <div class="col-sm-6">
  <input type="text" [value]="details?.website"  readonly class="form-control">
   </div> 
   <div class="col-sm-6">
-    <label><b>Business Location :</b></label>
+    <label><b>GST Number   </b></label>
+  </div>
+  <div class="col-sm-6">
+ <input type="text" [value]="details?.gstNumber"  readonly class="form-control">
+  </div>
+  <div class="col-sm-6">
+    <label><b>Business Location </b></label>
   </div>
   <div class="col-sm-6">
  <input type="text" [value]=""  readonly class="form-control">
   </div>
+ 
  </div>
  <!-- <input type="button"  style="width: 250px;height: 40px; text-align: center;margin-left: 45%;margin-top: 3%;" [routerLink]="['/UrbanRiderStoreCatalouge']" class="btn btn-primary" value="SAVE"><br><br> -->
 <div style="display: flex;">
