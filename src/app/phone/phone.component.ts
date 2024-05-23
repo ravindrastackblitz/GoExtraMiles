@@ -65,16 +65,19 @@ export class PhoneComponent {
   }
 
   onConfirm() {
-    setTimeout(() => {
-      this.spinner=true;
-    }, 2000);
+
+    // setTimeout(() => {
+    //   this.spinner=true;
+    // }, 2000);
     firebase
       .auth()
       .signInWithPhoneNumber(this.phoneNumber, this.reCaptchaverifer)
       .then((confirmationResult) => {
         localStorage.setItem('verificationId', confirmationResult.verificationId);
         this.route.navigate(['/OTP']);
-        console.log('Verification ID:', confirmationResult.verificationId);
+        // setTimeout(() => {
+        //   this.spinner=false;
+        // }, 2000);
   
         // Close the reCAPTCHA widget
         this.reCaptchaverifer.clear();
