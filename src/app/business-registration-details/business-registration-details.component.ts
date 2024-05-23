@@ -18,7 +18,7 @@ export class BusinessRegistrationDetailsComponent {
   // public latitude!: number;
   // public longitude!: number;
   // public zoom!: number;
- zoom = 4;
+ zoom = 12;
  latitude = 39.8282;
  longitude = -98.5795;
   
@@ -49,8 +49,6 @@ ngOnInit(){
  if(this.imagedata == "" || this.imagedata == null){
   this.imagedata = this.details?.url;
  }
- this.latitude = this.details.businesslocation.latitude;
- this.longitude = this.details.businesslocation.longitude;
  
  this.selectedFiles =this.imageService.getfile()
  if(this.details?.storetiming == "Pick Days"){
@@ -61,7 +59,10 @@ ngOnInit(){
 else{
   this.data1 = true;
 }
+this.latitude = this.details.businesslocation?.latitude;
+this.longitude = this.details.businesslocation?.longitude;
 }
+
 
 setbusinesslocation(){
   this.latitude = this.details.businesslocation.latitude;

@@ -143,10 +143,14 @@ label{
    margin-top: 2%;
 }
 agm-map {
-  height: 300px;
+  height: 200px;
+  width:400px;
   margin-top: 0px;
 }
-.map{
+#location{
+  margin-top: 2%;
+}
+/* .map{
   width: 95%;
   margin-left: 2.5%;
   margin-top: 2%;
@@ -154,4 +158,4 @@ agm-map {
 .location{
   margin-bottom: 1%;
   margin-left: 32%;
-}
+} */

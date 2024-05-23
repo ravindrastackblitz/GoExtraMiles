@@ -144,7 +144,7 @@ if(this.Email != '' && this.Email != undefined){
            this.selectedFiles = this.formdata.url;
            this.image1 = this.formdata.imagename;
            this.businesslocation = this.formdata.businesslocation;
-           this.Createbusiness?.controls['categoryname'].setValue(this.formdata.categoryname);
+           this.Createbusiness?.controls['categoryname'].setValue(this.formdata?.categoryname);
            this.categoryname = this.formdata.categoryname;
              this.datatime  = this.formdata.storetiming;
               this.AddvaluesToform()
@@ -155,6 +155,7 @@ if(this.Email != '' && this.Email != undefined){
              // console.log(this.formdata);
              this.Createbusiness?.controls['categoryname'].setValue(this.formdata.categoryname);
              this.categoryname = this.formdata.categoryname;
+             this.imagedata= this.imageService.getImageData();
              this.datatime  = this.formdata?.storetiming;
              this.businesslocation = this.formdata.businesslocation;
               this.buttons = false;

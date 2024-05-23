@@ -1,5 +1,5 @@
 agm-map {
-    height: 400px;
+    height: 350px;
     margin-top: 0px;
   }
   label{
@@ -12,6 +12,6 @@ agm-map {
   }
   #search{
     width:20%;
-    border: none;
+    border: 1px solid rgba(0, 0, 0, 0.288);
     margin: 0;
   }

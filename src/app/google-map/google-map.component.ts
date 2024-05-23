@@ -59,12 +59,21 @@ export class GoogleMapComponent {
           this.longitude = place.geometry.location.lng();
           //set latitude, longitude and zoom
           this.zoom = 12;
-        
-          this.location ={
-            latitude:this.latitude,
-            longitude :this.longitude
+
+          if(this.location == undefined || this.location == null){
+            this.setCurrentPosition();
+            this.location ={
+              latitude:this.latitude,
+              longitude :this.longitude
+            }
+            this.Searchdata.emit(this.location);
+          }else{
+            this.location ={
+              latitude:this.latitude,
+              longitude :this.longitude
+            }
+            this.Searchdata.emit(this.location);
           }
-          this.Searchdata.emit(this.location);
         });
       });
     });
@@ -76,6 +85,11 @@ export class GoogleMapComponent {
         this.latitude = position.coords.latitude;
         this.longitude = position.coords.longitude;
         this.zoom = 12;
+        this.location ={
+          latitude:this.latitude,
+          longitude :this.longitude
+        }
+        this.Searchdata.emit(this.location);
       });
     }
   }

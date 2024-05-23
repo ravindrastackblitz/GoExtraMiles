@@ -114,7 +114,7 @@ close1(){
  
   ngOnChanges():void
   {
-    console.log("@Input values  ",this.businessname);
+   // console.log("@Input values  ",this.businessname);
     this.selectcategory?.controls['category'].setValue(this.businessname);
   
   }
