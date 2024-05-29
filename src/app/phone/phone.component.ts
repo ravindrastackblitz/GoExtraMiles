@@ -8,12 +8,13 @@ import  intlTelInput from 'intl-tel-input';
  import { ConfigurationOptions, CustomCountryModel, OutputOptionsEnum } from "intl-input-phone";
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 var config = {
-  apiKey: "AIzaSyASnQe-_0mreed5EBiYq8GRbXe5bh5Zruo",
-  authDomain: "phone-auth-7ef07.firebaseapp.com",
-  projectId: "phone-auth-7ef07",
-  storageBucket: "phone-auth-7ef07.appspot.com",
-  messagingSenderId: "607514732171",
-  appId: "1:607514732171:web:7ab5c53205a38d1e21168e"
+  apiKey: "AIzaSyAZFKmd6vxVZTEm_EtH1zlKvCiJjHUaZ2Q",
+  authDomain: "goextramiles-c9d43.firebaseapp.com",
+  projectId: "goextramiles-c9d43",
+  storageBucket: "goextramiles-c9d43.appspot.com",
+  messagingSenderId: "781423247006",
+  appId: "1:781423247006:web:dcb1474e98382d344dc58f",
+  measurementId: "G-G377Y2B69Q"
   
 
 }

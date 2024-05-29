@@ -24,7 +24,7 @@ constructor(private _router:Router,private userloginService: UserloginService) {
 
   ngAfterViewInit(): void {
     google.accounts.id.initialize({
-      client_id: "1079320505171-a2m4mcbkl7q4mv8u96rmnj9fh2u1v2no.apps.googleusercontent.com",
+      client_id: "660738226945-skgjmvqq9n8ao0vbv3b15tcn44hl1p7n.apps.googleusercontent.com",
       callback: (response: any) => this.handleGoogleSignIn(response)
     });
     google.accounts.id.renderButton(
