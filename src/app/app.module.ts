@@ -26,7 +26,6 @@ import { PopupComponent } from './popup/popup.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgOtpInputModule } from  'ng-otp-input';
 import { PhonenumberDirective } from './phonenumber.directive';
-
 import { MatIconModule } from '@angular/material/icon';
 import { IntlInputPhoneModule } from 'intl-input-phone';
 import { MapsAPILoader } from '@agm/core';
@@ -47,6 +46,7 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { GoogleMapComponent } from './google-map/google-map.component';
 import { AgmCoreModule } from '@agm/core';
 import { ToastrModule } from 'ngx-toastr';
+
 
 
 const approu :Routes=[
@@ -77,7 +77,6 @@ const approu :Routes=[
   declarations: [
     AppComponent,
     ExtraMailBusinessComponent,
-
     PhoneComponent,
     OTPVerificationsComponent,
     BusinessRegistrationComponent,
@@ -126,19 +125,18 @@ const approu :Routes=[
     AngularFireDatabaseModule,
     MatIconModule,
     AgmCoreModule.forRoot({
-      apiKey:'AIzaSyCw1WGnlRsc19GSCRBdgxKqgrjvVPSUwzk',
+      apiKey:'AIzaSyCt_-WjDWiMbzNzDtWvoZ6gL3s90gKGT9s',
       libraries: ['places'],
     })
     // AgmCoreModule.forRoot({
     //   // please get your own API key here:
     //   // https://developers.google.com/maps/documentation/javascript/get-api-key?hl=en
-    //   apiKey: 'AIzaSyD6zd5tZXhsFOEdfQ2XxIyiiYxMzScu2Fw',
+    //   apiKey: 'AIzaSyDsWEJtqmVbSm9FLLHY8B2sRGaa6Yr9yGQ',
     //   libraries: ["places"]
     // }),
-   
   ],
   providers: [Geolocation,
-    { provide: 'AIzaSyCw1WGnlRsc19GSCRBdgxKqgrjvVPSUwzk', useValue: 'AIzaSyCw1WGnlRsc19GSCRBdgxKqgrjvVPSUwzk' }
+    { provide: 'AIzaSyCt_-WjDWiMbzNzDtWvoZ6gL3s90gKGT9s', useValue: 'AIzaSyCt_-WjDWiMbzNzDtWvoZ6gL3s90gKGT9s' }
   ],
   bootstrap: [AppComponent]
 })

@@ -16,7 +16,7 @@ export interface CatalogModel {
     Link:any;
     SellingPrice:number;
     Retailprice:number;
-    isApproved:boolean;
+    isApproved:boolean|string;
     registrationnumber:any;
      names: string[];
      

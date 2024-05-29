@@ -146,18 +146,19 @@ if(this.Email != '' && this.Email != undefined){
            this.businesslocation = this.formdata.businesslocation;
            this.Createbusiness?.controls['categoryname'].setValue(this.formdata?.categoryname);
            this.categoryname = this.formdata.categoryname;
-             this.datatime  = this.formdata.storetiming;
-              this.AddvaluesToform()
+           this.datatime  = this.formdata.storetiming;
+           this.AddvaluesToform()
         }
         else{
               const some = JSON.parse(JSON.stringify(localStorage.getItem('form-data') )|| '{}');
               this.formdata = JSON.parse(some)
              // console.log(this.formdata);
-             this.Createbusiness?.controls['categoryname'].setValue(this.formdata.categoryname);
+             this.Createbusiness?.controls['categoryname'].setValue(this.formdata?.categoryname);
              this.categoryname = this.formdata.categoryname;
              this.imagedata= this.imageService.getImageData();
              this.datatime  = this.formdata?.storetiming;
              this.businesslocation = this.formdata.businesslocation;
+             localStorage.removeItem('key')
               this.buttons = false;
               this.AddvaluesToform()
             } 
