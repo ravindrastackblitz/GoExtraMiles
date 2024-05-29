@@ -33,7 +33,7 @@
             ]
           },
           "configurations": {
-            "aot": true,
+            
             "production": {
               "budgets": [
                 {

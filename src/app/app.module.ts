@@ -125,7 +125,7 @@ const approu :Routes=[
     AngularFireDatabaseModule,
     MatIconModule,
     AgmCoreModule.forRoot({
-      apiKey:'AIzaSyCt_-WjDWiMbzNzDtWvoZ6gL3s90gKGT9s',
+      apiKey:'AIzaSyBFe0WTUKOaMMSFTV1WqaeAnw65lB_cKEw',
       libraries: ['places'],
     })
     // AgmCoreModule.forRoot({
@@ -136,7 +136,7 @@ const approu :Routes=[
     // }),
   ],
   providers: [Geolocation,
-    { provide: 'AIzaSyCt_-WjDWiMbzNzDtWvoZ6gL3s90gKGT9s', useValue: 'AIzaSyCt_-WjDWiMbzNzDtWvoZ6gL3s90gKGT9s' }
+    { provide: 'AIzaSyBFe0WTUKOaMMSFTV1WqaeAnw65lB_cKEw', useValue: 'AIzaSyBFe0WTUKOaMMSFTV1WqaeAnw65lB_cKEw' }
   ],
   bootstrap: [AppComponent]
 })
