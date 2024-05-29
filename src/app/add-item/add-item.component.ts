@@ -179,9 +179,7 @@ catalogModel:any;
 URLS:any =[];
 Names:any =[];
 Submit() {
-  setTimeout(()=>{
-    this.spinner= true;
-  },2000)
+
   if (this.Additemdetails.valid && this.selectedFile.length > 0) {
     
         this.catalogModel = {
