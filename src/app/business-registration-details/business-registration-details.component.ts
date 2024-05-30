@@ -15,9 +15,7 @@ import { toastersrc } from '../services/toastr.service';
 })
 export class BusinessRegistrationDetailsComponent {
 
-  // public latitude!: number;
-  // public longitude!: number;
-  // public zoom!: number;
+
  zoom = 12;
  latitude = 39.8282;
  longitude = -98.5795;

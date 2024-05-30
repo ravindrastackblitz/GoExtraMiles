@@ -64,6 +64,8 @@ keyName:any;
             this.selectedImages[0] = data.urls[0].url;
             this.selectedImages[1] =data.urls[1].url;
             this.selectedImages[2] = data.urls[2].url;
+            this.images.push(data.urls[i]);
+           // this.Names.push(data.urls[i].name)
            }
           this.formdata=data;
           this.buttons = true;
@@ -125,9 +127,8 @@ AddvaluesToform(){
     }
   }
   onFileSelected(event: any,index: number) {
+    this.images=[];
     const files = event.target.files;
-
-    
     if (files) {
       this.selectedFile[index] = files;
       const fileCount = files.length;
@@ -182,8 +183,11 @@ Submit() {
   // setTimeout(()=>{
   //   this.spinner= true;
   // },2000)
-  if (this.Additemdetails.valid && this.selectedFile.length > 0) {
-    
+  if (this.Additemdetails.valid) {
+
+    // if(this.selectedFile.length == 0){
+    //   this.selectedFile = this.formdata.urls || []
+    // }
         this.catalogModel = {
           Itemname: this.Additemdetails.value.itemname,
           Description: this.Additemdetails.value.description,
@@ -196,8 +200,10 @@ Submit() {
           urls: [], // Initialize URLs array
           names: [], // Initialize names array
           file: this.selectedFile,
-        };
 
+        };
+  if(this.selectedFile.length != 0){
+    this.images = []
     // Upload files to storage
     this.catalogCrudService.pushFilesToStorage(this.selectedFile).subscribe(
       catalogImagesUpload => {
@@ -213,6 +219,10 @@ Submit() {
         console.error('Error uploading files:', error);
       }
     );
+  }else{
+
+    this.saveFormData();
+  }
   }
 }
 
