@@ -15,9 +15,7 @@ import { toastersrc } from '../services/toastr.service';
 })
 export class BusinessRegistrationDetailsComponent {
 
-  // public latitude!: number;
-  // public longitude!: number;
-  // public zoom!: number;
+
  zoom = 12;
  latitude = 39.8282;
  longitude = -98.5795;
@@ -109,7 +107,7 @@ save() {
 
       this.businessService.pushFileToStorage(createBusinessAccount).subscribe({
         next: fileUpload => {
-       //   console.log('fileUpload details:', fileUpload);
+         console.log('fileUpload details:', fileUpload);
           this.currentFileUpload = fileUpload;
 
           if (this.currentFileUpload.url != null || undefined) {
@@ -119,13 +117,15 @@ save() {
                 console.log('Successfully updated');
                 this.toastar.success("Business Registration Details Updated Suessfully", "Success")
                 localStorage.removeItem('key');
+                this.router.navigate(['/MyCatalouge']);
               })
             }
             else{
               this.businessService.create(this.currentFileUpload)
                 .then(() => {
                   console.log('Data added successfully');
-                  this.toastar.success("Business Registration Details Added Suessfully", "Success")
+                  this.toastar.success("Business Registration Details Added Suessfully", "Success");
+                  this.router.navigate(['/MyCatalouge']);
                 })
                 .catch((error: any) => {
                   console.error('Error adding data:', error);
@@ -140,7 +140,7 @@ save() {
     }
 
   }
-  this.router.navigate(['/MyCatalouge']);
+
 }
 
 }

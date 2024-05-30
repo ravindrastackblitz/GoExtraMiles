@@ -99,7 +99,7 @@ spinner!:boolean;
         for(var i=0;i<dta.length;i++){
           const key = dta[i].key;
           const img = dta[i].urls[0];
-          this.Images.push({images:dta[i].urls[0],key:dta[i].key});
+          this.Images.push({images:dta[i].urls[0],key:dta[i].key,isApproved:dta[i].isApproved});
         }
         if( this.Images != "" ){
           this.showImage = false;
