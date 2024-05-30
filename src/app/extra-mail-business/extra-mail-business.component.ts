@@ -32,7 +32,6 @@ constructor(private _router:Router,private userloginService: UserloginService) {
       { size: "large", type: "standard", shape: "pill",theme:"filled_blue",text:"Continue_With" }  // customization attributes
     );
 
-
   }
 
   handleGoogleSignIn(response: any) {
