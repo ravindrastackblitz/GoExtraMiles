@@ -1,3 +1,4 @@
+import { Time } from '@angular/common';
 import { Component,OnInit,Output,EventEmitter,Input } from '@angular/core';
 import { FormBuilder ,FormControl,FormGroup, Validators} from '@angular/forms';
 import { Router, Routes } from '@angular/router';
@@ -17,13 +18,35 @@ export class StoreTimingsComponent {
   selectedOption: string = '';
   time!:boolean;
 time1!:boolean;
+
   select(){
   this.time=true;
   }
   select1(){
     this.time=false;
   }
- 
+  Monopen =''; 
+   Monclose = '';
+      Tueopen = '';
+      Tueclose = '';
+      Wedopen = '' ; 
+      Wedclose = '' ; 
+      Thuopen= '' ; 
+      Thuclose= '' ; 
+      Friopen= '' ; 
+      Friclose= '' ; 
+      Satopen= '' ; 
+      Satclose= '' ; 
+      Sunopen= '' ; 
+      Sunclose= '' ; 
+
+   togMon:boolean = false
+   togTue:boolean = false
+   togWed:boolean = false
+   togThu:boolean = false
+   togFri:boolean = false
+   togSat:boolean = false
+   togSun:boolean = true;
  
   //formdata =JSON.parse(JSON.stringify(localStorage.getItem('form-data')) || '{}');
 
@@ -44,22 +67,23 @@ this.Timedetails=this.formbuilder.group(
   {
     radiotime:new FormControl('',Validators.required)
   }
-)
+);
+this.togMon = false;
     this.storetimes = this.formbuilder.group({
-      Monopen: [''], 
-      Monclose: [''],
-      Tueopen: [''], 
-      Tueclose: [''],
-      Wedopen: [''], 
-      Wedclose: [''],
-      Thuopen: [''], 
-      Thuclose: [''],
-      Friopen: [''], 
-      Friclose: [''],
-      Satopen: [''], 
-      Satclose: [''],
-      Sunopen:[''],
-      Sunclose:[''],
+      // Monopen: [''], 
+      // Monclose: [''],
+      // Tueopen: [''], 
+      // Tueclose: [''],
+      // Wedopen: [''], 
+      // Wedclose: [''],
+      // Thuopen: [''], 
+      // Thuclose: [''],
+      // Friopen: [''], 
+      // Friclose: [''],
+      // Satopen: [''], 
+      // Satclose: [''],
+      // Sunopen:[''],
+      // Sunclose:[''],
       Alldaysopen:[''],
       Alldaysclose:['']
 
@@ -79,20 +103,20 @@ console.log("time" +this.formdata);
          this.buttonClicked6 = true;
 
           this.storetimes.patchValue({
-            Monopen: [''], 
-            Monclose: [''],
-            Tueopen: [''], 
-            Tueclose: [''],
-            Wedopen: [''], 
-            Wedclose: [''],
-            Thuopen: [''], 
-            Thuclose: [''],
-            Friopen: [''], 
-            Friclose: [''],
-            Satopen: [''], 
-            Satclose: [''],
-            Sunopen:[''],
-            Sunclose:[''],
+            // Monopen: [''], 
+            // Monclose: [''],
+            // Tueopen: [''], 
+            // Tueclose: [''],
+            // Wedopen: [''], 
+            // Wedclose: [''],
+            // Thuopen: [''], 
+            // Thuclose: [''],
+            // Friopen: [''], 
+            // Friclose: [''],
+            // Satopen: [''], 
+            // Satclose: [''],
+            // Sunopen:[''],
+            // Sunclose:[''],
 
           })
           
@@ -153,47 +177,73 @@ close1(){
   }
   onClick() {
     this.buttonClicked = true;
+    this.togMon = false;
   }
   onClick1() {
     this.buttonClicked1 = true;
+    this.togTue = false;
   }
   onClick2() {
     this.buttonClicked2 = true;
+    this.togWed = false;
   }
   onClick3() {
     this.buttonClicked3 = true;
+    this.togThu = false;
   }
   onClick4() {
     this.buttonClicked4 = true;
+    this.togFri = false;
   }
   onClick5() {
     this.buttonClicked5 = true;
+    this.togSat = false;
   }
   onClick6() {
     this.buttonClicked6 = true;
+    this.togSun = false;
   }
   Montog(){
     this.buttonClicked = false;
-    this.storetimes.value.Monopen = '';
-    this.storetimes.value.Monclose = '';
+     this.Monopen = '';
+     this.Monclose = '';
+    this.togMon = true;
   }
   Tuetog(){
     this.buttonClicked1 = false;
+    this.Tueopen = '';
+    this.Tueclose = '';
+    this.togTue = true;
   }
   Wedtog(){
     this.buttonClicked2 = false;
+    this.Wedopen = '' ; 
+    this.Wedclose = '' ; 
+    this.togWed = true;
   }
   Thutog(){
     this.buttonClicked3 = false;
+    this.Thuopen= '' ; 
+      this.Thuclose= '' ; 
+      this.togThu = true;
   }
   Fritog(){
     this.buttonClicked4 = false;
+    this.Friopen= '' ; 
+    this.Friclose= '' ;
+    this.togFri = true; 
   }
   Sattog(){
     this.buttonClicked5 = false;
+    this.Satopen= '' ; 
+    this.Satclose= '' ; 
+    this.togSat = true;
   }
   Suntog(){
     this.buttonClicked6 = false;
+    this.Sunopen= '' ; 
+    this.Sunclose= '' ; 
+    this.togSun = true;
   }
   close(): void {
     if(this.Allclick == true){
@@ -209,8 +259,8 @@ close1(){
       this.data();
     }
     else{
-      const mon1 = this.storetimes.value.Monopen;
-      const mon2 = this.storetimes.value.Monclose;
+      const mon1 = this.Monopen;
+      const mon2 = this.Monclose;
       if(mon1 == "" && mon2 ==""){
         this.storetime.Monday = " " + "00:00"+ ' AM  - ' +"00:00"+' PM '
       }else{
@@ -220,8 +270,8 @@ close1(){
      // console.log(this.storetime.Monday);
       this.buttonClicked = false;
     
-      const tue1 = this.storetimes.value.Tueopen;
-      const tue2 = this.storetimes.value.Tueclose;
+      const tue1 = this.Tueopen;
+      const tue2 = this.Tueclose;
       //console.log("Tue : "+tue1+ ' AM  '+tue2+' PM');
       if(tue1 == "" && tue2 ==""){
         this.storetime.Tueseday  = " " + "00:00"+ ' AM  - ' +"00:00"+' PM '
@@ -231,8 +281,8 @@ close1(){
      
       this.buttonClicked1 = false;
    
-      const wed1 = this.storetimes.value.Wedopen;
-      const wed2 = this.storetimes.value.Wedclose;
+      const wed1 = this.Wedopen;
+      const wed2 = this.Wedclose;
       //console.log("Wed : "+wed1+ ' AM  '+wed2+' PM');
       if(wed1 == "" && wed2 ==""){
         this.storetime.Wednesday  = " " + "00:00"+ ' AM  - ' +"00:00"+' PM '
@@ -242,8 +292,8 @@ close1(){
  
       this.buttonClicked2 = false;
     
-      const thu1 = this.storetimes.value.Thuopen;
-      const thu2 = this.storetimes.value.Thuclose;
+      const thu1 = this.Thuopen;
+      const thu2 = this.Thuclose;
       //console.log("Thu : "+thu1+ ' AM  '+thu2+' PM');
       if(thu1 == "" && thu2 ==""){
         this.storetime.Thusday = " " + "00:00"+ ' AM  - ' +"00:00"+' PM '
@@ -253,8 +303,8 @@ close1(){
 
       this.buttonClicked3 = false;
     
-      const fri1 = this.storetimes.value.Friopen;
-      const fri2 = this.storetimes.value.Friclose;
+      const fri1 = this.Friopen;
+      const fri2 = this.Friclose;
      // console.log("Fri : "+fri1+ ' AM  '+fri2+' PM');
      if(fri1 == "" && fri2 ==""){
       this.storetime.Friday = " " + "00:00"+ ' AM  - ' +"00:00"+' PM '
@@ -264,8 +314,8 @@ close1(){
    
       this.buttonClicked4 = false;
     
-      const sat1 = this.storetimes.value.Satopen;
-      const sat2 = this.storetimes.value.Satclose;
+      const sat1 = this.Satopen;
+      const sat2 = this.Satclose;
       //console.log("Sat : "+sat1+ ' AM  '+sat2+' PM');
       if(sat1 == "" && sat2 ==""){
         this.storetime.Saturday = " " + "00:00"+ ' AM  - ' +"00:00"+' PM '
@@ -275,8 +325,8 @@ close1(){
       
       this.buttonClicked5 = false;
    
-      const sun1 = this.storetimes.value.Sunopen;
-      const sun2 = this.storetimes.value.Sunclose;
+      const sun1 = this.Sunopen;
+      const sun2 = this.Sunclose;
      // console.log("Sun : "+sun1+ ' AM  '+sun2+' PM');
      if(sun1 == "" && sun2 ==""){
       this.storetime.Sunday = " Closed "; 

@@ -49,7 +49,7 @@ ngOnInit(){
  }
  
  this.selectedFiles =this.imageService.getfile()
- if(this.details?.storetiming == "Pick Days"){
+ if(this.details?.storetiming != "Available 24/7"){
   this.data1 = false;
   this.timetable = true;
   this.timetable1 = localStorage.getItem('storetime1');
