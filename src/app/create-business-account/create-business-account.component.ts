@@ -274,7 +274,7 @@ this.Terms= true;
         storetiming: this.storetiming,
         isApproved: false,
         registrationnumber:this.phone,
-        registrationEmail:this.username,
+        registrationEmail:this.Email,
         businesslocation:this.locationdata
       };
 

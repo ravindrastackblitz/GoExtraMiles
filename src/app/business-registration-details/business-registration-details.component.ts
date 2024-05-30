@@ -109,38 +109,45 @@ save() {
         next: fileUpload => {
          console.log('fileUpload details:', fileUpload);
           this.currentFileUpload = fileUpload;
-
-          if (this.currentFileUpload.url != null || undefined) {
-            if(this.key !="" && this.key != null){
-              this.businessService.updateBusinessBykey(this.key,this.currentFileUpload)
-              .then(()=>{
-                console.log('Successfully updated');
-                this.toastar.success("Business Registration Details Updated Suessfully", "Success")
-                localStorage.removeItem('key');
-                this.router.navigate(['/MyCatalouge']);
-              })
-            }
-            else{
-              this.businessService.create(this.currentFileUpload)
-                .then(() => {
-                  console.log('Data added successfully');
-                  this.toastar.success("Business Registration Details Added Suessfully", "Success");
-                  this.router.navigate(['/MyCatalouge']);
-                })
-                .catch((error: any) => {
-                  console.error('Error adding data:', error);
-                });
-            }
-          }
+          this.SaveFormdata();
         },
         error: error => {
           console.log(error);
         }
       });   
     }
+    else{
+      this.currentFileUpload = this.details
+      this.SaveFormdata()
+    }
 
   }
 
+}
+
+SaveFormdata(){
+  if (this.currentFileUpload.url != null || undefined) {
+    if(this.key !="" && this.key != null){
+      this.businessService.updateBusinessBykey(this.key,this.currentFileUpload)
+      .then(()=>{
+        console.log('Successfully updated');
+        this.toastar.success("Business Registration Details Updated Suessfully", "Success")
+        localStorage.removeItem('key');
+        this.router.navigate(['/MyCatalouge']);
+      })
+    }
+    else{
+      this.businessService.create(this.currentFileUpload)
+        .then(() => {
+          console.log('Data added successfully');
+          this.toastar.success("Business Registration Details Added Suessfully", "Success");
+          this.router.navigate(['/MyCatalouge']);
+        })
+        .catch((error: any) => {
+          console.error('Error adding data:', error);
+        });
+    }
+  }
 }
 
 }
