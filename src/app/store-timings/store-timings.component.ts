@@ -172,6 +172,29 @@ close1(){
   onClick6() {
     this.buttonClicked6 = true;
   }
+  Montog(){
+    this.buttonClicked = false;
+    this.storetimes.value.Monopen = '';
+    this.storetimes.value.Monclose = '';
+  }
+  Tuetog(){
+    this.buttonClicked1 = false;
+  }
+  Wedtog(){
+    this.buttonClicked2 = false;
+  }
+  Thutog(){
+    this.buttonClicked3 = false;
+  }
+  Fritog(){
+    this.buttonClicked4 = false;
+  }
+  Sattog(){
+    this.buttonClicked5 = false;
+  }
+  Suntog(){
+    this.buttonClicked6 = false;
+  }
   close(): void {
     if(this.Allclick == true){
       const daystime=this.storetimes.value.Alldaysopen +'AM  - ' +this.storetimes.value.Alldaysclose+' PM';

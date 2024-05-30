@@ -82,7 +82,11 @@ timetable!:boolean
 
 save() {
   // Assuming this.details contains your form data
-  if (this.details != null) {
+  if (this.details != null){
+
+    if(this.details.storetiming != 'Available 24/7'){
+         this.details.storetiming = this.times1
+    }
     const file: File | null | undefined = this.selectedFiles?.item(0);
     if (file) {
       const createBusinessAccount: CreateBusinessAccount = {

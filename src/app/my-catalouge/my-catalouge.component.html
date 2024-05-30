@@ -86,7 +86,7 @@
                 <img [src]="image.images.url"  [attr.data-imagename]="image.key" alt="Catalog Image" (click)="ImageData($event)" class="img">
                 <span class="icon" ><img src="assets/Images/circle.png"  id="info"></span>
               </div>
-              <div *ngIf="image.isApproved == 'progress'">
+              <div *ngIf="image.isApproved == 'scratchcard'">
                 <img [src]="image.images.url"  [attr.data-imagename]="image.key" alt="Catalog Image" (click)="ImageData($event)" class="img">
                 <span class="icon" ><img src="assets/Images/time.png"  id="info"></span>     
               </div>
@@ -129,7 +129,7 @@
    <a>
     <div class="row" style="margin-left: 15%;margin-top: 5%;">
     <div class="col-4" *ngFor="let image of Images" >
-      <div *ngIf="image.isApproved == 'progress'">
+      <div *ngIf="image.isApproved == 'scratchcard'">
       <img [src]="image.images.url" alt="Catalog Image" [attr.data-imagekey]="image.key" (click)="ScractchcardImage($event)" class="img">
       <span class="icon" ><img src="assets/Images/time.png"  id="info"></span>
     </div>

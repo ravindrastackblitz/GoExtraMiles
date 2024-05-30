@@ -147,6 +147,9 @@ if(this.Email != '' && this.Email != undefined){
            this.Createbusiness?.controls['categoryname'].setValue(this.formdata?.categoryname);
            this.categoryname = this.formdata.categoryname;
            this.datatime  = this.formdata.storetiming;
+           if(this.formdata.storetiming != 'Available 24/7'){
+             this.formdata.storetiming = 'Pick Days'
+           }
            this.AddvaluesToform()
         }
         else{
@@ -157,6 +160,9 @@ if(this.Email != '' && this.Email != undefined){
              this.categoryname = this.formdata.categoryname;
              this.imagedata= this.imageService.getImageData();
              this.datatime  = this.formdata?.storetiming;
+             if(this.formdata.storetiming != 'Available 24/7'){
+              this.formdata.storetiming = 'Pick Days'
+              }
              this.businesslocation = this.formdata.businesslocation;
              localStorage.removeItem('key')
               this.buttons = false;
