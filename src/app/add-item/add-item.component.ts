@@ -31,6 +31,7 @@ keyName:any;
   Email = localStorage.getItem('Email');
   ImagesUrl!:any[];
   spinner!:boolean;
+  hide:string|boolean = false;
 
   constructor(private fb: FormBuilder, private _router: Router,
     private imageService: ImagesarviceService,private toastar:toastersrc,
@@ -95,7 +96,7 @@ AddvaluesToform(){
       sellingprice:this.formdata.SellingPrice  ,
       retailprice: this.formdata.Retailprice  ,
       registrationnumber: this.phone,
-      isApproved: false,
+     // isApproved: false,
       file: '',
       urls: this.formdata.urls || [],
       names: this.Names || [],
@@ -196,7 +197,7 @@ Submit() {
           SellingPrice: this.Additemdetails.value.retailprice,
           Retailprice: this.Additemdetails.value.sellingprice,
           registrationnumber: this.phone,
-          isApproved: false,
+          isApproved: this.hide,
           urls: [], // Initialize URLs array
           names: [], // Initialize names array
           file: this.selectedFile,
@@ -226,6 +227,9 @@ Submit() {
   }
 }
 
+hideproduct(){
+this.hide = 'hideproduct'
+}
 
 saveFormData() {
  
@@ -237,7 +241,7 @@ saveFormData() {
     SellingPrice: this.Additemdetails.value.retailprice,
     Retailprice: this.Additemdetails.value.sellingprice,
     registrationnumber: this.phone,
-    isApproved: false,
+    isApproved: this.hide,
     file: '',
     urls: this.images,//[{url:"",Name:""},{}] 
 

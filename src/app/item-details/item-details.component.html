@@ -58,7 +58,8 @@
 <div style="display: flex;margin-left: 36%;margin-top:3%">
   <p>Hide from Catalouge </p>
   <label class="switch" style="margin-left: 40%;">
-      <input type="checkbox" (click)="clicktoggle()">
+      <input type="checkbox" *ngIf="details?.isApproved == false">
+      <input type="checkbox" checked *ngIf="details?.isApproved == 'hideproduct'">
       <span class="slider round"></span>
     </label>
  </div><br>
