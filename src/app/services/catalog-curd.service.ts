@@ -87,7 +87,7 @@ pushFilesToStorage(fileLists: FileList[]): Observable<any> {
 
   
 
-  getFilesByPhoneNumber(phoneNumber: string,keyName:string): Observable<any> {
+  getFilesByPhoneNumber(phoneNumber: string, keyName: string): Observable<any> {
     return this.db.list('Catalouges/').snapshotChanges().pipe(
       map(changes =>
         changes.map(c => ({ key: c.payload.key, ...c.payload.val() as any }))

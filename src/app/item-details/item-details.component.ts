@@ -6,6 +6,8 @@ import { Router, UrlSegment } from '@angular/router';
 import { CatalogCURDService } from '../services/catalog-curd.service';
 import { CatalogModel } from '../Model/catalog-model';
 import { UserloginService } from '../services/userlogin.service';
+import { Scratchcard } from '../Model/scratchcard';
+import {ScratchcardStatus}  from '../Model/scratchcard'
 
 @Component({
   selector: 'app-item-details',
@@ -29,12 +31,14 @@ data1 = JSON.parse(JSON.stringify(localStorage.getItem('AddItems')));
   catalogModel!:CatalogModel;
   phoneNumber: any =  localStorage.getItem('phoneNumber');
   keyName:any;
-
+  product!:string
   language: string = ''; // Variable to store the selected language
   dropdownVisible: boolean = false; // Variable to control the visibility of the dropdown menu
   textBoxData: string = '';
 
   images: any;
+Scratchcarddetails :any 
+data:any
 
   Ischecked!:boolean;
 
@@ -58,6 +62,13 @@ togglePopup1(): void {
 Scratchcard(){
   this.discount =false;
   this.dataService.sendData(this.textBoxData);
+const data1 :Scratchcard = {
+  isApproved: false,
+  scratchcardCode :this.textBoxData,
+  productKey:this.product,
+  status: ScratchcardStatus.Pending
+}
+  this.dataService.create(data1)
   this.catalogCrud.setchecked(true);
   this._router.navigate(['/MyCatalouge']);
 }
@@ -145,6 +156,7 @@ if (this.phoneNumber && this.keyName) {
      }
       
       this.details = data;
+       this.product =this.details.key;
       this.ItemDetails()
       
       }

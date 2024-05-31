@@ -67,7 +67,7 @@
     <pre style="margin-left: 37%;"><img src="https://cdn1.iconfinder.com/data/icons/material-device/20/access-time-64.png" style="width: 25px;"> This item is being reviewed.If it's been approved App users will
       Start seeing this item under your Catalouge. <b style="margin-left:2px;" (click)="popup()" class="term">Learn More</b>.</pre>
     <br>
-    <div style="display: flex;">
+    <div style="display: flex;" *ngIf="details.status == 'Approved' ">
       <button type="button" style="margin-left: 40%;" (click)="togglePopup()"  class="btn btn-primary">Create Scratch Card</button>
       <!-- <button type="button" style="margin-left: 40%;" (click)="update()"  class="btn btn-primary">Edit</button> -->
      <!-- <input type="button" [routerLink]="['/MyCatalouge']" style="margin-left:15%; width:10%;height: 40px;; background-color:black; color:white" class="btn btn-primary" value="Store"> -->
