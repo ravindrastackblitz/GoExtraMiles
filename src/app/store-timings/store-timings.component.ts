@@ -1,4 +1,4 @@
-import { Time } from '@angular/common';
+
 import { Component,OnInit,Output,EventEmitter,Input } from '@angular/core';
 import { FormBuilder ,FormControl,FormGroup, Validators} from '@angular/forms';
 import { Router, Routes } from '@angular/router';
@@ -18,35 +18,13 @@ export class StoreTimingsComponent {
   selectedOption: string = '';
   time!:boolean;
 time1!:boolean;
-
   select(){
   this.time=true;
   }
   select1(){
     this.time=false;
   }
-  Monopen =''; 
-   Monclose = '';
-      Tueopen = '';
-      Tueclose = '';
-      Wedopen = '' ; 
-      Wedclose = '' ; 
-      Thuopen= '' ; 
-      Thuclose= '' ; 
-      Friopen= '' ; 
-      Friclose= '' ; 
-      Satopen= '' ; 
-      Satclose= '' ; 
-      Sunopen= '' ; 
-      Sunclose= '' ; 
-
-   togMon:boolean = false
-   togTue:boolean = false
-   togWed:boolean = false
-   togThu:boolean = false
-   togFri:boolean = false
-   togSat:boolean = false
-   togSun:boolean = true;
+ 
  
   //formdata =JSON.parse(JSON.stringify(localStorage.getItem('form-data')) || '{}');
 
@@ -67,80 +45,26 @@ this.Timedetails=this.formbuilder.group(
   {
     radiotime:new FormControl('',Validators.required)
   }
-);
-this.togMon = false;
+)
     this.storetimes = this.formbuilder.group({
-      // Monopen: [''], 
-      // Monclose: [''],
-      // Tueopen: [''], 
-      // Tueclose: [''],
-      // Wedopen: [''], 
-      // Wedclose: [''],
-      // Thuopen: [''], 
-      // Thuclose: [''],
-      // Friopen: [''], 
-      // Friclose: [''],
-      // Satopen: [''], 
-      // Satclose: [''],
-      // Sunopen:[''],
-      // Sunclose:[''],
+      Monopen: [''], 
+      Monclose: [''],
+      Tueopen: [''], 
+      Tueclose: [''],
+      Wedopen: [''], 
+      Wedclose: [''],
+      Thuopen: [''], 
+      Thuclose: [''],
+      Friopen: [''], 
+      Friclose: [''],
+      Satopen: [''], 
+      Satclose: [''],
+      Sunopen:[''],
+      Sunclose:[''],
       Alldaysopen:[''],
       Alldaysclose:['']
 
     });
-console.log("time" +this.formdata);
-    if(this.formdata != ""){
-      if(this.formdata == "Pick Days")
-        {
-          this.Timedetails.controls['radiotime'].setValue(this.formdata);
-          this.time=true;
-         this.buttonClicked = true;
-         this.buttonClicked1 = true;
-         this.buttonClicked2 = true;
-         this.buttonClicked3 = true;
-         this.buttonClicked4 = true;
-         this.buttonClicked5 = true;
-         this.buttonClicked6 = true;
-
-          this.storetimes.patchValue({
-            // Monopen: [''], 
-            // Monclose: [''],
-            // Tueopen: [''], 
-            // Tueclose: [''],
-            // Wedopen: [''], 
-            // Wedclose: [''],
-            // Thuopen: [''], 
-            // Thuclose: [''],
-            // Friopen: [''], 
-            // Friclose: [''],
-            // Satopen: [''], 
-            // Satclose: [''],
-            // Sunopen:[''],
-            // Sunclose:[''],
-
-          })
-          
-      }
-     else if(this.formdata == "Available 24/7"){
-      this.Timedetails.controls['radiotime'].setValue(this.formdata);
-      this.time=false;
-     }
-     else{
-      this.Timedetails.controls['radiotime'].setValue('');
-     }
-      // this.Createbusiness.patchValue({
-      //   businessCategory : this.formdata.categoryname,
-      //   businessName : this.formdata.businessName,
-      //   description : this.formdata.description,
-      //   email : this.formdata.email,
-      //   website : this.formdata.website,
-      //   gstNumber : this.formdata.gstNumber,
-      //   isOwner : this.formdata.isOwner,
-      //   name :this.formdata.name,
-      //   storetiming   :this.formdata.storetiming,
-      //   mobileNumber :this.formdata.mobilenumber,
-      // })
-    }
 
 }
   onsubmit():void{
@@ -177,77 +101,28 @@ close1(){
   }
   onClick() {
     this.buttonClicked = true;
-    this.togMon = false;
   }
   onClick1() {
     this.buttonClicked1 = true;
-    this.togTue = false;
   }
   onClick2() {
     this.buttonClicked2 = true;
-    this.togWed = false;
   }
   onClick3() {
     this.buttonClicked3 = true;
-    this.togThu = false;
   }
   onClick4() {
     this.buttonClicked4 = true;
-    this.togFri = false;
   }
   onClick5() {
     this.buttonClicked5 = true;
-    this.togSat = false;
   }
   onClick6() {
     this.buttonClicked6 = true;
-    this.togSun = false;
-  }
-  Montog(){
-    this.buttonClicked = false;
-     this.Monopen = '';
-     this.Monclose = '';
-    this.togMon = true;
-  }
-  Tuetog(){
-    this.buttonClicked1 = false;
-    this.Tueopen = '';
-    this.Tueclose = '';
-    this.togTue = true;
-  }
-  Wedtog(){
-    this.buttonClicked2 = false;
-    this.Wedopen = '' ; 
-    this.Wedclose = '' ; 
-    this.togWed = true;
-  }
-  Thutog(){
-    this.buttonClicked3 = false;
-    this.Thuopen= '' ; 
-      this.Thuclose= '' ; 
-      this.togThu = true;
-  }
-  Fritog(){
-    this.buttonClicked4 = false;
-    this.Friopen= '' ; 
-    this.Friclose= '' ;
-    this.togFri = true; 
-  }
-  Sattog(){
-    this.buttonClicked5 = false;
-    this.Satopen= '' ; 
-    this.Satclose= '' ; 
-    this.togSat = true;
-  }
-  Suntog(){
-    this.buttonClicked6 = false;
-    this.Sunopen= '' ; 
-    this.Sunclose= '' ; 
-    this.togSun = true;
   }
   close(): void {
     if(this.Allclick == true){
-      const daystime=this.storetimes.value.Alldaysopen +'AM  - ' +this.storetimes.value.Alldaysclose+' PM';
+      const daystime=this.storetimes.value.Alldaysopen +' - ' +this.storetimes.value.Alldaysclose;
       this.storetime.Monday=" "+daystime;
       this.storetime.Tueseday=" "+daystime;
       this.storetime.Wednesday=" "+daystime;
@@ -259,79 +134,79 @@ close1(){
       this.data();
     }
     else{
-      const mon1 = this.Monopen;
-      const mon2 = this.Monclose;
+      const mon1 = this.storetimes.value.Monopen;
+      const mon2 = this.storetimes.value.Monclose;
       if(mon1 == "" && mon2 ==""){
-        this.storetime.Monday = " " + "00:00"+ ' AM  - ' +"00:00"+' PM '
+        this.storetime.Monday = " " + "00:00"+ '  -  ' +"00:00"
       }else{
-        this.storetime.Monday = " " + mon1+ ' AM  - ' +mon2 +' PM '
+        this.storetime.Monday = " " + mon1+ '  -  ' +mon2 
       }
       
      // console.log(this.storetime.Monday);
       this.buttonClicked = false;
     
-      const tue1 = this.Tueopen;
-      const tue2 = this.Tueclose;
-      //console.log("Tue : "+tue1+ ' AM  '+tue2+' PM');
+      const tue1 = this.storetimes.value.Tueopen;
+      const tue2 = this.storetimes.value.Tueclose;
+      //console.log("Tue : "+tue1+ '  '+tue2+);
       if(tue1 == "" && tue2 ==""){
-        this.storetime.Tueseday  = " " + "00:00"+ ' AM  - ' +"00:00"+' PM '
+        this.storetime.Tueseday  = " " + "00:00"+ '  -  ' +"00:00"
       }else{
-        this.storetime.Tueseday  = " "+tue1+ ' AM  - '+tue2+' PM'
+        this.storetime.Tueseday  = " "+tue1+ '  -  '+tue2
       }
      
       this.buttonClicked1 = false;
    
-      const wed1 = this.Wedopen;
-      const wed2 = this.Wedclose;
-      //console.log("Wed : "+wed1+ ' AM  '+wed2+' PM');
+      const wed1 = this.storetimes.value.Wedopen;
+      const wed2 = this.storetimes.value.Wedclose;
+      //console.log("Wed : "+wed1+ '  '+wed2+);
       if(wed1 == "" && wed2 ==""){
-        this.storetime.Wednesday  = " " + "00:00"+ ' AM  - ' +"00:00"+' PM '
+        this.storetime.Wednesday  = " " + "00:00"+ '  -  ' +"00:00"
       }else{
-        this.storetime.Wednesday = " "+wed1+ ' AM  - '+wed2+' PM'
+        this.storetime.Wednesday = " "+wed1+ '  -  '+wed2
       }
  
       this.buttonClicked2 = false;
     
-      const thu1 = this.Thuopen;
-      const thu2 = this.Thuclose;
-      //console.log("Thu : "+thu1+ ' AM  '+thu2+' PM');
+      const thu1 = this.storetimes.value.Thuopen;
+      const thu2 = this.storetimes.value.Thuclose;
+      //console.log("Thu : "+thu1+ '  '+thu2+);
       if(thu1 == "" && thu2 ==""){
-        this.storetime.Thusday = " " + "00:00"+ ' AM  - ' +"00:00"+' PM '
+        this.storetime.Thusday = " " + "00:00"+ '  -  ' +"00:00"
       }else{
-        this.storetime.Thusday = " "+thu1+ ' AM  - '+thu2+' PM'
+        this.storetime.Thusday = " "+thu1+ '  -  '+thu2
       }
 
       this.buttonClicked3 = false;
     
-      const fri1 = this.Friopen;
-      const fri2 = this.Friclose;
-     // console.log("Fri : "+fri1+ ' AM  '+fri2+' PM');
+      const fri1 = this.storetimes.value.Friopen;
+      const fri2 = this.storetimes.value.Friclose;
+     // console.log("Fri : "+fri1+ '  '+fri2+);
      if(fri1 == "" && fri2 ==""){
-      this.storetime.Friday = " " + "00:00"+ ' AM  - ' +"00:00"+' PM '
+      this.storetime.Friday = " " + "00:00"+ '  -  ' +"00:00"
     }else{
-      this.storetime.Friday  = " "+fri1+ ' AM  - '+fri2+' PM' 
+      this.storetime.Friday  = " "+fri1+ '  -  '+fri2
     }
    
       this.buttonClicked4 = false;
     
-      const sat1 = this.Satopen;
-      const sat2 = this.Satclose;
-      //console.log("Sat : "+sat1+ ' AM  '+sat2+' PM');
+      const sat1 = this.storetimes.value.Satopen;
+      const sat2 = this.storetimes.value.Satclose;
+      //console.log("Sat : "+sat1+ '  '+sat2+);
       if(sat1 == "" && sat2 ==""){
-        this.storetime.Saturday = " " + "00:00"+ ' AM  - ' +"00:00"+' PM '
+        this.storetime.Saturday = " " + "00:00"+ '  -  ' +"00:00"
       }else{
-        this.storetime.Saturday  = " "+sat1+ ' AM  - '+sat2+' PM'
+        this.storetime.Saturday  = " "+sat1+ '  -  '+sat2
       }
       
       this.buttonClicked5 = false;
    
-      const sun1 = this.Sunopen;
-      const sun2 = this.Sunclose;
-     // console.log("Sun : "+sun1+ ' AM  '+sun2+' PM');
+      const sun1 = this.storetimes.value.Sunopen;
+      const sun2 = this.storetimes.value.Sunclose;
+     // console.log("Sun : "+sun1+ '  '+sun2+);
      if(sun1 == "" && sun2 ==""){
       this.storetime.Sunday = " Closed "; 
     }else{
-      this.storetime.Sunday  = " "+sun1+ ' AM  - '+sun2+' PM'
+      this.storetime.Sunday  = " "+sun1+ '  -  '+sun2
     }
      
       this.buttonClicked6 = false;
@@ -341,7 +216,48 @@ close1(){
   ngOnChanges():void
   {
     console.log(this.formdata);
-    this.Timedetails?.controls['radiotime'].setValue(this.formdata);
+   // this.Timedetails?.controls['radiotime'].setValue(this.formdata);
+    if(this.formdata != ""){
+      if(this.formdata == "Pick Days")
+        {
+          this.Timedetails.controls['radiotime'].setValue(this.formdata);
+          this.time=true;
+         this.buttonClicked = true;
+         this.buttonClicked1 = true;
+         this.buttonClicked2 = true;
+         this.buttonClicked3 = true;
+         this.buttonClicked4 = true;
+         this.buttonClicked5 = true;
+         this.buttonClicked6 = true;
+
+          this.storetimes.patchValue({
+            Monopen: [''], 
+            Monclose: [''],
+            Tueopen: [''], 
+            Tueclose: [''],
+            Wedopen: [''], 
+            Wedclose: [''],
+            Thuopen: [''], 
+            Thuclose: [''],
+            Friopen: [''], 
+            Friclose: [''],
+            Satopen: [''], 
+            Satclose: [''],
+            Sunopen:[''],
+            Sunclose:[''],
+
+          })
+          
+      }
+     else if(this.formdata == "Available 24/7"){
+      this.Timedetails.controls['radiotime'].setValue(this.formdata);
+      this.time=false;
+     }
+     else{
+      this.Timedetails.controls['radiotime'].setValue('');
+     }
+    }
   }
 
 }
+

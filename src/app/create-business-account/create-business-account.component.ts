@@ -146,10 +146,15 @@ if(this.Email != '' && this.Email != undefined){
            this.businesslocation = this.formdata.businesslocation;
            this.Createbusiness?.controls['categoryname'].setValue(this.formdata?.categoryname);
            this.categoryname = this.formdata.categoryname;
-           this.datatime  = this.formdata.storetiming;
            if(this.formdata.storetiming != 'Available 24/7'){
              this.formdata.storetiming = 'Pick Days'
+             this.Createbusiness?.controls['storetiming'].setValue(this.formdata?.storetiming);
+             this.datatime  = this.formdata.storetiming;
            }
+           else{
+            this.datatime  = this.formdata.storetiming;
+           }
+         
            this.AddvaluesToform()
         }
         else{
@@ -162,7 +167,12 @@ if(this.Email != '' && this.Email != undefined){
              this.datatime  = this.formdata?.storetiming;
              if(this.formdata.storetiming != 'Available 24/7'){
               this.formdata.storetiming = 'Pick Days'
-              }
+              this.Createbusiness?.controls['storetiming'].setValue(this.formdata?.storetiming);
+              this.datatime  = this.formdata.storetiming;
+            }
+            else{
+             this.datatime  = this.formdata.storetiming;
+            }
              this.businesslocation = this.formdata.businesslocation;
              localStorage.removeItem('key')
               this.buttons = false;
