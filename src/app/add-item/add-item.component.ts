@@ -197,7 +197,9 @@ Submit() {
           SellingPrice: this.Additemdetails.value.retailprice,
           Retailprice: this.Additemdetails.value.sellingprice,
           registrationnumber: this.phone,
-          isApproved: this.hide,
+          isVerified: this.hide,
+          isHidden:false,
+          status : 'pending',
           urls: [], // Initialize URLs array
           names: [], // Initialize names array
           file: this.selectedFile,
@@ -241,7 +243,9 @@ saveFormData() {
     SellingPrice: this.Additemdetails.value.retailprice,
     Retailprice: this.Additemdetails.value.sellingprice,
     registrationnumber: this.phone,
-    isApproved: this.hide,
+    isVerified:false,
+    isHidden:false,
+    status :this.catalogModel.status,
     file: '',
     urls: this.images,//[{url:"",Name:""},{}] 
 

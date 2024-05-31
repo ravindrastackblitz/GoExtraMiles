@@ -91,7 +91,7 @@ spinner!:boolean;
      }
     this.catalogService.getBusinessByPhoneNumber(this.phoneNumber).subscribe(images1 => {
       setTimeout(()=>{
-     //   console.log("catelog data",images1)
+        console.log("catelog data",images1)
         this.images = images1;
         //this.catalogKeyt
         
@@ -99,8 +99,9 @@ spinner!:boolean;
         for(var i=0;i<dta.length;i++){
           const key = dta[i].key;
           const img = dta[i].urls[0];
-          this.Images.push({images:dta[i].urls[0],key:dta[i].key,isApproved:dta[i].isApproved});
+          this.Images.push({images:dta[i].urls[0],key:dta[i].key,isVerifed:dta[i].isVerified,status:dta[i].status});
         }
+        console.log('hello',this.Images)
         if( this.Images != "" ){
           this.showImage = false;
           this.showcatelog = true;
