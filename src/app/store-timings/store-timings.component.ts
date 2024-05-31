@@ -2,7 +2,8 @@
 import { Component,OnInit,Output,EventEmitter,Input } from '@angular/core';
 import { FormBuilder ,FormControl,FormGroup, Validators} from '@angular/forms';
 import { Router, Routes } from '@angular/router';
-
+import { Storetimings } from '../Model/storetimings';
+import { StoretimingService } from '../services/storetiming.service';
 @Component({
   selector: 'app-store-timings',
   templateUrl: './store-timings.component.html',
@@ -14,9 +15,12 @@ export class StoreTimingsComponent {
   @Output() timedata:EventEmitter<string> = new EventEmitter();
  timedata1!:string;
   Timedetails!:FormGroup;
+  storingTimings!:Storetimings
   storetime:any = {Monday:null,Tueseday:null,Wednesday:null,Thusday:null,Friday:null,Saturday:null,Sunday:null}
   selectedOption: string = '';
+  
   time!:boolean;
+  
 time1!:boolean;
   select(){
   this.time=true;
@@ -39,7 +43,7 @@ time1!:boolean;
   buttonClicked5: boolean = false;
   buttonClicked6: boolean = false;
 
-  constructor(private formbuilder:FormBuilder, private router:Router) {}
+  constructor(private formbuilder:FormBuilder, private router:Router, private timings:StoretimingService) {}
   ngOnInit(){
 this.Timedetails=this.formbuilder.group(
   {
@@ -85,6 +89,7 @@ close1(){
           }
           else{
             if(this.storetime !=null){
+              console.log("wefefweewwe",this.storetime)
               this.timedata1 = res.radiotime;
               this.timedata.emit(this.timedata1);
               localStorage.setItem("storetime1",JSON.stringify(this.storetime));
