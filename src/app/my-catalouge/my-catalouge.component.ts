@@ -124,6 +124,11 @@ spinner!:boolean;
 
   GotoAddItem(){
     this.router.navigate(['/AddItem']);
+    this.catalogService.setKey('');
+    localStorage.removeItem('AddItems');
+    this.imageService.setImageData1('');
+    this.imageService.setImageData2('');
+    this.imageService.setImageData3('');
   }
   ImageData(event: any) {
     const key = event.target.dataset.imagename;
