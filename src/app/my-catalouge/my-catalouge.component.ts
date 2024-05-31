@@ -122,7 +122,9 @@ spinner!:boolean;
     });
   }
 
-
+  GotoAddItem(){
+    this.router.navigate(['/AddItem']);
+  }
   ImageData(event: any) {
     const key = event.target.dataset.imagename;
     this.catalogService.setKey(key)

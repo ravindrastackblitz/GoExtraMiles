@@ -129,6 +129,7 @@ AddvaluesToform(){
   }
   onFileSelected(event: any,index: number) {
     this.images=[];
+    this.selectedImages = [];
     const files = event.target.files;
     if (files) {
       this.selectedFile[index] = files;
