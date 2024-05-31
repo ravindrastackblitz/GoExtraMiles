@@ -128,6 +128,10 @@ close1(){
   close(): void {
     if(this.Allclick == true){
       const daystime=this.storetimes.value.Alldaysopen +' - ' +this.storetimes.value.Alldaysclose;
+      // const data: Storetimings ={
+      //   Day:Monday
+      // }
+      // console.log(data)
       this.storetime.Monday=" "+daystime;
       this.storetime.Tueseday=" "+daystime;
       this.storetime.Wednesday=" "+daystime;
