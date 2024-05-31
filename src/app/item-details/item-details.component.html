@@ -58,8 +58,8 @@
 <div style="display: flex;margin-left: 36%;margin-top:3%">
   <p>Hide from Catalouge </p>
   <label class="switch" style="margin-left: 40%;">
-      <input type="checkbox" *ngIf="details?.isHidden == false">
-      <input type="checkbox" checked *ngIf="details?.isHidden == true">
+      <input type="checkbox" [value]=details?.isHidden *ngIf="details?.isHidden == false">
+      <input type="checkbox" [value]=details?.isHidden  checked *ngIf="details?.isHidden == true">
       <span class="slider round"></span>
     </label>
  </div><br>

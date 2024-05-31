@@ -184,6 +184,7 @@ ItemDetails(){
           registrationnumber: this.phoneNumber,
           isApproved: false,
           file: '',
+          isHidden:this.details.status,
           urls: this.details.urls || [],
           names: this.Names || []
           
