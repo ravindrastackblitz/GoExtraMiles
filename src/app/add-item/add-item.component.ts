@@ -35,6 +35,9 @@ keyName:any;
   hide:boolean = false;
   catelogStatus: any;
 
+  data1 = JSON.parse(JSON.stringify(localStorage.getItem('AddItems')));
+  details = JSON.parse(this.data1);
+
   constructor(private fb: FormBuilder, private _router: Router,
     private imageService: ImagesarviceService,private toastar:toastersrc,
     private httpClient: HttpClient, private catalogService: CatalogServiceService,
@@ -83,6 +86,13 @@ keyName:any;
         }
       }
     });
+  }
+  else{
+    this.formdata = this.details;
+    this.selectedImages[0] = this.imageService.getImageData1();
+    this.selectedImages[1] = this.imageService.getImageData2();
+    this.selectedImages[2] = this.imageService.getImageData3();
+    this.AddvaluesToform();
   }
 
   }

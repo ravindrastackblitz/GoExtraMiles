@@ -80,7 +80,9 @@ datadelete()
 {
   this.discount1 =false;
   this.details = '';
+  console.log("hhggg",this.keyName)
   this.catalogCrud.deletecatalouge(this.keyName)
+
   this._router.navigate(['/MyCatalouge']);
 }
 
@@ -104,6 +106,7 @@ datadelete()
   }
   update()
   {
+    this.catalogCrud.setKey(this.product);
     this._router.navigate(['/AddItem']);
 
   }
@@ -154,9 +157,11 @@ if (this.phoneNumber && this.keyName) {
       this.imagedata2 =data.urls[1].url;
       this.imagedata3 = data.urls[2].url;
      }
+     console.log("data",data.key)
       
       this.details = data;
-       this.product =this.details.key;
+       this.product = this.details.key;
+       console.log("hhello",this.product)
       this.ItemDetails()
       
       }
