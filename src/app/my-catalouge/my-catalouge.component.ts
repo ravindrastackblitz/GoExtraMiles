@@ -99,7 +99,7 @@ spinner!:boolean;
         for(var i=0;i<dta.length;i++){
           const key = dta[i].key;
           const img = dta[i].urls[0];
-          this.Images.push({images:dta[i].urls[0],key:dta[i].key,isVerifed:dta[i].isVerified,status:dta[i].status});
+          this.Images.push({images:dta[i].urls[0],key:dta[i].key,isVerifed:dta[i].isVerified,status:dta[i].status,isHidden:dta[i].isHidden});
         }
         console.log('hello',this.Images)
         if( this.Images != "" ){
@@ -140,7 +140,7 @@ spinner!:boolean;
   
   ScractchcardImage(event: any) {
     const Scrachkey = event.target.dataset.imagekey;
-    this.catalogService.SetScrachcard(Scrachkey)
+   this.catalogService.SetScrachcard(Scrachkey)
    // console.log("Image Name:", key); // Log imageName
     this.router.navigate(['/ScratchCardInsights']);
      

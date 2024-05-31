@@ -57,6 +57,7 @@ export class ScratchCardInsightsComponent {
   subscription!:Subscription;
   key!:string;
   phoneNumber: any =  localStorage.getItem('phoneNumber');
+  promocode : any;
   popup(){
     this.Terms = true
   }
@@ -69,6 +70,7 @@ export class ScratchCardInsightsComponent {
   
   }
   Email = localStorage.getItem('Email');
+ 
   ngOnInit() {
     if(this.Email != '' && this.Email != undefined){
       this.userloginService.setIsMainHeaderVisible(true); 
@@ -85,6 +87,7 @@ export class ScratchCardInsightsComponent {
       }
     );
     
+
     this.catalog.getFilesByPhoneNumber(this.phoneNumber, this.key).subscribe({
       next: data => {
         if(data !== undefined){
@@ -92,6 +95,18 @@ export class ScratchCardInsightsComponent {
           for(var i=0; i<data.urls.length; i++){
             this.images = data.urls[0].url;
           }
+          this.dataService.getScratchcardByKey1(this.key).subscribe({
+            next :details =>{
+              if(details != undefined){
+                console.log("scratchcarddetails",details);
+                const  scratchcard =[];
+                for(var i=0; i<details.length; i++ ){
+                scratchcard.push(details[i].scratchcardCode)
+                }
+                this.promocode = scratchcard
+              }
+            }
+          })
         }
       }
     })

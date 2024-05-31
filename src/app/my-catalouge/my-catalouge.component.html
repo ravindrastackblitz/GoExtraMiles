@@ -89,13 +89,13 @@
               <!-- <div *ngIf="image.isApproved == 'scratchcard'">
                 <img [src]="image.images.url"  [attr.data-imagename]="image.key" alt="Catalog Image" (click)="ImageData($event)" class="img">
                 <span class="icon" ><img src="assets/Images/time.png"  id="info"></span>     
-              </div>
-              <div *ngIf="image.isApproved == 'hideproduct'">
+              </div> --->
+              <div *ngIf="image.isHidden == false">
                 <img [src]="image.images.url"  id="textBox" [attr.data-imagename]="image.key" alt="Catalog Image" [ngClass]="{ 'unblurred': isUnblurred }" (click)="ImageData($event)">
                 <span class="eye-icon" *ngIf="!isUnblurred"  (click)="toggleBlur()">
                     <img src="assets/Images/eyepng.png"  id="eyeicon">
                 </span>  
-              </div> -->
+              </div> 
             </div>
           </div>
         </a>
