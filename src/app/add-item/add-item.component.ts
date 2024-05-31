@@ -9,6 +9,7 @@ import { CatalogCURDService } from '../services/catalog-curd.service';
 import { CatalogModel } from '../Model/catalog-model';
 import { UserloginService } from '../services/userlogin.service';
 import { toastersrc } from '../services/toastr.service';
+import { catelogStatus } from '../Model/catalog-model';
 
 @Component({
   selector: 'app-add-item',
@@ -69,6 +70,9 @@ keyName:any;
            // this.Names.push(data.urls[i].name)
            }
           this.formdata=data;
+          if(this.formdata.isHidden == true){
+            this.hide = true;
+          }
           this.buttons = true;
           this.AddvaluesToform();
         console.log("Retrieved Data:", data);
@@ -200,7 +204,7 @@ Submit() {
           registrationnumber: this.phone,
           isVerified: false,
           isHidden:false,
-          status : this.catalogModel.status,
+          status : catelogStatus.Pending,
           urls: [], // Initialize URLs array
           names: [], // Initialize names array
           file: this.selectedFile,
@@ -246,7 +250,7 @@ saveFormData() {
     registrationnumber: this.phone,
     isVerified:false,
     isHidden:this.hide,
-    status :this.catalogModel.status,
+    status :catelogStatus.Pending,
     file: '',
     urls: this.images,//[{url:"",Name:""},{}] 
 

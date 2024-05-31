@@ -18,10 +18,10 @@ export interface CatalogModel {
     
 }
 
-enum catelogStatus{
+ export enum catelogStatus{
     
-    Pending,
-    Approved,
-    rejected
+    Pending ='Pending',
+    Approved = 'Approved',
+    Rejected = 'Rejected'
    
 }
