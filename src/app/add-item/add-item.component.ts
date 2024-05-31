@@ -6,7 +6,7 @@ import { CatalogImage } from '../Model/catalog-image';
 import { CatalogServiceService } from '../services/catalog-service.service';
 import { ImagesarviceService } from '../services/imagesarvice.service';
 import { CatalogCURDService } from '../services/catalog-curd.service';
-import { CatalogModel,catelogStatus } from '../Model/catalog-model';
+import { CatalogModel } from '../Model/catalog-model';
 import { UserloginService } from '../services/userlogin.service';
 import { toastersrc } from '../services/toastr.service';
 import { catelogStatus } from '../Model/catalog-model';
