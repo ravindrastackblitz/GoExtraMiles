@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import {Router} from "@angular/router"
 import { UserloginService } from '../services/userlogin.service';
+import { AppConfigService } from '../services/appsettings.service';
 declare var google: any;
 @Component({
   selector: 'app-extra-mail-business',
@@ -20,11 +21,13 @@ Conditions(data:any){
 this.Terms = false;
 }
 
-constructor(private _router:Router,private userloginService: UserloginService) { }
+constructor(private _router:Router,private userloginService: UserloginService, private appsettings:AppConfigService ) { }
 
   ngAfterViewInit(): void {
+    console.log(this.appsettings.clientid);
     google.accounts.id.initialize({
-      client_id: "660738226945-skgjmvqq9n8ao0vbv3b15tcn44hl1p7n.apps.googleusercontent.com",
+      client_id:this.appsettings.clientid,
+      // "660738226945-skgjmvqq9n8ao0vbv3b15tcn44hl1p7n.apps.googleusercontent.com",
       callback: (response: any) => this.handleGoogleSignIn(response)
     });
     google.accounts.id.renderButton(

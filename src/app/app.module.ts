@@ -46,6 +46,8 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { GoogleMapComponent } from './google-map/google-map.component';
 import { AgmCoreModule } from '@agm/core';
 import { ToastrModule } from 'ngx-toastr';
+import { APP_INITIALIZER } from '@angular/core';
+import { AppConfigService } from './services/appsettings.service';
 
 
 
@@ -136,7 +138,18 @@ const approu :Routes=[
     // }),
   ],
   providers: [Geolocation,
-    { provide: 'AIzaSyBFe0WTUKOaMMSFTV1WqaeAnw65lB_cKEw', useValue: 'AIzaSyBFe0WTUKOaMMSFTV1WqaeAnw65lB_cKEw' }
+    { provide: 'AIzaSyBFe0WTUKOaMMSFTV1WqaeAnw65lB_cKEw', useValue: 'AIzaSyBFe0WTUKOaMMSFTV1WqaeAnw65lB_cKEw' },
+    {
+      provide: APP_INITIALIZER,
+      multi: true,
+      deps: [AppConfigService],
+      useFactory: (appConfigService: AppConfigService) => {
+        return () => {
+          //Make sure to return a promise!
+          return appConfigService.loadAppConfig();
+        };
+      }
+    }
   ],
   bootstrap: [AppComponent]
 })
