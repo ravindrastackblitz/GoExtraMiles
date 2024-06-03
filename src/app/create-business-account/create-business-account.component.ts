@@ -154,7 +154,7 @@ if(this.Email != '' && this.Email != undefined){
              this.datatime  = this.formdata.storetiming;
              this.timestore.getStoretimings(this.phone).subscribe((data)=>{
               console.log("timings from database",data);
-              localStorage.setItem("timetable",JSON.stringify(data));
+              //localStorage.setItem("timetable",JSON.stringify(data));
              });
            }
            else{
@@ -261,6 +261,7 @@ this.Terms= true;
   }
 
   onFileSelected(event: any): void {
+    this.brand =false;
     this.selectedFiles = event.target.files;
     const file: File = event.target.files[0];
     if (file) {

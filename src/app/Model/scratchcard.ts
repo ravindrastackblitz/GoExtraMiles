@@ -5,7 +5,7 @@ export interface Scratchcard {
  status:ScratchcardStatus
   productKey:string;
   scratchcardCode:string;
-
+  registrationnumber:string;
 }
  export enum ScratchcardStatus{   
   Pending = 0,

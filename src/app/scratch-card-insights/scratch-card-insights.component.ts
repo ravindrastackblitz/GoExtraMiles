@@ -54,6 +54,7 @@ export class ScratchCardInsightsComponent {
   images: (string | ArrayBuffer | null)[] = [];
   Terms!:boolean
   snumber:any;
+  
   subscription!:Subscription;
   key!:string;
   phoneNumber: any =  localStorage.getItem('phoneNumber');

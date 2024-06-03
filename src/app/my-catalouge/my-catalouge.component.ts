@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { CatalogModel } from '../Model/catalog-model';
 import { EMPTY, Subscription } from 'rxjs';
 import { UserloginService } from '../services/userlogin.service';
+import { Scratchcard } from '../Model/scratchcard';
+import { DiscountcodeService } from '../services/discountcode.service';
 
 @Component({
   selector: 'app-my-catalouge',
@@ -14,7 +16,9 @@ import { UserloginService } from '../services/userlogin.service';
 export class MyCatalougeComponent implements OnInit {
   phoneNumber: any =  localStorage.getItem('phoneNumber'); // Replace with actual phone number
   images: CatalogModel[] | undefined;
-  Images:any=[]
+  Images:any=[];
+  scratchcardImages:any =[];
+
 
 
 //   toDate: Date = new Date();
@@ -36,7 +40,7 @@ details2 = JSON.parse(this.data);
   Ischecked!:boolean;
 
   constructor(
-    private imageService: ImagesarviceService,private catalogService:CatalogCURDService,
+    private imageService: ImagesarviceService,private catalogService:CatalogCURDService,private dataservice:DiscountcodeService,
     private router: Router, private userloginService:UserloginService){
       this.subscription = this.catalogService.getchecked$.subscribe(val => this.Ischecked = val);
   }
@@ -76,6 +80,8 @@ spinner!:boolean;
     this.isUnblurred = !this.isUnblurred;
   }
   Email = localStorage.getItem('Email')
+
+  keys:any[] = [];
   ngOnInit(): void {
 
     if(this.Email != '' && this.Email != undefined){
@@ -89,6 +95,7 @@ spinner!:boolean;
     if(this.imagedata == "" || this.imagedata == null){
       this.imagedata = this.details2?.url;
      }
+     
     this.catalogService.getBusinessByPhoneNumber(this.phoneNumber).subscribe(images1 => {
       setTimeout(()=>{
         console.log("catelog data",images1)
@@ -97,7 +104,7 @@ spinner!:boolean;
         
         var dta = JSON.parse(JSON.stringify(images1));
         for(var i=0;i<dta.length;i++){
-          const key = dta[i].key;
+         // this.keys = dta[i].key;
           const img = dta[i].urls[0];
           this.Images.push({images:dta[i].urls[0],key:dta[i].key,isVerifed:dta[i].isVerified,status:dta[i].status,isHidden:dta[i].isHidden});
         }
@@ -105,6 +112,23 @@ spinner!:boolean;
         if( this.Images != "" ){
           this.showImage = false;
           this.showcatelog = true;
+         for(var i = 0; i<this.Images.length; i++){
+          this.keys.push(this.Images[i].key)
+          this.dataservice.getScratchcardByphone(this.phoneNumber).
+          subscribe( data => {console.log("tudttf",data.map((d:any)=>d["productKey"]))
+          var prodkeys=data.map((d:any)=>d["productKey"]);
+          const distinctprodkeys = prodkeys.filter((n:any, i:any) => prodkeys.indexOf(n) === i);
+          console.log(distinctprodkeys);
+        this.scratchcardImages =  this.Images.filter((x:any)=>distinctprodkeys.includes(x.key));
+       
+        console.log("yuuuu",this.Images);
+          console.log("yuuuu",this.scratchcardImages);
+          });
+        
+          
+         }
+    
+
         }
         else{
           this.showImage = true;
@@ -120,6 +144,7 @@ spinner!:boolean;
      
 
     });
+ 
   }
 
   GotoAddItem(){

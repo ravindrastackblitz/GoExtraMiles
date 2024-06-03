@@ -17,9 +17,10 @@ import { catelogStatus } from '../Model/catalog-model';
   styleUrls: ['./add-item.component.css']
 })
 export class AddItemComponent implements OnInit {
+  AddImage!:boolean;
   imagedata: any | string | ArrayBuffer | null = null;
   catalogDetails!:CatalogModel;
-  selectedFiles: FileList[] = [];
+  selectedFiles:undefined| FileList[] = [] ;
   selectedFile:any[]=[];
   selectedImages: any[] = [];
   Additemdetails!: FormGroup| any;
@@ -143,6 +144,7 @@ AddvaluesToform(){
     }
   }
   onFileSelected(event: any,index: number) {
+    this.AddImage = false
     this.images=[];
     this.selectedImages = [];
     const files = event.target.files;
@@ -196,12 +198,13 @@ catalogModel:any;
 
 URLS:any =[];
 Names:any =[];
+brand!:boolean
 Submit() {
   // setTimeout(()=>{
   //   this.spinner= true;
   // },2000)
   if (this.Additemdetails.valid) {
-
+ 
     // if(this.selectedFile.length == 0){
     //   this.selectedFile = this.formdata.urls || []
     // }
@@ -239,8 +242,13 @@ Submit() {
       }
     );
   }else{
-
-    this.saveFormData();
+     if(this.images.length != 0){
+      this.AddImage = false
+      this.saveFormData();
+     }
+     else{
+       this.AddImage = true;
+     }
   }
   }
 }

@@ -14,7 +14,7 @@
     <label for="avatarInput1">
  
 <img *ngIf="selectedImages[0]" [src]="selectedImages[0]" class="avatar-preview1" alt="Avatar Preview">
-<div *ngIf="!selectedImages[0]" class="avatar-placeholder">
+<div *ngIf="!selectedImages[0]" class="avatar-placeholder" [style.border]= "AddImage ? '2px dashed red' : '2px dashed #ccc'">
         <i class="fas fa-user1"></i> <!-- Placeholder icon -->
         <span>Add images</span>
       </div>
@@ -24,7 +24,7 @@
   <div class="avatar-container2" style="margin-left: 3%;">
     <label for="avatarInput2">
       <img *ngIf="selectedImages[1]" [src]="selectedImages[1]" class="avatar-preview2" alt="Avatar Preview">
-<div *ngIf="!selectedImages[1]" class="avatar-placeholder">
+<div *ngIf="!selectedImages[1]" class="avatar-placeholder" [style.border]= "AddImage ? '2px dashed red' : '2px dashed #ccc'">
         <i class="fas fa-user2"></i> <!-- Placeholder icon -->
         <span>Add images</span>
       </div>
@@ -34,15 +34,17 @@
   <div class="avatar-container3" style="margin-left: 3%;">
     <label for="avatarInput3">
       <img *ngIf="selectedImages[2]" [src]="selectedImages[2]" class="avatar-preview3" alt="Avatar Preview">
-<div *ngIf="!selectedImages[2]" class="avatar-placeholder">
+<div *ngIf="!selectedImages[2]" class="avatar-placeholder" [style.border]= "AddImage ? '2px dashed red' : '2px dashed #ccc'">
         <i class="fas fa-user3"></i> <!-- Placeholder icon -->
         <span>Add Images</span>
       </div>
     </label>
     <input type="file" id="avatarInput3" accept="image3/*" (change)="onFileSelected($event,2)">
-  </div>
+  
+</div>
 </div>
 <br>
+<p  [style.color]="AddImage ? 'red' : 'white'" style="margin-left: 40%;">Please Add Atleast One Product -Image</p>
 <br>
 <div style="margin-left: 35%;">
   <h2>Product Info</h2>

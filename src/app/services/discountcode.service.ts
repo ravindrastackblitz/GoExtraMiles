@@ -41,4 +41,22 @@ export class DiscountcodeService {
     );
   }
 
+    
+  getScratchcardByphone(phone:string): Observable<any> {
+    return this.db.list('/ScratchCard').snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c => ({ key: c.payload.key, ...c.payload.val() as any }))
+      ),
+      map(scratchcards =>
+        scratchcards.filter(cards => cards.registrationnumber == phone)
+      ),
+      catchError(error => {
+        console.error('Error retrieving business records:', error);
+        return ([]); // Return an empty array if an error occurs
+      })
+      
+    );
+  }
+
+
 }

@@ -66,6 +66,7 @@ const data1 :Scratchcard = {
   isApproved: false,
   scratchcardCode :this.textBoxData,
   productKey:this.product,
+  registrationnumber:this.phoneNumber,
   status: ScratchcardStatus.Pending
 }
   this.dataService.create(data1)
