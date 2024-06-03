@@ -295,8 +295,12 @@ brand!:boolean
       else{
         this.brand =false;
         const file: File  = this.selectedFiles![0];
+        this.brand =false;
         const formData: CreateBusinessAccount = {
           categoryname: this.category,
+
+
+          
           url:this.imagedata,
   
           file: file,
