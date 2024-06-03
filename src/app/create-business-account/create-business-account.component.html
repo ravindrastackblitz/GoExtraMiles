@@ -5,14 +5,14 @@
   <label for="avatarInput">
     <img *ngIf="imagedata" [src]="imagedata" class="avatar-preview" alt="Avatar Preview">
     <!-- <img *ngIf="imagedata" [src]="imagedata" class="avatar-preview" alt="Avatar Preview"> -->
-    <div *ngIf="!imagedata" class="avatar-placeholder">
+    <div *ngIf="!imagedata" class="avatar-placeholder" [style.border]="brand ? '2px dashed red' : '2px dashed #ccc'">
       <i class="fas fa-user"></i> <!-- Placeholder icon -->
       <span><b>Brand Logo</b></span>
     </div>
   </label>
-  <input type="file" id="avatarInput" accept="image/*"  formControlName="Image" (change)="onFileSelected($event)">
+  <input type="file" id="avatarInput" accept="image/*"  (change)="onFileSelected($event)">
 </div>
-
+<p  [style.color]="brand ? 'red' : 'white'" style="margin-left: 45%;">Please Select The Brand-log</p>
 <!-- <img [src]="imagedata" style="width: 150px;height: 150px;  border: 2px dashed #ccc; border-radius: 50%; cursor: pointer;margin-left: 35%;"> -->
 <div class="col-12">
   <div class="row">

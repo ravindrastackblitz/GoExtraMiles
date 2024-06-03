@@ -7,6 +7,7 @@ import { FileUpload } from '../Model/file-upload';
 import { CreateBusinessAccount } from '../Model/create-business-account';
 import { UserloginService } from '../services/userlogin.service';
 import { toastersrc } from '../services/toastr.service';
+import { StoretimingService } from '../services/storetiming.service';
 
 @Component({
   selector: 'app-business-registration-details',
@@ -28,16 +29,27 @@ timetable1!:any
 key:any =localStorage.getItem('key');
 times =JSON.parse(JSON.stringify(localStorage.getItem('storetime1')));
 times1 =JSON.parse(this.times);
+
+store =JSON.parse(JSON.stringify(localStorage.getItem('timetable')));
+storetable:any;
+clicked!:boolean
+
   imagedata :string | null = null;
   data1!:boolean
-  IsEdit!:boolean
+  IsEdit!:boolean;
+  Timings:any;
 
 constructor(private imageService: ImagesarviceService, private router: Router,private reg:BusinessRegistrationCRUDService,
   private businessService:BusinessRegistrationCRUDService,private  toastar:toastersrc,
-  private userloginService:UserloginService){
+  private userloginService:UserloginService,private timestore : StoretimingService){
+   // store =JSON.parse(JSON.stringify(localStorage.getItem('timetable')));
+   if(this.store !== undefined){
+this.storetable =JSON.parse(this.store);
+   }
+
 }
 Email = localStorage.getItem('Email')
-phone = localStorage.getItem('phoneNumber')
+phone:any = localStorage.getItem('phoneNumber')
 ngOnInit(){
  
   if(this.Email != '' && this.Email != undefined){
@@ -53,6 +65,9 @@ ngOnInit(){
   this.data1 = false;
   this.timetable = true;
   this.timetable1 = localStorage.getItem('storetime1');
+  // for(var i=0; i<this.storetable.length; i++){
+  //   this.Timings.push()
+  // }
 }
 else{
   this.data1 = true;
@@ -60,6 +75,20 @@ else{
 this.latitude = this.details.businesslocation?.latitude;
 this.longitude = this.details.businesslocation?.longitude;
 }
+
+// getHeaders() {
+//   let headers: string[] = [];
+//   if(this.storetable) {
+//     this.storetable.forEach((value:any) => {
+//       Object.keys(value).forEach((key) => {
+//         if(!headers.find((header) => header == key)){
+//           headers.push(key)
+//         }
+//       })
+//     })
+//   }
+//   return headers;
+// }
 
 
 setbusinesslocation(){
@@ -85,7 +114,7 @@ save() {
   if (this.details != null){
 
     if(this.details.storetiming != 'Available 24/7'){
-         this.details.storetiming = this.times1
+         this.details.storetiming = 'Pick Days'
     }
     const file: File | null | undefined = this.selectedFiles?.item(0);
     if (file) {
@@ -132,6 +161,7 @@ save() {
 SaveFormdata(){
   if (this.currentFileUpload.url != null || undefined) {
     if(this.key !="" && this.key != null){
+      this.timestore.deleteStoretimings(this.phone);
       this.businessService.updateBusinessBykey(this.key,this.currentFileUpload)
       .then(()=>{
         console.log('Successfully updated');
@@ -141,6 +171,11 @@ SaveFormdata(){
       })
     }
     else{
+      if(this.currentFileUpload.storetiming != 'Available 24/7'){
+        this.timestore.create(this.storetable).then(() =>{
+          console.log('data store in time table');
+        })
+       }
       this.businessService.create(this.currentFileUpload)
         .then(() => {
           console.log('Data added successfully');

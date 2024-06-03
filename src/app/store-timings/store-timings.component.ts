@@ -10,6 +10,21 @@ import { StoretimingService } from '../services/storetiming.service';
   styleUrls: ['./store-timings.component.css']
 })
 export class StoreTimingsComponent {
+
+//   ButtonClicked: boolean[] = [];
+
+// // Initialize buttonClicked array with false values for each day
+// initializeButtonClickedArray() {
+//   const daysCount = 7; // Assuming 7 days of the week
+//   this.ButtonClicked = Array(daysCount).fill(false);
+// }
+
+// // Function to toggle buttonClicked value for a specific index
+// onclick(index: number) {
+//   this.ButtonClicked[index] = !this.ButtonClicked[index];
+// }
+
+
   @Input() formdata:any
 
   @Output() timedata:EventEmitter<string> = new EventEmitter();
@@ -18,8 +33,11 @@ export class StoreTimingsComponent {
   storingTimings!:Storetimings
   storetime:any = {Monday:null,Tueseday:null,Wednesday:null,Thusday:null,Friday:null,Saturday:null,Sunday:null}
   selectedOption: string = '';
-  
+  phone:any = localStorage.getItem('phoneNumber')
   time!:boolean;
+
+  store :any; 
+storetable :any;
   
 time1!:boolean;
   select(){
@@ -28,10 +46,7 @@ time1!:boolean;
   select1(){
     this.time=false;
   }
- 
- 
   //formdata =JSON.parse(JSON.stringify(localStorage.getItem('form-data')) || '{}');
-
 
   public storetimes! : FormGroup;
   Allclick:boolean=false;
@@ -43,7 +58,12 @@ time1!:boolean;
   buttonClicked5: boolean = false;
   buttonClicked6: boolean = false;
 
-  constructor(private formbuilder:FormBuilder, private router:Router, private timings:StoretimingService) {}
+  constructor(private formbuilder:FormBuilder, private router:Router, private timings:StoretimingService) {
+    this.store =JSON.parse(JSON.stringify(localStorage.getItem('timetable')));
+    if(this.store !== undefined){
+      this.storetable =JSON.parse(this.store);
+    }
+  }
   ngOnInit(){
 this.Timedetails=this.formbuilder.group(
   {
@@ -51,20 +71,20 @@ this.Timedetails=this.formbuilder.group(
   }
 )
     this.storetimes = this.formbuilder.group({
-      Monopen: [''], 
-      Monclose: [''],
-      Tueopen: [''], 
-      Tueclose: [''],
-      Wedopen: [''], 
-      Wedclose: [''],
-      Thuopen: [''], 
-      Thuclose: [''],
-      Friopen: [''], 
-      Friclose: [''],
-      Satopen: [''], 
-      Satclose: [''],
-      Sunopen:[''],
-      Sunclose:[''],
+      Mondayopen: [''], 
+      Mondayclose: [''],
+      Tuesdayopen: [''], 
+      Tuesdayclose: [''],
+      Wednesdayopen: [''], 
+      Wednesdayclose: [''],
+      Thursdayopen: [''], 
+      Thursdayclose: [''],
+      Fridayopen: [''], 
+      Fridayclose: [''],
+      Saturdayopen: [''], 
+      Saturdayclose: [''],
+      Sundayopen:[''],
+      Sundayclose:[''],
       Alldaysopen:[''],
       Alldaysclose:['']
 
@@ -88,10 +108,11 @@ close1(){
         
           }
           else{
-            if(this.storetime !=null){
-              console.log("wefefweewwe",this.storetime)
+            if(this.storeTimings !=null){
+              console.log("wefefweewwe",this.storeTimings)
               this.timedata1 = res.radiotime;
               this.timedata.emit(this.timedata1);
+              localStorage.setItem("timetable",JSON.stringify(this.storeTimings));
               localStorage.setItem("storetime1",JSON.stringify(this.storetime));
           
             }
@@ -125,101 +146,49 @@ close1(){
   onClick6() {
     this.buttonClicked6 = true;
   }
+  storeTimings: Storetimings[] = [];
   close(): void {
     if(this.Allclick == true){
       const daystime=this.storetimes.value.Alldaysopen +' - ' +this.storetimes.value.Alldaysclose;
-      // const data: Storetimings ={
-      //   Day:Monday
-      // }
-      // console.log(data)
-      this.storetime.Monday=" "+daystime;
-      this.storetime.Tueseday=" "+daystime;
-      this.storetime.Wednesday=" "+daystime;
-      this.storetime.Thusday=" "+daystime;
-      this.storetime.Friday=" "+daystime;
-      this.storetime.Saturday=" "+daystime;
-      this.storetime.Sunday=" "+daystime;
+      const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+
+    //  const storeTimings: Storetimings[] = [];
+      days.forEach((day:any) => {
+          const storeTiming: Storetimings = {
+              Day: day,
+              StartTime: this.storetimes.value.Alldaysopen,
+              Closetime: this.storetimes.value.Alldaysclose,
+              RegistrationNumber: this.phone
+          };
+         this.storeTimings.push(storeTiming);
+      });
+     // console.log("3222222222",this.storeTimings);
       this.Allclick=false;
       this.data();
     }
-    else{
-      const mon1 = this.storetimes.value.Monopen;
-      const mon2 = this.storetimes.value.Monclose;
-      if(mon1 == "" && mon2 ==""){
-        this.storetime.Monday = " " + "00:00"+ '  -  ' +"00:00"
-      }else{
-        this.storetime.Monday = " " + mon1+ '  -  ' +mon2 
-      }
-      
-     // console.log(this.storetime.Monday);
-      this.buttonClicked = false;
-    
-      const tue1 = this.storetimes.value.Tueopen;
-      const tue2 = this.storetimes.value.Tueclose;
-      //console.log("Tue : "+tue1+ '  '+tue2+);
-      if(tue1 == "" && tue2 ==""){
-        this.storetime.Tueseday  = " " + "00:00"+ '  -  ' +"00:00"
-      }else{
-        this.storetime.Tueseday  = " "+tue1+ '  -  '+tue2
-      }
-     
-      this.buttonClicked1 = false;
-   
-      const wed1 = this.storetimes.value.Wedopen;
-      const wed2 = this.storetimes.value.Wedclose;
-      //console.log("Wed : "+wed1+ '  '+wed2+);
-      if(wed1 == "" && wed2 ==""){
-        this.storetime.Wednesday  = " " + "00:00"+ '  -  ' +"00:00"
-      }else{
-        this.storetime.Wednesday = " "+wed1+ '  -  '+wed2
-      }
- 
-      this.buttonClicked2 = false;
-    
-      const thu1 = this.storetimes.value.Thuopen;
-      const thu2 = this.storetimes.value.Thuclose;
-      //console.log("Thu : "+thu1+ '  '+thu2+);
-      if(thu1 == "" && thu2 ==""){
-        this.storetime.Thusday = " " + "00:00"+ '  -  ' +"00:00"
-      }else{
-        this.storetime.Thusday = " "+thu1+ '  -  '+thu2
-      }
-
-      this.buttonClicked3 = false;
-    
-      const fri1 = this.storetimes.value.Friopen;
-      const fri2 = this.storetimes.value.Friclose;
-     // console.log("Fri : "+fri1+ '  '+fri2+);
-     if(fri1 == "" && fri2 ==""){
-      this.storetime.Friday = " " + "00:00"+ '  -  ' +"00:00"
-    }else{
-      this.storetime.Friday  = " "+fri1+ '  -  '+fri2
-    }
-   
-      this.buttonClicked4 = false;
-    
-      const sat1 = this.storetimes.value.Satopen;
-      const sat2 = this.storetimes.value.Satclose;
-      //console.log("Sat : "+sat1+ '  '+sat2+);
-      if(sat1 == "" && sat2 ==""){
-        this.storetime.Saturday = " " + "00:00"+ '  -  ' +"00:00"
-      }else{
-        this.storetime.Saturday  = " "+sat1+ '  -  '+sat2
-      }
-      
-      this.buttonClicked5 = false;
-   
-      const sun1 = this.storetimes.value.Sunopen;
-      const sun2 = this.storetimes.value.Sunclose;
-     // console.log("Sun : "+sun1+ '  '+sun2+);
-     if(sun1 == "" && sun2 ==""){
-      this.storetime.Sunday = " Closed "; 
-    }else{
-      this.storetime.Sunday  = " "+sun1+ '  -  '+sun2
-    }
-     
-      this.buttonClicked6 = false;
-    this.data()
+    else {
+      const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+  
+      days.forEach((day: string) => {
+          var openTime = this.storetimes.value[`${day}open`] || "00:00";
+          var closeTime = this.storetimes.value[`${day}close`] || "00:00";
+          
+          if(day == 'Sunday'){
+            if(openTime == "00:00" && closeTime == "00:00"){
+              openTime = 'Closed';
+              closeTime = 'Closed';
+            }
+          }
+          const storeTiming: Storetimings = {
+              Day: day,
+              StartTime: openTime,
+              Closetime: closeTime,
+              RegistrationNumber: this.phone
+          };
+          this.storeTimings.push(storeTiming);
+      });
+     // console.log("222222222222222  ",this.storeTimings);
+      this.data()
     }
   }
   ngOnChanges():void
@@ -239,23 +208,28 @@ close1(){
          this.buttonClicked5 = true;
          this.buttonClicked6 = true;
 
+         if(this.storetable != null ){
           this.storetimes.patchValue({
-            Monopen: [''], 
-            Monclose: [''],
-            Tueopen: [''], 
-            Tueclose: [''],
-            Wedopen: [''], 
-            Wedclose: [''],
-            Thuopen: [''], 
-            Thuclose: [''],
-            Friopen: [''], 
-            Friclose: [''],
-            Satopen: [''], 
-            Satclose: [''],
-            Sunopen:[''],
-            Sunclose:[''],
-
+            Mondayopen: this.storetable[0].StartTime, 
+            Mondayclose: this.storetable[0].Closetime,
+            Tuesdayopen:this.storetable[1].StartTime , 
+            Tuesdayclose: this.storetable[1].Closetime,
+            Wednesdayopen: this.storetable[2].StartTime, 
+            Wednesdayclose: this.storetable[2].Closetime,
+            Thursdayopen: this.storetable[3].StartTime, 
+            Thursdayclose: this.storetable[3].Closetime,
+            Fridayopen: this.storetable[4].StartTime, 
+            Fridayclose: this.storetable[4].Closetime,
+            Saturdayopen: this.storetable[5].StartTime, 
+            Saturdayclose:this.storetable[5].Closetime,
+            Sundayopen:this.storetable[6].StartTime,
+            Sundayclose:this.storetable[6].Closetime,
+            // Alldaysopen:[''],
+            // Alldaysclose:['']
+      
           })
+         }
+         
           
       }
      else if(this.formdata == "Available 24/7"){

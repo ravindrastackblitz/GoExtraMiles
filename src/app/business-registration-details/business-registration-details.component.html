@@ -44,13 +44,16 @@
  <input type="text" [value]="details?.storetiming"  readonly  class="form-control" >   
  </div> 
   <div class="data" *ngIf="timetable">
-   <b class="day">Mon</b><input type="text" class="time" readonly [value]="times1?.Monday"><br>
-   <b class="day">Tue</b><input type="text" class="time" readonly [value]="times1?.Tueseday"><br>
-   <b class="day">Wed</b><input type="text"  class="time" readonly [value]="times1?.Wednesday"><br>
-   <b class="day">Thu</b><input type="text" class="time" readonly [value]="times1?.Thusday"><br>
-   <b class="day">Fri</b><input type="text" class="time" readonly [value]="times1?.Friday"><br>
-   <b class="day">Sat</b><input type="text" class="time" readonly [value]="times1?.Saturday"><br>
-   <b class="day">Sun</b><input type="text" class="time" readonly [value]="times1?.Sunday"><br>
+    <table border>
+      <tbody>
+        <tr><td><b>Day</b></td><td><b>StartTime</b></td><td><b>Closetime</b></td></tr>
+           <tr *ngFor="let item of storetable">   
+           <td>{{ item["Day"] }}</td>
+           <td>{{ item["StartTime"] }}</td>
+           <td>{{ item["Closetime"] }}</td> 
+           </tr>
+      </tbody> 
+    </table>
   </div>
 
    <!-- <div class="col-sm-6">
@@ -105,5 +108,21 @@
  </div>
 
 
- <button  class="btn btn-primary" (click)="save()">Save</button>
+ <button  class="btn btn-primary"  [disabled]="clicked" (click)="save(); clicked = true;" >Save</button>
 
+ <!-- <table border>
+  <thead>
+        <tr>           
+         <th *ngFor="let header of getHeaders()">{{header}}</th>
+       </tr> 
+  </thead>
+  <tbody>
+    <tr><td><b>Day</b></td><td><b>StartTime</b></td><td><b>Closetime</b></td></tr>
+       <tr *ngFor="let item of storetable">   
+ <td *ngFor= "let key of getHeaders()"> {{item[key]}}</td> 
+       <td>{{ item["Day"] | uppercase }}</td>
+       <td>{{ item["StartTime"] }}</td>
+       <td>{{ item["Closetime"] }}</td> 
+       </tr>
+  </tbody> 
+</table> -->

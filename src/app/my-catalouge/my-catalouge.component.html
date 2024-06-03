@@ -78,7 +78,7 @@
         <a>
           <div class="row" style="margin-left: 15%;margin-top: 5%;">
             <div class="col-4" *ngFor="let image of Images" >
-              <div *ngIf="image.isVerifed == true && image.status == 'Approved'">
+              <div *ngIf="image.isVerifed == true">
                 <img [src]="image.images.url"  [attr.data-imagename]="image.key" alt="Catalog Image" (click)="ImageData($event)" class="img">
                 <span class="icon" ><img src="assets/Images/greentick.png"  id="info"></span>
               </div>

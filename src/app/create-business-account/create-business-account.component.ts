@@ -16,6 +16,7 @@ import { map,switchMap,take } from 'rxjs/operators';
 import { listChanges } from '@angular/fire/compat/database';
 import { UserloginService } from '../services/userlogin.service';
 import { Subscription } from 'rxjs';
+import { StoretimingService } from '../services/storetiming.service';
 @Component({
   selector: 'app-create-business-account',
   templateUrl: './create-business-account.component.html',
@@ -66,7 +67,8 @@ Email = localStorage.getItem('Email')
     private httpClient: HttpClient,
     private uploadService: ImageUploadService,
     private businessService: BusinessRegistrationCRUDService,
-    private userloginService:UserloginService
+    private userloginService:UserloginService,
+    private timestore : StoretimingService
   ) {
     this.subscription = this.userloginService.getusername$.subscribe(name => this.username = name);
   }
@@ -119,7 +121,7 @@ if(this.Email != '' && this.Email != undefined){
   
     this.Createbusiness = this.formBuilder.group({
       categoryname:new FormControl('',[Validators.required]),
-      Image: new FormControl('', []),
+     // Image: new FormControl('', []),
       businessName: new FormControl('', [Validators.required]),
       storetiming:new FormControl('',[Validators.required]),
       description: new FormControl('', [Validators.required]),
@@ -150,6 +152,10 @@ if(this.Email != '' && this.Email != undefined){
              this.formdata.storetiming = 'Pick Days'
              this.Createbusiness?.controls['storetiming'].setValue(this.formdata?.storetiming);
              this.datatime  = this.formdata.storetiming;
+             this.timestore.getStoretimings(this.phone).subscribe((data)=>{
+              console.log("timings from database",data);
+              localStorage.setItem("timetable",JSON.stringify(data));
+             });
            }
            else{
             this.datatime  = this.formdata.storetiming;
@@ -162,18 +168,18 @@ if(this.Email != '' && this.Email != undefined){
               this.formdata = JSON.parse(some)
              // console.log(this.formdata);
              this.Createbusiness?.controls['categoryname'].setValue(this.formdata?.categoryname);
-             this.categoryname = this.formdata.categoryname;
+             this.categoryname = this.formdata?.categoryname;
              this.imagedata= this.imageService.getImageData();
              this.datatime  = this.formdata?.storetiming;
-             if(this.formdata.storetiming != 'Available 24/7'){
-              this.formdata.storetiming = 'Pick Days'
+             if(this.formdata?.storetiming != 'Available 24/7'){
+              //this.formdata.storetiming = 'Pick Days'
               this.Createbusiness?.controls['storetiming'].setValue(this.formdata?.storetiming);
-              this.datatime  = this.formdata.storetiming;
+              this.datatime  = this.formdata?.storetiming;
             }
             else{
              this.datatime  = this.formdata.storetiming;
             }
-             this.businesslocation = this.formdata.businesslocation;
+             this.businesslocation = this.formdata?.businesslocation;
              localStorage.removeItem('key')
               this.buttons = false;
               this.AddvaluesToform()
@@ -267,38 +273,46 @@ this.Terms= true;
       reader.readAsDataURL(file);
     }
   }
-
+brand!:boolean
   onFormSubmit(): void {
     if (this.Createbusiness.valid ) {
+     
+      if(this.selectedFiles == undefined){
+        this.brand =true;
+       console.log("hello98998");
+      }
+      else{
+        const file: File  = this.selectedFiles![0];
+        const formData: CreateBusinessAccount = {
+          categoryname: this.category,
+          url:this.imagedata,
+  
+          file: file,
+          businessName: this.Createbusiness.value.businessName,
+          description: this.Createbusiness.value.description,
+          email: this.Createbusiness.value.email,
+          website: this.Createbusiness.value.website,
+          gstNumber: this.Createbusiness.value.gstNumber,
+          isOwner: this.Createbusiness.value.isOwner,
+          imagename: this.image1,
+          username:this.Createbusiness.value.username,
+          mobilenumber: this.Createbusiness.value.mobileNumber,
+          storetiming: this.storetiming,
+          isApproved: false,
+          registrationnumber:this.phone,
+          registrationEmail:this.Email,
+          businesslocation:this.locationdata
+        };
+  
+        localStorage.setItem('form-data', JSON.stringify(formData));
+        this._router.navigate(['/BusinessRegistrationDetails']);
+        
+  
+        console.log("FORMATATA",formData)
+      }
+     
 
-      const file: File  = this.selectedFiles![0];
 
-      const formData: CreateBusinessAccount = {
-        categoryname: this.category,
-        url:this.imagedata,
-
-        file: file,
-        businessName: this.Createbusiness.value.businessName,
-        description: this.Createbusiness.value.description,
-        email: this.Createbusiness.value.email,
-        website: this.Createbusiness.value.website,
-        gstNumber: this.Createbusiness.value.gstNumber,
-        isOwner: this.Createbusiness.value.isOwner,
-        imagename: this.image1,
-        username:this.Createbusiness.value.username,
-        mobilenumber: this.Createbusiness.value.mobileNumber,
-        storetiming: this.storetiming,
-        isApproved: false,
-        registrationnumber:this.phone,
-        registrationEmail:this.Email,
-        businesslocation:this.locationdata
-      };
-
-      localStorage.setItem('form-data', JSON.stringify(formData));
-      this._router.navigate(['/BusinessRegistrationDetails']);
-      
-
-      console.log("FORMATATA",formData)
 
     } else {
       console.error("Form is not valid or no file selected.");

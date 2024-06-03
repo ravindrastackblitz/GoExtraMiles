@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/compat/database';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { catchError } from 'rxjs';
+import { catchError, tap, throwError } from 'rxjs';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/internal/operators/map';
@@ -19,31 +19,42 @@ export class StoretimingService {
     this.StoreTimingService = db.list(this.dbPath);
   }
 
-  private dataSubject = new BehaviorSubject<string>('');
-  public data$: Observable<string> = this.dataSubject.asObservable();
-
-  sendData(data: string) {
-    this.dataSubject.next(data);
-  }
 
   create(data: any) {
     console.log("Store-Timings", data);
     return this.StoreTimingService.push(data);
   }
   
-  getScratchcardByKey1(key:string): Observable<any> {
+  getStoretimings(phone: string): Observable<any> {
     return this.db.list('/StoreTimings').snapshotChanges().pipe(
       map(changes =>
         changes.map(c => ({ key: c.payload.key, ...c.payload.val() as any }))
       ),
-      map(scratchcards =>
-        scratchcards.filter(cards => cards.productKey == key)
+      // map(times =>
+      //   times.reduce((acc, curr) => acc.concat(Object.values(curr)), []) 
+      // ),
+      map(times => {
+         
+         console.log("21211221");
+        times.filter((t: any) => {
+
+          const registrationNumber = t.RegistrationNumber; 
+      // console.log('Comparing:', registrationNumber, phone);
+          return registrationNumber === phone;
+        })
+      }
+      
       ),
       catchError(error => {
         console.error('Error retrieving business records:', error);
-        return ([]); // Return an empty array if an error occurs
+        return (error);
       })
     );
   }
+ deleteStoretimings(phone:string){
+  this.getStoretimings(phone).subscribe()
+  return this.StoreTimingService.remove(phone);
+ }
+
 
 }
