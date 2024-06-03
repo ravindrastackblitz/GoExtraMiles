@@ -51,29 +51,34 @@ this.storetable =JSON.parse(this.store);
 Email = localStorage.getItem('Email')
 phone:any = localStorage.getItem('phoneNumber')
 ngOnInit(){
- 
-  if(this.Email != '' && this.Email != undefined){
-    this.userloginService.setIsMainHeaderVisible(true); 
+  if(this.phone != '' && this.phone != undefined){
+    if(this.Email != '' && this.Email != undefined){
+      this.userloginService.setIsMainHeaderVisible(true); 
+    }
+   this.imagedata = this.imageService.getImageData();
+   if(this.imagedata == "" || this.imagedata == null){
+    this.imagedata = this.details?.url;
+   }
+   
+   this.selectedFiles =this.imageService.getfile()
+   if(this.details?.storetiming != "Available 24/7"){
+    this.data1 = false;
+    this.timetable = true;
+    this.timetable1 = localStorage.getItem('storetime1');
+    // for(var i=0; i<this.storetable.length; i++){
+    //   this.Timings.push()
+    // }
   }
- this.imagedata = this.imageService.getImageData();
- if(this.imagedata == "" || this.imagedata == null){
-  this.imagedata = this.details?.url;
- }
- 
- this.selectedFiles =this.imageService.getfile()
- if(this.details?.storetiming != "Available 24/7"){
-  this.data1 = false;
-  this.timetable = true;
-  this.timetable1 = localStorage.getItem('storetime1');
-  // for(var i=0; i<this.storetable.length; i++){
-  //   this.Timings.push()
-  // }
-}
-else{
-  this.data1 = true;
-}
-this.latitude = this.details.businesslocation?.latitude;
-this.longitude = this.details.businesslocation?.longitude;
+  else{
+    this.data1 = true;
+  }
+  this.latitude = this.details.businesslocation?.latitude;
+  this.longitude = this.details.businesslocation?.longitude;
+  }
+  else{
+    this.router.navigate(['']);
+  }
+
 }
 
 // getHeaders() {

@@ -46,7 +46,8 @@ keyName:any;
     ) { }
 
     ngOnInit(){
-      if(this.Email != '' && this.Email != undefined){
+  if(this.phone != '' && this.phone != undefined) {
+      if(this.Email != '' && this.Email != undefined) {
         this.userloginService.setIsMainHeaderVisible(true); 
       }
     this.Additemdetails = this.fb.group({
@@ -95,8 +96,12 @@ keyName:any;
     this.selectedImages[2] = this.imageService.getImageData3();
     this.AddvaluesToform();
   }
-
-  }
+}
+else{
+  this._router.navigate(['']);
+}
+  
+}
 
 
 

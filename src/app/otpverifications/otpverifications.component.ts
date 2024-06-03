@@ -23,6 +23,8 @@ export class OTPVerificationsComponent {
 verify:any;
 spinner!:boolean;
 
+Email = localStorage.getItem('Email');
+
 constructor(private route : Router,private userloginService: UserloginService,
   private notificationService: NotificationService,private toastar:toastersrc){}
 
@@ -44,28 +46,14 @@ constructor(private route : Router,private userloginService: UserloginService,
 
   ngOnInit()
   {
-    // this.countDown = timer(0, this.tick)
-    // .pipe(take(this.counter))
-    // .subscribe(() => {
-    //   --this.counter;
-    //   // console.log(this.counter);
-    //   if (this.counter == 0) {
-    //     this.countDown.unsubscribe();
-    //   }
-    // });
-
-    this.verify=JSON.parse(JSON.stringify(localStorage.getItem('verificationId')) || '{}');
-    console.log(this.verify)     
+    if(this.Email != '' && this.Email != undefined){
+      this.verify=JSON.parse(JSON.stringify(localStorage.getItem('verificationId')) || '{}');
+      console.log(this.verify) 
+    }
+    else{
+      this.route.navigate(['']); 
+    }   
   }
-  // transform(value: number): string {
-    
-  //   const minutes: number = Math.floor(value / 60);
-  //   return (
-  //     ('00' + minutes).slice(-2) +
-  //     ':' +
-  //     ('00' + Math.floor(value - minutes * 60)).slice(-2)
-  //   );
-  // }
 
   onOtpChange(otpcode:any){
      this.otp = otpcode;
@@ -90,18 +78,5 @@ this.toastar.success("Your Mobile Number Verifycation Completed Suessfully", "Su
     alert(error.message)
   })
 }
-
-
-
-  // ngOnInit() {
-  //   const inputElement = document.querySelector('#phone') as HTMLInputElement; // Explicitly cast to HTMLInputElement
-  //   if (inputElement) {
-  //     intlTelInput(inputElement, {
-  //       initialCountry: 'in', // Corrected typo
-  //     // separateDialCode: true, // Corrected typo
-  //       utilsScript: 'httpx://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js'
-  //     });
-  //   }
-  // }
 
 }

@@ -83,7 +83,7 @@ spinner!:boolean;
 
   keys:any[] = [];
   ngOnInit(): void {
-
+  if(this.phoneNumber != '' && this.phoneNumber != undefined){
     if(this.Email != '' && this.Email != undefined){
       this.userloginService.setIsMainHeaderVisible(true); 
     }
@@ -141,9 +141,11 @@ spinner!:boolean;
       },2000)
  
      // console.log("yqwyqwuyw 4334",this.Images);
-     
-
     });
+  }
+  else{
+   this.router.navigate([''])
+  }
  
   }
 

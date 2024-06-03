@@ -136,6 +136,7 @@ this.Terms = false;
 Email = localStorage.getItem('Email');
 
 ngOnInit(){
+  if(this.phoneNumber != '' && this.phoneNumber != undefined){
   if(this.Email != '' && this.Email != undefined){
     this.userloginService.setIsMainHeaderVisible(true); 
   }
@@ -172,10 +173,11 @@ if (this.phoneNumber && this.keyName) {
       }
     }
   }
-   
-  
-   
   );
+}
+}
+else{
+ this._router.navigate(['']);
 }
 }
 

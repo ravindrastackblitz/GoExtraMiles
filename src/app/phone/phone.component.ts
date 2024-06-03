@@ -7,6 +7,7 @@ import { Route, Router } from '@angular/router';
 import  intlTelInput from 'intl-tel-input';
  import { ConfigurationOptions, CustomCountryModel, OutputOptionsEnum } from "intl-input-phone";
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { UserloginService } from '../services/userlogin.service';
 var config = {
   apiKey: "AIzaSyAZFKmd6vxVZTEm_EtH1zlKvCiJjHUaZ2Q",
   authDomain: "goextramiles-c9d43.firebaseapp.com",
@@ -35,9 +36,11 @@ export class PhoneComponent {
   dialog: any;
  spinner!:boolean;
 
-
+ Email = localStorage.getItem('Email')
  
-   constructor(private formBuilder: FormBuilder,private route : Router) {
+   constructor(private formBuilder: FormBuilder,private route : Router,
+    private userloginService:UserloginService
+   ) {
      this.phoneForm = this.formBuilder.group({
        sampleReactiveControl: new FormControl()
      });
@@ -50,7 +53,13 @@ export class PhoneComponent {
    }
  
    ngOnInit() {
-    firebase.initializeApp( config)
+    if(this.Email != '' && this.Email != undefined){
+      firebase.initializeApp( config)
+    }
+    else{
+      this.route.navigate(['']);
+    }
+
    }
    
    GetOtp() {
