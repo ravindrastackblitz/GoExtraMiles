@@ -149,8 +149,9 @@ AddvaluesToform(){
     }
   }
   onFileSelected(event: any,index: number) {
-    this.AddImage = false
-    this.images=[];
+    this.AddImage = false;
+    this.selectedFile =['']
+    this.images= [];
     this.selectedImages = [];
     const files = event.target.files;
     if (files) {
@@ -210,10 +211,9 @@ Submit() {
   // },2000)
   if (this.Additemdetails.valid) {
  
-    // if(this.selectedFile.length == 0){
-    //   this.selectedFile = this.formdata.urls || []
-    // }
-        this.catalogModel = {
+     if(this.selectedFile.length === 3 || this.images.length == 3){
+    //  this.selectedFile = this.formdata.urls || []
+            this.catalogModel = {
           Itemname: this.Additemdetails.value.itemname,
           Description: this.Additemdetails.value.description,
           Country: this.Additemdetails.value.country,
@@ -229,32 +229,33 @@ Submit() {
           file: this.selectedFile,
 
         };
-  if(this.selectedFile.length != 0){
-    this.images = []
-    // Upload files to storage
-    this.catalogCrudService.pushFilesToStorage(this.selectedFile).subscribe(
-      catalogImagesUpload => {
+      if(this.selectedFile.length != 0){
+        this.AddImage = false
+       this.images = []
+        this.catalogCrudService.pushFilesToStorage(this.selectedFile).subscribe(
+        catalogImagesUpload => {
         this.catalogUploads = catalogImagesUpload; 
         console.log("this is the catelog data",this.catalogUploads)
          for(var i=0; i<this.catalogUploads.length; i++ ){
           this.images.push({name: this.catalogUploads[i].imageName, url: this.catalogUploads[i].url});
         }
-        // Save form data once all files are uploaded
         this.saveFormData();
       },
       (error) => {
         console.error('Error uploading files:', error);
-      }
-    );
-  }else{
-     if(this.images.length != 0){
-      this.AddImage = false
-      this.saveFormData();
+      });
      }
      else{
+      if(this.images.length !=0){
+        this.AddImage = false
+        this.saveFormData();
+      }
+     }
+    }
+    else{
        this.AddImage = true;
      }
-  }
+  
   }
 }
 
