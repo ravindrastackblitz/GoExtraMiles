@@ -8,9 +8,9 @@ export interface Scratchcard {
   registrationnumber:string;
 }
  export enum ScratchcardStatus{   
-  Pending = 0,
-    Approved = 1,
-    Deleted = 2  
+  Pending = "Pending",
+    Approved = "Appproved",
+    Deleted = "Deleted"  
 }
 
 
