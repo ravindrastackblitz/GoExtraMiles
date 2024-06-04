@@ -19,17 +19,26 @@ export class ImagesarviceService {
 
   private selectedFiles?: FileList |undefined;
 
+  private  selectedgstFile ?:FileList | undefined;
+
   private imagedata :string | null = null;
+  private imageData4: any | string | ArrayBuffer | null = null;
  private imagedata1 :string | null = null;
  private imagedata2 :string | null = null;
  private imagedata3 :string | null = null;
 
- setfile(data:any){
-  this.selectedFiles = data;
+ setfile(some:any){
+  this.selectedFiles = some;
+ }
+ setfile1(some:any){
+  this.selectedgstFile = some;
  }
  
   setImageData(data:string){
     this.imagedata= data;
+  }
+  setImageData4(data:string){
+    this.imageData4= data;
   }
   getFile()
   {
@@ -51,8 +60,15 @@ export class ImagesarviceService {
   getfile(){
 return this.selectedFiles
   }
+  getfile1(){
+    return this.selectedgstFile
+      }
  getImageData() : string | null{
   return this.imagedata
+
+ }
+ getImageData4() : string | null{
+  return this.imageData4
 
  }
  getImageData1() : string | null{
