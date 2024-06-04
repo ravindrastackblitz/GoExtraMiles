@@ -28,15 +28,16 @@ export class SelectBusinessCategoryComponent implements OnInit, ControlValueAcce
   selectedValue:any;
   filteredOptions!: Observable<string[]>;
   question = 'Would you like to add ';
-  @Input() options!: string[];
+  @Input() options!: any[];
   @Output() added = new EventEmitter();
-
+  businesscategory:any[]=[]
   // Function to call when the option changes.
   onChange = (option: string) => {};
 
   // Function to call when the input is touched (when the autocomplete is clicked).
   onTouched = () => {};
 
+constructor(private category:BusinessCategoryService){}
   get value() {
     return this.selectedValue;
   }

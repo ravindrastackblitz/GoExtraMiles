@@ -16,6 +16,8 @@ import { listChanges } from '@angular/fire/compat/database';
 import { UserloginService } from '../services/userlogin.service';
 import { Subscription } from 'rxjs';
 import { StoretimingService } from '../services/storetiming.service';
+import { BusinessCategoryService } from '../services/business-category.service';
+import { SelectCategory } from '../Model/select-category';
 @Component({
   selector: 'app-create-business-account',
   templateUrl: './create-business-account.component.html',
@@ -59,6 +61,8 @@ locationdata!:Location
 businesslocation!:Location;
 categoryname!:string;
 Clicked!:boolean;
+options:any[]=[]
+businesscategory:any[]=[]
 Email = localStorage.getItem('Email')
 fb: any;
   constructor(private FB: FormBuilder,
@@ -68,7 +72,7 @@ fb: any;
     private formBuilder: FormBuilder,
     private _router: Router,
     private httpClient: HttpClient,
-    private uploadService: ImageUploadService,
+    private selectbusines: BusinessCategoryService,
     private businessService: BusinessRegistrationCRUDService,
     private userloginService:UserloginService,
     private timestore : StoretimingService
@@ -138,6 +142,16 @@ GetChilddata(data:string){
         mobileNumber: new FormControl('', [Validators.required]),
         termsAndConditions: [false, Validators.requiredTrue],
       });
+      
+      this.selectbusines.GetAllCategorys().subscribe(res => {
+        console.log("category",res);
+        for(var i =0; i<res.length; i++){
+          this.options.push(res[i].value)
+        }
+        //this.options  = JSON.stringify(this.businesscategory)
+      //  this.options = this.businesscategory;
+      //console.log("yyuyu",dat);
+        })
 
       this.businessService.getBusinessRecordByKey1(this.phone).subscribe(
         business => {
@@ -381,9 +395,6 @@ brand!:boolean
         }
 
       }
-     
-
-
 
     } else {
       console.error("Form is not valid or no file selected.");
@@ -393,11 +404,11 @@ brand!:boolean
 
   //data.....................................................
   name = 'Angular';
-  options = [
-    'Option 1',
-    'Option 2',
-    'Option 3'
-  ];
+  // options = [
+  //   'Option 1',
+  //   'Option 2',
+  //   'Option 3'
+  // ];
   myForm!: FormGroup;
 
   onSubmit() {
@@ -405,6 +416,15 @@ brand!:boolean
   }
 
   onItemAdded(itemToBeAdded:any) {
+    if (itemToBeAdded.trim() !== '') {
+      const data : SelectCategory ={
+        label : itemToBeAdded,
+        value : itemToBeAdded
+      }
+      this.selectbusines.Create(data);
+    } else {
+      alert('Please enter a valid category name.');
+    }
     console.log('Item to be added: ', itemToBeAdded);
   }
 }
