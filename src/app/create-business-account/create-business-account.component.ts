@@ -315,13 +315,14 @@ AddvaluesToform(){
 
   onFormSubmit(): void {
     if (this.Createbusiness.valid) {
-      if (!this.selectedFiles && !this.imagedata) {
+       if(this.selectedFiles == undefined && this.imagedata == null){
         this.brand = true;
         this.ngAfterViewInit()
         console.log("No files selected");
       } else {
-        this.brand = false;
-        const file: File = this.selectedFiles![0];
+        this.brand =false;
+        if(this.selectedFiles != undefined){
+          const file: File  = this.selectedFiles![0];
         const file1 :File = this.selectedgstfile![0];
         this.Clicked = true;
         const formData: CreateBusinessAccount = {
@@ -345,21 +346,42 @@ AddvaluesToform(){
           registrationnumber: this.phone,
           registrationEmail: this.Email,
           businesslocation: this.locationdata,
-          //imagedata1: this.imagedata1 // Add imagedata1 to formData
         };
 
-        // Store the form data to local storage if needed
         localStorage.setItem('form-data', JSON.stringify(formData));
-
-        // Call your business service method to upload imagedata1
-      
-        console.log("This is Image Data", this.imagedata)
-        console.log("this is the image Data2",this.imagedata1)
-
-        // Navigate to the next page
         this._router.navigate(['/BusinessRegistrationDetails']);
+        }
+        else{
+          const formData: CreateBusinessAccount = {
+            categoryname: this.category,
+            url:this.imagedata,
+            file:this.imagedata,
+            url2: this.imagedata1,
+            gstFile: this.imagedata1,
+            businessName: this.Createbusiness.value.businessName,
+            description: this.Createbusiness.value.description,
+            email: this.Createbusiness.value.email,
+            website: this.Createbusiness.value.website,
+            gstNumber: this.Createbusiness.value.gstNumber,
+            isOwner: this.Createbusiness.value.isOwner,
+            imagename: this.image1,
+            gstImageName:this.image2,
+            username:this.Createbusiness.value.username,
+            mobilenumber: this.Createbusiness.value.mobileNumber,
+            storetiming: this.storetiming,
+            isApproved: false,
+            registrationnumber:this.phone,
+            registrationEmail:this.Email,
+            businesslocation:this.locationdata
+          };
+    
+          localStorage.setItem('form-data', JSON.stringify(formData));
+          this._router.navigate(['/BusinessRegistrationDetails']);
+          console.log("FORMATATA",formData)
+        }
       }
-    } else {
+    }
+    else {
       console.error("Form is not valid or no file selected.");
     }
   }
