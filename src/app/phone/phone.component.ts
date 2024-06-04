@@ -35,6 +35,8 @@ export class PhoneComponent {
   reCaptchaverifer: any;
   dialog: any;
  spinner!:boolean;
+ clicked!:boolean;
+
 
  Email = localStorage.getItem('Email')
  

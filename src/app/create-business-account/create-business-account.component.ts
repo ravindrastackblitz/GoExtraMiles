@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -23,7 +23,7 @@ import { StoretimingService } from '../services/storetiming.service';
   styleUrls: ['./create-business-account.component.css']
 })
 export class CreateBusinessAccountComponent implements OnInit {
-
+  @ViewChild('productsElement') productsElement!: ElementRef;
   selectedFiles?: FileList;
   image1:any;
   currentFileUpload?: FileUpload;
@@ -56,6 +56,7 @@ formdata:any;
 locationdata!:Location
 businesslocation!:Location;
 categoryname!:string;
+Clicked!:boolean;
 
 Email = localStorage.getItem('Email')
   constructor(
@@ -199,8 +200,20 @@ GetChilddata(data:string){
 
    }
 
-     
-
+   ngAfterViewInit() {
+    if (this.brand == true) {
+      this.scrollIntoView();
+    }
+  }  
+  scrollIntoView() {
+    if (this.productsElement) {
+      this.productsElement.nativeElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+        inline: 'nearest'
+      });
+    }
+  }
   
 AddvaluesToform(){
   if(this.formdata != undefined){
@@ -286,17 +299,19 @@ this.Terms= true;
   }
 brand!:boolean
   onFormSubmit(): void {
+
     if (this.Createbusiness.valid ) {
-     
       if(this.selectedFiles == undefined && this.imagedata == null){
         this.brand =true;
-       console.log("hello98998");
+        this.ngAfterViewInit()
+        
       }
       else{
         this.brand =false;
         if(this.selectedFiles != undefined){
           const file: File  = this.selectedFiles![0];
           this.brand =false;
+          this.Clicked = true;
           const formData: CreateBusinessAccount = {
             categoryname: this.category,
             url:this.imagedata,
@@ -322,6 +337,7 @@ brand!:boolean
           console.log("FORMATATA",formData)
         }
         else{
+          this.Clicked = true;
           const formData: CreateBusinessAccount = {
             categoryname: this.category,
             url:this.imagedata,
