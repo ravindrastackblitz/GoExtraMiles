@@ -90,7 +90,7 @@ keyName:any;
     });
   }
   else{
-    this.formdata = this.details;
+   // this.formdata = this.details;
     this.selectedImages[0] = this.imageService.getImageData1();
     this.selectedImages[1] = this.imageService.getImageData2();
     this.selectedImages[2] = this.imageService.getImageData3();
@@ -149,8 +149,9 @@ AddvaluesToform(){
     }
   }
   onFileSelected(event: any,index: number) {
-    this.AddImage = false
-    this.images=[];
+    this.AddImage = false;
+    this.selectedFile =['']
+    this.images= [];
     this.selectedImages = [];
     const files = event.target.files;
     if (files) {
@@ -210,7 +211,7 @@ Submit() {
   // },2000)
   if (this.Additemdetails.valid) {
  
-    // if(this.selectedFile.length == 0){
+     if(this.selectedFile.length === 3 || this.images.length === 3){
     //   this.selectedFile = this.formdata.urls || []
     // }
         this.catalogModel = {
@@ -229,33 +230,34 @@ Submit() {
           file: this.selectedFile,
 
         };
-  if(this.selectedFile.length != 0){
-    this.images = []
-    // Upload files to storage
-    this.catalogCrudService.pushFilesToStorage(this.selectedFile).subscribe(
-      catalogImagesUpload => {
+      if(this.selectedFile.length != 0){
+        this.AddImage = false
+       this.images = []
+        this.catalogCrudService.pushFilesToStorage(this.selectedFile).subscribe(
+        catalogImagesUpload => {
         this.catalogUploads = catalogImagesUpload; 
         console.log("this is the catelog data",this.catalogUploads)
          for(var i=0; i<this.catalogUploads.length; i++ ){
           this.images.push({name: this.catalogUploads[i].imageName, url: this.catalogUploads[i].url});
         }
-        // Save form data once all files are uploaded
         this.saveFormData();
       },
       (error) => {
         console.error('Error uploading files:', error);
       }
     );
-  }else{
+  }
+  else{
      if(this.images.length != 0){
       this.AddImage = false
       this.saveFormData();
      }
-     else{
-       this.AddImage = true;
-     }
   }
   }
+  else{
+    this.AddImage = true;
+  }
+}
 }
 
 hideproduct(){
@@ -286,16 +288,16 @@ saveFormData() {
 
     this.catalogCrudService.updateCatalogKey(this.keyName,formData).then(()=>{
       this.spinner =false
-      this._router.navigate(['/ItemDetails']);
+      this._router.navigate(['/MyCatalouge']);
       console.log("Updated Sucessfully");
-      this.toastar.success("ItemDetails Updated Suessfully", "Success")
+      this.toastar.success("ProductDetails Updated Suessfully", "Success")
     })
   }
   else{
   this.catalogCrudService.create(formData).then(() => {
     console.log('Data added successfully');
-    this.toastar.success("ItemDetails Added Suessfully", "Success")
-    this._router.navigate(['/ItemDetails']);
+    this.toastar.success("ProductDetails Added Suessfully", "Success")
+    this._router.navigate(['/MyCatalouge']);
     this.spinner =false
   }).catch((error: any) => {
     console.error('Error adding data:', error);
