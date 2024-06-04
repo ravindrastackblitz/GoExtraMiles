@@ -1,5 +1,4 @@
-
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -58,7 +57,7 @@ businesslocation!:Location;
 categoryname!:string;
 
 Email = localStorage.getItem('Email')
-  fb: any;
+fb: any;
   constructor(private FB: FormBuilder,
     private popupservice: PopupService,
     private gstservice: GstService,
@@ -116,80 +115,80 @@ GetChilddata(data:string){
 
 
   ngOnInit() {
-    
-    if(this.phone != '' && this.phone != undefined){
-      if(this.Email != '' && this.Email != undefined){
-        this.userloginService.setIsMainHeaderVisible(true); 
+    if (this.phone != '' && this.phone != undefined) {
+      if (this.Email != '' && this.Email != undefined) {
+        this.userloginService.setIsMainHeaderVisible(true);
       }
       this.myForm = this.FB.group({
         option: [this.options]
       });
-          this.Createbusiness = this.formBuilder.group({
-            categoryname:new FormControl('',[Validators.required]),
-           // Image: new FormControl('', []),
-            businessName: new FormControl('', [Validators.required]),
-            storetiming:new FormControl('',[Validators.required]),
-            description: new FormControl('', [Validators.required]),
-            email: new FormControl('', [Validators.required, Validators.email]),
-            website: new FormControl('', [Validators.required]),
-            gstNumber: new FormControl('', [Validators.required]),
-            isOwner: new FormControl('', [Validators.required]),
-            username: new FormControl('', [Validators.required]),
-            mobileNumber: new FormControl('', [Validators.required]),
-            termsAndConditions: [false, Validators.requiredTrue],
-          });
-      
-          this.businessService.getBusinessRecordByKey1(this.phone).subscribe(
-            business => {
-              if(business !== undefined){
-                this.formdata = business;
-                    console.log( "data form database",this.formdata);
-                    this.buttons = true;
-                    this.imagedata= this.formdata.url;
-                    localStorage.setItem('key',this.formdata.key);
-                 //  console.log("this is the key"+this.formdata.url);imagename
-                 this.selectedFiles = this.formdata.url;
-                 this.image1 = this.formdata.imagename;
-                 this.businesslocation = this.formdata.businesslocation;
-                 this.Createbusiness?.controls['categoryname'].setValue(this.formdata?.categoryname);
-                 this.categoryname = this.formdata.categoryname;
-                 if(this.formdata.storetiming != 'Available 24/7'){
-                   this.formdata.storetiming = 'Pick Days'
-                   this.Createbusiness?.controls['storetiming'].setValue(this.formdata?.storetiming);
-                   this.datatime  = this.formdata.storetiming;
-                   this.timestore.getStoretimings(this.phone).subscribe((data)=>{
-                    console.log("timings from database",data);
-                    //localStorage.setItem("timetable",JSON.stringify(data));
-                   });
-                 }
-                 else{
-                  this.datatime  = this.formdata.storetiming;
-                 }
-               
-                 this.AddvaluesToform()
-              }
-              else{
-                    const some = JSON.parse(JSON.stringify(localStorage.getItem('form-data') )|| '{}');
-                    this.formdata = JSON.parse(some)
-                   // console.log(this.formdata);
-                   this.Createbusiness?.controls['categoryname'].setValue(this.formdata?.categoryname);
-                   this.categoryname = this.formdata?.categoryname;
-                   this.imagedata= this.imageService.getImageData();
-                   this.datatime  = this.formdata?.storetiming;
-                   if(this.formdata?.storetiming != 'Available 24/7'){
-                    //this.formdata.storetiming = 'Pick Days'
-                    this.Createbusiness?.controls['storetiming'].setValue(this.formdata?.storetiming);
-                    this.datatime  = this.formdata?.storetiming;
-                  }
-                  else{
-                   this.datatime  = this.formdata.storetiming;
-                  }
-                   this.businesslocation = this.formdata?.businesslocation;
-                   localStorage.removeItem('key')
-                    this.buttons = false;
-                    this.AddvaluesToform()
-                  } 
-            });
+      this.Createbusiness = this.formBuilder.group({
+        categoryname: new FormControl('', [Validators.required]),
+        businessName: new FormControl('', [Validators.required]),
+        storetiming: new FormControl('', [Validators.required]),
+        description: new FormControl('', [Validators.required]),
+        email: new FormControl('', [Validators.required, Validators.email]),
+        website: new FormControl('', [Validators.required]),
+        gstNumber: new FormControl('', [Validators.required]),
+        isOwner: new FormControl('', [Validators.required]),
+        username: new FormControl('', [Validators.required]),
+        mobileNumber: new FormControl('', [Validators.required]),
+        termsAndConditions: [false, Validators.requiredTrue],
+      });
+
+      this.businessService.getBusinessRecordByKey1(this.phone).subscribe(
+        business => {
+          if (business !== undefined) {
+            this.formdata = business;
+            console.log("data form database", this.formdata);
+            this.buttons = true;
+            this.imagedata = this.formdata.url;
+            this.imagedata1 = this.formdata.url2;
+            localStorage.setItem('key', this.formdata.key);
+            this.selectedFiles = this.formdata.url;
+            this.selectedgstfile = this.formdata.url2;
+            this.image1 = this.formdata.imagename;
+           
+           this.GSTNumber = this.formdata.gstNumber;
+            this.businesslocation = this.formdata.businesslocation;
+            this.Createbusiness?.controls['categoryname'].setValue(this.formdata?.categoryname);
+            this.categoryname = this.formdata.categoryname;
+            if (this.formdata.storetiming != 'Available 24/7') {
+              this.formdata.storetiming = 'Pick Days'
+              this.Createbusiness?.controls['storetiming'].setValue(this.formdata?.storetiming);
+              this.datatime = this.formdata.storetiming;
+              this.timestore.getStoretimings(this.phone).subscribe((data) => {
+                console.log("timings from database", data);
+              });
+            }
+            else {
+              this.datatime = this.formdata.storetiming;
+            }
+
+            this.AddvaluesToform()
+          }
+          else {
+            const some = JSON.parse(JSON.stringify(localStorage.getItem('form-data')) || '{}');
+            this.formdata = JSON.parse(some)
+            this.Createbusiness?.controls['categoryname'].setValue(this.formdata?.categoryname);
+            this.categoryname = this.formdata?.categoryname;
+            this.imagedata = this.imageService.getImageData();
+            this.imagedata1 = this.imageService.getImageData4();
+            this.datatime = this.formdata?.storetiming;
+            this.GSTNumber = this.formdata.gstNumber;
+            if (this.formdata?.storetiming != 'Available 24/7') {
+              this.Createbusiness?.controls['storetiming'].setValue(this.formdata?.storetiming);
+              this.datatime = this.formdata?.storetiming;
+            }
+            else {
+              this.datatime = this.formdata.storetiming;
+            }
+            this.businesslocation = this.formdata?.businesslocation;
+            localStorage.removeItem('key')
+            this.buttons = false;
+            this.AddvaluesToform()
+          }
+        });
 
             // if(this.imagedata != '' && this.imagedata != undefined){
             //   this.brand = false;
@@ -360,6 +359,8 @@ brand!:boolean
       console.error("Form is not valid or no file selected.");
     }
   }
+
+
   //data.....................................................
   name = 'Angular';
   options = [
