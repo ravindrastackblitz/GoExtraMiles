@@ -50,25 +50,25 @@ details2 = JSON.parse(this.data);
   imagedata2 :string | null = null;
   imagedata3 :string | null = null;
   HostListener:any
-  online!: boolean;
+  //online!: boolean;
 catalogKeyt!:any;
 
 spinner!:boolean;
   togglePopup(): void {
-    this.online =true;
+    this.router.navigate(['/AddItem']);
   }
 
-  confirm(){
-    this.online =false;
-    this.showImage = true;
-     this.router.navigate(['/AddItem']);
-  }
+  // confirm(){
+  //   this.online =false;
+  //   this.showImage = true;
+  //    this.router.navigate(['/AddItem']);
+  // }
 
   
-  cancle(){
-    this.online =false;
-    this.router.navigate(['/MyCatalouge']);
-  }
+  // cancle(){
+  //   this.online =false;
+  //   this.router.navigate(['/MyCatalouge']);
+  // }
  
    selectTab(tabNumber: number) {
     this.selectedTab = tabNumber;

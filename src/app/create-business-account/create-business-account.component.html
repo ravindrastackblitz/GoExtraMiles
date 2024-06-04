@@ -1,4 +1,3 @@
-
 <h2 style="text-align: center;">Create Business Account</h2>
 <form [formGroup]="Createbusiness" (ngSubmit)="onFormSubmit()">
 <div class="avatar-container" style="margin-left: 45%;" #productsElement id="products" >
@@ -18,9 +17,17 @@
   <div class="row">
     <div class="col-6">
       <div class="text-field w100p">
+  <app-select-business-category 
+    formControlName="option"
+    [options]="options"
+    (added)="onItemAdded($event)">
+  </app-select-business-category>
+      </div>
+
+      <!-- <div class="text-field w100p">
         <input class="text-base w100p" type="text" formControlName="categoryname"  placeholder="" (click)="popup()" >
         <span>Business Category  *</span>
-      </div>
+      </div> -->
       <!-- <input type="text" class="form-select" name="businessCategory" [value]="category" readonly [routerLink]="['/selectBusinessCategory']" placeholder="Business Category*     " (click)="popup()" >  -->
     </div>
     <div class="col-6">
@@ -36,9 +43,9 @@
       Please Enter  BusinessName.
      </div>
     </div>
-    <div [hidden]="!selectbusiness">
+    <!-- <div [hidden]="!selectbusiness">
       <app-select-business-category [businesscategory]="categoryname" (eventemit)="getchilddata($event)" ></app-select-business-category>
-    </div>
+    </div> -->
   </div>
   <div class="row">
     <div class="col-6">

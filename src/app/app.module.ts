@@ -49,7 +49,11 @@ import { ToastrModule } from 'ngx-toastr';
 import { APP_INITIALIZER } from '@angular/core';
 import { AppConfigService } from './services/appsettings.service';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule } from '@angular/common';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
+import { MatInputModule } from '@angular/material/input';
 
 const approu :Routes=[
   {path:'extramail',component:ExtraMailBusinessComponent},
@@ -101,7 +105,9 @@ const approu :Routes=[
     SpinnerComponent,
     GoogleMapComponent, 
   ],
-  imports: [
+  imports: [   MatAutocompleteModule,
+    MatFormFieldModule,
+    MatInputModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
@@ -122,10 +128,15 @@ const approu :Routes=[
     ToastrModule.forRoot({
       progressBar: true
     }),
+    
     IntlInputPhoneModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
     MatIconModule,
+    BrowserModule, 
+    FormsModule, 
+    BrowserAnimationsModule,
+  
     AgmCoreModule.forRoot({
       apiKey:'AIzaSyBFe0WTUKOaMMSFTV1WqaeAnw65lB_cKEw',
       libraries: ['places'],
@@ -150,6 +161,10 @@ const approu :Routes=[
         };
       }
     }
+  ], exports: [
+    MatAutocompleteModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   bootstrap: [AppComponent]
 })
