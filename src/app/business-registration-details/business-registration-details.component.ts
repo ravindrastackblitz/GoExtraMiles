@@ -35,9 +35,11 @@ storetable:any;
 clicked!:boolean
 
   imagedata :string | null = null;
+  imagedata1 :string | null = null;
   data1!:boolean
   IsEdit!:boolean;
   Timings:any;
+  selectedgstFile?: FileList;
 
 constructor(private imageService: ImagesarviceService, private router: Router,private reg:BusinessRegistrationCRUDService,
   private businessService:BusinessRegistrationCRUDService,private  toastar:toastersrc,
@@ -51,44 +53,39 @@ this.storetable =JSON.parse(this.store);
 Email = localStorage.getItem('Email')
 phone:any = localStorage.getItem('phoneNumber')
 ngOnInit(){
- 
-  if(this.Email != '' && this.Email != undefined){
-    this.userloginService.setIsMainHeaderVisible(true); 
+  if(this.phone != '' && this.phone != undefined){
+    if(this.Email != '' && this.Email != undefined){
+      this.userloginService.setIsMainHeaderVisible(true); 
+    }
+   this.imagedata = this.imageService.getImageData();
+   if(this.imagedata == "" || this.imagedata == null){
+    this.imagedata = this.details?.url;
+    this.imagedata1 = this.details?.url2;
+
+   }
+   
+   this.selectedFiles =this.imageService.getfile();
+   this.selectedgstFile  = this.imageService.getfile1();
+   if(this.details?.storetiming != "Available 24/7"){
+    this.data1 = false;
+    this.timetable = true;
+    this.timetable1 = localStorage.getItem('storetime1');
+    // for(var i=0; i<this.storetable.length; i++){
+    //   this.Timings.push()
+    // }
   }
- this.imagedata = this.imageService.getImageData();
- if(this.imagedata == "" || this.imagedata == null){
-  this.imagedata = this.details?.url;
- }
- 
- this.selectedFiles =this.imageService.getfile()
- if(this.details?.storetiming != "Available 24/7"){
-  this.data1 = false;
-  this.timetable = true;
-  this.timetable1 = localStorage.getItem('storetime1');
-  // for(var i=0; i<this.storetable.length; i++){
-  //   this.Timings.push()
-  // }
-}
-else{
-  this.data1 = true;
-}
-this.latitude = this.details.businesslocation?.latitude;
-this.longitude = this.details.businesslocation?.longitude;
+  else{
+    this.data1 = true;
+  }
+  this.latitude = this.details.businesslocation?.latitude;
+  this.longitude = this.details.businesslocation?.longitude;
+  }
+  else{
+    this.router.navigate(['']);
+  }
+
 }
 
-// getHeaders() {
-//   let headers: string[] = [];
-//   if(this.storetable) {
-//     this.storetable.forEach((value:any) => {
-//       Object.keys(value).forEach((key) => {
-//         if(!headers.find((header) => header == key)){
-//           headers.push(key)
-//         }
-//       })
-//     })
-//   }
-//   return headers;
-// }
 
 
 setbusinesslocation(){
@@ -117,12 +114,17 @@ save() {
          this.details.storetiming = 'Pick Days'
     }
     const file: File | null | undefined = this.selectedFiles?.item(0);
-    if (file) {
+    const file1: File | null | undefined = this.selectedgstFile?.item(0);
+    
+    if (file && file1) {
       const createBusinessAccount: CreateBusinessAccount = {
         categoryname: this.details.categoryname,
         imagename: '',
+        gstImageName:'',
         url: '',
+        url2:'',
         file: file,
+        gstFile:file1,
         businessName: this.details.businessName,
         description: this.details.description,
         email: this.details.email,

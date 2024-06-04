@@ -1,7 +1,7 @@
 
 <h2 style="text-align: center;">Create Business Account</h2>
 <form [formGroup]="Createbusiness" (ngSubmit)="onFormSubmit()">
-<div class="avatar-container" style="margin-left: 45%;">
+<div class="avatar-container" style="margin-left: 45%;" #productsElement id="products" >
   <label for="avatarInput">
     <img *ngIf="imagedata" [src]="imagedata" class="avatar-preview" alt="Avatar Preview">
     <!-- <img *ngIf="imagedata" [src]="imagedata" class="avatar-preview" alt="Avatar Preview"> -->
@@ -71,7 +71,7 @@
     <div class="col-6">
       <div class="text-field w100p">
         <input class="text-base w100p" type="text" formControlName="email"  placeholder="" >
-        <span>CompanyEmail   *</span>
+        <span>Email   *</span>
       </div>
       <!-- <div>
         <input type="email"  class="form-control"  placeholder="name@yourcompany.com" formControlName="email">
@@ -164,7 +164,7 @@
   <input type="checkbox" style="margin: 5px;" formControlName="termsAndConditions"> I accept the  <b (click)="condition()" class="term">Terms and Conditions</b> as well as <b (click)="condition()" class="term">Privacy Policy.</b> 
 </div>
 <div  *ngIf="!buttons">
-<button type="submit" [disabled]="!Createbusiness.valid" class="btn btn-primary m-3" id="SubmitUpdate">Submit</button>
+<button type="submit" [disabled]="!Createbusiness.valid" class="btn btn-primary m-3" [disabled]="Clicked" id="SubmitUpdate">Submit</button>
 </div>
 <div *ngIf="buttons">
 <button type="submit" [disabled]="!Createbusiness.valid" class="btn btn-primary m-3" id="SubmitUpdate">Update</button>

@@ -107,7 +107,9 @@ datadelete()
   }
   update()
   {
+    console.log("this is the product key",this.product)
     this.catalogCrud.setKey(this.product);
+    console.log("this is the normalkey ", this.keyName)
     this._router.navigate(['/AddItem']);
 
   }
@@ -136,6 +138,9 @@ this.Terms = false;
 Email = localStorage.getItem('Email');
 
 ngOnInit(){
+  if(this.phoneNumber != '' && this.phoneNumber != undefined){
+
+ 
   if(this.Email != '' && this.Email != undefined){
     this.userloginService.setIsMainHeaderVisible(true); 
   }
@@ -146,6 +151,7 @@ ngOnInit(){
 
   this.catalogCrud.data$.subscribe(data => {
     this.keyName = data;
+    console.log("this is the key ", this.keyName)
    });
 
 if (this.phoneNumber && this.keyName) {
@@ -171,12 +177,13 @@ if (this.phoneNumber && this.keyName) {
         console.log("No data found for the provided phone number and image name.");
       }
     }
-  }
-   
-  
-   
-  );
+  });
 }
+  }
+  else{
+ this._router.navigate([''])
+  }
+
 }
 
 ItemDetails(){

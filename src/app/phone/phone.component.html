@@ -23,7 +23,7 @@
         <p>Is it okay, or would you like to edit the number?</p>
         <div class="button-container">
             <button  class="edit" (click)="onEdit()">Edit</button>
-            <button  class="edit" (click)="onConfirm()">Confirm</button>
+            <button  class="edit"  [disabled]="clicked" (click)="onConfirm(); clicked = true;">Confirm</button>
         </div>
     </div>
   </div>

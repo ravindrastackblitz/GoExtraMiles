@@ -11,11 +11,19 @@ import { Route, Router } from '@angular/router';
 export class BusinessRegistrationComponent {
 
   constructor ( private userloginService:UserloginService,private _router: Router,){ }
-    Email = localStorage.getItem('Email')
+    Email = localStorage.getItem('Email');
+    phone = localStorage.getItem('phoneNumber')
 ngOnInit(){
-  if(this.Email != '' && this.Email != undefined){
-    this.userloginService.setIsMainHeaderVisible(true); 
-  }
+  if(this.phone != '' && this.phone != undefined)
+    {
+      if(this.Email != '' && this.Email != undefined){
+        this.userloginService.setIsMainHeaderVisible(true); 
+      }
+    }
+    else{
+      this._router.navigate(['']);
+    }
+
 }
 nexttab(){
   console.log("hello this nexttab button");

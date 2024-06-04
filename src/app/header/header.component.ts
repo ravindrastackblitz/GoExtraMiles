@@ -29,6 +29,7 @@ private popupservices:PopupService
   }
   Logout(){
     localStorage.removeItem('Email');
+    localStorage.removeItem('phoneNumber');
   }
   incrementCount() {
     this.badgeCount++;
