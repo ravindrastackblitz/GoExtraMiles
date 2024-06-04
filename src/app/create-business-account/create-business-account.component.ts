@@ -22,9 +22,11 @@ import { StoretimingService } from '../services/storetiming.service';
   styleUrls: ['./create-business-account.component.css'],  
 })
 export class CreateBusinessAccountComponent implements OnInit {
-
+  @ViewChild('productsElement') productsElement!: ElementRef;
   selectedFiles?: FileList;
+  selectedgstfile?: FileList;
   image1:any;
+  image2:any;
   currentFileUpload?: FileUpload;
   createBusinessAccount!:CreateBusinessAccount;
   createBusinessAccountList?: CreateBusinessAccount[] 
@@ -44,6 +46,7 @@ export class CreateBusinessAccountComponent implements OnInit {
   selectedLng: number | undefined;
   public Createbusiness!: FormGroup;
   imagedata: any | string | ArrayBuffer | null = null;
+  imagedata1: any | string | ArrayBuffer | null = null;
   category: string = "";
   storetiming: string = "";
   phone :any = localStorage.getItem('phoneNumber');
@@ -55,7 +58,7 @@ formdata:any;
 locationdata!:Location
 businesslocation!:Location;
 categoryname!:string;
-
+Clicked!:boolean;
 Email = localStorage.getItem('Email')
 fb: any;
   constructor(private FB: FormBuilder,
@@ -189,20 +192,26 @@ GetChilddata(data:string){
             this.AddvaluesToform()
           }
         });
-
-            // if(this.imagedata != '' && this.imagedata != undefined){
-            //   this.brand = false;
-            // }
-
     }
      else{
       this._router.navigate([''])
      }
     
-
    }
-
-     
+   ngAfterViewInit() {
+    if (this.brand == true) {
+      this.scrollIntoView();
+    }
+  }  
+  scrollIntoView() {
+    if (this.productsElement) {
+      this.productsElement.nativeElement.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+        inline: 'nearest'
+      });
+    }
+  }  
 
   
 AddvaluesToform(){
@@ -267,8 +276,19 @@ this.Terms= true;
 
   getFile(event: any): void {
     this.file = event.target.files[0];
+    this.brand = false;
+    this.selectedgstfile= event.target.files;
+    const file1: File = event.target.files[0];
+    if (file1) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.imagedata1 = e.target?.result;
+        this.imageService.setImageData4(this.imagedata1);
+        this.imageService.setfile1(this.selectedgstfile);
+      };
+      reader.readAsDataURL(file1);
+    }
   }
-
   clearFile(): void {
     this.file = undefined;
   }
@@ -287,23 +307,29 @@ this.Terms= true;
       reader.readAsDataURL(file);
     }
   }
+
 brand!:boolean
   onFormSubmit(): void {
     if (this.Createbusiness.valid ) {
      
       if(this.selectedFiles == undefined && this.imagedata == null){
         this.brand =true;
+        this.ngAfterViewInit();
        console.log("hello98998");
       }
       else{
         this.brand =false;
         if(this.selectedFiles != undefined){
           const file: File  = this.selectedFiles![0];
+          const file1: File  = this.selectedgstfile![0]; 
           this.brand =false;
+          this.Clicked=true;
           const formData: CreateBusinessAccount = {
             categoryname: this.category,
             url:this.imagedata,
+            url2:this.imagedata1,
             file: file,
+            gstFile:file1,
             businessName: this.Createbusiness.value.businessName,
             description: this.Createbusiness.value.description,
             email: this.Createbusiness.value.email,
@@ -311,6 +337,7 @@ brand!:boolean
             gstNumber: this.Createbusiness.value.gstNumber,
             isOwner: this.Createbusiness.value.isOwner,
             imagename: this.image1,
+            gstImageName:this.image2,
             username:this.Createbusiness.value.username,
             mobilenumber: this.Createbusiness.value.mobileNumber,
             storetiming: this.storetiming,
@@ -328,7 +355,9 @@ brand!:boolean
           const formData: CreateBusinessAccount = {
             categoryname: this.category,
             url:this.imagedata,
+            url2:this.imagedata1,
             file:this.imagedata,
+            gstFile:this.imagedata1,
             businessName: this.Createbusiness.value.businessName,
             description: this.Createbusiness.value.description,
             email: this.Createbusiness.value.email,
@@ -336,6 +365,7 @@ brand!:boolean
             gstNumber: this.Createbusiness.value.gstNumber,
             isOwner: this.Createbusiness.value.isOwner,
             imagename: this.image1,
+            gstImageName:this.image2,
             username:this.Createbusiness.value.username,
             mobilenumber: this.Createbusiness.value.mobileNumber,
             storetiming: this.storetiming,
