@@ -107,9 +107,7 @@ datadelete()
   }
   update()
   {
-    console.log("this is the product key",this.product)
-    this.catalogCrud.setKey(this.product);
-    console.log("this is the normalkey ", this.keyName)
+    this.catalogCrud.setKey(this.keyName);
     this._router.navigate(['/AddItem']);
 
   }

@@ -150,7 +150,6 @@ AddvaluesToform(){
   }
   onFileSelected(event: any,index: number) {
     this.AddImage = false;
-    this.selectedFile =['']
     this.images= [];
     this.selectedImages = [];
     const files = event.target.files;
