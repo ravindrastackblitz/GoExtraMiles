@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -20,7 +20,7 @@ import { StoretimingService } from '../services/storetiming.service';
 @Component({
   selector: 'app-create-business-account',
   templateUrl: './create-business-account.component.html',
-  styleUrls: ['./create-business-account.component.css']
+  styleUrls: ['./create-business-account.component.css'],  
 })
 export class CreateBusinessAccountComponent implements OnInit {
 
@@ -58,7 +58,8 @@ businesslocation!:Location;
 categoryname!:string;
 
 Email = localStorage.getItem('Email')
-  constructor(
+  fb: any;
+  constructor(private FB: FormBuilder,
     private popupservice: PopupService,
     private gstservice: GstService,
     private imageService: ImagesarviceService,
@@ -115,11 +116,14 @@ GetChilddata(data:string){
 
 
   ngOnInit() {
+    
     if(this.phone != '' && this.phone != undefined){
       if(this.Email != '' && this.Email != undefined){
         this.userloginService.setIsMainHeaderVisible(true); 
       }
-        
+      this.myForm = this.FB.group({
+        option: [this.options]
+      });
           this.Createbusiness = this.formBuilder.group({
             categoryname:new FormControl('',[Validators.required]),
            // Image: new FormControl('', []),
@@ -355,6 +359,22 @@ brand!:boolean
     } else {
       console.error("Form is not valid or no file selected.");
     }
+  }
+  //data.....................................................
+  name = 'Angular';
+  options = [
+    'Option 1',
+    'Option 2',
+    'Option 3'
+  ];
+  myForm!: FormGroup;
+
+  onSubmit() {
+    console.log(this.myForm.value);
+  }
+
+  onItemAdded(itemToBeAdded:any) {
+    console.log('Item to be added: ', itemToBeAdded);
   }
 }
 
