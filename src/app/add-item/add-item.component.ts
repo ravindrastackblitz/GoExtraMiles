@@ -281,16 +281,16 @@ saveFormData() {
 
     this.catalogCrudService.updateCatalogKey(this.keyName,formData).then(()=>{
       this.spinner =false
-      this._router.navigate(['/ItemDetails']);
+      this._router.navigate(['/MyCatalouge']);
       console.log("Updated Sucessfully");
-      this.toastar.success("ItemDetails Updated Suessfully", "Success")
+      this.toastar.success("Product Details Updated Suessfully", "Success")
     })
   }
   else{
   this.catalogCrudService.create(formData).then(() => {
     console.log('Data added successfully');
-    this.toastar.success("ItemDetails Added Suessfully", "Success")
-    this._router.navigate(['/ItemDetails']);
+    this.toastar.success("Product Details Added Suessfully", "Success")
+    this._router.navigate(['/MyCatalouge']);
     this.spinner =false
   }).catch((error: any) => {
     console.error('Error adding data:', error);

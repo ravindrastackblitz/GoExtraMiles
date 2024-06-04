@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -17,6 +17,7 @@ import { listChanges } from '@angular/fire/compat/database';
 import { UserloginService } from '../services/userlogin.service';
 import { Subscription } from 'rxjs';
 import { StoretimingService } from '../services/storetiming.service';
+import { BusinessCategoryService } from '../services/business-category.service';
 @Component({
   selector: 'app-create-business-account',
   templateUrl: './create-business-account.component.html',
@@ -58,7 +59,8 @@ businesslocation!:Location;
 categoryname!:string;
 
 Email = localStorage.getItem('Email')
-  constructor(
+  businesscategory: any;
+  constructor(private cate :BusinessCategoryService,
     private popupservice: PopupService,
     private gstservice: GstService,
     private imageService: ImagesarviceService,
@@ -117,7 +119,15 @@ GetChilddata(data:string){
   ngOnInit() {
 if(this.Email != '' && this.Email != undefined){
   this.userloginService.setIsMainHeaderVisible(true); 
-}
+} 
+document.addEventListener('click', function(event:any) {
+  var dropdownContainer = document.getElementById('dropdownContainer');
+  if (!dropdownContainer?.contains(event.target as Node)) {
+      var dropdownContent = document.getElementById('dropdown');
+      !dropdownContent?.style.display;
+  }
+  
+});
   
     this.Createbusiness = this.formBuilder.group({
       categoryname:new FormControl('',[Validators.required]),
@@ -323,5 +333,101 @@ brand!:boolean
       console.error("Form is not valid or no file selected.");
     }
   }
+//   toggleDropdown() {
+//     const dropdownContent = document.getElementById('dropdown');
+//     if (dropdownContent) {
+//       dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+//     }
+//   }
+
+//   filterFunction() {
+//     const input = document.getElementById('searchInput') as HTMLInputElement;
+//     const filter = input.value.toUpperCase();
+//     const dropdown = document.getElementById('dropdown');
+//     if (dropdown) {
+//       const labels = dropdown.getElementsByTagName('label');
+//       for (let i = 0; i < labels.length; i++) {
+//         const label = labels[i];
+//         const txtValue = label.textContent || label.innerText;
+//         if (txtValue.toUpperCase().indexOf(filter) > -1) {
+//           label.style.display = '';
+//         } else {
+//           label.style.display = 'none';
+//         }
+//       }
+//     }
+//   }
+//   selectOption(option: string) {
+//     const selectionBox = document.getElementById('selectionBox');
+//     if (selectionBox) {
+//         selectionBox.textContent = option;
+//         this.toggleDropdown();
+//     }
+// }
+
+// addNewOption() {
+//   const newOption = prompt("Enter the new option:");
+//   if (newOption) {
+//       const dropdown = document.getElementById('dropdown');
+//       if (dropdown) {
+//           // Check if the option already exists
+//           const existingOptions = Array.from(dropdown.querySelectorAll('input[type="radio"]')) as HTMLInputElement[];
+//           const optionExists = existingOptions.some(option => option.value === newOption);
+          
+//           if (!optionExists) {
+//               const newLabel = document.createElement('label');
+//               newLabel.innerHTML = `<input type="radio" name="option" value="${newOption}" (click)="selectOption(this)"> ${newOption}`;
+//               dropdown.appendChild(newLabel);
+//           } else {
+//               alert("Option already exists!");
+//           }
+//       }
+//   }
+// }
+
+@ViewChild('dropdownContainer') dropdownContainer!: ElementRef;
+@ViewChild('dropdown') dropdown!: ElementRef;
+@ViewChild('searchInput') searchInput!: ElementRef;
+
+options: string[] = ['Option 1', 'Option 2'];
+
+toggleDropdown() {
+    this.dropdown.nativeElement.style.display = this.dropdown.nativeElement.style.display === 'block' ? 'none' : 'block';
+}
+
+handleInput(event:any) {
+  const char = event.target.value.trim().toLowerCase(); 
+    this.cate.GetAllCategorys().subscribe((res:any) => {
+      const filteredResults = res.filter((item:any )=> item.label?.toLowerCase().includes(char) || item.value?.toLowerCase() === char);
+    //  console.log("Filtered results:", filteredResults);
+      this.businesscategory =filteredResults;
+    if (event.key === 'Enter') {
+        const inputValue = (this.searchInput.nativeElement as HTMLInputElement).value.trim();
+        if (inputValue !== '') {
+            const isExisting = this.options.some(option => option === inputValue);
+            if (!isExisting) {
+                this.options.push(inputValue);
+            } else {
+                alert('Selected: ' + inputValue);
+            }
+            (this.searchInput.nativeElement as HTMLInputElement).value = ''; // Clear input field
+            this.toggleDropdown();
+        }
+    }
+})
+}
+selectOption(option: string) {
+    this.dropdownContainer.nativeElement.textContent = option;
+    this.toggleDropdown();
+};
+
+// Hide dropdown when clicking outside
+onClickOutside(event: MouseEvent) {
+    if (!this.dropdownContainer.nativeElement.contains(event)) {
+        this.dropdown.nativeElement.style.display = 'none';
+    }
+};
+
+
 }
 
