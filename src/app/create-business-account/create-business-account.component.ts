@@ -288,43 +288,65 @@ brand!:boolean
   onFormSubmit(): void {
     if (this.Createbusiness.valid ) {
      
-      if(this.selectedFiles == undefined && this.imagedata == " "){
+      if(this.selectedFiles == undefined && this.imagedata == null){
         this.brand =true;
        console.log("hello98998");
       }
       else{
         this.brand =false;
-        const file: File  = this.selectedFiles![0];
-        this.brand =false;
-        const formData: CreateBusinessAccount = {
-          categoryname: this.category,
+        if(this.selectedFiles != undefined){
+          const file: File  = this.selectedFiles![0];
+          this.brand =false;
+          const formData: CreateBusinessAccount = {
+            categoryname: this.category,
+            url:this.imagedata,
+            file: file,
+            businessName: this.Createbusiness.value.businessName,
+            description: this.Createbusiness.value.description,
+            email: this.Createbusiness.value.email,
+            website: this.Createbusiness.value.website,
+            gstNumber: this.Createbusiness.value.gstNumber,
+            isOwner: this.Createbusiness.value.isOwner,
+            imagename: this.image1,
+            username:this.Createbusiness.value.username,
+            mobilenumber: this.Createbusiness.value.mobileNumber,
+            storetiming: this.storetiming,
+            isApproved: false,
+            registrationnumber:this.phone,
+            registrationEmail:this.Email,
+            businesslocation:this.locationdata
+          };
+    
+          localStorage.setItem('form-data', JSON.stringify(formData));
+          this._router.navigate(['/BusinessRegistrationDetails']);
+          console.log("FORMATATA",formData)
+        }
+        else{
+          const formData: CreateBusinessAccount = {
+            categoryname: this.category,
+            url:this.imagedata,
+            file:this.imagedata,
+            businessName: this.Createbusiness.value.businessName,
+            description: this.Createbusiness.value.description,
+            email: this.Createbusiness.value.email,
+            website: this.Createbusiness.value.website,
+            gstNumber: this.Createbusiness.value.gstNumber,
+            isOwner: this.Createbusiness.value.isOwner,
+            imagename: this.image1,
+            username:this.Createbusiness.value.username,
+            mobilenumber: this.Createbusiness.value.mobileNumber,
+            storetiming: this.storetiming,
+            isApproved: false,
+            registrationnumber:this.phone,
+            registrationEmail:this.Email,
+            businesslocation:this.locationdata
+          };
+    
+          localStorage.setItem('form-data', JSON.stringify(formData));
+          this._router.navigate(['/BusinessRegistrationDetails']);
+          console.log("FORMATATA",formData)
+        }
 
-
-          
-          url:this.imagedata,
-  
-          file: file,
-          businessName: this.Createbusiness.value.businessName,
-          description: this.Createbusiness.value.description,
-          email: this.Createbusiness.value.email,
-          website: this.Createbusiness.value.website,
-          gstNumber: this.Createbusiness.value.gstNumber,
-          isOwner: this.Createbusiness.value.isOwner,
-          imagename: this.image1,
-          username:this.Createbusiness.value.username,
-          mobilenumber: this.Createbusiness.value.mobileNumber,
-          storetiming: this.storetiming,
-          isApproved: false,
-          registrationnumber:this.phone,
-          registrationEmail:this.Email,
-          businesslocation:this.locationdata
-        };
-  
-        localStorage.setItem('form-data', JSON.stringify(formData));
-        this._router.navigate(['/BusinessRegistrationDetails']);
-        
-  
-        console.log("FORMATATA",formData)
       }
      
 
