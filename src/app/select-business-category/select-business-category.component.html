@@ -7,7 +7,7 @@
     matInput 
     [formControl]="myControl" 
     [matAutocomplete]="auto"
-    (keyup)="enter()" style="display: inline-block;">
+    (keyup.enter)="enter()" style="display: inline-block;">
   <mat-autocomplete 
     #auto="matAutocomplete"
     (optionSelected)="optionSelected($event.option)">

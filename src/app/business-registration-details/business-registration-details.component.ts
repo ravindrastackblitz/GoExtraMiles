@@ -119,8 +119,8 @@ save() {
     if (file && file1) {
       const createBusinessAccount: CreateBusinessAccount = {
         categoryname: this.details.categoryname,
-        imagename: '',
-        gstImageName:'',
+        imagename: file.name,
+        gstImageName:file1.name,
         url: '',
         url2:'',
         file: file,

@@ -63,6 +63,8 @@ categoryname!:string;
 Clicked!:boolean;
 options:any[]=[]
 businesscategory:any[]=[]
+gstfile:any;
+gstfilename:any;
 Email = localStorage.getItem('Email')
 fb: any;
   constructor(private FB: FormBuilder,
@@ -160,12 +162,12 @@ GetChilddata(data:string){
             console.log("data form database", this.formdata);
             this.buttons = true;
             this.imagedata = this.formdata.url;
-            this.imagedata1 = this.formdata.url2;
+            this.gstfile = this.formdata.url2;
             localStorage.setItem('key', this.formdata.key);
-            this.selectedFiles = this.formdata.url;
-            this.selectedgstfile = this.formdata.url2;
+            // this.selectedFiles = this.formdata.url;
+            // this.selectedgstfile = this.formdata.url2;
             this.image1 = this.formdata.imagename;
-           
+           this.gstfilename = this.formdata.gstImageName
            this.GSTNumber = this.formdata.gstNumber;
             this.businesslocation = this.formdata.businesslocation;
             this.Createbusiness?.controls['categoryname'].setValue(this.formdata?.categoryname);
@@ -289,6 +291,8 @@ this.Terms= true;
   file: File | undefined;
 
   getFile(event: any): void {
+    this.gstfile = "";
+    this.gstfilename = '';
     this.file = event.target.files[0];
     this.brand = false;
     this.selectedgstfile= event.target.files;
@@ -333,15 +337,15 @@ brand!:boolean
       }
       else{
         this.brand =false;
-        if(this.selectedFiles != undefined){
+        if(this.selectedFiles != undefined && this.selectedgstfile != null){
           const file: File  = this.selectedFiles![0];
           const file1: File  = this.selectedgstfile![0]; 
           this.brand =false;
           this.Clicked=true;
           const formData: CreateBusinessAccount = {
             categoryname: this.category,
-            url:this.imagedata,
-            url2:this.imagedata1,
+            url:'',
+            url2:'',
             file: file,
             gstFile:file1,
             businessName: this.Createbusiness.value.businessName,
@@ -350,8 +354,8 @@ brand!:boolean
             website: this.Createbusiness.value.website,
             gstNumber: this.Createbusiness.value.gstNumber,
             isOwner: this.Createbusiness.value.isOwner,
-            imagename: this.image1,
-            gstImageName:this.image2,
+            imagename: file.name,
+            gstImageName:file1.name,
             username:this.Createbusiness.value.username,
             mobilenumber: this.Createbusiness.value.mobileNumber,
             storetiming: this.storetiming,
@@ -369,9 +373,9 @@ brand!:boolean
           const formData: CreateBusinessAccount = {
             categoryname: this.category,
             url:this.imagedata,
-            url2:this.imagedata1,
+            url2:this.gstfile,
             file:this.imagedata,
-            gstFile:this.imagedata1,
+            gstFile:this.gstfile,
             businessName: this.Createbusiness.value.businessName,
             description: this.Createbusiness.value.description,
             email: this.Createbusiness.value.email,
@@ -379,7 +383,7 @@ brand!:boolean
             gstNumber: this.Createbusiness.value.gstNumber,
             isOwner: this.Createbusiness.value.isOwner,
             imagename: this.image1,
-            gstImageName:this.image2,
+            gstImageName:this.gstfilename,
             username:this.Createbusiness.value.username,
             mobilenumber: this.Createbusiness.value.mobileNumber,
             storetiming: this.storetiming,
@@ -422,9 +426,7 @@ brand!:boolean
         value : itemToBeAdded
       }
       this.selectbusines.Create(data);
-    } else {
-      alert('Please enter a valid category name.');
-    }
+    } 
     console.log('Item to be added: ', itemToBeAdded);
   }
 }
