@@ -34,7 +34,7 @@
                 <input formControlName="Mondayclose" name="Monclose" type="time"  class="daytime">               
               </p>
             </div>
-            <span class="switch"><input type="checkbox" id="switcher"><label for=switcher></label></span>
+            <span class="switch"><input type="checkbox"  [checked]="togMon" (click)="Montog()" id="switcher"><label for=switcher></label></span>
             <br>
 
             <label class="la"><b>TUE</b></label><div style="display: inline-block;"><input type="button" *ngIf="!buttonClicked1" (click)="onClick1()" class="btn1 choice" value="CHOOSE">
@@ -43,7 +43,7 @@
                 <input formControlName="Tuesdayclose" name="Tueclose" type="time"  class="daytime">
             </p>
         </div>
-            <span class="switch"><input type="checkbox" id="switcher"><label for=switcher></label></span>
+            <span class="switch"><input type="checkbox"  [checked]="togTue" (click)="Tuetog()" id="switcher"><label for=switcher></label></span>
             <br>
            
             <label class="la"><b>WED</b></label><div style="display: inline-block;"><input type="button" *ngIf="!buttonClicked2" (click)="onClick2()" class="btn1 choice" value="CHOOSE">
@@ -52,7 +52,7 @@
                 <input formControlName="Wednesdayclose" name="Wedclose" type="time"  class="daytime">
             </p>
             </div>
-            <span class="switch"><input type="checkbox" id="switcher"><label for=switcher></label></span><br>
+            <span class="switch"><input type="checkbox"  [checked]="togWed" (click)="Wedtog()" id="switcher"><label for=switcher></label></span><br>
            
             <label class="la"><b>THU</b></label><div style="display: inline-block;"><input type="button" *ngIf="!buttonClicked3" (click)="onClick3()" class="btn1 choice" value="CHOOSE">
             <p *ngIf="buttonClicked3" style="display: inline;">
@@ -60,7 +60,7 @@
                 <input formControlName="Thursdayclose" name="Thuclose" type="time"  class="daytime">
               </p>
             </div>
-            <span class="switch"><input type="checkbox" id="switcher"><label for=switcher></label></span><br>
+            <span class="switch"><input type="checkbox"  [checked]="togThu" (click)="Thutog()" id="switcher"><label for=switcher></label></span><br>
         
             <label class="la"><b>FRI</b></label>
              <div style="display: inline-block;">
@@ -70,7 +70,7 @@
                 <input formControlName="Fridayclose" name="Friclose" type="time"  class="daytime">
             </p>
             </div>
-            <span class="switch"><input type="checkbox" id="switcher"><label for=switcher></label></span><br>
+            <span class="switch"><input type="checkbox"  [checked]="togFri" (click)="Fritog()" id="switcher"><label for=switcher></label></span><br>
         
             <label class="la"><b>SAT</b></label>
             <div style="display: inline-block;">
@@ -80,7 +80,7 @@
                 <input formControlName="Saturdayclose" name="Satclose" type="time"  class="daytime">
               </p>
             </div>
-            <span class="switch"><input type="checkbox" id="switcher"><label for=switcher></label></span><br>
+            <span class="switch"><input type="checkbox" [checked]="togSat" (click)="Sattog()" id="switcher"><label for=switcher></label></span><br>
             
             <!-- <label class="la"><b>SAT</b></label><input type="button" *ngIf="!buttonClicked5" (click)="onClick5()" class="btn1 choice" value="CHOOSE">
             <p *ngIf="buttonClicked5">
@@ -96,7 +96,7 @@
                 <input formControlName="Sundayclose" name="Sunclose" type="time"  class="daytime">
               </p>
             </div>
-            <span class="switch"><input type="checkbox" checked id="switcher"><label for=switcher></label></span> <br>
+            <span class="switch"><input type="checkbox"  [checked]="togSun" (click)="Suntog()" checked id="switcher"><label for=switcher></label></span> <br>
             <button type="submit" class="btn btn-primary" style="margin-top: 3%;width: 300px;" (click)="close()"> SAVE</button>
         </form>
         </div>
