@@ -28,6 +28,7 @@ export class SelectBusinessCategoryComponent implements OnInit, ControlValueAcce
   selectedValue:any;
   filteredOptions!: Observable<string[]>;
   question = 'Would you like to add ';
+  @Input() dropdownselected!:string;
   @Input() options!: any[];
   @Output() added = new EventEmitter();
   @Output() businessvalue = new EventEmitter();
@@ -60,7 +61,7 @@ constructor(private category:BusinessCategoryService){}
       this.writeValue(newOption);
     } else {
       this.myControl.setValue(option.value);
-      console.log("cvcvvc",option.value);
+     // console.log("cvcvvc",option.value);
       this.businessvalue.emit(option.value)
       this.writeValue(option.value);
     }
@@ -114,6 +115,13 @@ constructor(private category:BusinessCategoryService){}
     }
     return results;
   }
+
+  ngOnChanges():void
+  {
+   // console.log("@Input values  ",this.businessname);
+   this.myControl.setValue(this.dropdownselected);
+  
+  }  
 //   businesscategory:any=[];
 
 // selectcategory!:FormGroup;

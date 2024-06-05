@@ -17,9 +17,9 @@
   <div class="row">
     <div class="col-6">
       <div class="text-field w100p">
-  <app-select-business-category 
-    formControlName="categoryname"
-    [options]="options"
+  <app-select-business-category  
+    formControlName="categoryname" 
+    [options]="options" [dropdownselected]="dropdownselected"
     (added)="onItemAdded($event)" (businessvalue) ="selectedname($event)">
   </app-select-business-category>
       </div>

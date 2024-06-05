@@ -61,6 +61,7 @@ locationdata!:Location
 businesslocation!:Location;
 categoryname!:string;
 Clicked!:boolean;
+dropdownselected!:string;
 options:any[]=[]
 businesscategory:any[]=[]
 gstfile:any;
@@ -177,6 +178,7 @@ GetChilddata(data:string){
             this.businesslocation = this.formdata.businesslocation;
             this.Createbusiness?.controls['categoryname'].setValue(this.formdata?.categoryname);
             this.categoryname = this.formdata.categoryname;
+            this.dropdownselected = this.formdata.categoryname;
             if (this.formdata.storetiming != 'Available 24/7') {
               this.formdata.storetiming = 'Pick Days'
               this.Createbusiness?.controls['storetiming'].setValue(this.formdata?.storetiming);
@@ -196,6 +198,7 @@ GetChilddata(data:string){
             this.formdata = JSON.parse(some)
             this.Createbusiness?.controls['categoryname'].setValue(this.formdata?.categoryname);
             this.categoryname = this.formdata?.categoryname;
+           // this.dropdownselected = this.formdata.categoryname;
             this.imagedata = this.imageService.getImageData();
             this.imagedata1 = this.imageService.getImageData4();
             this.datatime = this.formdata?.storetiming;
@@ -208,6 +211,7 @@ GetChilddata(data:string){
               this.datatime = this.formdata.storetiming;
             }
             this.businesslocation = this.formdata?.businesslocation;
+            this.dropdownselected = this.formdata.categoryname;
             localStorage.removeItem('key')
             this.buttons = false;
             this.AddvaluesToform()
