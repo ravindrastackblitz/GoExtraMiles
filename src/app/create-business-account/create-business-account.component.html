@@ -199,20 +199,25 @@
         <input class="text-base w100p" type="text" [(ngModel)]="GSTNumber"  placeholder="" >
         <span>GST Number *</span>
       </div>
+ 
 
       <div class="file-container" *ngIf="!file" >
        <i class="fas fa-cloud-upload-alt upload-icon" id="uploadicon"></i> 
         <!-- <i class="fas fa-upload" id="uploadicon"></i> -->
         <div class="upload-text">Select a file</div>
         <p id="browse">Browse</p>
-        <input #fileInput type="file" (change)="getFile($event)" class="file"/>
+        <input #fileInput type="file" (change)="getFile($event)"  class="file"/>
+      
       </div>
       
       <div *ngIf="file" class="file-info">
         File name: {{file.name}} <br/>
         <button (click)="clearFile()">Clear file</button>
       </div>
-  </div> 
+  </div>  
+   <a [href]="gstfile" target="_blank">{{gstfilename}}</a> 
+      
   <button (click)="closeDialog()" class="btn btn-primary m-3">CONTINUE</button>
+ 
  </div> 
 

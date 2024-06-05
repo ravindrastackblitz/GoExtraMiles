@@ -83,6 +83,7 @@ export class BusinessRegistrationCRUDService {
         fileUpload.url = urls.fileURL;
         fileUpload.imagename = fileUpload.file.name;
         fileUpload.url2 = urls.gstURL;
+        fileUpload.gstImageName = fileUpload.gstFile.name;
         return of(fileUpload);
       })
     );
