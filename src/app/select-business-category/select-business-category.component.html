@@ -1,21 +1,21 @@
-<mat-form-field 
-  class="example-full-width">
+<mat-form-field appearance="outline" class="textboxboader">
+  <mat-label>Business Category *</mat-label>
 	<input 
     type="text" 
-    placeholder="Business category" 
-    aria-label="Number" 
+    placeholder=" " 
+    aria-label="number" 
     matInput 
     [formControl]="myControl" 
     [matAutocomplete]="auto"
-    (keyup.enter)="enter()">
+    (keyup)="enter()" style="display: inline-block;">
   <mat-autocomplete 
     #auto="matAutocomplete"
     (optionSelected)="optionSelected($event.option)">
-    <mat-option 
+      <mat-option 
       *ngFor="let option of filteredOptions | async" 
-      [value]="option">
+      [value]="option" class="selectedoptiondata">
       {{option}}
-    </mat-option>
+    </mat-option> 
   </mat-autocomplete>
 </mat-form-field>
 <!-- 
