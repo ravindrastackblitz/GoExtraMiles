@@ -20,7 +20,7 @@
   <app-select-business-category 
     formControlName="categoryname"
     [options]="options"
-    (added)="onItemAdded($event)">
+    (added)="onItemAdded($event)" (businessvalue) ="selectedname($event)">
   </app-select-business-category>
       </div>
 

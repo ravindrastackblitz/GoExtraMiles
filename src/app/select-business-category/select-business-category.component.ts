@@ -30,6 +30,7 @@ export class SelectBusinessCategoryComponent implements OnInit, ControlValueAcce
   question = 'Would you like to add ';
   @Input() options!: any[];
   @Output() added = new EventEmitter();
+  @Output() businessvalue = new EventEmitter();
   businesscategory:any[]=[]
   // Function to call when the option changes.
   onChange = (option: string) => {};
@@ -59,6 +60,8 @@ constructor(private category:BusinessCategoryService){}
       this.writeValue(newOption);
     } else {
       this.myControl.setValue(option.value);
+      console.log("cvcvvc",option.value);
+      this.businessvalue.emit(option.value)
       this.writeValue(option.value);
     }
   }
