@@ -63,6 +63,7 @@ categoryname!:string;
 Clicked!:boolean;
 options:any[]=[]
 businesscategory:any[]=[]
+
 Email = localStorage.getItem('Email')
 fb: any;
   constructor(private FB: FormBuilder,
@@ -78,6 +79,7 @@ fb: any;
     private timestore : StoretimingService
   ) {
     this.subscription = this.userloginService.getusername$.subscribe(name => this.username = name);
+  
   }
 
 
@@ -97,18 +99,22 @@ console.log("location details :",event)
 this.locationdata=event;
 }
 
-  getchilddata(data:string){
-    if(data == "undefined"){
-      this.category = '';
-      this.selectbusiness = false;
-    }
-    else{
-      this.category = data;
-      this.selectbusiness = false;
-      this.Createbusiness.controls['categoryname'].setValue(this.category);
-    }
+  // getchilddata(data:string){
+  //   if(data == "undefined"){
+  //     this.category = '';
+  //     this.selectbusiness = false;
+  //   }
+  //   else{
+  //     this.category = data;
+  //     this.selectbusiness = false;
+  //     this.Createbusiness.controls['categoryname'].setValue(this.category);
+  //   }
+  // }
+  
+  selectedname(data:any){
+  //console.log("eselected kjkj",data);
+  this.category = data;
   }
-
 GetChilddata(data:string){
   if(data == "undefined"){
     this.storetiming = '';
@@ -231,7 +237,7 @@ GetChilddata(data:string){
 AddvaluesToform(){
   if(this.formdata != undefined){
     this.Createbusiness.patchValue({
-      businessCategory : this.formdata.categoryname,
+      categoryname : this.formdata.categoryname,
       businessName : this.formdata.businessName,
       description : this.formdata.description,
       email : this.formdata.email,
