@@ -8,6 +8,8 @@
 {
   border:3px;
   background-color:rgb(218, 206, 206);
-
+}
+.textboxcenter{
+  display: inline-block;margin-top: 12px;
 }
 

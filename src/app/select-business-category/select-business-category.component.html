@@ -1,13 +1,13 @@
 <mat-form-field appearance="outline" class="textboxboader">
   <mat-label>Business Category *</mat-label>
 	<input 
-    type="text" 
+    type="text" class="textboxcenter"
     placeholder=" " 
     aria-label="number" 
     matInput 
     [formControl]="myControl" 
-    [matAutocomplete]="auto"
-    (keyup)="enter()" style="display: inline-block;">
+    [matAutocomplete]="auto" 
+    (keyup.enter)="enter()">
   <mat-autocomplete 
     #auto="matAutocomplete"
     (optionSelected)="optionSelected($event.option)">
@@ -18,67 +18,3 @@
     </mat-option> 
   </mat-autocomplete>
 </mat-form-field>
-<!-- 
-
-<div class="popup">
-  <div class="popup-content">
-    <div class="modal-header">
-        <h3>Select business category <i class="fa fa-info-circle" (click)="AddCategory()"></i></h3>
-      <i class="fas fa-times-circle" (click)="close1()"> </i>
-    </div>
-    <div>
-      <div class="flex">
-        <input type="button" class="btn btn-primary" (click)="showPopup()" id="butsel"  value="Add New Category">
-        <div class="input-icons">
-      <i class="fa fa-search icon"></i>
-      <input class="input-field" type="text" placeholder="Search"  (keyup)="Filterdata($event)" >
-       <input class="input-field" type="text" placeholder="Search"  [(ngModel)]="filterTerm" >
-
-    </div>
-    </div>
-  
-      <form class="data" [formGroup]="selectcategory">
-        <div id="createdCategories" >
-          <div *ngFor="let category of businesscategory.slice(0,5) ">
-            <div class="row">
-              <div class="col-sm-6">
-                <label  class="label1">{{ category.label}}</label>
-              </div>
-               <div class="col-sm-6">
-                 <input type="radio"  value="{{category.value}}"  id="rad" formControlName="category" >
-               </div>
-            </div>  
-          </div>
-        </div>
-      
-    <button type="button"  class="btn btn-primary continue" (click)="categorys()">CONTINUE</button>
-    </form>
-    
-    
-    <div class="popup1" *ngIf="showModal">
-      <div class="popup-content1">
-        <div class="modal-header1">
-          <input type="text" id="categoryNameInput" class="form-control" [(ngModel)]="categoryName" placeholder="Write Business Category Name" name="categoryName" #categoryInput="ngModel" required>
-        </div>
-        <hr>
-        <div>
-          <button (click)="createCategory()" class="btn btn-primary m-3" id="add" [disabled]="!categoryInput.valid">Add</button>
-        </div> 
-      </div>  
-    </div>
-    
-</div> 
-
-<div class="categorypopup" *ngIf="addcategory">
-  <div class="categorypopup-content">
-    <div class="categorymodal-header">
-      <h3>Category</h3>   
-    </div>
-    <h4>If you Could not find the Category Name Please 
-      click on "<b>Add Category</b>" and 
-      write the category name</h4>
-      <button (click)="closeDialog()" class="btn btn-primary m-3">Ok</button>
-    <div>
-  </div>
-</div> 
-</div> -->
