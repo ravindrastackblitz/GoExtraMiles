@@ -55,22 +55,29 @@ export class CreateBusinessAccountComponent implements OnInit {
   buttons!:boolean;
   datatime :string ="";
   username:string ='';
+  brand!:boolean
   subscription: Subscription;
-formdata:any;
-locationdata!:Location
-businesslocation!:Location;
-categoryname!:string;
-Clicked!:boolean;
-dropdownselected!:string;
-options:any[]=[]
-businesscategory:any[]=[]
-gstfile:any;
-gstfilename:any;
+  formdata:any;
+  locationdata!:Location
+  businesslocation!:Location;
+  categoryname!:string;
+  Clicked!:boolean;
+  Terms!:boolean;
+  file: File | undefined;
+  dropdownselected!:string;
+  options:any[]=[]
+  businesscategory:any[]=[]
+  gstfile:any;
+  gstfilename:any;
   GstFile!: File;
   brandfile!:File;
-Email = localStorage.getItem('Email')
-fb: any;
-  constructor(private FB: FormBuilder,
+  Email = localStorage.getItem('Email')
+  fb: any;
+  myForm!: FormGroup;
+
+  constructor
+  (
+    private FB: FormBuilder,
     private popupservice: PopupService,
     private gstservice: GstService,
     private imageService: ImagesarviceService,
@@ -81,44 +88,29 @@ fb: any;
     private businessService: BusinessRegistrationCRUDService,
     private userloginService:UserloginService,
     private timestore : StoretimingService
-  ) {
-    this.subscription = this.userloginService.getusername$.subscribe(name => this.username = name);
-  
-  }
+  ) 
+    {
+      this.subscription = this.userloginService.getusername$.subscribe(name => this.username = name);
+    }
 
 
   OnlyNubersAllowed(event:any):boolean
   {
   const charCode = (event.which)?event.which:event.keyCode;
-
   if(charCode > 31 && (charCode < 48 || charCode >57)){
-    console.log('charcode restricted is '+ charCode);
     return false;
   }
   return true;
 }
 
 Location(event:any){
-console.log("location details :",event)
 this.locationdata=event;
 }
 
-  // getchilddata(data:string){
-  //   if(data == "undefined"){
-  //     this.category = '';
-  //     this.selectbusiness = false;
-  //   }
-  //   else{
-  //     this.category = data;
-  //     this.selectbusiness = false;
-  //     this.Createbusiness.controls['categoryname'].setValue(this.category);
-  //   }
-  // }
-  
   selectedname(data:any){
-  //console.log("eselected kjkj",data);
   this.category = data;
   }
+
 GetChilddata(data:string){
   if(data == "undefined"){
     this.storetiming = '';
@@ -129,7 +121,6 @@ GetChilddata(data:string){
     this.Createbusiness.controls['storetiming'].setValue(this.storetiming);
   }
 }
-
 
   ngOnInit() {
     if (this.phone != '' && this.phone != undefined) {
@@ -154,26 +145,19 @@ GetChilddata(data:string){
       });
       
       this.selectbusines.GetAllCategorys().subscribe(res => {
-        console.log("category",res);
         for(var i =0; i<res.length; i++){
           this.options.push(res[i].value)
         }
-        //this.options  = JSON.stringify(this.businesscategory)
-      //  this.options = this.businesscategory;
-      //console.log("yyuyu",dat);
         })
 
       this.businessService.getBusinessRecordByKey1(this.phone).subscribe(
         business => {
           if (business !== undefined) {
             this.formdata = business;
-            console.log("data form database", this.formdata);
             this.buttons = true;
             this.imagedata = this.formdata.url;
             this.gstfile = this.formdata.url2;
             localStorage.setItem('key', this.formdata.key);
-            // this.selectedFiles = this.formdata.url;
-            // this.selectedgstfile = this.formdata.url2;
             this.image1 = this.formdata.imagename;
            this.gstfilename = this.formdata.gstImageName
            this.GSTNumber = this.formdata.gstNumber;
@@ -186,7 +170,6 @@ GetChilddata(data:string){
               this.Createbusiness?.controls['storetiming'].setValue(this.formdata?.storetiming);
               this.datatime = this.formdata.storetiming;
               this.timestore.getStoretimings(this.phone).subscribe((data) => {
-                console.log("timings from database", data);
               });
             }
             else {
@@ -200,7 +183,6 @@ GetChilddata(data:string){
             this.formdata = JSON.parse(some)
             this.Createbusiness?.controls['categoryname'].setValue(this.formdata?.categoryname);
             this.categoryname = this.formdata?.categoryname;
-           // this.dropdownselected = this.formdata.categoryname;
             this.imagedata = this.imageService.getImageData();
             this.imagedata1 = this.imageService.getImageData4();
             this.datatime = this.formdata?.storetiming;
@@ -254,17 +236,12 @@ AddvaluesToform(){
       username :this.formdata.username,
       storetiming  :this.formdata.storetiming,
       mobileNumber :this.formdata.mobilenumber,
-     // imagedata : this.imageService.getImageData(),
-    //   imagedata : this.formdata.url,
-    //  image :this.formdata.imagename
     })
-    console.log("this is the data",this.imagedata)
   }  
 }
   
   popup() {
     this.selectbusiness = true;
-  // this.popupservice.openPopup();
   }
 
   gst() {
@@ -272,26 +249,24 @@ AddvaluesToform(){
   }
 
   storetime() {
-    this.showtimes = true;
-    
+    this.showtimes = true;  
   }
 
   close() {
     this.showGstPopup = false;
   }
 
-  Terms!:boolean
   condition(){
 this.Terms= true;
   }
+
   Conditions(data:any){
     this.Terms = false;
     }
+
   closeDialog() {
     this.showGstPopup = false;
-    //console.log("gstnumber", this.GSTNumber);
     this.sendnumber = this.GSTNumber;
-
     this.Createbusiness.controls['gstNumber'].setValue(this.GSTNumber);
   }
 
@@ -299,7 +274,6 @@ this.Terms= true;
     this.selectedLat = event.coords.lat;
     this.selectedLng = event.coords.lng;
   }
-  file: File | undefined;
 
   getFile(event: any): void {
     this.gstfile = "";
@@ -337,14 +311,11 @@ this.Terms= true;
     }
   }
 
-brand!:boolean
   onFormSubmit(): void {
     if (this.Createbusiness.valid ) {
-     
       if(this.selectedFiles == undefined && this.imagedata == null){
         this.brand =true;
         this.ngAfterViewInit();
-       console.log("hello98998");
       }
       else{
         this.brand =false;
@@ -378,7 +349,6 @@ brand!:boolean
             };
             localStorage.setItem('form-data', JSON.stringify(formData));
             this._router.navigate(['/BusinessRegistrationDetails']);
-          //  console.log("FORMATATA",formData)
           }else{
             const formData: CreateBusinessAccount = {
               categoryname: this.category,
@@ -404,7 +374,6 @@ brand!:boolean
             };
             localStorage.setItem('form-data', JSON.stringify(formData));
             this._router.navigate(['/BusinessRegistrationDetails']);
-           // console.log("FORMATATA",formData)
           }
         }
         else{
@@ -433,28 +402,12 @@ brand!:boolean
     
           localStorage.setItem('form-data', JSON.stringify(formData));
           this._router.navigate(['/BusinessRegistrationDetails']);
-         // console.log("FORMATATA",formData)
         }
-
       }
 
     } else {
       console.error("Form is not valid or no file selected.");
     }
-  }
-
-
-  //data.....................................................
-  name = 'Angular';
-  // options = [
-  //   'Option 1',
-  //   'Option 2',
-  //   'Option 3'
-  // ];
-  myForm!: FormGroup;
-
-  onSubmit() {
-    console.log(this.myForm.value);
   }
 
   onItemAdded(itemToBeAdded:any) {
@@ -465,7 +418,6 @@ brand!:boolean
       }
       this.selectbusines.Create(data);
     } 
-    console.log('Item to be added: ', itemToBeAdded);
   }
 }
 

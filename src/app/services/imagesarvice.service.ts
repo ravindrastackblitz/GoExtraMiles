@@ -8,6 +8,13 @@ export class ImagesarviceService {
 
   private IsEdit: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public get getuserrole$(): Observable<boolean> { return this.IsEdit.asObservable(); };
+  private selectedFiles?: FileList |undefined;
+  private  selectedgstFile ?:FileList | undefined;
+  private imagedata :string | null = null;
+  private imageData4: any | string | ArrayBuffer | null = null;
+  private imagedata1 :string | null = null;
+  private imagedata2 :string | null = null;
+  private imagedata3 :string | null = null;
 
   setdata(IsEdit: boolean) {
     this.IsEdit.next(IsEdit)
@@ -17,15 +24,7 @@ export class ImagesarviceService {
     this.selectedFiles=data;
   }
 
-  private selectedFiles?: FileList |undefined;
-
-  private  selectedgstFile ?:FileList | undefined;
-
-  private imagedata :string | null = null;
-  private imageData4: any | string | ArrayBuffer | null = null;
- private imagedata1 :string | null = null;
- private imagedata2 :string | null = null;
- private imagedata3 :string | null = null;
+  
 
  setfile(some:any){
   this.selectedFiles = some;
@@ -33,6 +32,7 @@ export class ImagesarviceService {
  setfile1(some:any){
   this.selectedgstFile = some;
  }
+
  
   setImageData(data:string){
     this.imagedata= data;
@@ -40,10 +40,12 @@ export class ImagesarviceService {
   setImageData4(data:string){
     this.imageData4= data;
   }
+
   getFile()
   {
     return this.selectedFiles
     }
+    
   setImageData1(data:string){
     this.imagedata1= data;
 

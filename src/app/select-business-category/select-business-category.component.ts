@@ -8,8 +8,6 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { BusinessCategoryService } from '../services/business-category.service';
 import { SelectCategory } from '../Model/select-category';
 
-
-
 @Component({
   selector: 'app-select-business-category',
   templateUrl: './select-business-category.component.html',
@@ -61,7 +59,6 @@ constructor(private category:BusinessCategoryService){}
       this.writeValue(newOption);
     } else {
       this.myControl.setValue(option.value);
-     // console.log("cvcvvc",option.value);
       this.businessvalue.emit(option.value)
       this.writeValue(option.value);
     }
@@ -83,21 +80,14 @@ constructor(private category:BusinessCategoryService){}
     }
   }
 
-  // Allows Angular to update the model (option).
-  // Update the model and changes needed for the view here.
   writeValue(option: string): void {
     this.selectedValue = option;
     this.onChange(option);
   }
 
-  // Allows Angular to register a function to call when the model (rating) changes.
-  // Save the function as a property to call later here.
   registerOnChange(fn: (option: string) => void): void {
     this.onChange = fn;
   }
-
-  // Allows Angular to register a function to call when the input has been touched.
-  // Save the function as a property to call later here.
   registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
@@ -118,109 +108,7 @@ constructor(private category:BusinessCategoryService){}
 
   ngOnChanges():void
   {
-   // console.log("@Input values  ",this.businessname);
    this.myControl.setValue(this.dropdownselected);
   
-  }  
-//   businesscategory:any=[];
-
-// selectcategory!:FormGroup;
-// selectedCategory:string="";
-
-// @Output() eventemit:EventEmitter<string> = new EventEmitter();
-
-// @Input('businesscategory') businessname!:string;
-// filterTerm!: string;
-// categoriesdata !:SelectCategory
-
-//   showModal: boolean = false;
-//   categoryName: string = '';
-//   categories: { name: string }[] = [];
-
-
-//   constructor( private popup:PopupService ,private formbuilder:FormBuilder,  private _router: Router,private category:BusinessCategoryService){
-//     // this.subscription = this.popup.selectbusiness$.subscribe(business =>this.selectbusiness = business)
-//   }
-
-
-// ngOnInit(){
-// this.selectcategory = this.formbuilder.group({
-//     category : new FormControl('',Validators.required)
-// })
-
-// this.category.GetAllCategorys().subscribe(res => {
-// //console.log("category",res);
-// this.businesscategory =res
-// })
-// }
-
-// Filterdata(event: any) {
-//     const char = event.target.value.trim().toLowerCase(); 
-//     this.category.GetAllCategorys().subscribe(res => {
-//       const filteredResults = res.filter(item => item.label?.toLowerCase().includes(char) || item.value?.toLowerCase() === char);
-//     //  console.log("Filtered results:", filteredResults);
-//       this.businesscategory =filteredResults;
-//     })
- 
-// }
-
-// addcategory!:boolean;
-// AddCategory(){
-// this.addcategory=true;
-// }
-
-// closeDialog(){
-//   this.addcategory = false;
-// }
-// onsubmit(){
-//   // if(this.selectcategory.valid){
-//   //   var res = this.selectcategory.value
-//   //   localStorage.setItem('category', res.category);
-//   //   this._router.navigate(['/CreateBusinessAccount']);
-//   // }
-// }
-// categorys(){
-//   if(this.selectcategory.valid){
-//     var res = this.selectcategory.value;
-//     this.selectedCategory = res.category
-//     this.eventemit.emit( this.selectedCategory);   
-//   }
-//   this.category.GetAllCategorys().subscribe(res => {
-//     this.businesscategory =res
-//     })
-// }
-// close1(){
-//   this.eventemit.emit( this.selectedCategory);
-// }
-
-//   showPopup() {
-//     this.showModal = true;
-//   }
-
-//   closePopup() {
-//     this.showModal = false;
-//     this.categoryName = ''; // Reset the category name input
-//   }
-
-//   createCategory() {
-//     if (this.categoryName.trim() !== '') {
-//       const data : SelectCategory ={
-//         label : this.categoryName,
-//         value :this.categoryName
-//       }
-//       this.category.Create(data);
-//    //   this.categories.push({ name: this.categoryName });
-//       this.closePopup();
-//     } else {
-//       alert('Please enter a valid category name.');
-//     }
-
-//   }
- 
-//   ngOnChanges():void
-//   {
-//    // console.log("@Input values  ",this.businessname);
-//     this.selectcategory?.controls['category'].setValue(this.businessname);
-  
-//   }
+  }
 }

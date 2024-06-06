@@ -5,7 +5,6 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AppConfigService {
-
   private appConfig: any;
 
   constructor(private http: HttpClient) { }
@@ -16,13 +15,9 @@ export class AppConfigService {
       .then(data => {
         this.appConfig = data;
       });
-
-     
-
   }
 
    get clientid() {
-
     if (!this.appConfig) {
       throw Error('Config file not loaded!');
     }

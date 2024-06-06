@@ -1,26 +1,18 @@
-<!-- <div *ngIf="spinner" class="spin">
-  <h3 class="text-center text-primary">Please Wait Loading </h3>
-  <app-spinner></app-spinner>
-</div> -->
 <form [formGroup]="Additemdetails" (ngSubmit)="Submit()" *ngIf="!spinner">
-<div>
+  <div>
   <h1 style="text-align: center;">Add Items</h1>
- 
-  <!-- <input class="button" [routerLink]="['/ItemDetails']"  class="btn btn-primary" style="margin-left:80%;" value="SAVE"> -->
-</div>
+ </div>
 <div class="image-container" style="margin-left: 35%;">
-
   <div class="avatar-container1">
     <label for="avatarInput1">
- 
-<img *ngIf="selectedImages[0]" [src]="selectedImages[0]" class="avatar-preview1" alt="Avatar Preview">
+    <img *ngIf="selectedImages[0]" [src]="selectedImages[0]" class="avatar-preview1" alt="Avatar Preview">
 <div *ngIf="!selectedImages[0]" class="avatar-placeholder" [style.border]= "AddImage ? '2px dashed red' : '2px dashed #ccc'">
         <i class="fas fa-user1"></i> <!-- Placeholder icon -->
         <span>Add images</span>
-      </div>
-    </label>
-    <input type="file" id="avatarInput1" accept="image1/*" (change)="onFileSelected($event,0)">
-  </div>
+</div>
+</label>
+<input type="file" id="avatarInput1" accept="image1/*" (change)="onFileSelected($event,0)">
+</div>
   <div class="avatar-container2" style="margin-left: 3%;">
     <label for="avatarInput2">
       <img *ngIf="selectedImages[1]" [src]="selectedImages[1]" class="avatar-preview2" alt="Avatar Preview">
@@ -96,7 +88,6 @@
   <div class="form-text text-muted"
   *ngIf="Additemdetails.controls['retailprice'].touched && Additemdetails.controls['retailprice'].errors">
   <div *ngIf="Additemdetails.controls['retailprice'].errors?.['required']">Please Enter  Retailprice.</div>
-  <!-- <div *ngIf="Additemdetails.controls['retailprice'].errors?.['pattern']"> Price must have a maximum of two decimal places.</div> -->
 </div>
   <div class="text-field w100p">
     <input class="text-base w100p" type="text" required placeholder=" " (input)="enforceNumberValidation($event)" formControlName="sellingprice"  (keypress)="OnlyNubersAllowed($event)">
@@ -105,9 +96,7 @@
   <div class="form-text text-muted"
  *ngIf="Additemdetails.controls['sellingprice'].touched && Additemdetails.controls['sellingprice'].errors">
  <div *ngIf="Additemdetails.controls['sellingprice'].errors?.['required']">Please Enter  Selling Price.</div>
- <!-- <div *ngIf="Additemdetails.controls['sellingprice'].errors?.['pattern']"> Price must have a maximum of two decimal places.</div> -->
 </div>
-
 </div>
 
  <div style="display: flex;">

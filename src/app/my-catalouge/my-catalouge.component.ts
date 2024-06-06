@@ -18,18 +18,10 @@ export class MyCatalougeComponent implements OnInit {
   images: CatalogModel[] | undefined;
   Images:any=[];
   scratchcardImages:any =[];
-
-
-
-//   toDate: Date = new Date();
-// numDate=1590319189931;
-//readmore variable, its true than read more string will print
-ReadMore:boolean = true
-
-//hiding info box
-visible:boolean = false;
-data = JSON.parse(JSON.stringify(localStorage.getItem('form-data')));
-details2 = JSON.parse(this.data);
+  ReadMore:boolean = true
+  visible:boolean = false;
+  data = JSON.parse(JSON.stringify(localStorage.getItem('form-data')));
+  details2 = JSON.parse(this.data);
   details1 = JSON.parse(localStorage.getItem('form-data') || '{}');
   selectedImage:any| string | ArrayBuffer | null = null;
   selectedTab: number = 1;
@@ -38,38 +30,27 @@ details2 = JSON.parse(this.data);
   time!: boolean;
   subscription!:Subscription;
   Ischecked!:boolean;
-
-  constructor(
-    private imageService: ImagesarviceService,private catalogService:CatalogCURDService,private dataservice:DiscountcodeService,
-    private router: Router, private userloginService:UserloginService){
-      this.subscription = this.catalogService.getchecked$.subscribe(val => this.Ischecked = val);
-  }
   showImage!: boolean;
   showcatelog:boolean = true
   imagedata1 :string | null = null;
   imagedata2 :string | null = null;
   imagedata3 :string | null = null;
   HostListener:any
-  //online!: boolean;
-catalogKeyt!:any;
+  catalogKeyt!:any;
+  Email = localStorage.getItem('Email');
+  keys:any[] = [];
+  spinner!:boolean;
 
-spinner!:boolean;
+  constructor(
+    private imageService: ImagesarviceService,private catalogService:CatalogCURDService,private dataservice:DiscountcodeService,
+    private router: Router, private userloginService:UserloginService){
+      this.subscription = this.catalogService.getchecked$.subscribe(val => this.Ischecked = val);
+  }
+
   togglePopup(): void {
     this.router.navigate(['/AddItem']);
   }
 
-  // confirm(){
-  //   this.online =false;
-  //   this.showImage = true;
-  //    this.router.navigate(['/AddItem']);
-  // }
-
-  
-  // cancle(){
-  //   this.online =false;
-  //   this.router.navigate(['/MyCatalouge']);
-  // }
- 
    selectTab(tabNumber: number) {
     this.selectedTab = tabNumber;
   }
@@ -79,9 +60,7 @@ spinner!:boolean;
   toggleBlur(): void {
     this.isUnblurred = !this.isUnblurred;
   }
-  Email = localStorage.getItem('Email')
-
-  keys:any[] = [];
+ 
   ngOnInit(): void {
   if(this.phoneNumber != '' && this.phoneNumber != undefined){
     if(this.Email != '' && this.Email != undefined){
@@ -90,7 +69,6 @@ spinner!:boolean;
     this.imagedata1 = this.imageService.getImageData1();
     this.imagedata2 = this.imageService.getImageData2();
     this.imagedata3 = this.imageService.getImageData3();
-    
     this.imagedata = this.imageService.getImageData();
     if(this.imagedata == "" || this.imagedata == null){
       this.imagedata = this.details2?.url;
@@ -98,37 +76,25 @@ spinner!:boolean;
      
     this.catalogService.getBusinessByPhoneNumber(this.phoneNumber).subscribe(images1 => {
       setTimeout(()=>{
-        console.log("catelog data",images1)
         this.images = images1;
-        //this.catalogKeyt
-        
+        //this.catalogKeyt  
         var dta = JSON.parse(JSON.stringify(images1));
         for(var i=0;i<dta.length;i++){
-         // this.keys = dta[i].key;
           const img = dta[i].urls[0];
           this.Images.push({images:dta[i].urls[0],key:dta[i].key,isVerifed:dta[i].isVerified,status:dta[i].status,isHidden:dta[i].isHidden});
         }
-        console.log('hello',this.Images)
         if( this.Images != "" ){
           this.showImage = false;
           this.showcatelog = true;
          for(var i = 0; i<this.Images.length; i++){
           this.keys.push(this.Images[i].key)
           this.dataservice.getScratchcardByphone(this.phoneNumber).
-          subscribe( data => {console.log("tudttf",data.map((d:any)=>d["productKey"]))
+          subscribe( data => {
           var prodkeys=data.map((d:any)=>d["productKey"]);
           const distinctprodkeys = prodkeys.filter((n:any, i:any) => prodkeys.indexOf(n) === i);
-          console.log(distinctprodkeys);
         this.scratchcardImages =  this.Images.filter((x:any)=>distinctprodkeys.includes(x.key));
-       
-        console.log("yuuuu",this.Images);
-          console.log("yuuuu",this.scratchcardImages);
           });
-        
-          
          }
-    
-
         }
         else{
           this.showImage = true;
@@ -139,14 +105,11 @@ spinner!:boolean;
       setTimeout(()=>{
         this.spinner= true;
       },2000)
- 
-     // console.log("yqwyqwuyw 4334",this.Images);
-    });
+     });
   }
   else{
    this.router.navigate([''])
   }
- 
   }
 
   GotoAddItem(){
@@ -160,19 +123,12 @@ spinner!:boolean;
   ImageData(event: any) {
     const key = event.target.dataset.imagename;
     this.catalogService.setKey(key)
-   // console.log("Image Name:", key); // Log imageName
     this.router.navigate(['/ItemDetails'])
-     
   }
   
   ScractchcardImage(event: any) {
     const Scrachkey = event.target.dataset.imagekey;
    this.catalogService.SetScrachcard(Scrachkey)
-   // console.log("Image Name:", key); // Log imageName
-    this.router.navigate(['/ScratchCardInsights']);
-     
+    this.router.navigate(['/ScratchCardInsights']);   
   }
-  
-  
-
 }

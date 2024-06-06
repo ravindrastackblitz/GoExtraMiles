@@ -9,10 +9,11 @@ import { Route, Router } from '@angular/router';
   styleUrls: ['./business-registration.component.css']
 })
 export class BusinessRegistrationComponent {
+Email = localStorage.getItem('Email');
+phone = localStorage.getItem('phoneNumber');
 
-  constructor ( private userloginService:UserloginService,private _router: Router,){ }
-    Email = localStorage.getItem('Email');
-    phone = localStorage.getItem('phoneNumber')
+constructor ( private userloginService:UserloginService,private _router: Router,){ }
+   
 ngOnInit(){
   if(this.phone != '' && this.phone != undefined)
     {
@@ -23,11 +24,9 @@ ngOnInit(){
     else{
       this._router.navigate(['']);
     }
-
 }
+
 nexttab(){
-  console.log("hello this nexttab button");
  this._router.navigate(['/CreateBusinessAccount']);
-console.log('after link');
 }
 }

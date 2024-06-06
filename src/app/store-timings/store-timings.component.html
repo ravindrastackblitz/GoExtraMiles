@@ -81,14 +81,6 @@
               </p>
             </div>
             <span class="switch"><input type="checkbox" id="switcher"><label for=switcher></label></span><br>
-            
-            <!-- <label class="la"><b>SAT</b></label><input type="button" *ngIf="!buttonClicked5" (click)="onClick5()" class="btn1 choice" value="CHOOSE">
-            <p *ngIf="buttonClicked5">
-                <input formControlName="Satopen" name="Satopen" type="time" style="width: 80px;">
-                <input formControlName="Satclose" name="Satclose" type="time" style="width: 80px;">
-                <input type="button" (click)="close5()" value="enter">
-            </p>
-            <span class="switch"><input type="checkbox" id="switcher"><label for=switcher></label></span><br> -->
         
             <label class="la"><b>SUN</b></label><div style="display: inline-block;"><input type="button" *ngIf="!buttonClicked6" (click)="onClick6()" class="btn1 choice" value="CHOOSE">
             <p *ngIf="buttonClicked6" style="display: inline;">
@@ -106,15 +98,3 @@
   </div>
 </div>
  
-
-<!-- <div *ngFor="let day of ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']; let i = index" style="display: inline-block;">
-  <label class="la"><b>{{ day }}</b></label>
-  <input type="button" *ngIf="!ButtonClicked[index]" (click)="onclick(index)" class="btn1 choice" value="CHOOSE">
-  <p *ngIf="ButtonClicked[index]" style="display: inline;">
-      <input formControlName="{{ day.toLowerCase() }}open" name="{{ day.toLowerCase() }}open" type="time" class="daytime">
-      <input formControlName="{{ day.toLowerCase() }}close" name="{{ day.toLowerCase() }}close" type="time" class="daytime">
-  </p>
-  <span class="switch"><input type="checkbox" id="switcher"><label for="switcher"></label></span><br>
-</div> -->
-
-    <!-- Your input fields here -->

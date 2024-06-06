@@ -11,6 +11,9 @@ export class PromotionInsightsComponent {
   images: (string | ArrayBuffer | null)[] = [];
   Terms!:boolean
   discount1!: boolean;
+  Email = localStorage.getItem('Email');
+ 
+  constructor(private imageService: ImagesarviceService, private userloginService:UserloginService) {}
 
   popup(){
     this.Terms = true
@@ -24,9 +27,6 @@ export class PromotionInsightsComponent {
   Conditions(data:any){
   this.Terms = false;
   }
-  constructor(private imageService: ImagesarviceService, private userloginService:UserloginService) {}
-
-  Email = localStorage.getItem('Email');
   ngOnInit() {
     if(this.Email != '' && this.Email != undefined){
       this.userloginService.setIsMainHeaderVisible(true); 
@@ -34,17 +34,4 @@ export class PromotionInsightsComponent {
     this.images.push(this.imageService.getImageData1());
 
   }
-  // selectedImage:any| string | ArrayBuffer | null = null;
-
-  // onFileSelected(event: any) {
-  //   const file: File = event.target.files[0];
-  //   if (file) {
-  //     const reader = new FileReader();
-  //     reader.onload = (e) => {
-  //       this.selectedImage = e.target?.result;
-  //     };
-  //     reader.readAsDataURL(file);
-  //   }
-  // }
-
 }

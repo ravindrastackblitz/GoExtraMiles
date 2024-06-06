@@ -3,7 +3,6 @@
 <div class="avatar-container" style="margin-left: 45%;" #productsElement id="products" >
   <label for="avatarInput">
     <img *ngIf="imagedata" [src]="imagedata" class="avatar-preview" alt="Avatar Preview">
-    <!-- <img *ngIf="imagedata" [src]="imagedata" class="avatar-preview" alt="Avatar Preview"> -->
     <div *ngIf="!imagedata" class="avatar-placeholder" [style.border]="brand ? '2px dashed red' : '2px dashed #ccc'">
       <i class="fas fa-user"></i> <!-- Placeholder icon -->
       <span><b>Brand Logo</b></span>
@@ -12,7 +11,6 @@
   <input type="file" id="avatarInput" accept="image/*"  (change)="onFileSelected($event)">
 </div>
 <p  [style.color]="brand ? 'red' : 'white'" style="margin-left: 45%;">Tap hear to select Your Brand-logo</p>
-<!-- <img [src]="imagedata" style="width: 150px;height: 150px;  border: 2px dashed #ccc; border-radius: 50%; cursor: pointer;margin-left: 35%;"> -->
 <div class="col-12">
   <div class="row">
     <div class="col-6">
@@ -23,29 +21,17 @@
     (added)="onItemAdded($event)" (businessvalue) ="selectedname($event)">
   </app-select-business-category>
       </div>
-
-      <!-- <div class="text-field w100p">
-        <input class="text-base w100p" type="text" formControlName="categoryname"  placeholder="" (click)="popup()" >
-        <span>Business Category  *</span>
-      </div> -->
-      <!-- <input type="text" class="form-select" name="businessCategory" [value]="category" readonly [routerLink]="['/selectBusinessCategory']" placeholder="Business Category*     " (click)="popup()" >  -->
     </div>
     <div class="col-6">
       <div class="text-field w100p">
         <input class="text-base w100p" type="text"   formControlName="businessName" placeholder="" >
         <span>Business Name  *</span>
       </div>
-      <!-- <div>
-        <input type="text"  class="form-control"  placeholder="Business Name" formControlName="businessName">
-      </div> -->
       <div class="form-text text-muted"
       *ngIf="Createbusiness.controls['businessName'].touched && Createbusiness.controls['businessName'].errors?.['required']">
       Please Enter  BusinessName.
      </div>
     </div>
-    <!-- <div [hidden]="!selectbusiness">
-      <app-select-business-category [businesscategory]="categoryname" (eventemit)="getchilddata($event)" ></app-select-business-category>
-    </div> -->
   </div>
   <div class="row">
     <div class="col-6">
@@ -53,36 +39,27 @@
         <input class="text-base w100p" type="text"   formControlName="description" placeholder="" >
         <span>Description of the Business  *</span>
       </div>
-      <!-- <div>
-        <input type="text"  class="form-control" placeholder="Description of the Business" formControlName="description">
-      </div> -->
       <div class="form-text text-muted"
       *ngIf="Createbusiness.controls['description'].touched && Createbusiness.controls['description'].errors?.['required']">
       Please Enter  Description.
      </div>
     </div>
-    
     <div class="col-6">
       <div class="text-field w100p">
         <input class="text-base w100p" type="text" (click)="storetime()"  formControlName="storetiming"  placeholder="" >
         <span>Add Store Timings    *</span>
       </div>
-      <!-- <input type="text" [routerLink]="['/StoreTimings']" class="form-select" [value]="storetiming" placeholder="Add Store Timings     "> -->
     </div>
   </div>
   <div [hidden]="!showtimes">
     <app-store-timings [formdata]="datatime" (timedata)="GetChilddata($event)"></app-store-timings>
   </div>
- 
   <div class="row">
     <div class="col-6">
       <div class="text-field w100p">
         <input class="text-base w100p" type="text" formControlName="email"  placeholder="" >
         <span>Email   *</span>
       </div>
-      <!-- <div>
-        <input type="email"  class="form-control"  placeholder="name@yourcompany.com" formControlName="email">
-      </div> -->
       <div class="form-text text-muted"
       *ngIf="Createbusiness.controls['email'].touched && Createbusiness.controls['email'].errors?.['required']">
       Please Enter  Email.
@@ -98,9 +75,6 @@
         <input class="text-base w100p" type="text" formControlName="website"  placeholder="" >
         <span>Website  *</span>
       </div>
-      <!-- <div>
-        <input type="text"  class="form-control"  placeholder="Website" formControlName="website">
-      </div> -->
   <div class="form-text text-muted"
     *ngIf="Createbusiness.controls['website'].touched && Createbusiness.controls['website'].errors">
     <div *ngIf="Createbusiness.controls['website'].errors?.['required']">Please Enter Website Link.</div>
@@ -110,30 +84,16 @@
   </div>
   <div class="row">
     <div class="col-6">
-      <!-- <input type="text"  [value]="sendnumber" class="form-select" placeholder="GST Number" formControlName="gstNumber" (click)="gst()" > -->
       <div class="text-field w100p">
         <input class="text-base w100p" type="text" formControlName="gstNumber" (click)="gst()" placeholder="" >
         <span>GstNumber  *</span>
       </div>
-      <!-- <div class="form-text text-muted"
-      *ngIf="Createbusiness.controls['gstNumber'].dirty  && Createbusiness.controls['gstNumber'].errors">
-      <div *ngIf="Createbusiness.controls['gstNumber'].errors?.['required']">Please Enter GstNumber.</div>
-    </div> -->
     </div>
   </div>  
 </div>
-
-
-<!-- <label style="margin-left: 5%;margin-top: 2%;"><b>Search Location:</b></label>
-<input type="text" formControlName="searchQuery" class="location"  placeholder="Search for a location">
-<button id="search" (click)="searchLocation()">Search</button> -->
 <div class="googlemap">
   <app-google-map   [locationdetails]="businesslocation"  (Searchdata)="Location($event)"></app-google-map>
 </div>
- 
-
-
-<!-- <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d121735.52507417274!2d78.45314559999998!3d17.543987199999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1714654002113!5m2!1sen!2sin"  class="map" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> -->
 <div class="second">
 <div class="who">
   <label class="form-label"><b>Are You the owner/manager of this Business*</b></label>
@@ -147,27 +107,20 @@
       <input class="text-base w100p" type="text" formControlName="username"  placeholder="" >
       <span>Name *</span>
     </div>
-    <!-- <input type="text" class="form-control" placeholder="Name*" formControlName="name"> -->
     <div class="form-text text-muted" 
     *ngIf="Createbusiness.controls['username'].touched && Createbusiness.controls['username'].errors?.['required']">
     Please Enter  YourName.
    </div>
- 
     <div class="text-field w100p">
       <input class="text-base w100p" type="text" formControlName="mobileNumber" (keypress)="OnlyNubersAllowed($event)" minlength="10" maxlength="10" placeholder="" >
       <span>Mobile Number *</span>
     </div>
-    <!-- <input type="text" class="form-control" placeholder="Mobile Number *" formControlName="mobileNumber" (keypress)="OnlyNubersAllowed($event)" minlength="10" maxlength="10"><br>  -->
     <div class="form-text text-muted"
     *ngIf="Createbusiness.controls['mobileNumber'].touched && Createbusiness.controls['mobileNumber'].errors?.['required']" >
  Please Enter  MobileNumber.
  <div *ngIf="Createbusiness.errors?.['minlength']" style="color: red;">Phone number cannot exceed 10 digits.</div>
 </div>
-<!-- <div *ngIf="Createbusiness.controls['mobileNumber'].errors?.['maxlength']">Max length is 10</div> -->
 </div>
-
-
-
   <input type="checkbox" style="margin: 5px;" formControlName="termsAndConditions"> I accept the  <b (click)="condition()" class="term">Terms and Conditions</b> as well as <b (click)="condition()" class="term">Privacy Policy.</b> 
 </div>
 <div  *ngIf="!buttons">
@@ -177,7 +130,6 @@
 <button type="submit" [disabled]="!Createbusiness.valid" class="btn btn-primary m-3" id="SubmitUpdate">Update</button>
 </div>
 </div>
-<!-- <input type="button" [routerLink]="['/BusinessRegistrationDetails']" class="btn btn-primary" style="margin-left: 5%;"  value="CREATE ACCOUNT"> -->
 </form>
  <div [hidden]="!Terms">
     <app-terms (terms)="Conditions($event)"></app-terms>
@@ -189,9 +141,6 @@
   <div class="popup-content">
     <div class="modal-header">
         <h3>GST Details</h3>
-      <!-- <button type="button" class="close" aria-label="Close" (click)="close()">
-        <span aria-hidden="true">&times;</span>
-      </button> -->
       <i class="fas fa-times-circle" (click)="close()"> </i>
     </div>
     <div>
@@ -199,25 +148,18 @@
         <input class="text-base w100p" type="text" [(ngModel)]="GSTNumber"  placeholder="" >
         <span>GST Number *</span>
       </div>
- 
-
       <div class="file-container" *ngIf="!file" >
        <i class="fas fa-cloud-upload-alt upload-icon" id="uploadicon"></i> 
-        <!-- <i class="fas fa-upload" id="uploadicon"></i> -->
         <div class="upload-text">Select a file</div>
         <p id="browse">Browse</p>
-        <input #fileInput type="file" (change)="getFile($event)"  class="file"/>
-      
-      </div>
-      
+        <input #fileInput type="file" (change)="getFile($event)"  class="file"/> 
+      </div> 
       <div *ngIf="file" class="file-info">
         File name: {{file.name}} <br/>
         <button (click)="clearFile()">Clear file</button>
       </div>
   </div>  
-   <a [href]="gstfile" target="_blank">{{gstfilename}}</a> 
-      
+   <a [href]="gstfile" target="_blank">{{gstfilename}}</a>    
   <button (click)="closeDialog()" class="btn btn-primary m-3">CONTINUE</button>
- 
  </div> 
 

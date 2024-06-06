@@ -55,10 +55,6 @@
       </tbody> 
     </table>
   </div>
-
-   <!-- <div class="col-sm-6">
-    <textarea type="text-area" [value]="storetimings" rows="7" cols="45" readonly class="form-control"></textarea>
-     </div> -->
   <div class="col-sm-6">
     <label><b>Email Address  </b></label>
   </div>
@@ -81,24 +77,12 @@
     <label><b>Business Location </b></label>
   </div>
   <div class="col-sm-6" id="location">
- <!-- <input type="text" [value]=""  readonly class="form-control"> -->
  <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
   <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
 </agm-map>
   </div> 
  
  </div>
-
- <!-- <div class="map">
-  <b class="location">Business Location </b>
-  <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false" [zoom]="zoom">
-    <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
-  </agm-map>
- </div> -->
- 
-
-
- <!-- <input type="button"  style="width: 250px;height: 40px; text-align: center;margin-left: 45%;margin-top: 3%;" [routerLink]="['/UrbanRiderStoreCatalouge']" class="btn btn-primary" value="SAVE"><br><br> -->
 <div style="display: flex;">
   <p style="margin-left: 35%; margin-top: 3%;" >Hide from Catalouge </p>
   <label class="switch" style="margin-left: 20%;" >
@@ -109,20 +93,3 @@
 
 
  <button  class="btn btn-primary"  [disabled]="clicked" (click)="save(); clicked = true;" >Save</button>
-
- <!-- <table border>
-  <thead>
-        <tr>           
-         <th *ngFor="let header of getHeaders()">{{header}}</th>
-       </tr> 
-  </thead>
-  <tbody>
-    <tr><td><b>Day</b></td><td><b>StartTime</b></td><td><b>Closetime</b></td></tr>
-       <tr *ngFor="let item of storetable">   
- <td *ngFor= "let key of getHeaders()"> {{item[key]}}</td> 
-       <td>{{ item["Day"] | uppercase }}</td>
-       <td>{{ item["StartTime"] }}</td>
-       <td>{{ item["Closetime"] }}</td> 
-       </tr>
-  </tbody> 
-</table> -->

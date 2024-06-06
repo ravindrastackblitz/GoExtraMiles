@@ -12,9 +12,10 @@ export class BusinessCategoryService {
   private dbPath ='/Categories';
   BusinessCategories: AngularFireList<SelectCategory>;
 
-  constructor(private db: AngularFireDatabase, private storage: AngularFireStorage) {
+  constructor(private db: AngularFireDatabase, private storage: AngularFireStorage) 
+    {
     this.BusinessCategories = db.list(this.dbPath);
-  }
+    }
 
   GetAllCategorys(){
     this.BusinessCategories = this.db.list(this.dbPath);
@@ -27,6 +28,5 @@ export class BusinessCategoryService {
 
   Create(data:any){
   return this.BusinessCategories.push(data)
-  }
-  
+  } 
 }

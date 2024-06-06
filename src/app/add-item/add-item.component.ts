@@ -28,25 +28,33 @@ export class AddItemComponent implements OnInit {
 catalogUploads:any;
 keyName:any;
   formdata:any;
-  buttons!:boolean
+  buttons!:boolean;
   phone :any = localStorage.getItem('phoneNumber');
   Email = localStorage.getItem('Email');
   ImagesUrl!:any[];
   spinner!:boolean;
   hide:boolean = false;
   catelogStatus: any;
+  CatalogImage: any
+  images:CatalogImage[]  =[];
+  catalogModel:any;
+  URLS:any =[];
+  Names:any =[];
+  brand!:boolean;
 
   data1 = JSON.parse(JSON.stringify(localStorage.getItem('AddItems')));
   details = JSON.parse(this.data1);
 
-  constructor(private fb: FormBuilder, private _router: Router,
+  constructor(
+    private fb: FormBuilder, private _router: Router,
     private imageService: ImagesarviceService,private toastar:toastersrc,
     private httpClient: HttpClient, private catalogService: CatalogServiceService,
     private catalogCrudService: CatalogCURDService, private userloginService:UserloginService,
     ) { }
 
-    ngOnInit(){
-  if(this.phone != '' && this.phone != undefined) {
+    ngOnInit()
+    {
+      if(this.phone != '' && this.phone != undefined) {
       if(this.Email != '' && this.Email != undefined) {
         this.userloginService.setIsMainHeaderVisible(true); 
       }
@@ -58,7 +66,6 @@ keyName:any;
       retailprice: ['', Validators.required],
       sellingprice: ['', Validators.required]
     });
-
     this.catalogCrudService.data$.subscribe(data => {
       this.keyName = data;
      });
@@ -73,7 +80,6 @@ keyName:any;
             this.selectedImages[1] =data.urls[1].url;
             this.selectedImages[2] = data.urls[2].url;
             this.images.push(data.urls[i]);
-           // this.Names.push(data.urls[i].name)
            }
           this.formdata=data;
           if(this.formdata.isHidden == true){
@@ -81,7 +87,6 @@ keyName:any;
           }
           this.buttons = true;
           this.AddvaluesToform();
-        console.log("Retrieved Data:", data);
         }
         else{
           this.buttons = false;
@@ -90,7 +95,6 @@ keyName:any;
     });
   }
   else{
-   // this.formdata = this.details;
     this.selectedImages[0] = this.imageService.getImageData1();
     this.selectedImages[1] = this.imageService.getImageData2();
     this.selectedImages[2] = this.imageService.getImageData3();
@@ -99,12 +103,8 @@ keyName:any;
 }
 else{
   this._router.navigate(['']);
+} 
 }
-  
-}
-
-
-
 
 AddvaluesToform(){
   if( this.formdata!= undefined){
@@ -117,7 +117,6 @@ AddvaluesToform(){
       sellingprice:this.formdata.SellingPrice  ,
       retailprice: this.formdata.Retailprice  ,
       registrationnumber: this.phone,
-     // isApproved: false,
       file: '',
       urls: this.formdata.urls || [],
       names: this.Names || [],
@@ -129,10 +128,8 @@ AddvaluesToform(){
   enforceNumberValidation(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
     let val = inputElement.value;
-
     const splitVal = val.split('.');
     if (splitVal.length == 2 && splitVal[1].length > 2) {
-      // user entered more than 2 decimal places
       val = splitVal[0] + '.' + splitVal[1].substr(0, 2);
       inputElement.value = val;
     }
@@ -143,11 +140,12 @@ AddvaluesToform(){
       (charCode >= 48 && charCode <= 57) || charCode === 46)
     {
       return true;
-    } else {
-      console.log('charcode restricted is ' + charCode);
+    } 
+    else {
       return false;
     }
   }
+
   onFileSelected(event: any,index: number) {
     this.AddImage = false;
     this.images= [];
@@ -168,7 +166,6 @@ AddvaluesToform(){
     const reader = new FileReader();
     reader.onload = (e) => {
       const imageData = e.target?.result as string;
-      console.log('Image data:', imageData);
       if (index === 0) {
         this.imageService.setImageData1(imageData);
       } else if (index === 1) {
@@ -184,8 +181,6 @@ AddvaluesToform(){
     reader.readAsDataURL(file);
   }
       }
-
-
     }
  }
 updateSelectedImages(): void {
@@ -194,25 +189,11 @@ updateSelectedImages(): void {
     this.imageService.getImageData2(),
     this.imageService.getImageData3()
   ];
-  console.log('Selected images:', this.selectedImages);
 }
 
-CatalogImage: any
-images:CatalogImage[]  =[];
-catalogModel:any;
-
-URLS:any =[];
-Names:any =[];
-brand!:boolean
 Submit() {
-  // setTimeout(()=>{
-  //   this.spinner= true;
-  // },2000)
   if (this.Additemdetails.valid) {
- 
      if(this.selectedFile.length === 3 || this.images.length === 3){
-    //   this.selectedFile = this.formdata.urls || []
-    // }
         this.catalogModel = {
           Itemname: this.Additemdetails.value.itemname,
           Description: this.Additemdetails.value.description,
@@ -227,7 +208,6 @@ Submit() {
           urls: [], // Initialize URLs array
           names: [], // Initialize names array
           file: this.selectedFile,
-
         };
       if(this.selectedFile.length != 0){
         this.AddImage = false
@@ -235,7 +215,6 @@ Submit() {
         this.catalogCrudService.pushFilesToStorage(this.selectedFile).subscribe(
         catalogImagesUpload => {
         this.catalogUploads = catalogImagesUpload; 
-        console.log("this is the catelog data",this.catalogUploads)
          for(var i=0; i<this.catalogUploads.length; i++ ){
           this.images.push({name: this.catalogUploads[i].imageName, url: this.catalogUploads[i].url});
         }
@@ -246,12 +225,14 @@ Submit() {
       }
     );
   }
-  else{
-     if(this.images.length != 0){
+  else
+  {
+    if(this.images.length != 0)
+      {
       this.AddImage = false
       this.saveFormData();
      }
-  }
+    }
   }
   else{
     this.AddImage = true;
@@ -278,23 +259,19 @@ saveFormData() {
     status :catelogStatus.Pending,
     file: '',
     urls: this.images,//[{url:"",Name:""},{}] 
-
     names: this.Names, 
   };
 
   // Save form data to database
   if(this.keyName !="" && this.keyName != null){
-
     this.catalogCrudService.updateCatalogKey(this.keyName,formData).then(()=>{
       this.spinner =false
       this._router.navigate(['/MyCatalouge']);
-      console.log("Updated Sucessfully");
       this.toastar.success("ProductDetails Updated Suessfully", "Success")
     })
   }
   else{
   this.catalogCrudService.create(formData).then(() => {
-    console.log('Data added successfully');
     this.toastar.success("ProductDetails Added Suessfully", "Success")
     this._router.navigate(['/MyCatalouge']);
     this.spinner =false
@@ -306,7 +283,4 @@ saveFormData() {
   //this._router.navigate(['/ItemDetails']);
   }
 }
-
-
-
 }

@@ -12,12 +12,13 @@ import { Storetimings } from '../Model/storetimings';
 })
 export class StoretimingService {
 
-    private dbPath = '/StoreTimings';
+  private dbPath = '/StoreTimings';
   StoreTimingService!: AngularFireList<Storetimings>;
 
-    constructor(private db:AngularFireDatabase, private storage: AngularFireStorage) {
-    this.StoreTimingService = db.list(this.dbPath);
-  }
+    constructor(private db:AngularFireDatabase, private storage: AngularFireStorage) 
+    {
+      this.StoreTimingService = db.list(this.dbPath);
+    }
 
 
   create(data: any) {
@@ -30,16 +31,11 @@ export class StoretimingService {
       map(changes =>
         changes.map(c => ({ key: c.payload.key, ...c.payload.val() as any }))
       ),
-      // map(times =>
-      //   times.reduce((acc, curr) => acc.concat(Object.values(curr)), []) 
-      // ),
+     
       map(times => {
-         
-         console.log("21211221");
         times.filter((t: any) => {
 
           const registrationNumber = t.RegistrationNumber; 
-      // console.log('Comparing:', registrationNumber, phone);
           return registrationNumber === phone;
         })
       }
@@ -55,6 +51,4 @@ export class StoretimingService {
   this.getStoretimings(phone).subscribe()
   return this.StoreTimingService.remove(phone);
  }
-
-
 }
