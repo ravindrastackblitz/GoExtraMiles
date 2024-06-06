@@ -11,20 +11,6 @@ import { StoretimingService } from '../services/storetiming.service';
 })
 export class StoreTimingsComponent {
 
-//   ButtonClicked: boolean[] = [];
-
-// // Initialize buttonClicked array with false values for each day
-// initializeButtonClickedArray() {
-//   const daysCount = 7; // Assuming 7 days of the week
-//   this.ButtonClicked = Array(daysCount).fill(false);
-// }
-
-// // Function to toggle buttonClicked value for a specific index
-// onclick(index: number) {
-//   this.ButtonClicked[index] = !this.ButtonClicked[index];
-// }
-
-
   @Input() formdata:any
 
   @Output() timedata:EventEmitter<string> = new EventEmitter();
@@ -40,6 +26,14 @@ export class StoreTimingsComponent {
 storetable :any;
   
 time1!:boolean;
+togMon!:boolean;
+togTue!:boolean;
+togWed!:boolean;
+togThu!:boolean;
+togFri!:boolean;
+togSat!:boolean;
+togSun:boolean = true;
+
   select(){
   this.time=true;
   }
@@ -127,25 +121,58 @@ close1(){
   }
   onClick() {
     this.buttonClicked = true;
+    this.togMon = false;
   }
   onClick1() {
     this.buttonClicked1 = true;
+    this.togTue = false;
   }
   onClick2() {
     this.buttonClicked2 = true;
+    this.togWed = false;
   }
   onClick3() {
     this.buttonClicked3 = true;
+    this.togThu = false;
   }
   onClick4() {
     this.buttonClicked4 = true;
+    this.togFri = false;
   }
   onClick5() {
     this.buttonClicked5 = true;
+    this.togSat = false;
   }
   onClick6() {
     this.buttonClicked6 = true;
+    this.togSun = true;
   }
+  Montog(){
+    this.buttonClicked = false;
+    // this.storetimes.value.Mondayopen = ['']
+    // this.storetimes.value.Mondayclose = ''
+    // this.storetable[0].StartTime = ''
+    // this.storetable[0].Closetime = ''
+  }
+  Tuetog(){
+    this.buttonClicked1 = false;
+  }
+  Wedtog(){
+    this.buttonClicked2 = false;
+  }
+  Thutog(){
+    this.buttonClicked3 = false;
+  }
+  Fritog(){
+    this.buttonClicked4 = false;
+  }
+  Sattog(){
+    this.buttonClicked5 = false;
+  }
+  Suntog(){
+    this.buttonClicked6 = false;
+  }
+
   storeTimings: Storetimings[] = [];
   close(): void {
     if(this.Allclick == true){
@@ -207,7 +234,7 @@ close1(){
          this.buttonClicked4 = true;
          this.buttonClicked5 = true;
          this.buttonClicked6 = true;
-
+    this.togSun = false;
          if(this.storetable != null ){
           this.storetimes.patchValue({
             Mondayopen: this.storetable[0].StartTime, 
