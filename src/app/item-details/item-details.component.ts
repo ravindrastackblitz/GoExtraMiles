@@ -22,7 +22,7 @@ export class ItemDetailsComponent {
   scratchnumber!:string;
   formdata:any=[];
   Names:any =[];
-data1 = JSON.parse(JSON.stringify(localStorage.getItem('AddItems')));
+  data1 = JSON.parse(JSON.stringify(localStorage.getItem('AddItems')));
   details = JSON.parse(this.data1);
   imagedata1 :string | null = null;
   imagedata2 :string | null = null;
@@ -35,23 +35,21 @@ data1 = JSON.parse(JSON.stringify(localStorage.getItem('AddItems')));
   language: string = ''; // Variable to store the selected language
   dropdownVisible: boolean = false; // Variable to control the visibility of the dropdown menu
   textBoxData: string = '';
-
   images: any;
-Scratchcarddetails :any 
-data:any
-
+  Scratchcarddetails :any 
+  data:any
   Ischecked!:boolean;
+  Email = localStorage.getItem('Email');
+  Terms!:boolean;
 
-  // clicktoggle()
-  // {
-  //   this.details =(this.details === 'empty') ? "JSON.parse(localStorage.getItem('AddItems') || '{}')" : 'empty';
-  // }
+  constructor(private imageService: ImagesarviceService, 
+    private _router: Router, 
+    private catalogCrud:CatalogCURDService,
+    private dataService:DiscountcodeService,
+    private userloginService:UserloginService){ }
+  
   clicktoggle(){
-  // if (this.details === "none") {
-  //   this.details  = "block";
-  // } else {
-  //   this.details  = "none";
-  // }
+
 }
 togglePopup(): void {
   this.discount =true;
@@ -86,7 +84,6 @@ datadelete()
 
   this._router.navigate(['/MyCatalouge']);
 }
-
   // Function to change the language
   changeLanguage(language: string) {
     this.language = language;
@@ -119,10 +116,7 @@ datadelete()
       this.dropdownVisible = false;
     }
   }
-constructor(private imageService: ImagesarviceService, private _router: Router, 
-  private catalogCrud:CatalogCURDService,private dataService:DiscountcodeService,private userloginService:UserloginService){
-}
-Terms!:boolean
+
 popup(){
   this.Terms = true
 }
@@ -131,42 +125,31 @@ Conditions(data:any){
 this.Terms = false;
 }
 
-
-
-Email = localStorage.getItem('Email');
-
 ngOnInit(){
   if(this.phoneNumber != '' && this.phoneNumber != undefined){
-
- 
   if(this.Email != '' && this.Email != undefined){
     this.userloginService.setIsMainHeaderVisible(true); 
   }
-
   this.imagedata1 = this.imageService.getImageData1();
   this.imagedata2 = this.imageService.getImageData2();
   this.imagedata3 = this.imageService.getImageData3();
-
   this.catalogCrud.data$.subscribe(data => {
     this.keyName = data;
-    console.log("this is the key ", this.keyName)
    });
 
 if (this.phoneNumber && this.keyName) {
   this.catalogCrud.getFilesByPhoneNumber(this.phoneNumber, this.keyName).subscribe({
     next: data => {
       if(data !== undefined){
-      console.log("Retrieved Data:", data);
      for(var i = 0; i<data.urls.length; i++){
       this.imagedata1 = data.urls[0].url;
       this.imagedata2 =data.urls[1].url;
       this.imagedata3 = data.urls[2].url;
      }
-     console.log("data",data.key)
+
       
       this.details = data;
        this.product = this.details.key;
-       console.log("hhello",this.product)
       this.ItemDetails()
       
       }

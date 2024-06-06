@@ -1,47 +1,37 @@
 import { Component, ElementRef, NgZone, OnInit, ViewChild,Output,EventEmitter,Input } from '@angular/core';
 import { FormControl } from "@angular/forms";
 import { MapsAPILoader } from '@agm/core';
-
-import {Location} from '../Model/location'
+import {Location} from '../Model/location';
 
 declare var google:any;
+
 @Component({
   selector: 'app-google-map',
   templateUrl: './google-map.component.html',
   styleUrls: ['./google-map.component.css']
 })
 export class GoogleMapComponent {
-
   public latitude!: number;
   public longitude!: number;
   public searchControl!: FormControl;
   public zoom!: number;
-  
-  @ViewChild("search")
-  public searchElementRef!: ElementRef;
+  location!:Location;
 
-  location!:Location
+  @ViewChild("search") public searchElementRef!: ElementRef;
   @Output() Searchdata:EventEmitter<any> =new EventEmitter()
-
   @Input('locationdetails') locationdata!:Location;
 
-  constructor(
-    private mapsAPILoader: MapsAPILoader,
-    private ngZone: NgZone
-  ) {}
+  constructor(private mapsAPILoader: MapsAPILoader,private ngZone: NgZone) {}
   
   ngOnInit() {
     //set google maps defaults
     this.zoom = 4;
     this.latitude = 39.8282;
     this.longitude = -98.5795;
-    console.log("@Input values  0",this.locationdata)
     //create search FormControl
     this.searchControl = new FormControl();
-    
     //set current position
     this.setCurrentPosition();
-    
     //load Places Autocomplete
     this.mapsAPILoader.load().then(() => {
       let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement);
@@ -49,7 +39,6 @@ export class GoogleMapComponent {
         this.ngZone.run(() => {
           //get the place result
           let place: google.maps.places.PlaceResult = autocomplete.getPlace();
-  
           //verify result
           if (place.geometry === undefined || place.geometry === null) {
             return;
@@ -96,7 +85,7 @@ export class GoogleMapComponent {
 
   ngOnChanges():void
   {
-   // console.log("@Input values  01",this.locationdata?.latitude);
+
     this.latitude = this.locationdata?.latitude;
     this.longitude = this.locationdata?.longitude;
   }

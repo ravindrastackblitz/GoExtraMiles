@@ -10,7 +10,7 @@ import { timer, Subscription } from 'rxjs';
 import { Pipe, PipeTransform } from '@angular/core';
 import { take } from 'rxjs/operators'
 import { UserloginService } from '../services/userlogin.service';
-import { NotificationService } from '../notifications.service';
+import { NotificationService } from '../services/notifications.service';
 import { toastersrc } from '../services/toastr.service';
 
 @Component({
@@ -18,18 +18,18 @@ import { toastersrc } from '../services/toastr.service';
   templateUrl: './otpverifications.component.html',
   styleUrls: ['./otpverifications.component.css']
 })
+
 export class OTPVerificationsComponent {
-  otp!:string;
+otp!:string;
 verify:any;
 spinner!:boolean;
-
 Email = localStorage.getItem('Email');
 
-constructor(private route : Router,private userloginService: UserloginService,
-  private notificationService: NotificationService,private toastar:toastersrc){}
+constructor(private route : Router,private userloginService: UserloginService,private notificationService: NotificationService,private toastar:toastersrc){}
 
-  config ={
-    allowNumberOnly:true,
+config =
+{
+  allowNumberOnly:true,
     length:6,
     isPasswordInput:false,
     disableAutoFocus:false,
@@ -38,45 +38,38 @@ constructor(private route : Router,private userloginService: UserloginService,
       width:'50px',
       height:'50px'
     },
-  }
-  // countDown: Subscription | undefined | any;
-  // counter = 29;
-  // tick = 1000;
-
+}
 
   ngOnInit()
   {
     if(this.Email != '' && this.Email != undefined){
       this.verify=JSON.parse(JSON.stringify(localStorage.getItem('verificationId')) || '{}');
-      console.log(this.verify) 
     }
-    else{
+    else
+    {
       this.route.navigate(['']); 
     }   
   }
 
-  onOtpChange(otpcode:any){
+  onOtpChange(otpcode:any)
+  {
      this.otp = otpcode;
-     console.log(this.otp)
   }
-handleClick(){
-  var credentials = firebase.auth.PhoneAuthProvider.credential(this.verify,this.otp);
 
+handleClick()
+{
+  var credentials = firebase.auth.PhoneAuthProvider.credential(this.verify,this.otp);
   firebase
   .auth()
   .signInWithCredential(credentials)
   .then((response)=>{
-   // console.log("THirhfh",response);
     localStorage.setItem('user_data',JSON.stringify(response));
     this.notificationService.addNotification();
     this.route.navigate(['/BusinessRegistration']);
-this.toastar.success("Your Mobile Number Verifycation Completed Suessfully", "Success")
-    //show main header 
+    this.toastar.success("Your Mobile Number Verifycation Completed Suessfully", "Success")
     this.userloginService.setIsMainHeaderVisible(true); 
-
   }).catch((error)=>{
     alert(error.message)
   })
 }
-
 }

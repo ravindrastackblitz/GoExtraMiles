@@ -9,10 +9,8 @@ import { OTPVerificationsComponent } from './otpverifications/otpverifications.c
 import { BusinessRegistrationComponent } from './business-registration/business-registration.component';
 import { CreateBusinessAccountComponent } from './create-business-account/create-business-account.component';
 import { SelectBusinessCategoryComponent } from './select-business-category/select-business-category.component';
-import { GSTDetailsComponent } from './gstdetails/gstdetails.component';
 import { StoreTimingsComponent } from './store-timings/store-timings.component';
 import { BusinessRegistrationDetailsComponent } from './business-registration-details/business-registration-details.component';
-import { UrbenRiderStoreCatalougeComponent } from './urben-rider-store-catalouge/urben-rider-store-catalouge.component';
 import { AddItemComponent } from './add-item/add-item.component';
 import { ItemDetailsComponent } from './item-details/item-details.component';
 import { MyCatalougeComponent } from './my-catalouge/my-catalouge.component';
@@ -21,7 +19,6 @@ import { PromotionInsightsComponent } from './promotion-insights/promotion-insig
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxOtpInputModule } from 'ngx-otp-input';
-import { ScratchCardComponent } from './scratch-card/scratch-card.component';
 import { PopupComponent } from './popup/popup.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgOtpInputModule } from  'ng-otp-input';
@@ -48,35 +45,30 @@ import { AgmCoreModule } from '@agm/core';
 import { ToastrModule } from 'ngx-toastr';
 import { APP_INITIALIZER } from '@angular/core';
 import { AppConfigService } from './services/appsettings.service';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-
 import { MatInputModule } from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
+
+
 const approu :Routes=[
   {path:'extramail',component:ExtraMailBusinessComponent},
   {path:'',component:ExtraMailBusinessComponent},
-
   {path:'phone',component:PhoneComponent},
   {path:'OTP',component:OTPVerificationsComponent},
   {path:'BusinessRegistration' ,component:BusinessRegistrationComponent},
   {path:'CreateBusinessAccount',component:CreateBusinessAccountComponent},
   {path:'selectBusinessCategory',component:SelectBusinessCategoryComponent},
-  {path:'GSTDetails',component:GSTDetailsComponent},
   {path:'GoogleMap',component:GoogleMapComponent},
   {path:'StoreTimings',component:StoreTimingsComponent},
   {path:'BusinessRegistrationDetails',component:BusinessRegistrationDetailsComponent},
-  {path:'UrbanRiderStoreCatalouge',component:UrbenRiderStoreCatalougeComponent},
   {path:'AddItem',component:AddItemComponent},
   {path:'ItemDetails',component:ItemDetailsComponent},
   {path:'MyCatalouge',component:MyCatalougeComponent},
   {path:'ScratchCardInsights',component:ScratchCardInsightsComponent},
   {path:'PromotionInsights',component:PromotionInsightsComponent},
-  {path:'Scratchcard',component:ScratchCardComponent},
   {path:'terms',component:TermsComponent}
- 
 ]
 
 @NgModule({
@@ -88,16 +80,13 @@ const approu :Routes=[
     BusinessRegistrationComponent,
     CreateBusinessAccountComponent,
     SelectBusinessCategoryComponent,
-    GSTDetailsComponent,
     StoreTimingsComponent,
     BusinessRegistrationDetailsComponent,
-    UrbenRiderStoreCatalougeComponent,
     AddItemComponent,
     ItemDetailsComponent,
     MyCatalougeComponent,
     ScratchCardInsightsComponent,
     PromotionInsightsComponent,
-    ScratchCardComponent,
     PopupComponent,
     PhonenumberDirective,
     TermsComponent,
@@ -105,13 +94,16 @@ const approu :Routes=[
     SpinnerComponent,
     GoogleMapComponent, 
   ],
-  imports: [  MatSelectModule, MatAutocompleteModule,
+  imports: [  
+    MatSelectModule, 
+    MatAutocompleteModule,
     MatFormFieldModule,
     MatInputModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule,MatDialogModule,
+    ReactiveFormsModule,
+    MatDialogModule,
     NgOtpInputModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
@@ -125,10 +117,7 @@ const approu :Routes=[
     ReactiveFormsModule,
     RouterModule.forRoot(approu),
     NgxOtpInputModule,  
-    ToastrModule.forRoot({
-      progressBar: true
-    }),
-    
+    ToastrModule.forRoot({progressBar: true}),
     IntlInputPhoneModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
@@ -136,21 +125,13 @@ const approu :Routes=[
     BrowserModule, 
     FormsModule, 
     BrowserAnimationsModule,
-  
     AgmCoreModule.forRoot({
       apiKey:'AIzaSyBFe0WTUKOaMMSFTV1WqaeAnw65lB_cKEw',
       libraries: ['places'],
     })
-    // AgmCoreModule.forRoot({
-    //   // please get your own API key here:
-    //   // https://developers.google.com/maps/documentation/javascript/get-api-key?hl=en
-    //   apiKey: 'AIzaSyDsWEJtqmVbSm9FLLHY8B2sRGaa6Yr9yGQ',
-    //   libraries: ["places"]
-    // }),
   ],
   providers: [Geolocation,
     { provide: 'AIzaSyBFe0WTUKOaMMSFTV1WqaeAnw65lB_cKEw', useValue: 'AIzaSyBFe0WTUKOaMMSFTV1WqaeAnw65lB_cKEw' },
-   
     {
       provide: APP_INITIALIZER,
       multi: true,
@@ -162,16 +143,19 @@ const approu :Routes=[
         };
       }
     }
-  ], exports: [
+  ], 
+  exports: [
     MatAutocompleteModule,
     MatFormFieldModule,
     MatInputModule
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { 
 
-}
+
+export class AppModule { }
+
+
 declare global {
   interface Window {
     google: typeof google;

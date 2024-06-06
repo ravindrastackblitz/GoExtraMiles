@@ -1,7 +1,6 @@
 export interface CreateBusinessAccount {
-  categoryname: string;
-
-  imagename:string;
+categoryname: string;
+imagename:string;
 gstImageName:string;
 url: any;
 url2:any;

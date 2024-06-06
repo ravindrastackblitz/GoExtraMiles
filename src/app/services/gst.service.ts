@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { GSTDetailsComponent } from '../gstdetails/gstdetails.component';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { PopupComponent } from '../popup/popup.component';
 import { BehaviorSubject, Observable, Subject, catchError, forkJoin, map, of, switchMap, throwError } from 'rxjs';
@@ -13,26 +12,24 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 export class GstService {
   private dbPath = '/BusinessRegistrations';
   number= localStorage.getItem('phoneNumber')
-
   gstmodel: AngularFireList<CreateBusinessAccount>;
-
-  constructor(private dialog: MatDialog,private db: AngularFireDatabase, private storage: AngularFireStorage) {
-    this.gstmodel = db.list(this.dbPath);
-  }
   private isdisabled: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public get getdisable$(): Observable<boolean> { return this.isdisabled.asObservable(); };
+
+  constructor(private dialog: MatDialog,private db: AngularFireDatabase, private storage: AngularFireStorage) 
+  {
+    this.gstmodel = db.list(this.dbPath);
+  }
 
   
   pushFilesToStorage(fileLists: FileList[]): Observable<any> {
     const uploadTasks: Observable<any>[] = [];
-  
     fileLists.forEach(fileList => {
       for (let i = 0; i < fileList.length; i++) {
         const file = fileList[i];
         const filePath = `${this.dbPath}/${file.name}`;
         const storageRef = this.storage.ref(filePath);
         const uploadTask = this.storage.upload(filePath, file);
-  
         uploadTasks.push(uploadTask.snapshotChanges().pipe(
           switchMap(() => {
             return storageRef.getDownloadURL().pipe(
@@ -42,17 +39,13 @@ export class GstService {
         ));
       }
     });
-  
     return forkJoin(uploadTasks);
   }
-
-
 
   pushGstFile(fileUpload: CreateBusinessAccount): Observable<any> {
     const filePath = `${this.dbPath}/${fileUpload.gstFile.name}`;
     const storageRef = this.storage.ref(filePath);
     const uploadTask = this.storage.upload(filePath, fileUpload.file);
-  
     return uploadTask.snapshotChanges().pipe(
       switchMap(() => {
         return storageRef.getDownloadURL().pipe(
@@ -65,13 +58,8 @@ export class GstService {
       })
     );
   }
-  
-
-
-
 
   create(gstImage: any) {
-    console.log("service", gstImage);
     return this.gstmodel.push(gstImage);
   }
 
@@ -113,9 +101,7 @@ export class GstService {
     this.isdisabled.next(isdisabled)
   }
 
-  opengst() {
-    this.dialog.open(GSTDetailsComponent);
-  }
+  
   closegst(){
     this.dialog.closeAll();
   }

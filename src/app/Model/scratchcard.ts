@@ -12,27 +12,3 @@ export interface Scratchcard {
     Approved = "Appproved",
     Deleted = "Deleted"  
 }
-
-
-// enum catelogStatus{
-    
-//     Pending,
-//     Approved,
-//     rejected
-   
-// }
-
-// catelouge
-// ----------
-
-// Isverified t/false(default)
-// status ->catelogStatus-pending
-// ishidden->false (default)//
-
-// ScratchcardStatus
-// -----------------
-// Isverified t/false(default)
-// status ->catelogStatus-pending
-
-
-

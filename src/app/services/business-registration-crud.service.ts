@@ -12,63 +12,20 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 export class BusinessRegistrationCRUDService {
   private dbPath = '/BusinessRegistrations';
   number= localStorage.getItem('phoneNumber')
-
   businessRegistration: AngularFireList<CreateBusinessAccount>;
 
-  constructor(private db: AngularFireDatabase, private storage: AngularFireStorage) {
+  constructor(private db: AngularFireDatabase, private storage: AngularFireStorage) 
+  {
     this.businessRegistration = db.list(this.dbPath);
   }
   
-
-
-  // uploadFile(file: File): Observable<string> {
-  //   const filePath = `${this.dbPath}/${file.name}`;
-  //   const storageRef = this.storage.ref(filePath);
-  //   const uploadTask = this.storage.upload(filePath, file);
-
-  //   return uploadTask.snapshotChanges().pipe(
-  //     switchMap(() => {
-  //       return storageRef.getDownloadURL();
-  //     }),
-  //     catchError(error => {
-  //       console.error('Error uploading file:', error);
-  //       return throwError(error);
-  //     })
-  //   );
-  // }
-
-
-
-  // uploadImage(image: File): Observable<string> {
-  //   const imagePath = `${this.dbPath}/${image.name}`;
-  //   const storageRef = this.storage.ref(imagePath);
-  //   const uploadTask = this.storage.upload(imagePath, image);
-
-  //   return uploadTask.snapshotChanges().pipe(
-  //     switchMap(() => {
-  //       return storageRef.getDownloadURL();
-  //     }),
-  //     catchError(error => {
-  //       console.error('Error uploading image:', error);
-  //       return throwError(error);
-  //     })
-  //   );
-  // }
-
-
-
-
- 
   pushFileToStorage(fileUpload: CreateBusinessAccount): Observable<any> {
     const fileStoragePath = `${this.dbPath}/${fileUpload.file.name}`;
     const gstStoragePath = `${this.dbPath}/${fileUpload.gstFile.name}`;
-  
     const fileStorageRef = this.storage.ref(fileStoragePath);
     const gstStorageRef = this.storage.ref(gstStoragePath);
-  
     const fileUploadTask = this.storage.upload(fileStoragePath, fileUpload.file);
     const gstUploadTask = this.storage.upload(gstStoragePath, fileUpload.gstFile);
-  
     return forkJoin({
       fileUpload: fileUploadTask.snapshotChanges(),
       gstUpload: gstUploadTask.snapshotChanges()
@@ -88,14 +45,8 @@ export class BusinessRegistrationCRUDService {
       })
     );
   }
-  
-  
-
-
-
 
   create(businessReg: any) {
-    console.log("service", businessReg);
     return this.businessRegistration.push(businessReg);
   }
 
@@ -130,14 +81,11 @@ export class BusinessRegistrationCRUDService {
         return throwError(error); // Rethrow the error for handling in the calling component
       })
     ).subscribe(() => {
-      console.log('Business updated successfully');
-      // Handle success, maybe redirect or show a success message
+ 
     });
   }
 
   updateBusinessBykey(key:string,newData:any){
     return this.businessRegistration.update(key, newData);
   }
-  
-
 }

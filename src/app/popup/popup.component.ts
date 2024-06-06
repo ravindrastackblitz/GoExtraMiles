@@ -1,7 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { PopupService } from '../services/popup.service';
-import { NotificationService } from '../notifications.service';
+import { NotificationService } from '../services/notifications.service';
 import { Subscription } from 'rxjs';
 
 @Component({

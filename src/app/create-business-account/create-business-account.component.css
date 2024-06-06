@@ -61,19 +61,11 @@
   overflow: hidden;
 }
 
-
 .register
 { 
      background-color: darkgreen;
      color: white;
 }
-  
-
-
-  /* .form-control{
-    width:100%;
-  
-  } */
   .col-12{
     width:90%;
     margin-left:5%;
@@ -209,11 +201,6 @@ width:30%
   margin-left: 10%
 }
 
-/* .file-container .fa-download {
-  font-size: 5rem;
-  margin-top: 20px;
-  color: grey;
-} */
 #uploadicon{
   font-size: 20px;
   padding-top: 10%;

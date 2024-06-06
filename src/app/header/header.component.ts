@@ -1,7 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { UserloginService } from '../services/userlogin.service';
 import { Subscription } from 'rxjs';
-import { NotificationService } from '../notifications.service';
+import { NotificationService } from '../services/notifications.service';
 import { PopupService } from '../services/popup.service';
 
 @Component({
@@ -14,14 +14,13 @@ export class HeaderComponent implements OnInit {
   notifications: string[] = [];
   popupVisible = false;
   badgeCount: number;
-MainHeaderVisible:boolean=false;
-username:string="";
-user!:any;
-subscription: Subscription;
-notificationspopup!:boolean;
-  constructor(private userloginService: UserloginService,private notificationService: NotificationService,
-private popupservices:PopupService
-  ) {
+  MainHeaderVisible:boolean=false;
+  username:string="";
+  user!:any;
+  subscription: Subscription;
+  notificationspopup!:boolean;
+  constructor(private userloginService: UserloginService,private notificationService: NotificationService,private popupservices:PopupService)
+   {
     this.badgeCount = 5;
     this.subscription = this.userloginService.getIsMainHeaderVisible$.subscribe(role => this.MainHeaderVisible = role);
     this.subscription = this.userloginService.getusername$.subscribe(name => this.username = name);
@@ -50,7 +49,6 @@ private popupservices:PopupService
     this.notificationspopup = false;
   }
   toggleNotificationPopup() {
-   // this.notificationService.setnotificationspopup(true);
    this.notificationspopup = true;
     this.notificationCount = 0;
   }

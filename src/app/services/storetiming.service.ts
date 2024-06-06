@@ -13,10 +13,9 @@ import { Storetimings } from '../Model/storetimings';
 export class StoretimingService {
 matcheddata:any[]=[];
 
-    private dbPath = '/StoreTimings';
+  private dbPath = '/StoreTimings';
   StoreTimingService!: AngularFireList<Storetimings>;
- 
-
+  
     constructor(private db:AngularFireDatabase, private storage: AngularFireStorage) {
     this.StoreTimingService = db.list(this.dbPath);
   }
@@ -59,8 +58,6 @@ getStoretimings(phone: string): Observable<any> {
  deleteStoretimings(key:string){
   return this.StoreTimingService.remove(key);
  }
-
-
 }
 
 

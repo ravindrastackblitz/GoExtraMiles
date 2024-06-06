@@ -22,9 +22,6 @@
 
 .notification-popup ul {
   list-style: none;
-
- 
-
 }
 
 .notification-popup ul li {
@@ -39,5 +36,4 @@
   position: relative;
   display: inline-block;
   margin-left: 70%;
-
 }

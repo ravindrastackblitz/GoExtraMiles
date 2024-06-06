@@ -10,20 +10,18 @@ import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/compat/
 export class CatalogCURDService {
   private dbPath = '/Catalouges';
   number= localStorage.getItem('phoneNumber')
-
   catalogService: AngularFireList<CatalogModel>;
-
-  
-
   private Key = new BehaviorSubject<string>('');
   public data$: Observable<string> = this.Key.asObservable();
-
   private Ischecked: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
   private ScratchcardKey = new BehaviorSubject<string>('');
   public getScrachcard$: Observable<string> = this.ScratchcardKey.asObservable();
-
   public get getchecked$(): Observable<boolean> { return this.Ischecked.asObservable(); };
+
+  constructor(private db: AngularFireDatabase, private storage: AngularFireStorage) 
+  {
+    this.catalogService = db.list(this.dbPath);
+   }
 
   setKey(key: string) {
     this.Key.next(key);
@@ -37,20 +35,16 @@ export class CatalogCURDService {
     this.Ischecked.next(Ischecked)
   }
 
-  constructor(private db: AngularFireDatabase, private storage: AngularFireStorage) {
-    this.catalogService = db.list(this.dbPath);
-   }
+ 
 
 pushFilesToStorage(fileLists: FileList[]): Observable<any> {
   const uploadTasks: Observable<any>[] = [];
-
   fileLists.forEach(fileList => {
     for (let i = 0; i < fileList.length; i++) {
       const file = fileList[i];
       const filePath = `${this.dbPath}/${file.name}`;
       const storageRef = this.storage.ref(filePath);
       const uploadTask = this.storage.upload(filePath, file);
-
       uploadTasks.push(uploadTask.snapshotChanges().pipe(
         switchMap(() => {
           return storageRef.getDownloadURL().pipe(
@@ -60,7 +54,6 @@ pushFilesToStorage(fileLists: FileList[]): Observable<any> {
       ));
     }
   });
-
   return forkJoin(uploadTasks);
 }
 
@@ -72,7 +65,6 @@ pushFilesToStorage(fileLists: FileList[]): Observable<any> {
 
   getBusinessByPhoneNumber(phonenumber:string): Observable<any> {
     this.catalogService = this.db.list(this.dbPath);
-    
     return this.catalogService.snapshotChanges().pipe(
       map(changes =>
         changes.map(c => ({ key: c.payload.key, ...c.payload.val() }))
@@ -82,10 +74,6 @@ pushFilesToStorage(fileLists: FileList[]): Observable<any> {
       )
      );
   }
-
-  
-
-  
 
   getFilesByPhoneNumber(phoneNumber: string, keyName: string): Observable<any> {
     return this.db.list('Catalouges/').snapshotChanges().pipe(
@@ -111,11 +99,9 @@ updateCatalogKey(key:string,newData:any){
   return this.catalogService.update(key, newData);
 }
 
-
 deletecatalouge(key:string)
 {
   return this.catalogService.remove(key);
 }
-
 
 }

@@ -9,12 +9,8 @@ import { BehaviorSubject, Observable, Subject, throwError } from 'rxjs';
 export class PopupService {
   private notificationsSubject = new BehaviorSubject<string[]>([]);
   notifications$ = this.notificationsSubject.asObservable();
-
   private notificationspopup : BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
-
-
   public get   getnotificationspopup1$():Observable<boolean>{return  this.notificationspopup.asObservable();}
-
   private notifications: string[] = [];
 
   addNotification() {

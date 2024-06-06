@@ -2,12 +2,9 @@
 <div class="menu-nav">
   <div class="menu-item" ><h3>Item Details</h3></div>
   <div class="dropdown-container" tabindex="-1">
-   
-  
       <button type="button" (click)="update()"  class="btn btn-primary" style="width: 70px;margin-top: 2%;">Edit</button>
      <br>
      <button type="button" (click)="togglePopup1()"  class="btn btn-primary" style="margin-top: 3%;">Delete</button>
-     <!-- <button class="delete">Delete</button>  -->
   </div>
 </div>
 <br>
@@ -16,7 +13,6 @@
 <img [src]="imagedata3" class="storeimage" >
 
 <br>
- 
 <div class="row">
   <div class="col-sm-6">
     <label class="label1"><b>Item Name  :</b></label>
@@ -69,8 +65,6 @@
     <br>
     <div style="display: flex;" *ngIf="details.status == 'Approved' ">
       <button type="button" style="margin-left: 40%;" (click)="togglePopup()"  class="btn btn-primary">Create Scratch Card</button>
-      <!-- <button type="button" style="margin-left: 40%;" (click)="update()"  class="btn btn-primary">Edit</button> -->
-     <!-- <input type="button" [routerLink]="['/MyCatalouge']" style="margin-left:15%; width:10%;height: 40px;; background-color:black; color:white" class="btn btn-primary" value="Store"> -->
     </div>
     <div [hidden]="!Terms">
       <app-terms (terms)="Conditions($event)"></app-terms>
@@ -89,8 +83,6 @@
     </div> 
   </div>  
 </div>
-<!-- delete-modal.component.html -->
-
 <div class="popup1" *ngIf="discount1">
   <div class="popup-content1">
     <div class="modal-header1">

@@ -1,5 +1,5 @@
 export class AddItemImage {
-     key!: string;
+    key!: string;
     imagename!: string;//
     url!: string;
     file: File;

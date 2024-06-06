@@ -1,17 +1,5 @@
 
  <h1 style="text-align: center;">Promotion Insights</h1>
-<!--<div class="image-container" style="margin-left: 45%;">
-  <div class="avatar-container">
-    <label for="avatarInput">
-      <img *ngIf="selectedImage" [src]="selectedImage" class="avatar-preview" alt="Avatar Preview">
-      <div *ngIf="!selectedImage" class="avatar-placeholder">
-        <i class="fas fa-user"></i>  Placeholder icon -->
-        <!-- <span>Upload Avatar</span>
-      </div>
-    </label>
-    <input type="file" id="avatarInput" accept="image/*" (change)="onFileSelected($event)">
-  </div>
-</div> -->
 <div *ngFor="let image of images">
   <img *ngIf="image" [src]="image">
 </div>
@@ -31,15 +19,6 @@
 </div>
 <div style="text-align: center;" >
   <textarea rows="7" cols="50">Bar Charts</textarea>
-  <!-- <h5><b style="text-align: center;">Vehicle Type</b></h5>
-  <img src="https://thepercentagecalculator.net/images/pie-charts/pie-chart-showing-31.3-percent.png" style="width: 300px;height: 300px;">
-    <br>
-    <div style="display:flex;">
-      <h3 style="margin-left: 2%;"><b>31.3%</b></h3><h3 style="margin-left: 50%;"><b>68.7%</b></h3>
-      </div>
-        <input type="box" style="color: rgb(42, 156, 243);background-color: rgb(67, 141, 225);width: 20px;height: 20px;border: none;margin: 2%;" checked>2 Wheeler
-        <input type="box" style="color: #fc232d;background-color: hsl(351, 82%, 52%);width: 20px;height: 20px;border: none;margin-left:45%;" checked>4 Wheeler
-   -->
 </div>
 <br>
 <div style="text-align: center;">
@@ -63,8 +42,6 @@
     </div>
     <div >
       <button (click)="Scratchcard1()" class="btn btn-primary m-3" class="add" >Cancle</button><button style="margin-left:3%;" (click)="Scratchcard1()" class="btn btn-primary m-3" class="add">Delete</button>
-
-      
     </div> 
   </div>  
 </div>

@@ -1,7 +1,6 @@
 <div class="notification-container" *ngIf="notificationspopup">
 <div class="notification-popup">
   <h4 > Notification  <i class="fas fa-times-circle" (click)="notificationclose()"> </i></h4>  
- 
   <ul>
     <li *ngFor="let notification of notifications"><b>{{ notification }}</b> Successfully login your mail this application</li>
   </ul>
