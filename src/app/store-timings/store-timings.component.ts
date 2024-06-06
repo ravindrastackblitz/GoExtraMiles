@@ -103,7 +103,6 @@ close1(){
           }
           else{
             if(this.storeTimings !=null){
-              console.log("wefefweewwe",this.storeTimings)
               this.timedata1 = res.radiotime;
               this.timedata.emit(this.timedata1);
               localStorage.setItem("timetable",JSON.stringify(this.storeTimings));
@@ -214,7 +213,6 @@ close1(){
           };
           this.storeTimings.push(storeTiming);
       });
-     // console.log("222222222222222  ",this.storeTimings);
       this.data()
     }
   }
@@ -235,7 +233,7 @@ close1(){
          this.buttonClicked5 = true;
          this.buttonClicked6 = true;
     this.togSun = false;
-         if(this.storetable != null ){
+         if(this.storetable != undefined  ){
           this.storetimes.patchValue({
             Mondayopen: this.storetable[0].StartTime, 
             Mondayclose: this.storetable[0].Closetime,

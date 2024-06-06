@@ -11,9 +11,11 @@ import { Storetimings } from '../Model/storetimings';
   providedIn: 'root'
 })
 export class StoretimingService {
+matcheddata:any[]=[];
 
     private dbPath = '/StoreTimings';
   StoreTimingService!: AngularFireList<Storetimings>;
+ 
 
     constructor(private db:AngularFireDatabase, private storage: AngularFireStorage) {
     this.StoreTimingService = db.list(this.dbPath);
@@ -24,37 +26,41 @@ export class StoretimingService {
     console.log("Store-Timings", data);
     return this.StoreTimingService.push(data);
   }
-  
-  getStoretimings(phone: string): Observable<any> {
-    return this.db.list('/StoreTimings').snapshotChanges().pipe(
-      map(changes =>
-        changes.map(c => ({ key: c.payload.key, ...c.payload.val() as any }))
-      ),
-      // map(times =>
-      //   times.reduce((acc, curr) => acc.concat(Object.values(curr)), []) 
-      // ),
-      map(times => {
-         
-         console.log("21211221");
-        times.filter((t: any) => {
 
-          const registrationNumber = t.RegistrationNumber; 
-      // console.log('Comparing:', registrationNumber, phone);
-          return registrationNumber === phone;
-        })
-      }
-      
-      ),
-      catchError(error => {
-        console.error('Error retrieving business records:', error);
-        return (error);
-      })
-    );
-  }
- deleteStoretimings(phone:string){
-  this.getStoretimings(phone).subscribe()
-  return this.StoreTimingService.remove(phone);
+  stoetimeingarrayandkey: { storerecords: Storetimings[] | any[]; key: string } = { storerecords: [], key: '' };
+
+getStoretimings(phone: string): Observable<any> {
+  return this.db.list('/StoreTimings').snapshotChanges().pipe(
+    map(changes =>
+      changes.map(c => ({ key: c.payload.key, ...c.payload.val() as Storetimings }))
+    ),
+    map(times => {
+      this.matcheddata = times.filter(timesArray => {
+        const some = Object.values(timesArray)
+        const data = some.filter(x => x.RegistrationNumber === phone);
+        if (data.length > 0) {
+          var key = some[7];
+          this.stoetimeingarrayandkey = { "storerecords": data, "key": key };
+         // console.log("hjhjhj", this.stoetimeingarrayandkey);
+        //  return this.stoetimeingarrayandkey;
+        }
+        return []
+      });
+      return this.stoetimeingarrayandkey;
+    }),
+    catchError(error => {
+      console.error('Error retrieving business records:', error);
+      throw error;
+    })
+  );
+}
+
+
+ deleteStoretimings(key:string){
+  return this.StoreTimingService.remove(key);
  }
 
 
 }
+
+

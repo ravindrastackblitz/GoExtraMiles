@@ -29,7 +29,7 @@ timetable1!:any
 key:any =localStorage.getItem('key');
 times =JSON.parse(JSON.stringify(localStorage.getItem('storetime1')));
 times1 =JSON.parse(this.times);
-
+Timekey:any = localStorage.getItem('Timekey')
 store =JSON.parse(JSON.stringify(localStorage.getItem('timetable')));
 storetable:any;
 clicked!:boolean
@@ -163,12 +163,28 @@ save() {
 SaveFormdata(){
   if (this.currentFileUpload.url != null || undefined) {
     if(this.key !="" && this.key != null){
-      this.timestore.deleteStoretimings(this.phone);
+      if(this.currentFileUpload.storetiming == 'Pick Days'){
+        if(this.Timekey !='' && this.Timekey != null){
+          this.timestore.deleteStoretimings(this.Timekey);
+          this.timestore.create(this.storetable).then(() =>{
+            console.log('data store in time table');
+          });
+        }
+        else{
+          this.timestore.create(this.storetable).then(() =>{
+            console.log('data store in time table');
+          });
+        }
+       }
+       else{
+        this.timestore.deleteStoretimings(this.Timekey);
+       }
       this.businessService.updateBusinessBykey(this.key,this.currentFileUpload)
       .then(()=>{
         console.log('Successfully updated');
         this.toastar.success("Business Registration Details Updated Suessfully", "Success")
         localStorage.removeItem('key');
+        localStorage.removeItem('Timekey');
         this.router.navigate(['/MyCatalouge']);
       })
     }

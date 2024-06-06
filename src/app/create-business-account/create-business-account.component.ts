@@ -185,9 +185,18 @@ GetChilddata(data:string){
               this.formdata.storetiming = 'Pick Days'
               this.Createbusiness?.controls['storetiming'].setValue(this.formdata?.storetiming);
               this.datatime = this.formdata.storetiming;
-              this.timestore.getStoretimings(this.phone).subscribe((data) => {
-                console.log("timings from database", data);
+              this.timestore.getStoretimings(this.phone).subscribe({
+                next: (data) => {
+                  if(data != undefined){
+                    localStorage.setItem('timetable',JSON.stringify(data.storerecords));
+                    localStorage.setItem("Timekey",data.key);
+                  }
+                },
+                error: (error) => {
+                  console.error("Error fetching store timings:", error);
+                },
               });
+              
             }
             else {
               this.datatime = this.formdata.storetiming;

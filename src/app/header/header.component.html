@@ -6,11 +6,8 @@
           <li style="margin-left: 4%;"><img src="https://png.pngtree.com/png-clipart/20190517/original/pngtree-vector-location-icon-png-image_4280104.jpg" alt="Image" class="image" style="width:40px;height: 40px;"></li>
         </ng-container>
       </ul>
-
-
     </div>
    
- 
   </div>
 
   <div class="navbar" id="MainHeader" *ngIf="MainHeaderVisible">
@@ -18,7 +15,7 @@
  
       <ul>
         <ng-container >
-          <li style="margin-left: 4%;"><img src="https://png.pngtree.com/png-clipart/20190517/original/pngtree-vector-location-icon-png-image_4280104.jpg" alt="Image" class="image" style="width:40px;height: 40px;"></li>
+          <li style="margin-left: 4%;"><img src="https://png.pngtree.com/png-clipart/20190517/original/pngtree-vector-location-icon-png-image_4280104.jpg" alt="Image"  [routerLink]="['/MyCatalouge']" class="image" style="width:40px;height: 40px;"></li>
 
           <li style="margin-left: 10%;text-wrap: nowrap;"><a [routerLink]="['/BusinessRegistration']" style="color: white;"><b>Business Registration</b></a></li>
           <li style="margin-left: 10%;"><a [routerLink]="['/MyCatalouge']" style="color: white;">Catalouges</a></li>

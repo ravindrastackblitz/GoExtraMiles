@@ -56,7 +56,8 @@ keyName:any;
       country: ['', Validators.required],
       link: ['', [Validators.required, Validators.pattern(/^(https?:\/\/)?([\w.-]+)\.([a-zA-Z]{2,63})(\/\S*)?$/)]],
       retailprice: ['', Validators.required],
-      sellingprice: ['', Validators.required]
+      sellingprice: ['', Validators.required],
+    //  IsHidden :[''],
     });
 
     this.catalogCrudService.data$.subscribe(data => {
@@ -260,7 +261,12 @@ Submit() {
 }
 
 hideproduct(){
-this.hide = true
+  if(this.hide == true){
+    this.hide = false;
+  }
+  else{
+    this.hide = true
+  }
 }
 
 saveFormData() {
