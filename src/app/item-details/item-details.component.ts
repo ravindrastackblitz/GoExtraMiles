@@ -155,7 +155,6 @@ if (this.phoneNumber && this.keyName) {
       }
        else {
         this.ItemDetails()
-        console.log("No data found for the provided phone number and image name.");
       }
     }
   });

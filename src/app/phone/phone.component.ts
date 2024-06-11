@@ -8,16 +8,8 @@ import  intlTelInput from 'intl-tel-input';
  import { ConfigurationOptions, CustomCountryModel, OutputOptionsEnum } from "intl-input-phone";
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { UserloginService } from '../services/userlogin.service';
-var config = 
-{
-  apiKey: "AIzaSyAZFKmd6vxVZTEm_EtH1zlKvCiJjHUaZ2Q",
-  authDomain: "goextramiles-c9d43.firebaseapp.com",
-  projectId: "goextramiles-c9d43",
-  storageBucket: "goextramiles-c9d43.appspot.com",
-  messagingSenderId: "781423247006",
-  appId: "1:781423247006:web:dcb1474e98382d344dc58f",
-  measurementId: "G-G377Y2B69Q"
-}
+import { environment } from 'src/environments/environment';
+import { AppConfigService } from '../services/appsettings.service';
 
 @Component({
   selector: 'app-phone',
@@ -27,6 +19,7 @@ var config =
 })
 
 export class PhoneComponent {
+  
 verify!:boolean;
 configOption1: ConfigurationOptions;
 phoneForm: FormGroup;
@@ -38,8 +31,9 @@ spinner!:boolean;
 clicked!:boolean;
 Email = localStorage.getItem('Email')
  
-   constructor(private formBuilder: FormBuilder,private route : Router,private userloginService:UserloginService) 
+   constructor(private formBuilder: FormBuilder,private route : Router,private userloginService:UserloginService,private appsetting:AppConfigService) 
    {
+    
      this.phoneForm = this.formBuilder.group
      ({
        sampleReactiveControl: new FormControl()
@@ -54,7 +48,9 @@ Email = localStorage.getItem('Email')
     {
       if(this.Email != '' && this.Email != undefined)
         {
+          var config=this.appsetting.firebasedata
           firebase.initializeApp( config)
+
         }
          else
          {
@@ -92,5 +88,6 @@ Email = localStorage.getItem('Email')
   {
     this.verify =false;
   }
-
+  
 }
+ 

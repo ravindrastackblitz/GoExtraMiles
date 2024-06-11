@@ -151,12 +151,10 @@ SaveFormdata(){
         if(this.Timekey !='' && this.Timekey != null){
           this.timestore.deleteStoretimings(this.Timekey);
           this.timestore.create(this.storetable).then(() =>{
-            console.log('data store in time table');
           });
         }
         else{
           this.timestore.create(this.storetable).then(() =>{
-            console.log('data store in time table');
           });
         }
        }

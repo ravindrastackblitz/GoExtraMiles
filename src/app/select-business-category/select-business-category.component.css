@@ -7,7 +7,7 @@
 .selectedoptiondata
 {
   border:3px;
-  background-color:white;
+  background-color:rgb(212, 205, 205);
 }
 .textboxcenter{
   display: inline-block;margin-top: 12px;

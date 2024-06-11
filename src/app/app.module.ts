@@ -25,7 +25,7 @@ import { NgOtpInputModule } from  'ng-otp-input';
 import { PhonenumberDirective } from './phonenumber.directive';
 import { MatIconModule } from '@angular/material/icon';
 import { IntlInputPhoneModule } from 'intl-input-phone';
-import { MapsAPILoader } from '@agm/core';
+import {  MapsAPILoader } from '@agm/core';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { environment } from 'src/environments/environment.development';
 import { AngularFireModule } from '@angular/fire/compat';
@@ -50,6 +50,9 @@ import { CommonModule } from '@angular/common';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
+import appSettings from '../assets/appsettings.json';
+
+
 
 
 const approu :Routes=[
@@ -70,6 +73,8 @@ const approu :Routes=[
   {path:'PromotionInsights',component:PromotionInsightsComponent},
   {path:'terms',component:TermsComponent}
 ]
+
+
 
 @NgModule({
   declarations: [
@@ -126,23 +131,24 @@ const approu :Routes=[
     FormsModule, 
     BrowserAnimationsModule,
     AgmCoreModule.forRoot({
-      apiKey:'AIzaSyBFe0WTUKOaMMSFTV1WqaeAnw65lB_cKEw',
-      libraries: ['places'],
+      apiKey:appSettings.MapApiKey.apikey,
+      libraries:appSettings.MapApiKey.libraries
     })
   ],
-  providers: [Geolocation,
-    { provide: 'AIzaSyBFe0WTUKOaMMSFTV1WqaeAnw65lB_cKEw', useValue: 'AIzaSyBFe0WTUKOaMMSFTV1WqaeAnw65lB_cKEw' },
+
+  providers:  [
+    Geolocation,{provide:appSettings.MapApiKey.apikey,useValue:appSettings.MapApiKey.apikey},
     {
       provide: APP_INITIALIZER,
       multi: true,
       deps: [AppConfigService],
       useFactory: (appConfigService: AppConfigService) => {
         return () => {
-          //Make sure to return a promise!
+          // Make sure to return a promise!
           return appConfigService.loadAppConfig();
         };
-      }
-    }
+      } 
+    },
   ], 
   exports: [
     MatAutocompleteModule,
@@ -153,11 +159,13 @@ const approu :Routes=[
 })
 
 
-export class AppModule { }
-
+export class AppModule {
+}
 
 declare global {
   interface Window {
     google: typeof google;
   }
 }
+
+

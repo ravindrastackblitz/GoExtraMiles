@@ -148,10 +148,6 @@ close1(){
   }
   Montog(){
     this.buttonClicked = false;
-    // this.storetimes.value.Mondayopen = ['']
-    // this.storetimes.value.Mondayclose = ''
-    // this.storetable[0].StartTime = ''
-    // this.storetable[0].Closetime = ''
   }
   Tuetog(){
     this.buttonClicked1 = false;
@@ -218,7 +214,6 @@ close1(){
   }
   ngOnChanges():void
   {
-    console.log(this.formdata);
    // this.Timedetails?.controls['radiotime'].setValue(this.formdata);
     if(this.formdata != ""){
       if(this.formdata == "Pick Days")
@@ -232,7 +227,7 @@ close1(){
          this.buttonClicked4 = true;
          this.buttonClicked5 = true;
          this.buttonClicked6 = true;
-    this.togSun = false;
+         this.togSun = false;
          if(this.storetable != undefined  ){
           this.storetimes.patchValue({
             Mondayopen: this.storetable[0].StartTime, 
@@ -249,9 +244,6 @@ close1(){
             Saturdayclose:this.storetable[5].Closetime,
             Sundayopen:this.storetable[6].StartTime,
             Sundayclose:this.storetable[6].Closetime,
-            // Alldaysopen:[''],
-            // Alldaysclose:['']
-      
           })
          }
          

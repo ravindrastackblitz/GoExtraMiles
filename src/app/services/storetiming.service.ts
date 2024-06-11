@@ -22,7 +22,6 @@ matcheddata:any[]=[];
 
 
   create(data: any) {
-    console.log("Store-Timings", data);
     return this.StoreTimingService.push(data);
   }
 

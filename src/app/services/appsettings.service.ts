@@ -6,7 +6,6 @@ import { Injectable } from '@angular/core';
 })
 export class AppConfigService {
   private appConfig: any;
-
   constructor(private http: HttpClient) { }
 
   loadAppConfig() {
@@ -15,6 +14,7 @@ export class AppConfigService {
       .then(data => {
         this.appConfig = data;
       });
+     
   }
 
    get clientid() {
@@ -23,4 +23,12 @@ export class AppConfigService {
     }
     return this.appConfig.client_id;
   }
+
+  get firebasedata(){
+    if (!this.appConfig) {
+      throw Error('Config file not loaded!');
+    }
+    return this.appConfig.Phoneanddatabaseconfigurations.firebase
+  }  
+
 }

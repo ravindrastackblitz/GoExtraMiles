@@ -1,5 +1,6 @@
 export const environment = {
     production:true,
+    MapApi:"AIzaSyBFe0WTUKOaMMSFTV1WqaeAnw65lB_cKEw",
     firebase:{
         apiKey: "AIzaSyAZFKmd6vxVZTEm_EtH1zlKvCiJjHUaZ2Q",
   authDomain: "goextramiles-c9d43.firebaseapp.com",
