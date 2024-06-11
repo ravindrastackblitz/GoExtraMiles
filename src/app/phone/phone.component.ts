@@ -8,7 +8,7 @@ import  intlTelInput from 'intl-tel-input';
  import { ConfigurationOptions, CustomCountryModel, OutputOptionsEnum } from "intl-input-phone";
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { UserloginService } from '../services/userlogin.service';
-import { environment } from 'src/environments/environment';
+//import { environment } from 'src/environments/environment';
 import { AppConfigService } from '../services/appsettings.service';
 
 @Component({

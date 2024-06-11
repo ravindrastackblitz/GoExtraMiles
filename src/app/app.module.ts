@@ -27,7 +27,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { IntlInputPhoneModule } from 'intl-input-phone';
 import {  MapsAPILoader } from '@agm/core';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-import { environment } from 'src/environments/environment.development';
+//import { environment } from 'src/environments/environment.development';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
@@ -110,7 +110,7 @@ const approu :Routes=[
     ReactiveFormsModule,
     MatDialogModule,
     NgOtpInputModule,
-    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireModule.initializeApp(appSettings.Phoneanddatabaseconfigurations.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
     MatFormFieldModule,
