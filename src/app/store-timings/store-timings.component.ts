@@ -146,26 +146,108 @@ close1(){
     this.buttonClicked6 = true;
     this.togSun = true;
   }
-  Montog(){
+  // Montog(){
+  //   this.buttonClicked = false;
+  // }
+  Montog() {
     this.buttonClicked = false;
-  }
+    this.togMon = !this.togMon; // Toggle the value of togMon
+    if (this.togMon) {
+        this.storetimes.patchValue({
+            Mondayopen: '',
+            Mondayclose: ''
+        });
+    }
+}
+// Tuetog()
+// {
+//   this.buttonClicked1=false;
+// }
   Tuetog(){
     this.buttonClicked1 = false;
+    this.togTue=!this.togTue;
+    if(this.togTue)
+      {
+        this.storetimes.patchValue({
+          Tuesdayopen: '',
+          Tuesdayclose: ''
+        });
+      }
   }
+  // Wedtog()
+  // {
+  //   this.buttonClicked2=false;
+  // }
   Wedtog(){
     this.buttonClicked2 = false;
+    this.togWed=!this.togWed;
+    if(this.togWed)
+      {
+        this.storetimes.patchValue({
+          Wednesdayopen: '',
+          Wednesdayclose: '',
+        })
+      }
   }
+  // Thutog()
+  // {
+  //   this.buttonClicked3=false;
+  // }
   Thutog(){
     this.buttonClicked3 = false;
+    this.togThu=!this.togThu;
+    if(this.togThu)
+      {
+        this.storetimes.patchValue({
+          Thursdayopen: '', 
+          Thursdayclose: '',
+        })
+      }
   }
+  // Fritog()
+  // {
+  //   this.buttonClicked4=false;
+  // }
   Fritog(){
     this.buttonClicked4 = false;
+    this.togFri=!this.togFri;
+    if(this.togFri)
+      {
+        this.storetimes.patchValue({
+          Fridayopen: '', 
+          Fridayclose: '',
+        })
+      }
   }
+  // Sattog()
+  // {
+  //   this.buttonClicked5=false;
+  // }
   Sattog(){
     this.buttonClicked5 = false;
+    this.togSat=!this.togSat;
+    if(this.togSat)
+      {
+        this.storetimes.patchValue({
+          Saturdayopen: '', 
+          Saturdayclose: '',
+        })
+      }
   }
+  // Suntog()
+  // {
+  //   this.buttonClicked6=false;
+  // }
   Suntog(){
     this.buttonClicked6 = false;
+    this.togSun=!this.togSun;
+    if(this.togSun)
+      {
+        this.storetimes.patchValue({
+          Sundayopen:'',
+          Sundayclose:'',
+        })
+      }
   }
 
   storeTimings: Storetimings[] = [];

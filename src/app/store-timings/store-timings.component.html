@@ -80,7 +80,7 @@
                 <input formControlName="Saturdayclose" name="Satclose" type="time"  class="daytime">
               </p>
             </div>
-            <span class="switch"><input type="checkbox" id="switcher"><label for=switcher></label></span><br>
+            <span class="switch"><input type="checkbox" [checked]="togSat" (click)="Sattog()" id="switcher"><label for=switcher></label></span><br>
         
             <label class="la"><b>SUN</b></label><div style="display: inline-block;"><input type="button" *ngIf="!buttonClicked6" (click)="onClick6()" class="btn1 choice" value="CHOOSE">
             <p *ngIf="buttonClicked6" style="display: inline;">
